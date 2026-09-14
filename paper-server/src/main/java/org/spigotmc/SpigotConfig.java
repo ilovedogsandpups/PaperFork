@@ -36,10 +36,10 @@ public class SpigotConfig {
         This is the Spigot configuration file for Paper.
         As you can see, there's tons to configure. Some options may impact gameplay, so use
         with caution, and make sure you know what each option does before configuring.
-        
+
         If you need help with the configuration or have any questions related to Paper,
         join us in our Discord or check the docs page.
-        
+
         File Reference: https://docs.papermc.io/paper/reference/spigot-configuration/
         Docs: https://docs.papermc.io/
         Discord: https://discord.gg/papermc
@@ -66,13 +66,14 @@ public class SpigotConfig {
         SpigotConfig.config.options().copyDefaults(true);
 
         SpigotConfig.commands = new HashMap<>();
-        SpigotConfig.commands.put("spigot", new SpigotCommand("spigot"));
+        // SpigotConfig.commands.put("spigot", new SpigotCommand("spigot"));
 
         SpigotConfig.version = SpigotConfig.getInt("config-version", 13);
         SpigotConfig.set("config-version", 13);
         SpigotConfig.readConfig(SpigotConfig.class, null);
     }
 
+    @Deprecated(forRemoval = true)
     public static void registerCommands() {
         for (Map.Entry<String, Command> entry : SpigotConfig.commands.entrySet()) {
             MinecraftServer.getServer().server.getCommandMap().register(entry.getKey(), "Spigot", entry.getValue());
@@ -183,7 +184,7 @@ public class SpigotConfig {
         SpigotConfig.restartOnCrash = SpigotConfig.getBoolean("settings.restart-on-crash", SpigotConfig.restartOnCrash);
         SpigotConfig.restartScript = SpigotConfig.getString("settings.restart-script", SpigotConfig.restartScript);
         SpigotConfig.restartMessage = SpigotConfig.transform(SpigotConfig.getString("messages.restart", "Server is restarting"));
-        SpigotConfig.commands.put("restart", new RestartCommand("restart"));
+        // SpigotConfig.commands.put("restart", new RestartCommand("restart"));
     }
 
     public static boolean bungee;

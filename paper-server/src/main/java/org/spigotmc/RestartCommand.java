@@ -7,7 +7,9 @@ import net.minecraft.server.level.ServerPlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.craftbukkit.util.CraftChatMessage;
+import org.jspecify.annotations.NonNull;
 
+@Deprecated(forRemoval = true)
 public class RestartCommand extends Command {
 
     public RestartCommand(String name) {
@@ -18,7 +20,7 @@ public class RestartCommand extends Command {
     }
 
     @Override
-    public boolean execute(CommandSender sender, String currentAlias, String[] args) {
+    public boolean execute(@NonNull CommandSender sender, @NonNull String currentAlias, String @NonNull [] args) {
         if (this.testPermission(sender)) {
             MinecraftServer.getServer().processQueue.add(RestartCommand::restart);
         }
@@ -58,7 +60,7 @@ public class RestartCommand extends Command {
             // Give the socket a chance to send the packets
             try {
                 Thread.sleep(100);
-            } catch (InterruptedException ex) {
+            } catch (InterruptedException _) {
             }
 
             closeSocket();
@@ -66,7 +68,7 @@ public class RestartCommand extends Command {
             // Actually shutdown
             try {
                 MinecraftServer.getServer().close(); // calls stop()
-            } catch (Throwable t) {
+            } catch (Throwable _) {
             }
 
             // Actually stop the JVM

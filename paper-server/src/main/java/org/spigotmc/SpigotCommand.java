@@ -6,9 +6,11 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.jspecify.annotations.NonNull;
 
 import static net.kyori.adventure.text.Component.text;
 
+@Deprecated(forRemoval = true)
 public class SpigotCommand extends Command {
 
     public SpigotCommand(String name) {
@@ -19,7 +21,7 @@ public class SpigotCommand extends Command {
     }
 
     @Override
-    public boolean execute(CommandSender sender, String commandLabel, String[] args) {
+    public boolean execute(@NonNull CommandSender sender, @NonNull String commandLabel, String @NonNull [] args) {
         if (!this.testPermission(sender)) return true;
 
         if (args.length != 1 || !args[0].equals("reload")) {
@@ -43,7 +45,7 @@ public class SpigotCommand extends Command {
         console.server.reloadCount++;
 
         Command.broadcastCommandMessage(sender, text("Reload complete.", NamedTextColor.GREEN));
-        
+
 
         return true;
     }

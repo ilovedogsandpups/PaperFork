@@ -1014,7 +1014,7 @@ public final class CraftServer implements Server {
         }
         // Paper end
         this.reloadData();
-        org.spigotmc.SpigotConfig.registerCommands(); // Spigot
+        // org.spigotmc.SpigotConfig.registerCommands(); // Spigot
         io.papermc.paper.command.PaperCommands.registerCommands(this.console); // Paper
         this.spark.registerCommandBeforePlugins(this); // Paper - spark
         this.overrideAllCommandBlockCommands = this.commandsConfiguration.getStringList("command-block-overrides").contains("*");
