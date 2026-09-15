@@ -9,6 +9,7 @@ import org.bukkit.map.MapCursor;
 import org.bukkit.map.MapCursorCollection;
 import org.bukkit.map.MapRenderer;
 import org.bukkit.map.MapView;
+import org.jspecify.annotations.NonNull;
 
 public class CraftMapRenderer extends MapRenderer {
 
@@ -20,7 +21,7 @@ public class CraftMapRenderer extends MapRenderer {
     }
 
     @Override
-    public void render(MapView map, MapCanvas canvas, Player player) {
+    public void render(@NonNull MapView map, @NonNull MapCanvas canvas, @NonNull Player player) {
         // Map
         for (int y = 0; y < 128; ++y) {
             for (int x = 0; x < 128; ++x) {

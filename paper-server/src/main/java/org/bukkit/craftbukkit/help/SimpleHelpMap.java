@@ -26,6 +26,7 @@ import org.bukkit.help.HelpTopic;
 import org.bukkit.help.HelpTopicComparator;
 import org.bukkit.help.HelpTopicFactory;
 import org.bukkit.help.IndexHelpTopic;
+import org.jspecify.annotations.NonNull;
 
 /**
  * Standard implementation of {@link HelpMap} for CraftBukkit servers.
@@ -68,7 +69,7 @@ public class SimpleHelpMap implements HelpMap {
     }
 
     @Override
-    public Collection<HelpTopic> getHelpTopics() {
+    public @NonNull Collection<HelpTopic> getHelpTopics() {
         return this.helpTopics.values();
     }
 
@@ -86,7 +87,7 @@ public class SimpleHelpMap implements HelpMap {
     }
 
     @Override
-    public List<String> getIgnoredPlugins() {
+    public @NonNull List<String> getIgnoredPlugins() {
         return this.yaml.getIgnoredPlugins();
     }
 
@@ -222,7 +223,7 @@ public class SimpleHelpMap implements HelpMap {
     }
 
     @Override
-    public void registerHelpTopicFactory(Class commandClass, HelpTopicFactory factory) {
+    public void registerHelpTopicFactory(@NonNull Class commandClass, @NonNull HelpTopicFactory factory) {
         Preconditions.checkArgument(Command.class.isAssignableFrom(commandClass) || CommandExecutor.class.isAssignableFrom(commandClass), "commandClass (%s) must implement either Command or CommandExecutor", commandClass.getName());
         this.topicFactoryMap.put(commandClass, factory);
     }

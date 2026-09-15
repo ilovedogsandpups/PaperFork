@@ -12,6 +12,7 @@ import org.bukkit.entity.AbstractHorse;
 import org.bukkit.entity.AnimalTamer;
 import org.bukkit.entity.Horse;
 import org.bukkit.inventory.AbstractHorseInventory;
+import org.jspecify.annotations.NonNull;
 
 public abstract class CraftAbstractHorse extends CraftAnimals implements AbstractHorse {
 
@@ -114,7 +115,7 @@ public abstract class CraftAbstractHorse extends CraftAnimals implements Abstrac
     }
 
     @Override
-    public AbstractHorseInventory getInventory() {
+    public @NonNull AbstractHorseInventory getInventory() {
         return new CraftInventorySaddledHorse(
             this.getHandle().inventory,
             this.getHandle().createEquipmentSlotContainer(EquipmentSlot.BODY),

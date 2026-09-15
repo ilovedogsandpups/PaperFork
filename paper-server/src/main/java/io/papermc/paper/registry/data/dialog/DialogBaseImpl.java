@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.List;
 import net.kyori.adventure.text.Component;
 import org.jetbrains.annotations.Unmodifiable;
+import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 
 public record DialogBaseImpl(
@@ -40,43 +41,43 @@ public record DialogBaseImpl(
         }
 
         @Override
-        public BuilderImpl externalTitle(final @Nullable Component externalTitle) {
+        public @NonNull BuilderImpl externalTitle(final @Nullable Component externalTitle) {
             this.externalTitle = externalTitle;
             return this;
         }
 
         @Override
-        public BuilderImpl canCloseWithEscape(final boolean canCloseWithEscape) {
+        public @NonNull BuilderImpl canCloseWithEscape(final boolean canCloseWithEscape) {
             this.canCloseWithEscape = canCloseWithEscape;
             return this;
         }
 
         @Override
-        public BuilderImpl pause(final boolean pause) {
+        public @NonNull BuilderImpl pause(final boolean pause) {
             this.pause = pause;
             return this;
         }
 
         @Override
-        public BuilderImpl afterAction(final DialogAfterAction afterAction) {
+        public @NonNull BuilderImpl afterAction(final @NonNull DialogAfterAction afterAction) {
             this.afterAction = afterAction;
             return this;
         }
 
         @Override
-        public BuilderImpl body(final List<? extends DialogBody> body) {
+        public @NonNull BuilderImpl body(final @NonNull List<? extends DialogBody> body) {
             this.body = List.copyOf(body);
             return this;
         }
 
         @Override
-        public BuilderImpl inputs(final List<? extends DialogInput> inputs) {
+        public @NonNull BuilderImpl inputs(final @NonNull List<? extends DialogInput> inputs) {
             this.inputs = List.copyOf(inputs);
             return this;
         }
 
         @Override
-        public DialogBase build() {
+        public @NonNull DialogBase build() {
             return new DialogBaseImpl(this.title, this.externalTitle, this.canCloseWithEscape, this.pause, this.afterAction, this.body, this.inputs);
         }
     }

@@ -1,5 +1,7 @@
 package io.papermc.paper.configuration.constraint;
 
+import org.jspecify.annotations.NonNull;
+
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -17,7 +19,7 @@ public @interface Constraint {
     class Factory implements org.spongepowered.configurate.objectmapping.meta.Constraint.Factory<Constraint, Object> {
         @SuppressWarnings("unchecked")
         @Override
-        public org.spongepowered.configurate.objectmapping.meta.Constraint<Object> make(final Constraint data, final Type type) {
+        public org.spongepowered.configurate.objectmapping.meta.@NonNull Constraint<Object> make(final Constraint data, final @NonNull Type type) {
             try {
                 final Constructor<? extends org.spongepowered.configurate.objectmapping.meta.Constraint<?>> constructor = data.value().getDeclaredConstructor();
                 constructor.trySetAccessible();

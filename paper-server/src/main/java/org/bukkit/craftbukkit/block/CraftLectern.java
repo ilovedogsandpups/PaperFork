@@ -8,6 +8,7 @@ import org.bukkit.World;
 import org.bukkit.block.Lectern;
 import org.bukkit.craftbukkit.inventory.CraftInventoryLectern;
 import org.bukkit.inventory.Inventory;
+import org.jspecify.annotations.NonNull;
 
 public class CraftLectern extends CraftBlockEntityState<LecternBlockEntity> implements Lectern {
 
@@ -30,12 +31,12 @@ public class CraftLectern extends CraftBlockEntityState<LecternBlockEntity> impl
     }
 
     @Override
-    public Inventory getSnapshotInventory() {
+    public @NonNull Inventory getSnapshotInventory() {
         return new CraftInventoryLectern(this.getSnapshot().bookAccess);
     }
 
     @Override
-    public Inventory getInventory() {
+    public @NonNull Inventory getInventory() {
         if (!this.isPlaced()) {
             return this.getSnapshotInventory();
         }
@@ -55,12 +56,12 @@ public class CraftLectern extends CraftBlockEntityState<LecternBlockEntity> impl
     }
 
     @Override
-    public CraftLectern copy() {
+    public @NonNull CraftLectern copy() {
         return new CraftLectern(this, null);
     }
 
     @Override
-    public CraftLectern copy(Location location) {
+    public @NonNull CraftLectern copy(@NonNull Location location) {
         return new CraftLectern(this, location);
     }
 }

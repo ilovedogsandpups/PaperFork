@@ -9,6 +9,7 @@ import org.bukkit.craftbukkit.block.CraftBlock;
 import org.bukkit.craftbukkit.util.CraftChatMessage;
 import org.bukkit.permissions.PermissibleBase;
 import org.bukkit.permissions.ServerOperator;
+import org.jspecify.annotations.NonNull;
 
 /**
  * Represents input from a command block
@@ -38,12 +39,12 @@ public class CraftBlockCommandSender extends ServerCommandSender implements Bloc
     }
 
     @Override
-    public Block getBlock() {
+    public @NonNull Block getBlock() {
         return CraftBlock.at(this.blockEntity.getLevel(), this.blockEntity.getBlockPos());
     }
 
     @Override
-    public void sendMessage(String message) {
+    public void sendMessage(@NonNull String message) {
         for (Component component : CraftChatMessage.fromString(message)) {
             this.sourceStack.source.sendSystemMessage(component);
         }
@@ -57,17 +58,17 @@ public class CraftBlockCommandSender extends ServerCommandSender implements Bloc
     }
 
     @Override
-    public String getName() {
+    public @NonNull String getName() {
         return this.sourceStack.getTextName();
     }
 
     @Override
-    public void sendMessage(final net.kyori.adventure.text.Component message) {
+    public void sendMessage(final net.kyori.adventure.text.@NonNull Component message) {
         this.sourceStack.source.sendSystemMessage(io.papermc.paper.adventure.PaperAdventure.asVanilla(message));
     }
 
     @Override
-    public net.kyori.adventure.text.Component name() {
+    public net.kyori.adventure.text.@NonNull Component name() {
         return io.papermc.paper.adventure.PaperAdventure.asAdventure(this.sourceStack.getDisplayName());
     }
 

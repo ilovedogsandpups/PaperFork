@@ -8,6 +8,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Score;
+import org.jspecify.annotations.NonNull;
 
 /**
  * TL;DR: This class is special and lazily grabs a handle...
@@ -25,17 +26,17 @@ final class CraftScore implements Score {
     }
 
     @Override
-    public OfflinePlayer getPlayer() {
+    public @NonNull OfflinePlayer getPlayer() {
         return Bukkit.getOfflinePlayer(this.entry.getScoreboardName());
     }
 
     @Override
-    public String getEntry() {
+    public @NonNull String getEntry() {
         return this.entry.getScoreboardName();
     }
 
     @Override
-    public Objective getObjective() {
+    public @NonNull Objective getObjective() {
         return this.objective;
     }
 

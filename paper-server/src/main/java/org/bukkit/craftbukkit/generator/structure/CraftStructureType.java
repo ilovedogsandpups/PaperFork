@@ -6,6 +6,7 @@ import net.minecraft.core.registries.Registries;
 import org.bukkit.NamespacedKey;
 import org.bukkit.craftbukkit.CraftRegistry;
 import org.bukkit.generator.structure.StructureType;
+import org.jspecify.annotations.NonNull;
 
 public class CraftStructureType extends StructureType implements Holderable<net.minecraft.world.level.levelgen.structure.StructureType<?>> {
 
@@ -24,12 +25,12 @@ public class CraftStructureType extends StructureType implements Holderable<net.
     }
 
     @Override
-    public Holder<net.minecraft.world.level.levelgen.structure.StructureType<?>> getHolder() {
+    public @NonNull Holder<net.minecraft.world.level.levelgen.structure.StructureType<?>> getHolder() {
         return this.holder;
     }
 
     @Override
-    public NamespacedKey getKey() {
+    public @NonNull NamespacedKey getKey() {
         return Holderable.super.getKey();
     }
 

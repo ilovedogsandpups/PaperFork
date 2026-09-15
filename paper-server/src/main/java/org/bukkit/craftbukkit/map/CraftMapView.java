@@ -17,6 +17,7 @@ import org.bukkit.craftbukkit.CraftWorld;
 import org.bukkit.craftbukkit.entity.CraftPlayer;
 import org.bukkit.map.MapRenderer;
 import org.bukkit.map.MapView;
+import org.jspecify.annotations.NonNull;
 
 public final class CraftMapView implements MapView {
 
@@ -41,7 +42,7 @@ public final class CraftMapView implements MapView {
     }
 
     @Override
-    public Scale getScale() {
+    public @NonNull Scale getScale() {
         return Scale.valueOf(this.worldMap.scale);
     }
 
@@ -92,12 +93,12 @@ public final class CraftMapView implements MapView {
     }
 
     @Override
-    public List<MapRenderer> getRenderers() {
+    public @NonNull List<MapRenderer> getRenderers() {
         return new ArrayList<MapRenderer>(this.renderers);
     }
 
     @Override
-    public void addRenderer(MapRenderer renderer) {
+    public void addRenderer(@NonNull MapRenderer renderer) {
         if (!this.renderers.contains(renderer)) {
             this.renderers.add(renderer);
             this.canvases.put(renderer, new WeakHashMap<>());

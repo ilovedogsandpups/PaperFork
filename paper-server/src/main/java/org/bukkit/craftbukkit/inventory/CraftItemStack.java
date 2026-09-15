@@ -63,6 +63,7 @@ import org.bukkit.persistence.PersistentDataContainer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Unmodifiable;
+import org.jspecify.annotations.NonNull;
 
 @DelegateDeserialization(ItemStack.class)
 public final class CraftItemStack extends ItemStack {
@@ -235,12 +236,12 @@ public final class CraftItemStack extends ItemStack {
     }
 
     @Override
-    public Material getType() {
+    public @NonNull Material getType() {
         return this.handle != null ? CraftItemType.minecraftToBukkit(this.handle.getItem()) : Material.AIR;
     }
 
     @Override
-    public void setType(Material type) {
+    public void setType(@NonNull Material type) {
         if (this.getType() == type) {
             return;
         } else if (type == Material.AIR) {
@@ -309,7 +310,7 @@ public final class CraftItemStack extends ItemStack {
     }
 
     @Override
-    public int getMaxItemUseDuration(final LivingEntity entity) {
+    public int getMaxItemUseDuration(final @NonNull LivingEntity entity) {
         if (this.handle == null) {
             return 0;
         }
@@ -318,7 +319,7 @@ public final class CraftItemStack extends ItemStack {
     }
 
     @Override
-    public void addUnsafeEnchantment(Enchantment enchant, int level) {
+    public void addUnsafeEnchantment(@NonNull Enchantment enchant, int level) {
         Preconditions.checkArgument(enchant != null, "Enchantment cannot be null");
 
         if (this.handle == null) {
@@ -331,12 +332,12 @@ public final class CraftItemStack extends ItemStack {
     }
 
     @Override
-    public boolean containsEnchantment(Enchantment enchant) {
+    public boolean containsEnchantment(@NonNull Enchantment enchant) {
         return this.getEnchantmentLevel(enchant) > 0;
     }
 
     @Override
-    public int getEnchantmentLevel(Enchantment enchant) {
+    public int getEnchantmentLevel(@NonNull Enchantment enchant) {
         Preconditions.checkArgument(enchant != null, "Enchantment cannot be null");
         if (this.handle == null) {
             return 0;
@@ -345,7 +346,7 @@ public final class CraftItemStack extends ItemStack {
     }
 
     @Override
-    public int removeEnchantment(Enchantment enchant) {
+    public int removeEnchantment(@NonNull Enchantment enchant) {
         Preconditions.checkArgument(enchant != null, "Enchantment cannot be null");
 
         if (this.handle == null) {
@@ -418,7 +419,7 @@ public final class CraftItemStack extends ItemStack {
     }
 
     @Override
-    public Map<Enchantment, Integer> getEnchantments() {
+    public @NonNull Map<Enchantment, Integer> getEnchantments() {
         io.papermc.paper.datacomponent.item.ItemEnchantments itemEnchantments = this.getData(DataComponentTypes.ENCHANTMENTS); // empty constant might be useful here
         if (itemEnchantments == null) {
             return Collections.emptyMap();
@@ -427,7 +428,7 @@ public final class CraftItemStack extends ItemStack {
     }
 
     @Override
-    public CraftItemStack clone() {
+    public @NonNull CraftItemStack clone() {
         return new CraftItemStack(this.handle != null ? this.handle.copy() : null); // Paper
     }
 
@@ -564,7 +565,7 @@ public final class CraftItemStack extends ItemStack {
     }
     // Paper start - with type
     @Override
-    public ItemStack withType(final Material type) {
+    public @NonNull ItemStack withType(final @NonNull Material type) {
         if (type == Material.AIR) {
             return CraftItemStack.asCraftMirror(null);
         }
@@ -625,22 +626,22 @@ public final class CraftItemStack extends ItemStack {
         }
 
         @Override
-        public CompoundTag toTagCompound() {
+        public @NonNull CompoundTag toTagCompound() {
             return CraftItemStack.this.getPdcTag();
         }
 
         @Override
-        public Tag getTag(final String key) {
+        public Tag getTag(final @NonNull String key) {
             return CraftItemStack.this.getPdcTag().get(key);
         }
     };
     @Override
-    public PersistentDataContainerView getPersistentDataContainer() {
+    public @NonNull PersistentDataContainerView getPersistentDataContainer() {
         return this.pdcView;
     }
 
     @Override
-    public boolean editPersistentDataContainer(final Consumer<PersistentDataContainer> consumer) {
+    public boolean editPersistentDataContainer(final @NonNull Consumer<PersistentDataContainer> consumer) {
         if (this.handle == null || this.handle.isEmpty()) return false;
 
         final CraftPersistentDataContainer container = new CraftPersistentDataContainer(REGISTRY);
@@ -664,7 +665,7 @@ public final class CraftItemStack extends ItemStack {
 
     // Paper start - data component API
     @Override
-    public <T> T getData(final io.papermc.paper.datacomponent.DataComponentType.Valued<T> type) {
+    public <T> T getData(final io.papermc.paper.datacomponent.DataComponentType.@NonNull Valued<T> type) {
         if (this.isEmpty()) {
             return null;
         }
@@ -672,7 +673,7 @@ public final class CraftItemStack extends ItemStack {
     }
 
     @Override
-    public boolean hasData(final io.papermc.paper.datacomponent.DataComponentType type) {
+    public boolean hasData(final io.papermc.paper.datacomponent.@NonNull DataComponentType type) {
         if (this.isEmpty()) {
             return false;
         }
@@ -688,7 +689,7 @@ public final class CraftItemStack extends ItemStack {
     }
 
     @Override
-    public <T> void setData(final io.papermc.paper.datacomponent.DataComponentType.Valued<T> type, final T value) {
+    public <T> void setData(final io.papermc.paper.datacomponent.DataComponentType.@NonNull Valued<T> type, final @NonNull T value) {
         Preconditions.checkArgument(value != null, "value cannot be null");
         if (this.isEmpty()) {
             return;
@@ -697,7 +698,7 @@ public final class CraftItemStack extends ItemStack {
     }
 
     @Override
-    public void setData(final io.papermc.paper.datacomponent.DataComponentType.NonValued type) {
+    public void setData(final io.papermc.paper.datacomponent.DataComponentType.@NonNull NonValued type) {
         if (this.isEmpty()) {
             return;
         }
@@ -709,7 +710,7 @@ public final class CraftItemStack extends ItemStack {
     }
 
     @Override
-    public void unsetData(final io.papermc.paper.datacomponent.DataComponentType type) {
+    public void unsetData(final io.papermc.paper.datacomponent.@NonNull DataComponentType type) {
         if (this.isEmpty()) {
             return;
         }
@@ -717,7 +718,7 @@ public final class CraftItemStack extends ItemStack {
     }
 
     @Override
-    public void resetData(final io.papermc.paper.datacomponent.DataComponentType type) {
+    public void resetData(final io.papermc.paper.datacomponent.@NonNull DataComponentType type) {
         if (this.isEmpty()) {
             return;
         }
@@ -733,7 +734,7 @@ public final class CraftItemStack extends ItemStack {
     }
 
     @Override
-    public void copyDataFrom(final ItemStack source, final Predicate<io.papermc.paper.datacomponent.DataComponentType> filter) {
+    public void copyDataFrom(final @NonNull ItemStack source, final @NonNull Predicate<io.papermc.paper.datacomponent.DataComponentType> filter) {
         Preconditions.checkArgument(source != null, "source cannot be null");
         Preconditions.checkArgument(filter != null, "filter cannot be null");
         if (this.isEmpty() || source.isEmpty()) {
@@ -752,7 +753,7 @@ public final class CraftItemStack extends ItemStack {
     }
 
     @Override
-    public boolean isDataOverridden(final io.papermc.paper.datacomponent.DataComponentType type) {
+    public boolean isDataOverridden(final io.papermc.paper.datacomponent.@NonNull DataComponentType type) {
         if (this.isEmpty()) {
             return false;
         }
@@ -761,7 +762,7 @@ public final class CraftItemStack extends ItemStack {
     }
 
     @Override
-    public boolean matchesWithoutData(final ItemStack item, final Set<io.papermc.paper.datacomponent.DataComponentType> exclude, final boolean ignoreCount) {
+    public boolean matchesWithoutData(final @NonNull ItemStack item, final @NonNull Set<io.papermc.paper.datacomponent.DataComponentType> exclude, final boolean ignoreCount) {
         // Extracted from base equals
         final CraftItemStack craftStack = getCraftStack(item);
         if (this.handle == craftStack.handle) return true;

@@ -12,6 +12,7 @@ import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.FishHook;
 import org.bukkit.inventory.EquipmentSlot;
+import org.jspecify.annotations.NonNull;
 
 public class CraftFishHook extends CraftProjectile implements FishHook {
 
@@ -192,7 +193,7 @@ public class CraftFishHook extends CraftProjectile implements FishHook {
     }
 
     @Override
-    public HookState getState() {
+    public @NonNull HookState getState() {
         return HookState.values()[this.getHandle().currentState.ordinal()];
     }
 
@@ -234,7 +235,7 @@ public class CraftFishHook extends CraftProjectile implements FishHook {
     }
 
     @Override
-    public int retrieve(EquipmentSlot slot) {
+    public int retrieve(@NonNull EquipmentSlot slot) {
         Preconditions.checkArgument(slot == EquipmentSlot.HAND || slot == EquipmentSlot.OFF_HAND, "Equipment slot must be HAND or OFF_HAND");
         final FishingHook fishingHook = getHandle();
         final Player playerOwner = fishingHook.getPlayerOwner();

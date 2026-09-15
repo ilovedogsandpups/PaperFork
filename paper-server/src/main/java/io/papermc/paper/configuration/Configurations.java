@@ -292,7 +292,7 @@ public abstract class Configurations<G, W> {
 
         @SuppressWarnings("unchecked")
         public <T> T require(ContextKey<T> key) {
-            final @Nullable Object value = this.backingMap.get(key);
+            final Object value = this.backingMap.get(key);
             if (value == null) {
                 throw new NoSuchElementException("No element found for " + key + " with type " + key.type());
             } else if (value == VOID) {

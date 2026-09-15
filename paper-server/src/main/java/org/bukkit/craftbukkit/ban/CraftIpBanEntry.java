@@ -7,6 +7,7 @@ import java.util.Date;
 import net.minecraft.server.players.IpBanList;
 import net.minecraft.server.players.IpBanListEntry;
 import org.bukkit.BanEntry;
+import org.jspecify.annotations.NonNull;
 
 public final class CraftIpBanEntry implements BanEntry<InetAddress> {
     private static final Date minorDate = Date.from(Instant.parse("1899-12-31T04:00:00Z"));
@@ -27,12 +28,12 @@ public final class CraftIpBanEntry implements BanEntry<InetAddress> {
     }
 
     @Override
-    public String getTarget() {
+    public @NonNull String getTarget() {
         return this.target;
     }
 
     @Override
-    public InetAddress getBanTarget() {
+    public @NonNull InetAddress getBanTarget() {
         return InetAddresses.forString(this.target);
     }
 
@@ -42,17 +43,17 @@ public final class CraftIpBanEntry implements BanEntry<InetAddress> {
     }
 
     @Override
-    public void setCreated(Date created) {
+    public void setCreated(@NonNull Date created) {
         this.created = created;
     }
 
     @Override
-    public String getSource() {
+    public @NonNull String getSource() {
         return this.source;
     }
 
     @Override
-    public void setSource(String source) {
+    public void setSource(@NonNull String source) {
         this.source = source;
     }
 

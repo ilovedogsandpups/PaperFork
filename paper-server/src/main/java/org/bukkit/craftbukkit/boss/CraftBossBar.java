@@ -20,6 +20,7 @@ import org.bukkit.boss.BossBar;
 import org.bukkit.craftbukkit.entity.CraftPlayer;
 import org.bukkit.craftbukkit.util.CraftChatMessage;
 import org.bukkit.entity.Player;
+import org.jspecify.annotations.NonNull;
 
 public class CraftBossBar implements BossBar {
 
@@ -85,7 +86,7 @@ public class CraftBossBar implements BossBar {
     }
 
     @Override
-    public String getTitle() {
+    public @NonNull String getTitle() {
         return CraftChatMessage.fromComponent(this.handle.name);
     }
 
@@ -96,29 +97,29 @@ public class CraftBossBar implements BossBar {
     }
 
     @Override
-    public BarColor getColor() {
+    public @NonNull BarColor getColor() {
         return this.convertColor(this.handle.color);
     }
 
     @Override
-    public void setColor(BarColor color) {
+    public void setColor(@NonNull BarColor color) {
         this.handle.color = this.convertColor(color);
         this.handle.broadcast(ClientboundBossEventPacket::createUpdateStylePacket);
     }
 
     @Override
-    public BarStyle getStyle() {
+    public @NonNull BarStyle getStyle() {
         return this.convertStyle(this.handle.overlay);
     }
 
     @Override
-    public void setStyle(BarStyle style) {
+    public void setStyle(@NonNull BarStyle style) {
         this.handle.overlay = this.convertStyle(style);
         this.handle.broadcast(ClientboundBossEventPacket::createUpdateStylePacket);
     }
 
     @Override
-    public void addFlag(BarFlag flag) {
+    public void addFlag(@NonNull BarFlag flag) {
         FlagContainer flagContainer = this.flags.get(flag);
         if (flagContainer != null) {
             flagContainer.set.accept(true);
@@ -126,7 +127,7 @@ public class CraftBossBar implements BossBar {
     }
 
     @Override
-    public void removeFlag(BarFlag flag) {
+    public void removeFlag(@NonNull BarFlag flag) {
         FlagContainer flagContainer = this.flags.get(flag);
         if (flagContainer != null) {
             flagContainer.set.accept(false);
@@ -134,7 +135,7 @@ public class CraftBossBar implements BossBar {
     }
 
     @Override
-    public boolean hasFlag(BarFlag flag) {
+    public boolean hasFlag(@NonNull BarFlag flag) {
         FlagContainer flagContainer = this.flags.get(flag);
         if (flagContainer != null) {
             return flagContainer.get.get();
@@ -154,7 +155,7 @@ public class CraftBossBar implements BossBar {
     }
 
     @Override
-    public void addPlayer(Player player) {
+    public void addPlayer(@NonNull Player player) {
         Preconditions.checkArgument(player != null, "player == null");
         Preconditions.checkArgument(((CraftPlayer) player).getHandle().connection != null, "player is not fully connected (wait for PlayerJoinEvent)");
 
@@ -162,14 +163,14 @@ public class CraftBossBar implements BossBar {
     }
 
     @Override
-    public void removePlayer(Player player) {
+    public void removePlayer(@NonNull Player player) {
         Preconditions.checkArgument(player != null, "player == null");
 
         this.handle.removePlayer(((CraftPlayer) player).getHandle());
     }
 
     @Override
-    public List<Player> getPlayers() {
+    public @NonNull List<Player> getPlayers() {
         ImmutableList.Builder<Player> players = ImmutableList.builder();
         for (ServerPlayer p : this.handle.getPlayers()) {
             players.add(p.getBukkitEntity());

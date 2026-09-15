@@ -10,6 +10,7 @@ import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.plugin.Plugin;
+import org.jspecify.annotations.NonNull;
 
 public class ProxiedNativeCommandSender implements ProxiedCommandSender {
 
@@ -28,17 +29,17 @@ public class ProxiedNativeCommandSender implements ProxiedCommandSender {
     }
 
     @Override
-    public CommandSender getCaller() {
+    public @NonNull CommandSender getCaller() {
         return this.caller;
     }
 
     @Override
-    public CommandSender getCallee() {
+    public @NonNull CommandSender getCallee() {
         return this.callee;
     }
 
     @Override
-    public void sendMessage(String message) {
+    public void sendMessage(@NonNull String message) {
         this.getCaller().sendMessage(message);
     }
 
@@ -48,7 +49,7 @@ public class ProxiedNativeCommandSender implements ProxiedCommandSender {
     }
 
     @Override
-    public void sendMessage(UUID sender, String message) {
+    public void sendMessage(UUID sender, @NonNull String message) {
         this.getCaller().sendMessage(sender, message);
     }
 
@@ -58,62 +59,62 @@ public class ProxiedNativeCommandSender implements ProxiedCommandSender {
     }
 
     @Override
-    public Server getServer() {
+    public @NonNull Server getServer() {
         return this.getCallee().getServer();
     }
 
     @Override
-    public String getName() {
+    public @NonNull String getName() {
         return this.getCallee().getName();
     }
 
     @Override
-    public net.kyori.adventure.text.Component name() {
+    public net.kyori.adventure.text.@NonNull Component name() {
         return this.getCallee().name();
     }
 
     @Override
-    public boolean isPermissionSet(String name) {
+    public boolean isPermissionSet(@NonNull String name) {
         return this.getCaller().isPermissionSet(name);
     }
 
     @Override
-    public boolean isPermissionSet(Permission perm) {
+    public boolean isPermissionSet(@NonNull Permission perm) {
         return this.getCaller().isPermissionSet(perm);
     }
 
     @Override
-    public boolean hasPermission(String name) {
+    public boolean hasPermission(@NonNull String name) {
         return this.getCaller().hasPermission(name);
     }
 
     @Override
-    public boolean hasPermission(Permission perm) {
+    public boolean hasPermission(@NonNull Permission perm) {
         return this.getCaller().hasPermission(perm);
     }
 
     @Override
-    public PermissionAttachment addAttachment(Plugin plugin, String name, boolean value) {
+    public @NonNull PermissionAttachment addAttachment(@NonNull Plugin plugin, @NonNull String name, boolean value) {
         return this.getCaller().addAttachment(plugin, name, value);
     }
 
     @Override
-    public PermissionAttachment addAttachment(Plugin plugin) {
+    public @NonNull PermissionAttachment addAttachment(@NonNull Plugin plugin) {
         return this.getCaller().addAttachment(plugin);
     }
 
     @Override
-    public PermissionAttachment addAttachment(Plugin plugin, String name, boolean value, int ticks) {
+    public PermissionAttachment addAttachment(@NonNull Plugin plugin, @NonNull String name, boolean value, int ticks) {
         return this.getCaller().addAttachment(plugin, name, value, ticks);
     }
 
     @Override
-    public PermissionAttachment addAttachment(Plugin plugin, int ticks) {
+    public PermissionAttachment addAttachment(@NonNull Plugin plugin, int ticks) {
         return this.getCaller().addAttachment(plugin, ticks);
     }
 
     @Override
-    public void removeAttachment(PermissionAttachment attachment) {
+    public void removeAttachment(@NonNull PermissionAttachment attachment) {
         this.getCaller().removeAttachment(attachment);
     }
 
@@ -123,7 +124,7 @@ public class ProxiedNativeCommandSender implements ProxiedCommandSender {
     }
 
     @Override
-    public Set<PermissionAttachmentInfo> getEffectivePermissions() {
+    public @NonNull Set<PermissionAttachmentInfo> getEffectivePermissions() {
         return this.getCaller().getEffectivePermissions();
     }
 
@@ -138,7 +139,7 @@ public class ProxiedNativeCommandSender implements ProxiedCommandSender {
     }
 
     @Override
-    public org.bukkit.command.CommandSender.Spigot spigot() {
+    public org.bukkit.command.CommandSender.@NonNull Spigot spigot() {
         return this.getCaller().spigot();
     }
 }

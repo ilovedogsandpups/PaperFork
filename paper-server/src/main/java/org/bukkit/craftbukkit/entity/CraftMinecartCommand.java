@@ -13,6 +13,7 @@ import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.plugin.Plugin;
+import org.jspecify.annotations.NonNull;
 
 public class CraftMinecartCommand extends CraftMinecart implements CommandMinecart, io.papermc.paper.commands.PaperCommandBlockHolder {
 
@@ -28,7 +29,7 @@ public class CraftMinecartCommand extends CraftMinecart implements CommandMineca
     }
 
     @Override
-    public String getCommand() {
+    public @NonNull String getCommand() {
         return this.getHandle().getCommandBlock().getCommand();
     }
 
@@ -44,7 +45,7 @@ public class CraftMinecartCommand extends CraftMinecart implements CommandMineca
     }
 
     @Override
-    public void sendMessage(String message) {
+    public void sendMessage(@NonNull String message) {
     }
 
     @Override
@@ -52,7 +53,7 @@ public class CraftMinecartCommand extends CraftMinecart implements CommandMineca
     }
 
     @Override
-    public String getName() {
+    public @NonNull String getName() {
         return CraftChatMessage.fromComponent(this.getHandle().getCommandBlock().getName());
     }
 
@@ -62,7 +63,7 @@ public class CraftMinecartCommand extends CraftMinecart implements CommandMineca
     }
 
     @Override
-    public net.minecraft.world.level.BaseCommandBlock getCommandBlockHandle() {
+    public net.minecraft.world.level.@NonNull BaseCommandBlock getCommandBlockHandle() {
         return this.getHandle().getCommandBlock();
     }
 
@@ -83,47 +84,47 @@ public class CraftMinecartCommand extends CraftMinecart implements CommandMineca
     }
 
     @Override
-    public boolean isPermissionSet(String name) {
+    public boolean isPermissionSet(@NonNull String name) {
         return this.perm.isPermissionSet(name);
     }
 
     @Override
-    public boolean isPermissionSet(Permission perm) {
+    public boolean isPermissionSet(@NonNull Permission perm) {
         return this.perm.isPermissionSet(perm);
     }
 
     @Override
-    public boolean hasPermission(String name) {
+    public boolean hasPermission(@NonNull String name) {
         return this.perm.hasPermission(name);
     }
 
     @Override
-    public boolean hasPermission(Permission perm) {
+    public boolean hasPermission(@NonNull Permission perm) {
         return this.perm.hasPermission(perm);
     }
 
     @Override
-    public PermissionAttachment addAttachment(Plugin plugin, String name, boolean value) {
+    public @NonNull PermissionAttachment addAttachment(@NonNull Plugin plugin, @NonNull String name, boolean value) {
         return this.perm.addAttachment(plugin, name, value);
     }
 
     @Override
-    public PermissionAttachment addAttachment(Plugin plugin) {
+    public @NonNull PermissionAttachment addAttachment(@NonNull Plugin plugin) {
         return this.perm.addAttachment(plugin);
     }
 
     @Override
-    public PermissionAttachment addAttachment(Plugin plugin, String name, boolean value, int ticks) {
+    public PermissionAttachment addAttachment(@NonNull Plugin plugin, @NonNull String name, boolean value, int ticks) {
         return this.perm.addAttachment(plugin, name, value, ticks);
     }
 
     @Override
-    public PermissionAttachment addAttachment(Plugin plugin, int ticks) {
+    public PermissionAttachment addAttachment(@NonNull Plugin plugin, int ticks) {
         return this.perm.addAttachment(plugin, ticks);
     }
 
     @Override
-    public void removeAttachment(PermissionAttachment attachment) {
+    public void removeAttachment(@NonNull PermissionAttachment attachment) {
         this.perm.removeAttachment(attachment);
     }
 
@@ -133,12 +134,12 @@ public class CraftMinecartCommand extends CraftMinecart implements CommandMineca
     }
 
     @Override
-    public Set<PermissionAttachmentInfo> getEffectivePermissions() {
+    public @NonNull Set<PermissionAttachmentInfo> getEffectivePermissions() {
         return this.perm.getEffectivePermissions();
     }
 
     @Override
-    public Server getServer() {
+    public @NonNull Server getServer() {
         return Bukkit.getServer();
     }
 }

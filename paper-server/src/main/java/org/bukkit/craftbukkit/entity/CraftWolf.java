@@ -10,6 +10,7 @@ import org.bukkit.DyeColor;
 import org.bukkit.craftbukkit.CraftRegistry;
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.entity.Wolf;
+import org.jspecify.annotations.NonNull;
 
 public class CraftWolf extends CraftTameableAnimal implements Wolf {
 
@@ -37,7 +38,7 @@ public class CraftWolf extends CraftTameableAnimal implements Wolf {
     }
 
     @Override
-    public DyeColor getCollarColor() {
+    public @NonNull DyeColor getCollarColor() {
         return DyeColor.getByWoolData((byte) this.getHandle().getCollarColor().getId());
     }
 
@@ -67,24 +68,24 @@ public class CraftWolf extends CraftTameableAnimal implements Wolf {
     }
 
     @Override
-    public Variant getVariant() {
+    public @NonNull Variant getVariant() {
         return CraftVariant.minecraftHolderToBukkit(this.getHandle().getVariant());
     }
 
     @Override
-    public void setVariant(Variant variant) {
+    public void setVariant(@NonNull Variant variant) {
         Preconditions.checkArgument(variant != null, "variant cannot be null");
 
         this.getHandle().setVariant(CraftVariant.bukkitToMinecraftHolder(variant));
     }
 
     @Override
-    public SoundVariant getSoundVariant() {
+    public @NonNull SoundVariant getSoundVariant() {
         return CraftSoundVariant.minecraftHolderToBukkit(this.getHandle().getSoundVariant());
     }
 
     @Override
-    public void setSoundVariant(SoundVariant soundVariant) {
+    public void setSoundVariant(@NonNull SoundVariant soundVariant) {
         Preconditions.checkArgument(soundVariant != null, "soundVariant cannot be null");
 
         this.getHandle().setSoundVariant(CraftSoundVariant.bukkitToMinecraftHolder(soundVariant));

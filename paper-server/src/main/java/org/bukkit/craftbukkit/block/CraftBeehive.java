@@ -13,6 +13,7 @@ import org.bukkit.block.Beehive;
 import org.bukkit.craftbukkit.entity.CraftBee;
 import org.bukkit.craftbukkit.util.CraftLocation;
 import org.bukkit.entity.Bee;
+import org.jspecify.annotations.NonNull;
 
 public class CraftBeehive extends CraftBlockEntityState<BeehiveBlockEntity> implements Beehive {
 
@@ -64,7 +65,7 @@ public class CraftBeehive extends CraftBlockEntityState<BeehiveBlockEntity> impl
     }
 
     @Override
-    public List<Bee> releaseEntities() {
+    public @NonNull List<Bee> releaseEntities() {
         this.ensureNoWorldGeneration();
 
         List<Bee> bees = new ArrayList<>();
@@ -80,19 +81,19 @@ public class CraftBeehive extends CraftBlockEntityState<BeehiveBlockEntity> impl
     }
 
     @Override
-    public void addEntity(Bee entity) {
+    public void addEntity(@NonNull Bee entity) {
         Preconditions.checkArgument(entity != null, "Entity must not be null");
 
         this.getSnapshot().addOccupant(((CraftBee) entity).getHandle());
     }
 
     @Override
-    public CraftBeehive copy() {
+    public @NonNull CraftBeehive copy() {
         return new CraftBeehive(this, null);
     }
 
     @Override
-    public CraftBeehive copy(Location location) {
+    public @NonNull CraftBeehive copy(@NonNull Location location) {
         return new CraftBeehive(this, location);
     }
 

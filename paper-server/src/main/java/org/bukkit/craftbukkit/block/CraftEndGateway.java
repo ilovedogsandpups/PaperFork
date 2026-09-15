@@ -7,6 +7,7 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.EndGateway;
 import org.bukkit.craftbukkit.util.CraftLocation;
+import org.jspecify.annotations.NonNull;
 
 public class CraftEndGateway extends CraftBlockEntityState<TheEndGatewayBlockEntity> implements EndGateway {
 
@@ -65,12 +66,12 @@ public class CraftEndGateway extends CraftBlockEntityState<TheEndGatewayBlockEnt
     }
 
     @Override
-    public CraftEndGateway copy() {
+    public @NonNull CraftEndGateway copy() {
         return new CraftEndGateway(this, null);
     }
 
     @Override
-    public CraftEndGateway copy(Location location) {
+    public @NonNull CraftEndGateway copy(@NonNull Location location) {
         return new CraftEndGateway(this, location);
     }
 }

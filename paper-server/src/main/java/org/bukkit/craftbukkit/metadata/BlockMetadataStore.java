@@ -8,6 +8,7 @@ import org.bukkit.metadata.MetadataStore;
 import org.bukkit.metadata.MetadataStoreBase;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
+import org.jspecify.annotations.NonNull;
 
 /**
  * A BlockMetadataStore stores metadata values for {@link Block} objects.
@@ -34,7 +35,7 @@ public class BlockMetadataStore extends MetadataStoreBase<Block> implements Meta
      * @see MetadataStoreBase#disambiguate(Object, String)
      */
     @Override
-    protected String disambiguate(Block block, String metadataKey) {
+    protected @NonNull String disambiguate(Block block, @NonNull String metadataKey) {
         return Integer.toString(block.getX()) + ":" + Integer.toString(block.getY()) + ":" + Integer.toString(block.getZ()) + ":" + metadataKey;
     }
 
@@ -45,7 +46,7 @@ public class BlockMetadataStore extends MetadataStoreBase<Block> implements Meta
      * @see MetadataStoreBase#getMetadata(Object, String)
      */
     @Override
-    public List<MetadataValue> getMetadata(Block block, String metadataKey) {
+    public @NonNull List<MetadataValue> getMetadata(Block block, @NonNull String metadataKey) {
         Preconditions.checkArgument(block.getWorld() == this.owningWorld, "Block does not belong to world %s", this.owningWorld.key().asString());
         return super.getMetadata(block, metadataKey);
     }
@@ -57,7 +58,7 @@ public class BlockMetadataStore extends MetadataStoreBase<Block> implements Meta
      * @see MetadataStoreBase#hasMetadata(Object, String)
      */
     @Override
-    public boolean hasMetadata(Block block, String metadataKey) {
+    public boolean hasMetadata(Block block, @NonNull String metadataKey) {
         Preconditions.checkArgument(block.getWorld() == this.owningWorld, "Block does not belong to world %s", this.owningWorld.key().asString());
         return super.hasMetadata(block, metadataKey);
     }
@@ -69,7 +70,7 @@ public class BlockMetadataStore extends MetadataStoreBase<Block> implements Meta
      * @see MetadataStoreBase#removeMetadata(Object, String, org.bukkit.plugin.Plugin)
      */
     @Override
-    public void removeMetadata(Block block, String metadataKey, Plugin owningPlugin) {
+    public void removeMetadata(Block block, @NonNull String metadataKey, @NonNull Plugin owningPlugin) {
         Preconditions.checkArgument(block.getWorld() == this.owningWorld, "Block does not belong to world %s", this.owningWorld.key().asString());
         super.removeMetadata(block, metadataKey, owningPlugin);
     }
@@ -81,7 +82,7 @@ public class BlockMetadataStore extends MetadataStoreBase<Block> implements Meta
      * @see MetadataStoreBase#setMetadata(Object, String, org.bukkit.metadata.MetadataValue)
      */
     @Override
-    public void setMetadata(Block block, String metadataKey, MetadataValue newMetadataValue) {
+    public void setMetadata(Block block, @NonNull String metadataKey, @NonNull MetadataValue newMetadataValue) {
         Preconditions.checkArgument(block.getWorld() == this.owningWorld, "Block does not belong to world %s", this.owningWorld.key().asString());
         super.setMetadata(block, metadataKey, newMetadataValue);
     }

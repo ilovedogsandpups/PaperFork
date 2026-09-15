@@ -18,6 +18,7 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.ServerLinks;
 import org.bukkit.craftbukkit.CraftServerLinks;
 import org.bukkit.craftbukkit.util.CraftNamespacedKey;
+import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 
 public abstract class PaperCommonConnection<T extends ServerCommonPacketListenerImpl> extends ReadablePlayerCookieConnectionImpl implements PlayerCommonConnection {
@@ -30,22 +31,22 @@ public abstract class PaperCommonConnection<T extends ServerCommonPacketListener
     }
 
     @Override
-    public void sendReportDetails(final Map<String, String> details) {
+    public void sendReportDetails(final @NonNull Map<String, String> details) {
         this.packetListener.send(new ClientboundCustomReportDetailsPacket(details));
     }
 
     @Override
-    public void sendLinks(final ServerLinks links) {
+    public void sendLinks(final @NonNull ServerLinks links) {
         this.packetListener.send(new ClientboundServerLinksPacket(((CraftServerLinks) links).getServerLinks().untrust()));
     }
 
     @Override
-    public void transfer(final String host, final int port) {
+    public void transfer(final @NonNull String host, final int port) {
         this.packetListener.send(new ClientboundTransferPacket(host, port));
     }
 
     @Override
-    public <T> T getClientOption(ClientOption<T> type) {
+    public <T> @NonNull T getClientOption(@NonNull ClientOption<T> type) {
         ClientInformation information = this.getClientInformation();
 
         if (ClientOption.SKIN_PARTS == type) {
@@ -76,7 +77,7 @@ public abstract class PaperCommonConnection<T extends ServerCommonPacketListener
     }
 
     @Override
-    public void disconnect(final Component component) {
+    public void disconnect(final @NonNull Component component) {
         this.packetListener.disconnect(PaperAdventure.asVanilla(component), DisconnectionReason.UNKNOWN);
     }
 
@@ -86,12 +87,12 @@ public abstract class PaperCommonConnection<T extends ServerCommonPacketListener
     }
 
     @Override
-    public SocketAddress getAddress() {
+    public @NonNull SocketAddress getAddress() {
         return this.packetListener.connection.channel.remoteAddress();
     }
 
     @Override
-    public InetSocketAddress getClientAddress() {
+    public @NonNull InetSocketAddress getClientAddress() {
         return (InetSocketAddress) this.packetListener.connection.getRemoteAddress();
     }
 
@@ -106,7 +107,7 @@ public abstract class PaperCommonConnection<T extends ServerCommonPacketListener
     }
 
     @Override
-    public void storeCookie(final NamespacedKey key, final byte[] value) {
+    public void storeCookie(final @NonNull NamespacedKey key, final byte[] value) {
         Preconditions.checkArgument(key != null, "Cookie key cannot be null");
         Preconditions.checkArgument(value != null, "Cookie value cannot be null");
         Preconditions.checkArgument(value.length <= 5120, "Cookie value too large, must be smaller than 5120 bytes");

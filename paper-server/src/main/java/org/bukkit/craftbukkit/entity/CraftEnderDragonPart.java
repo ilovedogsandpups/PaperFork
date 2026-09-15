@@ -5,6 +5,7 @@ import org.bukkit.damage.DamageSource;
 import org.bukkit.entity.EnderDragon;
 import org.bukkit.entity.EnderDragonPart;
 import org.bukkit.entity.Entity;
+import org.jspecify.annotations.NonNull;
 
 public class CraftEnderDragonPart extends CraftComplexPart implements EnderDragonPart {
     public CraftEnderDragonPart(CraftServer server, net.minecraft.world.entity.boss.enderdragon.EnderDragonPart entity) {
@@ -12,12 +13,12 @@ public class CraftEnderDragonPart extends CraftComplexPart implements EnderDrago
     }
 
     @Override
-    public EnderDragon getParent() {
+    public @NonNull EnderDragon getParent() {
         return (EnderDragon) super.getParent();
     }
 
     @Override
-    public void damage(double amount, DamageSource damageSource) {
+    public void damage(double amount, @NonNull DamageSource damageSource) {
         this.getParent().damage(amount, damageSource);
     }
 
@@ -32,7 +33,7 @@ public class CraftEnderDragonPart extends CraftComplexPart implements EnderDrago
     }
 
     @Override
-    public void kill(DamageSource damageSource) {
+    public void kill(@NonNull DamageSource damageSource) {
         this.getParent().kill(damageSource);
     }
 
@@ -47,7 +48,7 @@ public class CraftEnderDragonPart extends CraftComplexPart implements EnderDrago
     }
 
     @Override
-    public void heal(final double amount, final org.bukkit.event.entity.EntityRegainHealthEvent.RegainReason reason) {
+    public void heal(final double amount, final org.bukkit.event.entity.EntityRegainHealthEvent.@NonNull RegainReason reason) {
         this.getParent().heal(amount, reason);
     }
 

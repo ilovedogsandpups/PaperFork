@@ -6,6 +6,7 @@ import io.papermc.paper.registry.set.RegistrySet;
 import net.minecraft.server.dialog.CommonButtonData;
 import org.checkerframework.checker.index.qual.Positive;
 import org.jetbrains.annotations.Range;
+import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 
 import static io.papermc.paper.util.BoundChecker.requirePositive;
@@ -30,25 +31,25 @@ public record DialogListTypeImpl(
         }
 
         @Override
-        public DialogListType.Builder exitAction(final @Nullable ActionButton exitAction) {
+        public DialogListType.@NonNull Builder exitAction(final @Nullable ActionButton exitAction) {
             this.exitAction = exitAction;
             return this;
         }
 
         @Override
-        public DialogListType.Builder columns(final @Positive int columns) {
+        public DialogListType.@NonNull Builder columns(final @Positive int columns) {
             this.columns = requirePositive(columns, "columns");
             return this;
         }
 
         @Override
-        public DialogListType.Builder buttonWidth(final @Range(from = 1, to = 1024) int buttonWidth) {
+        public DialogListType.@NonNull Builder buttonWidth(final @Range(from = 1, to = 1024) int buttonWidth) {
             this.buttonWidth = requireRange(buttonWidth, "buttonWidth", 1, 1024);
             return this;
         }
 
         @Override
-        public DialogListType build() {
+        public @NonNull DialogListType build() {
             return new DialogListTypeImpl(this.dialogs, this.exitAction, this.columns, this.buttonWidth);
         }
     }

@@ -9,6 +9,8 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Constructor;
+
+import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 import org.spigotmc.SpigotWorldConfig;
 import org.spongepowered.configurate.objectmapping.meta.NodeResolver;
@@ -30,7 +32,7 @@ public @interface RequiresSpigotInitialization {
         }
 
         @Override
-        public @Nullable NodeResolver make(String name, AnnotatedElement element) {
+        public @Nullable NodeResolver make(@NonNull String name, AnnotatedElement element) {
             if (element.isAnnotationPresent(RequiresSpigotInitialization.class)) {
                 return this.cache.row(element.getAnnotation(RequiresSpigotInitialization.class).value()).computeIfAbsent(name, key -> {
                     try {

@@ -10,6 +10,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.storage.TagValueInput;
 import org.bukkit.entity.EntityFactory;
 import org.bukkit.entity.EntitySnapshot;
+import org.jspecify.annotations.NonNull;
 import org.slf4j.Logger;
 
 public class CraftEntityFactory implements EntityFactory {
@@ -25,7 +26,7 @@ public class CraftEntityFactory implements EntityFactory {
     }
 
     @Override
-    public EntitySnapshot createEntitySnapshot(String input) {
+    public @NonNull EntitySnapshot createEntitySnapshot(@NonNull String input) {
         Preconditions.checkArgument(input != null, "Input string cannot be null");
 
         CompoundTag tag;

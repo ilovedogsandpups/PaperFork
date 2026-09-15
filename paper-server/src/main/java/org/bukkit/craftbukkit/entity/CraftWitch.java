@@ -6,6 +6,7 @@ import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.craftbukkit.inventory.CraftItemStack;
 import org.bukkit.entity.Witch;
 import org.bukkit.inventory.ItemStack;
+import org.jspecify.annotations.NonNull;
 
 public class CraftWitch extends CraftRaider implements Witch, com.destroystokyo.paper.entity.CraftRangedEntity<net.minecraft.world.entity.monster.Witch> { // Paper
 
@@ -32,7 +33,7 @@ public class CraftWitch extends CraftRaider implements Witch, com.destroystokyo.
         this.getHandle().usingTime = ticks;
     }
 
-    public ItemStack getDrinkingPotion() {
+    public @NonNull ItemStack getDrinkingPotion() {
         return CraftItemStack.asCraftMirror(this.getHandle().getMainHandItem());
     }
 

@@ -3,6 +3,7 @@ package org.bukkit.craftbukkit.entity;
 import com.google.common.base.Preconditions;
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.entity.Parrot;
+import org.jspecify.annotations.NonNull;
 
 public class CraftParrot extends CraftTameableAnimal implements Parrot {
 
@@ -16,7 +17,7 @@ public class CraftParrot extends CraftTameableAnimal implements Parrot {
     }
 
     @Override
-    public Variant getVariant() {
+    public @NonNull Variant getVariant() {
         return Variant.values()[this.getHandle().getVariant().ordinal()];
     }
 

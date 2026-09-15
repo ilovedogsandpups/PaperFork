@@ -11,6 +11,7 @@ import net.minecraft.world.item.trading.Merchant;
 import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraft.world.item.trading.MerchantOffers;
 import org.bukkit.craftbukkit.util.CraftChatMessage;
+import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 
 public class CraftMerchantCustom implements CraftMerchant {
@@ -63,7 +64,7 @@ public class CraftMerchantCustom implements CraftMerchant {
         // Paper end
 
         @Override
-        public CraftMerchant getCraftMerchant() {
+        public @NonNull CraftMerchant getCraftMerchant() {
             return this.craftMerchant;
         }
 
@@ -78,13 +79,13 @@ public class CraftMerchantCustom implements CraftMerchant {
         }
 
         @Override
-        public MerchantOffers getOffers() {
+        public @NonNull MerchantOffers getOffers() {
             return this.trades;
         }
 
         // Paper start - Add PlayerTradeEvent and PlayerPurchaseEvent
         @Override
-        public void processTrade(MerchantOffer offer, io.papermc.paper.event.player.@Nullable PlayerPurchaseEvent event) { // The MerchantRecipe passed in here is the one set by the PlayerPurchaseEvent
+        public void processTrade(@NonNull MerchantOffer offer, io.papermc.paper.event.player.@Nullable PlayerPurchaseEvent event) { // The MerchantRecipe passed in here is the one set by the PlayerPurchaseEvent
             /* Based on {@link net.minecraft.world.entity.npc.villager.AbstractVillager#processTrade(MerchantOffer, io.papermc.paper.event.player.PlayerPurchaseEvent)} */
             if (getTradingPlayer() instanceof net.minecraft.server.level.ServerPlayer) {
                 if (event == null || event.willIncreaseTradeUses()) {
@@ -98,13 +99,13 @@ public class CraftMerchantCustom implements CraftMerchant {
         }
         // Paper end - Add PlayerTradeEvent and PlayerPurchaseEvent
         @Override
-        public void notifyTrade(MerchantOffer offer) {
+        public void notifyTrade(@NonNull MerchantOffer offer) {
             // increase recipe's uses
             // offer.increaseUses(); // Paper - Add PlayerTradeEvent and PlayerPurchaseEvent; handled above in processTrade
         }
 
         @Override
-        public void notifyTradeUpdated(ItemStack stack) {
+        public void notifyTradeUpdated(@NonNull ItemStack stack) {
         }
 
         public Component getScoreboardDisplayName() {
@@ -126,12 +127,12 @@ public class CraftMerchantCustom implements CraftMerchant {
         }
 
         @Override
-        public SoundEvent getNotifyTradeSound() {
+        public @NonNull SoundEvent getNotifyTradeSound() {
             return SoundEvents.VILLAGER_YES;
         }
 
         @Override
-        public void overrideOffers(MerchantOffers offers) {
+        public void overrideOffers(@NonNull MerchantOffers offers) {
         }
 
         @Override
@@ -140,7 +141,7 @@ public class CraftMerchantCustom implements CraftMerchant {
         }
 
         @Override
-        public boolean stillValid(Player player) {
+        public boolean stillValid(@NonNull Player player) {
             return this.tradingPlayer == player;
         }
     }

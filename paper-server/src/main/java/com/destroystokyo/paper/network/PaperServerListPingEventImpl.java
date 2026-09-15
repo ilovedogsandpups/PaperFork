@@ -5,6 +5,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.util.CachedServerIcon;
+import org.jspecify.annotations.NonNull;
 
 import javax.annotation.Nullable;
 
@@ -19,12 +20,12 @@ class PaperServerListPingEventImpl extends PaperServerListPingEvent {
     }
 
     @Override
-    protected final Object[] getOnlinePlayers() {
+    protected final Object @NonNull [] getOnlinePlayers() {
         return this.server.getPlayerList().getPlayers().toArray();
     }
 
     @Override
-    protected final Player getBukkitPlayer(Object player) {
+    protected final @NonNull Player getBukkitPlayer(@NonNull Object player) {
         return ((ServerPlayer) player).getBukkitEntity();
     }
 

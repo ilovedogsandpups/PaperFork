@@ -2,7 +2,7 @@ package org.bukkit.craftbukkit.inventory;
 
 import com.google.common.collect.ImmutableMap.Builder;
 import com.mojang.authlib.GameProfile;
-import com.mojang.datafixers.util.Either;
+
 import java.util.Map;
 import java.util.Objects;
 import net.minecraft.core.UUIDUtil;
@@ -13,7 +13,6 @@ import net.minecraft.nbt.NbtOps;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.Util;
-import net.minecraft.world.entity.player.PlayerSkin;
 import net.minecraft.world.item.component.ResolvableProfile;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
@@ -25,6 +24,7 @@ import org.bukkit.craftbukkit.util.CraftNamespacedKey;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.profile.PlayerProfile;
 import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
 
 @DelegateDeserialization(SerializableMeta.class)
 public class CraftMetaSkull extends CraftMetaItem implements SkullMeta {
@@ -134,7 +134,7 @@ public class CraftMetaSkull extends CraftMetaItem implements SkullMeta {
     }
 
     @Override
-    public CraftMetaSkull clone() {
+    public @NonNull CraftMetaSkull clone() {
         return (CraftMetaSkull) super.clone();
     }
 

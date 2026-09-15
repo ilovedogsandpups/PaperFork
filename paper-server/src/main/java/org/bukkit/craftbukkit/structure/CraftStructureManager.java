@@ -24,6 +24,7 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.craftbukkit.util.CraftNamespacedKey;
 import org.bukkit.structure.Structure;
 import org.bukkit.structure.StructureManager;
+import org.jspecify.annotations.NonNull;
 
 public class CraftStructureManager implements StructureManager {
 
@@ -36,7 +37,7 @@ public class CraftStructureManager implements StructureManager {
     }
 
     @Override
-    public Map<NamespacedKey, Structure> getStructures() {
+    public @NonNull Map<NamespacedKey, Structure> getStructures() {
         Map<NamespacedKey, Structure> cachedStructures = new HashMap<>();
         for (Map.Entry<Identifier, Optional<StructureTemplate>> entry : this.structureManager.structureRepository.entrySet()) {
             entry.getValue().ifPresent(definedStructure -> cachedStructures.put(CraftNamespacedKey.fromMinecraft(entry.getKey()), new CraftStructure(definedStructure, this.registry)));
@@ -45,7 +46,7 @@ public class CraftStructureManager implements StructureManager {
     }
 
     @Override
-    public Structure getStructure(NamespacedKey structureKey) {
+    public Structure getStructure(@NonNull NamespacedKey structureKey) {
         Preconditions.checkArgument(structureKey != null, "NamespacedKey structureKey cannot be null");
 
         final Optional<StructureTemplate> definedStructure = this.structureManager.structureRepository.get(CraftNamespacedKey.toMinecraft(structureKey));
@@ -56,7 +57,7 @@ public class CraftStructureManager implements StructureManager {
     }
 
     @Override
-    public Structure loadStructure(NamespacedKey structureKey, boolean register) {
+    public Structure loadStructure(@NonNull NamespacedKey structureKey, boolean register) {
         Identifier id = this.createAndValidateStructureId(structureKey);
 
         Optional<StructureTemplate> structure = this.structureManager.structureRepository.getOrDefault(id, Optional.empty())
@@ -69,17 +70,17 @@ public class CraftStructureManager implements StructureManager {
     }
 
     @Override
-    public Structure loadStructure(NamespacedKey structureKey) {
+    public Structure loadStructure(@NonNull NamespacedKey structureKey) {
         return this.loadStructure(structureKey, true);
     }
 
     @Override
-    public void saveStructure(NamespacedKey structureKey) {
+    public void saveStructure(@NonNull NamespacedKey structureKey) {
         this.structureManager.save(this.createAndValidateStructureId(structureKey));
     }
 
     @Override
-    public void saveStructure(NamespacedKey structureKey, Structure structure) throws IOException {
+    public void saveStructure(@NonNull NamespacedKey structureKey, @NonNull Structure structure) throws IOException {
         Preconditions.checkArgument(structureKey != null, "NamespacedKey structure cannot be null");
         Preconditions.checkArgument(structure != null, "Structure cannot be null");
 
@@ -89,7 +90,7 @@ public class CraftStructureManager implements StructureManager {
     }
 
     @Override
-    public Structure registerStructure(NamespacedKey structureKey, Structure structure) {
+    public Structure registerStructure(@NonNull NamespacedKey structureKey, @NonNull Structure structure) {
         Preconditions.checkArgument(structureKey != null, "NamespacedKey structureKey cannot be null");
         Preconditions.checkArgument(structure != null, "Structure cannot be null");
         Identifier id = this.createAndValidateStructureId(structureKey);
@@ -100,7 +101,7 @@ public class CraftStructureManager implements StructureManager {
     }
 
     @Override
-    public Structure unregisterStructure(NamespacedKey structureKey) {
+    public Structure unregisterStructure(@NonNull NamespacedKey structureKey) {
         Preconditions.checkArgument(structureKey != null, "NamespacedKey structureKey cannot be null");
         Identifier id = this.createAndValidateStructureId(structureKey);
 
@@ -109,12 +110,12 @@ public class CraftStructureManager implements StructureManager {
     }
 
     @Override
-    public void deleteStructure(NamespacedKey structureKey) throws IOException {
+    public void deleteStructure(@NonNull NamespacedKey structureKey) throws IOException {
         this.deleteStructure(structureKey, true);
     }
 
     @Override
-    public void deleteStructure(NamespacedKey structureKey, boolean unregister) throws IOException {
+    public void deleteStructure(@NonNull NamespacedKey structureKey, boolean unregister) throws IOException {
         Identifier id = CraftNamespacedKey.toMinecraft(structureKey);
 
         if (unregister) {
@@ -125,13 +126,13 @@ public class CraftStructureManager implements StructureManager {
     }
 
     @Override
-    public File getStructureFile(NamespacedKey structureKey) {
+    public @NonNull File getStructureFile(@NonNull NamespacedKey structureKey) {
         Identifier id = this.createAndValidateStructureId(structureKey);
         return this.structureManager.worldTemplates().createAndValidatePathToStructure(id, StructureTemplateManager.WORLD_STRUCTURE_LISTER).toFile();
     }
 
     @Override
-    public Structure loadStructure(File file) throws IOException {
+    public @NonNull Structure loadStructure(@NonNull File file) throws IOException {
         Preconditions.checkArgument(file != null, "File cannot be null");
 
         FileInputStream fileinputstream = new FileInputStream(file);
@@ -139,14 +140,14 @@ public class CraftStructureManager implements StructureManager {
     }
 
     @Override
-    public Structure loadStructure(InputStream inputStream) throws IOException {
+    public @NonNull Structure loadStructure(@NonNull InputStream inputStream) throws IOException {
         Preconditions.checkArgument(inputStream != null, "inputStream cannot be null");
 
         return new CraftStructure(this.structureManager.resourceManagerSource.readStructure(TemplateSource.readStructure(inputStream)), this.registry);
     }
 
     @Override
-    public void saveStructure(File file, Structure structure) throws IOException {
+    public void saveStructure(@NonNull File file, @NonNull Structure structure) throws IOException {
         Preconditions.checkArgument(file != null, "file cannot be null");
         Preconditions.checkArgument(structure != null, "structure cannot be null");
 
@@ -155,7 +156,7 @@ public class CraftStructureManager implements StructureManager {
     }
 
     @Override
-    public void saveStructure(OutputStream outputStream, Structure structure) throws IOException {
+    public void saveStructure(@NonNull OutputStream outputStream, @NonNull Structure structure) throws IOException {
         Preconditions.checkArgument(outputStream != null, "outputStream cannot be null");
         Preconditions.checkArgument(structure != null, "structure cannot be null");
 
@@ -164,7 +165,7 @@ public class CraftStructureManager implements StructureManager {
     }
 
     @Override
-    public Structure createStructure() {
+    public @NonNull Structure createStructure() {
         return new CraftStructure(new StructureTemplate(), this.registry);
     }
 
@@ -177,7 +178,7 @@ public class CraftStructureManager implements StructureManager {
     }
 
     @Override
-    public Structure copy(Structure structure) {
+    public @NonNull Structure copy(@NonNull Structure structure) {
         Preconditions.checkArgument(structure != null, "Structure cannot be null");
         return new CraftStructure(this.structureManager.resourceManagerSource.readStructure(((CraftStructure) structure).getHandle().save(new CompoundTag())), this.registry);
     }

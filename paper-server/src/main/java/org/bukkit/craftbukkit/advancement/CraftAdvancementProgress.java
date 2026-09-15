@@ -8,6 +8,7 @@ import net.minecraft.advancements.CriterionProgress;
 import net.minecraft.server.PlayerAdvancements;
 import org.bukkit.advancement.Advancement;
 import org.bukkit.advancement.AdvancementProgress;
+import org.jspecify.annotations.NonNull;
 
 public class CraftAdvancementProgress implements AdvancementProgress {
 
@@ -22,7 +23,7 @@ public class CraftAdvancementProgress implements AdvancementProgress {
     }
 
     @Override
-    public Advancement getAdvancement() {
+    public @NonNull Advancement getAdvancement() {
         return this.advancement;
     }
 
@@ -32,28 +33,28 @@ public class CraftAdvancementProgress implements AdvancementProgress {
     }
 
     @Override
-    public boolean awardCriteria(String criteria) {
+    public boolean awardCriteria(@NonNull String criteria) {
         return this.playerData.award(this.advancement.getHandle(), criteria);
     }
 
     @Override
-    public boolean revokeCriteria(String criteria) {
+    public boolean revokeCriteria(@NonNull String criteria) {
         return this.playerData.revoke(this.advancement.getHandle(), criteria);
     }
 
     @Override
-    public Date getDateAwarded(String criteria) {
+    public Date getDateAwarded(@NonNull String criteria) {
         CriterionProgress criterion = this.handle.getCriterion(criteria);
         return (criterion == null) ? null : criterion.getObtained() == null ? null : Date.from(criterion.getObtained()); // Paper - fix NPE if criterion isn't obtained
     }
 
     @Override
-    public Collection<String> getRemainingCriteria() {
+    public @NonNull Collection<String> getRemainingCriteria() {
         return Collections.unmodifiableCollection(Lists.newArrayList(this.handle.getRemainingCriteria()));
     }
 
     @Override
-    public Collection<String> getAwardedCriteria() {
+    public @NonNull Collection<String> getAwardedCriteria() {
         return Collections.unmodifiableCollection(Lists.newArrayList(this.handle.getCompletedCriteria()));
     }
 }

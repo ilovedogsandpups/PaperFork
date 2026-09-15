@@ -1,6 +1,7 @@
 package io.papermc.paper.plugin.provider.configuration.serializer.constraints;
 
 import io.papermc.paper.plugin.util.NamespaceChecker;
+import org.jspecify.annotations.NonNull;
 import org.spongepowered.configurate.objectmapping.meta.Constraint;
 import org.spongepowered.configurate.serialize.SerializationException;
 
@@ -28,7 +29,7 @@ public final class PluginConfigConstraints {
             private static final Pattern VALID_NAME = Pattern.compile("^[A-Za-z\\d _.-]+$");
 
             @Override
-            public Constraint<String> make(PluginName data, Type type) {
+            public @NonNull Constraint<String> make(@NonNull PluginName data, @NonNull Type type) {
                 return value -> {
                     if (value != null) {
                         if (RESERVED_KEYS.contains(value.toLowerCase(Locale.ROOT))) {
@@ -55,7 +56,7 @@ public final class PluginConfigConstraints {
         final class Factory implements Constraint.Factory<PluginNameSpace, String> {
 
             @Override
-            public Constraint<String> make(PluginNameSpace data, Type type) {
+            public @NonNull Constraint<String> make(@NonNull PluginNameSpace data, @NonNull Type type) {
                 return value -> {
                     if (value != null && !NamespaceChecker.isValidNameSpace(value)) {
                         throw new SerializationException("provided class '%s' is in an invalid namespace.".formatted(value));

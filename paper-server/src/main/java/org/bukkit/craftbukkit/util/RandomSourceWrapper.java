@@ -3,6 +3,7 @@ package org.bukkit.craftbukkit.util;
 import java.util.Random;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.levelgen.PositionalRandomFactory;
+import org.jspecify.annotations.NonNull;
 
 public final class RandomSourceWrapper implements RandomSource {
 
@@ -13,12 +14,12 @@ public final class RandomSourceWrapper implements RandomSource {
     }
 
     @Override
-    public RandomSource fork() {
+    public @NonNull RandomSource fork() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public PositionalRandomFactory forkPositional() {
+    public @NonNull PositionalRandomFactory forkPositional() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 

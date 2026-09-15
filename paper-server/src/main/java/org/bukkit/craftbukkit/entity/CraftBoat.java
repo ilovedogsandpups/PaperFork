@@ -6,6 +6,7 @@ import net.minecraft.world.entity.vehicle.boat.AbstractBoat;
 import org.bukkit.TreeSpecies;
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.entity.Boat;
+import org.jspecify.annotations.NonNull;
 
 public abstract class CraftBoat extends CraftVehicle implements Boat, io.papermc.paper.entity.PaperLeashable { // Paper - Leashable API
 
@@ -19,22 +20,22 @@ public abstract class CraftBoat extends CraftVehicle implements Boat, io.papermc
     }
 
     @Override
-    public TreeSpecies getWoodType() {
+    public @NonNull TreeSpecies getWoodType() {
         return CraftBoat.getTreeSpecies(this.getHandle().getType());
     }
 
     @Override
-    public void setWoodType(TreeSpecies species) {
+    public void setWoodType(@NonNull TreeSpecies species) {
         throw new UnsupportedOperationException("Not supported - you must spawn a new entity to change boat type.");
     }
 
     @Override
-    public Type getBoatType() {
+    public @NonNull Type getBoatType() {
         return CraftBoat.boatTypeFromNms(this.getHandle().getType());
     }
 
     @Override
-    public void setBoatType(Type type) {
+    public void setBoatType(@NonNull Type type) {
         throw new UnsupportedOperationException("Not supported - you must spawn a new entity to change boat type.");
     }
 
@@ -83,12 +84,12 @@ public abstract class CraftBoat extends CraftVehicle implements Boat, io.papermc
     }
 
     @Override
-    public org.bukkit.Material getBoatMaterial() {
+    public org.bukkit.@NonNull Material getBoatMaterial() {
         return org.bukkit.craftbukkit.util.CraftMagicNumbers.getMaterial(this.getHandle().getDropItem());
     }
 
     @Override
-    public Status getStatus() {
+    public @NonNull Status getStatus() {
         final net.minecraft.world.entity.vehicle.boat.AbstractBoat handle = this.getHandle();
         AbstractBoat.Status status = this.getHandle().status;
         if (status == null) {

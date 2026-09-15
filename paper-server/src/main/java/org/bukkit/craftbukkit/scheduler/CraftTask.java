@@ -5,6 +5,7 @@ import java.util.function.Consumer;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitTask;
+import org.jspecify.annotations.NonNull;
 
 public class CraftTask implements BukkitTask, Runnable { // Spigot
 
@@ -63,7 +64,7 @@ public class CraftTask implements BukkitTask, Runnable { // Spigot
     }
 
     @Override
-    public final Plugin getOwner() {
+    public final @NonNull Plugin getOwner() {
         return this.plugin;
     }
 

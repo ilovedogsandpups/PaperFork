@@ -10,6 +10,7 @@ import org.bukkit.craftbukkit.inventory.CraftItemStack;
 import org.bukkit.craftbukkit.util.CraftLocation;
 import org.bukkit.entity.EnderSignal;
 import org.bukkit.inventory.ItemStack;
+import org.jspecify.annotations.NonNull;
 
 public class CraftEnderSignal extends CraftEntity implements EnderSignal {
     public CraftEnderSignal(CraftServer server, EyeOfEnder entity) {
@@ -27,7 +28,7 @@ public class CraftEnderSignal extends CraftEntity implements EnderSignal {
     }
 
     @Override
-    public void setTargetLocation(Location location) {
+    public void setTargetLocation(@NonNull Location location) {
         // Paper start - Change EnderEye target without changing other things
         this.setTargetLocation(location, true);
     }
@@ -50,7 +51,7 @@ public class CraftEnderSignal extends CraftEntity implements EnderSignal {
     }
 
     @Override
-    public ItemStack getItem() {
+    public @NonNull ItemStack getItem() {
         return CraftItemStack.asBukkitCopy(this.getHandle().getItem());
     }
 

@@ -4,6 +4,7 @@ import net.minecraft.world.level.block.entity.CalibratedSculkSensorBlockEntity;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.CalibratedSculkSensor;
+import org.jspecify.annotations.NonNull;
 
 public class CraftCalibratedSculkSensor extends CraftSculkSensor<CalibratedSculkSensorBlockEntity> implements CalibratedSculkSensor {
 
@@ -16,12 +17,12 @@ public class CraftCalibratedSculkSensor extends CraftSculkSensor<CalibratedSculk
     }
 
     @Override
-    public CraftCalibratedSculkSensor copy() {
+    public @NonNull CraftCalibratedSculkSensor copy() {
         return new CraftCalibratedSculkSensor(this, null);
     }
 
     @Override
-    public CraftCalibratedSculkSensor copy(Location location) {
+    public @NonNull CraftCalibratedSculkSensor copy(@NonNull Location location) {
         return new CraftCalibratedSculkSensor(this, location);
     }
 }

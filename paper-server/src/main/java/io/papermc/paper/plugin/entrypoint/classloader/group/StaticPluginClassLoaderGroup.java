@@ -3,6 +3,7 @@ package io.papermc.paper.plugin.entrypoint.classloader.group;
 import io.papermc.paper.plugin.provider.classloader.ClassLoaderAccess;
 import io.papermc.paper.plugin.provider.classloader.ConfiguredPluginClassLoader;
 import org.jetbrains.annotations.ApiStatus;
+import org.jspecify.annotations.NonNull;
 
 import java.util.List;
 
@@ -20,7 +21,7 @@ public class StaticPluginClassLoaderGroup extends SimpleListPluginClassLoaderGro
     }
 
     @Override
-    public ClassLoaderAccess getAccess() {
+    public @NonNull ClassLoaderAccess getAccess() {
         return this.access;
     }
 

@@ -22,6 +22,8 @@ import org.bukkit.craftbukkit.block.CraftBlockStates;
 import org.bukkit.craftbukkit.block.banner.CraftPatternType;
 import org.bukkit.inventory.meta.BlockStateMeta;
 import org.bukkit.inventory.meta.ShieldMeta;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 
 @DelegateDeserialization(SerializableMeta.class)
 public class CraftMetaShield extends CraftMetaItem implements ShieldMeta, BlockStateMeta {
@@ -105,7 +107,7 @@ public class CraftMetaShield extends CraftMetaItem implements ShieldMeta, BlockS
     }
 
     @Override
-    public List<Pattern> getPatterns() {
+    public @NonNull List<Pattern> getPatterns() {
         if (this.patterns == null) {
             return new ArrayList<>();
         }
@@ -114,18 +116,18 @@ public class CraftMetaShield extends CraftMetaItem implements ShieldMeta, BlockS
     }
 
     @Override
-    public void setPatterns(List<Pattern> patterns) {
+    public void setPatterns(@NonNull List<Pattern> patterns) {
         this.patterns = new ArrayList<>(patterns);
     }
 
     @Override
-    public void addPattern(Pattern pattern) {
+    public void addPattern(@NonNull Pattern pattern) {
         if (this.patterns == null) this.patterns = new ArrayList<>();
         this.patterns.add(pattern);
     }
 
     @Override
-    public Pattern getPattern(int i) {
+    public @NonNull Pattern getPattern(int i) {
         if (this.patterns == null) {
             throw new IndexOutOfBoundsException(i);
         }
@@ -134,7 +136,7 @@ public class CraftMetaShield extends CraftMetaItem implements ShieldMeta, BlockS
     }
 
     @Override
-    public Pattern removePattern(int i) {
+    public @NonNull Pattern removePattern(int i) {
         if (this.patterns == null) {
             throw new IndexOutOfBoundsException(i);
         }
@@ -143,7 +145,7 @@ public class CraftMetaShield extends CraftMetaItem implements ShieldMeta, BlockS
     }
 
     @Override
-    public void setPattern(int i, Pattern pattern) {
+    public void setPattern(int i, @NonNull Pattern pattern) {
         if (this.patterns == null) {
             throw new IndexOutOfBoundsException(i);
         }
@@ -161,12 +163,12 @@ public class CraftMetaShield extends CraftMetaItem implements ShieldMeta, BlockS
     }
 
     @Override
-    public DyeColor getBaseColor() {
+    public @Nullable DyeColor getBaseColor() {
         return this.baseColor;
     }
 
     @Override
-    public void setBaseColor(DyeColor baseColor) {
+    public void setBaseColor(@Nullable DyeColor baseColor) {
         this.baseColor = baseColor;
     }
 
@@ -226,14 +228,14 @@ public class CraftMetaShield extends CraftMetaItem implements ShieldMeta, BlockS
     }
 
     @Override
-    public BlockState getBlockState() {
+    public @NonNull BlockState getBlockState() {
         final Banner banner = CraftMetaShield.getBlockState(this.baseColor);
         if (this.patterns != null) banner.setPatterns(this.patterns);
         return banner;
     }
 
     @Override
-    public void setBlockState(BlockState blockState) {
+    public void setBlockState(@NonNull BlockState blockState) {
         Preconditions.checkArgument(blockState != null, "blockState must not be null");
         Preconditions.checkArgument(blockState instanceof Banner, "Invalid blockState");
 
@@ -254,7 +256,7 @@ public class CraftMetaShield extends CraftMetaItem implements ShieldMeta, BlockS
     }
 
     @Override
-    public CraftMetaShield clone() {
+    public @NonNull CraftMetaShield clone() {
         CraftMetaShield meta = (CraftMetaShield) super.clone();
         meta.baseColor = this.baseColor;
         meta.patterns = this.patterns == null ? null : new ArrayList<>(this.patterns);

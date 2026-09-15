@@ -2,7 +2,6 @@ package com.destroystokyo.paper.profile;
 
 import com.google.common.base.Preconditions;
 import com.mojang.authlib.yggdrasil.ProfileResult;
-import com.mojang.datafixers.util.Either;
 import io.papermc.paper.configuration.GlobalConfiguration;
 import com.google.common.collect.Iterables;
 import com.mojang.authlib.GameProfile;
@@ -15,7 +14,6 @@ import net.minecraft.core.UUIDUtil;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.players.NameAndId;
 import net.minecraft.util.StringUtil;
-import net.minecraft.world.entity.player.PlayerSkin;
 import net.minecraft.world.item.component.ResolvableProfile;
 import org.apache.commons.lang3.StringUtils;
 import org.bukkit.configuration.serialization.SerializableAs;
@@ -25,10 +23,10 @@ import org.bukkit.craftbukkit.profile.CraftPlayerTextures;
 import org.bukkit.craftbukkit.profile.CraftProfileProperty;
 import org.bukkit.profile.PlayerTextures;
 import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 
@@ -83,7 +81,7 @@ public class CraftPlayerProfile implements PlayerProfile, SharedPlayerProfile {
     }
 
     @Override
-    public CraftPlayerTextures getTextures() {
+    public @NonNull CraftPlayerTextures getTextures() {
         return new CraftPlayerTextures(this);
     }
 
@@ -136,7 +134,7 @@ public class CraftPlayerProfile implements PlayerProfile, SharedPlayerProfile {
 
     @Override
     @Deprecated(forRemoval = true)
-    public String setName(@Nullable String name) {
+    public @NonNull String setName(@Nullable String name) {
         GameProfile prev = this.profile;
         this.profile = createAuthLibProfile(prev.id(), name);
         copyProfileProperties(prev, this.profile);
@@ -161,17 +159,16 @@ public class CraftPlayerProfile implements PlayerProfile, SharedPlayerProfile {
     }
 
     @Override
-    public boolean removeProperty(String property) {
+    public boolean removeProperty(@NonNull String property) {
         return !profile.properties().removeAll(property).isEmpty();
     }
 
     @Nullable
     @Override
-    public Property getProperty(String property) {
+    public Property getProperty(@NonNull String property) {
         return Iterables.getFirst(this.profile.properties().get(property), null);
     }
 
-    @Nullable
     @Override
     public void setProperty(@NotNull String propertyName, @Nullable Property property) {
         if (property != null) {
@@ -199,7 +196,7 @@ public class CraftPlayerProfile implements PlayerProfile, SharedPlayerProfile {
     }
 
     @Override
-    public CraftPlayerProfile clone() {
+    public @NonNull CraftPlayerProfile clone() {
         CraftPlayerProfile clone = new CraftPlayerProfile(this.getId(), this.getName());
         clone.setProperties(getProperties());
         return clone;
@@ -435,7 +432,7 @@ public class CraftPlayerProfile implements PlayerProfile, SharedPlayerProfile {
         }
 
         @Override
-        public boolean addAll(Collection<? extends ProfileProperty> c) {
+        public boolean addAll(@NonNull Collection<? extends ProfileProperty> c) {
             //noinspection unchecked
             setProperties((Collection<ProfileProperty>) c);
             return true;

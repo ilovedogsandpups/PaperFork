@@ -4,6 +4,8 @@ import ca.spottedleaf.concurrentutil.util.ConcurrentUtil;
 import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
 import org.bukkit.plugin.IllegalPluginAccessException;
 import org.bukkit.plugin.Plugin;
+import org.jspecify.annotations.NonNull;
+
 import java.lang.invoke.VarHandle;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +40,7 @@ public class FoliaGlobalRegionScheduler implements GlobalRegionScheduler {
     }
 
     @Override
-    public void execute(final Plugin plugin, final Runnable run) {
+    public void execute(final @NonNull Plugin plugin, final @NonNull Runnable run) {
         Objects.requireNonNull(plugin, "Plugin may not be null");
         Objects.requireNonNull(run, "Runnable may not be null");
 
@@ -48,12 +50,12 @@ public class FoliaGlobalRegionScheduler implements GlobalRegionScheduler {
     }
 
     @Override
-    public ScheduledTask run(final Plugin plugin, final Consumer<ScheduledTask> task) {
+    public @NonNull ScheduledTask run(final @NonNull Plugin plugin, final @NonNull Consumer<ScheduledTask> task) {
         return this.runDelayed(plugin, task, 1);
     }
 
     @Override
-    public ScheduledTask runDelayed(final Plugin plugin, final Consumer<ScheduledTask> task, final long delayTicks) {
+    public @NonNull ScheduledTask runDelayed(final @NonNull Plugin plugin, final @NonNull Consumer<ScheduledTask> task, final long delayTicks) {
         Objects.requireNonNull(plugin, "Plugin may not be null");
         Objects.requireNonNull(task, "Task may not be null");
         if (delayTicks <= 0) {
@@ -77,7 +79,7 @@ public class FoliaGlobalRegionScheduler implements GlobalRegionScheduler {
     }
 
     @Override
-    public ScheduledTask runAtFixedRate(final Plugin plugin, final Consumer<ScheduledTask> task, final long initialDelayTicks, final long periodTicks) {
+    public @NonNull ScheduledTask runAtFixedRate(final @NonNull Plugin plugin, final @NonNull Consumer<ScheduledTask> task, final long initialDelayTicks, final long periodTicks) {
         Objects.requireNonNull(plugin, "Plugin may not be null");
         Objects.requireNonNull(task, "Task may not be null");
         if (initialDelayTicks <= 0) {
@@ -104,7 +106,7 @@ public class FoliaGlobalRegionScheduler implements GlobalRegionScheduler {
     }
 
     @Override
-    public void cancelTasks(final Plugin plugin) {
+    public void cancelTasks(final @NonNull Plugin plugin) {
         Objects.requireNonNull(plugin, "Plugin may not be null");
 
         final List<GlobalScheduledTask> toCancel = new ArrayList<>();
@@ -195,7 +197,7 @@ public class FoliaGlobalRegionScheduler implements GlobalRegionScheduler {
         }
 
         @Override
-        public Plugin getOwningPlugin() {
+        public @NonNull Plugin getOwningPlugin() {
             return this.plugin;
         }
 
@@ -205,7 +207,7 @@ public class FoliaGlobalRegionScheduler implements GlobalRegionScheduler {
         }
 
         @Override
-        public CancelledState cancel() {
+        public @NonNull CancelledState cancel() {
             for (int curr = this.getStateVolatile();;) {
                 switch (curr) {
                     case STATE_IDLE: {
@@ -244,7 +246,7 @@ public class FoliaGlobalRegionScheduler implements GlobalRegionScheduler {
         }
 
         @Override
-        public ExecutionState getExecutionState() {
+        public @NonNull ExecutionState getExecutionState() {
             final int state = this.getStateVolatile();
             switch (state) {
                 case STATE_IDLE:

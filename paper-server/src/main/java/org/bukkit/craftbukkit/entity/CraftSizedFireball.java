@@ -6,6 +6,7 @@ import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.craftbukkit.inventory.CraftItemStack;
 import org.bukkit.entity.SizedFireball;
 import org.bukkit.inventory.ItemStack;
+import org.jspecify.annotations.NonNull;
 
 public class CraftSizedFireball extends CraftFireball implements SizedFireball {
 
@@ -19,7 +20,7 @@ public class CraftSizedFireball extends CraftFireball implements SizedFireball {
     }
 
     @Override
-    public ItemStack getDisplayItem() {
+    public @NonNull ItemStack getDisplayItem() {
         if (this.getHandle().getItem().isEmpty()) {
             return new ItemStack(Material.FIRE_CHARGE);
         } else {
@@ -28,7 +29,7 @@ public class CraftSizedFireball extends CraftFireball implements SizedFireball {
     }
 
     @Override
-    public void setDisplayItem(ItemStack item) {
+    public void setDisplayItem(@NonNull ItemStack item) {
         this.getHandle().setItem(CraftItemStack.asNMSCopy(item));
     }
 }

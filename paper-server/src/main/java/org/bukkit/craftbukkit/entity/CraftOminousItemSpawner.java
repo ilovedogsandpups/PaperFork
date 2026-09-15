@@ -4,6 +4,7 @@ import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.craftbukkit.inventory.CraftItemStack;
 import org.bukkit.entity.OminousItemSpawner;
 import org.bukkit.inventory.ItemStack;
+import org.jspecify.annotations.NonNull;
 
 public class CraftOminousItemSpawner extends CraftEntity implements OminousItemSpawner {
 
@@ -17,7 +18,7 @@ public class CraftOminousItemSpawner extends CraftEntity implements OminousItemS
     }
 
     @Override
-    public ItemStack getItem() {
+    public @NonNull ItemStack getItem() {
         return CraftItemStack.asBukkitCopy(this.getHandle().getItem());
     }
 

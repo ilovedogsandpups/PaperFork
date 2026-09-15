@@ -4,6 +4,7 @@ import net.minecraft.world.inventory.MerchantContainer;
 import org.bukkit.inventory.Merchant;
 import org.bukkit.inventory.MerchantInventory;
 import org.bukkit.inventory.MerchantRecipe;
+import org.jspecify.annotations.NonNull;
 
 public class CraftInventoryMerchant extends CraftInventory implements MerchantInventory {
 
@@ -31,7 +32,7 @@ public class CraftInventoryMerchant extends CraftInventory implements MerchantIn
     }
 
     @Override
-    public Merchant getMerchant() {
+    public @NonNull Merchant getMerchant() {
         return this.merchant.getCraftMerchant();
     }
 }

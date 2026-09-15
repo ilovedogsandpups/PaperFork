@@ -11,6 +11,7 @@ import org.bukkit.block.Bell;
 import org.bukkit.block.BlockFace;
 import org.bukkit.craftbukkit.entity.CraftEntity;
 import org.bukkit.entity.Entity;
+import org.jspecify.annotations.NonNull;
 
 public class CraftBell extends CraftBlockEntityState<BellBlockEntity> implements Bell {
 
@@ -56,12 +57,12 @@ public class CraftBell extends CraftBlockEntityState<BellBlockEntity> implements
     }
 
     @Override
-    public CraftBell copy() {
+    public @NonNull CraftBell copy() {
         return new CraftBell(this, null);
     }
 
     @Override
-    public CraftBell copy(Location location) {
+    public @NonNull CraftBell copy(@NonNull Location location) {
         return new CraftBell(this, location);
     }
 }

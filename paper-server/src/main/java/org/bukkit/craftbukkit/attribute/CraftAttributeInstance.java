@@ -8,6 +8,7 @@ import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.craftbukkit.util.CraftNamespacedKey;
+import org.jspecify.annotations.NonNull;
 
 public class CraftAttributeInstance implements AttributeInstance {
 
@@ -20,7 +21,7 @@ public class CraftAttributeInstance implements AttributeInstance {
     }
 
     @Override
-    public Attribute getAttribute() {
+    public @NonNull Attribute getAttribute() {
         return this.attribute;
     }
 
@@ -35,7 +36,7 @@ public class CraftAttributeInstance implements AttributeInstance {
     }
 
     @Override
-    public Collection<AttributeModifier> getModifiers() {
+    public @NonNull Collection<AttributeModifier> getModifiers() {
         List<AttributeModifier> result = new ArrayList<AttributeModifier>();
         for (net.minecraft.world.entity.ai.attributes.AttributeModifier nms : this.handle.getModifiers()) {
             result.add(CraftAttributeInstance.convert(nms));
@@ -45,44 +46,44 @@ public class CraftAttributeInstance implements AttributeInstance {
     }
 
     @Override
-    public AttributeModifier getModifier(final net.kyori.adventure.key.Key key) {
+    public AttributeModifier getModifier(final net.kyori.adventure.key.@NonNull Key key) {
         Preconditions.checkArgument(key != null, "Key cannot be null");
         net.minecraft.world.entity.ai.attributes.AttributeModifier modifier = this.handle.getModifier(io.papermc.paper.adventure.PaperAdventure.asVanilla(key));
         return modifier == null ? null : CraftAttributeInstance.convert(modifier);
     }
 
     @Override
-    public void removeModifier(final net.kyori.adventure.key.Key key) {
+    public void removeModifier(final net.kyori.adventure.key.@NonNull Key key) {
         Preconditions.checkArgument(key != null, "Key cannot be null");
         this.handle.removeModifier(io.papermc.paper.adventure.PaperAdventure.asVanilla(key));
     }
 
     @Override
-    public AttributeModifier getModifier(java.util.UUID uuid) {
+    public AttributeModifier getModifier(java.util.@NonNull UUID uuid) {
         Preconditions.checkArgument(uuid != null, "UUID cannot be null");
         return this.getModifier(AttributeMappings.uuidToKey(uuid));
     }
 
     @Override
-    public void removeModifier(java.util.UUID uuid) {
+    public void removeModifier(java.util.@NonNull UUID uuid) {
         Preconditions.checkArgument(uuid != null, "UUID cannot be null");
         this.removeModifier(AttributeMappings.uuidToKey(uuid));
     }
 
     @Override
-    public void addModifier(AttributeModifier modifier) {
+    public void addModifier(@NonNull AttributeModifier modifier) {
         Preconditions.checkArgument(modifier != null, "modifier");
         this.handle.addPermanentModifier(CraftAttributeInstance.convert(modifier));
     }
 
     @Override
-    public void addTransientModifier(AttributeModifier modifier) {
+    public void addTransientModifier(@NonNull AttributeModifier modifier) {
         Preconditions.checkArgument(modifier != null, "modifier");
         this.handle.addTransientModifier(CraftAttributeInstance.convert(modifier));
     }
 
     @Override
-    public void removeModifier(AttributeModifier modifier) {
+    public void removeModifier(@NonNull AttributeModifier modifier) {
         Preconditions.checkArgument(modifier != null, "modifier");
         this.handle.removeModifier(CraftAttributeInstance.convert(modifier));
     }

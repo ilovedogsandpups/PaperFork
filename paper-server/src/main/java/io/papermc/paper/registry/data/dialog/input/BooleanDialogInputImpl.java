@@ -3,6 +3,7 @@ package io.papermc.paper.registry.data.dialog.input;
 import com.google.common.base.Preconditions;
 import net.kyori.adventure.text.Component;
 import net.minecraft.commands.functions.StringTemplate;
+import org.jspecify.annotations.NonNull;
 
 public record BooleanDialogInputImpl(String key, Component label, boolean initial, String onTrue, String onFalse) implements BooleanDialogInput {
 
@@ -21,25 +22,25 @@ public record BooleanDialogInputImpl(String key, Component label, boolean initia
         }
 
         @Override
-        public BooleanDialogInput.Builder initial(final boolean initial) {
+        public BooleanDialogInput.@NonNull Builder initial(final boolean initial) {
             this.initial = initial;
             return this;
         }
 
         @Override
-        public BooleanDialogInput.Builder onTrue(final String onTrue) {
+        public BooleanDialogInput.@NonNull Builder onTrue(final @NonNull String onTrue) {
             this.onTrue = onTrue;
             return this;
         }
 
         @Override
-        public BooleanDialogInput.Builder onFalse(final String onFalse) {
+        public BooleanDialogInput.@NonNull Builder onFalse(final @NonNull String onFalse) {
             this.onFalse = onFalse;
             return this;
         }
 
         @Override
-        public BooleanDialogInput build() {
+        public @NonNull BooleanDialogInput build() {
             return new BooleanDialogInputImpl(this.key, this.label, this.initial, this.onTrue, this.onFalse);
         }
     }

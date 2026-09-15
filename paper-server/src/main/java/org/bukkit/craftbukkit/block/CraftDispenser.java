@@ -13,6 +13,7 @@ import org.bukkit.craftbukkit.inventory.CraftInventory;
 import org.bukkit.craftbukkit.projectiles.CraftBlockProjectileSource;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.projectiles.BlockProjectileSource;
+import org.jspecify.annotations.NonNull;
 
 public class CraftDispenser extends CraftLootable<DispenserBlockEntity> implements Dispenser {
 
@@ -25,12 +26,12 @@ public class CraftDispenser extends CraftLootable<DispenserBlockEntity> implemen
     }
 
     @Override
-    public Inventory getSnapshotInventory() {
+    public @NonNull Inventory getSnapshotInventory() {
         return new CraftInventory(this.getSnapshot());
     }
 
     @Override
-    public Inventory getInventory() {
+    public @NonNull Inventory getInventory() {
         if (!this.isPlaced()) {
             return this.getSnapshotInventory();
         }
@@ -64,12 +65,12 @@ public class CraftDispenser extends CraftLootable<DispenserBlockEntity> implemen
     }
 
     @Override
-    public CraftDispenser copy() {
+    public @NonNull CraftDispenser copy() {
         return new CraftDispenser(this, null);
     }
 
     @Override
-    public CraftDispenser copy(Location location) {
+    public @NonNull CraftDispenser copy(@NonNull Location location) {
         return new CraftDispenser(this, location);
     }
 }

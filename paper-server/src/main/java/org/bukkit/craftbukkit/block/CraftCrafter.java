@@ -7,6 +7,7 @@ import org.bukkit.World;
 import org.bukkit.block.Crafter;
 import org.bukkit.craftbukkit.inventory.CraftInventory;
 import org.bukkit.inventory.Inventory;
+import org.jspecify.annotations.NonNull;
 
 public class CraftCrafter extends CraftLootable<CrafterBlockEntity> implements Crafter {
 
@@ -19,12 +20,12 @@ public class CraftCrafter extends CraftLootable<CrafterBlockEntity> implements C
     }
 
     @Override
-    public Inventory getSnapshotInventory() {
+    public @NonNull Inventory getSnapshotInventory() {
         return new CraftInventory(this.getSnapshot());
     }
 
     @Override
-    public Inventory getInventory() {
+    public @NonNull Inventory getInventory() {
         if (!this.isPlaced()) {
             return this.getSnapshotInventory();
         }
@@ -33,12 +34,12 @@ public class CraftCrafter extends CraftLootable<CrafterBlockEntity> implements C
     }
 
     @Override
-    public CraftCrafter copy() {
+    public @NonNull CraftCrafter copy() {
         return new CraftCrafter(this, null);
     }
 
     @Override
-    public CraftCrafter copy(Location location) {
+    public @NonNull CraftCrafter copy(@NonNull Location location) {
         return new CraftCrafter(this, location);
     }
 

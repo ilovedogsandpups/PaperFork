@@ -2,6 +2,7 @@ package org.bukkit.craftbukkit.entity;
 
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.entity.Rabbit;
+import org.jspecify.annotations.NonNull;
 
 public class CraftRabbit extends CraftAnimals implements Rabbit {
 
@@ -15,7 +16,7 @@ public class CraftRabbit extends CraftAnimals implements Rabbit {
     }
 
     @Override
-    public Type getRabbitType() {
+    public @NonNull Type getRabbitType() {
         return Type.values()[this.getHandle().getVariant().ordinal()];
     }
 

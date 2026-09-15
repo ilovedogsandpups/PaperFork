@@ -5,6 +5,7 @@ import net.minecraft.world.entity.LightningBolt;
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.entity.LightningStrike;
 import org.bukkit.entity.Player;
+import org.jspecify.annotations.NonNull;
 
 public class CraftLightningStrike extends CraftEntity implements LightningStrike {
 
@@ -57,7 +58,7 @@ public class CraftLightningStrike extends CraftEntity implements LightningStrike
     };
 
     @Override
-    public LightningStrike.Spigot spigot() {
+    public LightningStrike.@NonNull Spigot spigot() {
         return this.spigot;
     }
     // Spigot end

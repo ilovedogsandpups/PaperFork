@@ -5,6 +5,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityReference;
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.entity.Projectile;
+import org.jspecify.annotations.NonNull;
 
 public abstract class AbstractProjectile extends CraftEntity implements Projectile {
 
@@ -47,17 +48,17 @@ public abstract class AbstractProjectile extends CraftEntity implements Projecti
     }
 
     @Override
-    public boolean canHitEntity(org.bukkit.entity.Entity entity) {
+    public boolean canHitEntity(org.bukkit.entity.@NonNull Entity entity) {
         return this.getHandle().canHitEntityPublic(((CraftEntity) entity).getHandle());
     }
 
     @Override
-    public void hitEntity(org.bukkit.entity.Entity entity) {
+    public void hitEntity(org.bukkit.entity.@NonNull Entity entity) {
         this.getHandle().preHitTargetOrDeflectSelf(new net.minecraft.world.phys.EntityHitResult(((CraftEntity) entity).getHandle()));
     }
 
     @Override
-    public void hitEntity(org.bukkit.entity.Entity entity, org.bukkit.util.Vector vector) {
+    public void hitEntity(org.bukkit.entity.@NonNull Entity entity, org.bukkit.util.Vector vector) {
         this.getHandle().preHitTargetOrDeflectSelf(new net.minecraft.world.phys.EntityHitResult(((CraftEntity) entity).getHandle(), new net.minecraft.world.phys.Vec3(vector.getX(), vector.getY(), vector.getZ())));
     }
 

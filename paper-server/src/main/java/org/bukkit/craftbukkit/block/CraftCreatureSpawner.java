@@ -31,6 +31,7 @@ import org.bukkit.craftbukkit.entity.CraftEntitySnapshot;
 import org.bukkit.craftbukkit.entity.CraftEntityType;
 import org.bukkit.entity.EntitySnapshot;
 import org.bukkit.entity.EntityType;
+import org.jspecify.annotations.NonNull;
 
 public class CraftCreatureSpawner extends CraftBlockEntityState<SpawnerBlockEntity> implements CreatureSpawner, org.bukkit.craftbukkit.spawner.PaperSharedSpawnerLogic { // Paper - more spawner API
 
@@ -104,7 +105,7 @@ public class CraftCreatureSpawner extends CraftBlockEntityState<SpawnerBlockEnti
     }
 
     @Override
-    public void addPotentialSpawn(EntitySnapshot snapshot, int weight, SpawnRule spawnRule) {
+    public void addPotentialSpawn(@NonNull EntitySnapshot snapshot, int weight, SpawnRule spawnRule) {
         CraftCreatureSpawner.addPotentialSpawn(this.getSnapshot().getSpawner(), snapshot, weight, spawnRule, null);
     }
 
@@ -127,7 +128,7 @@ public class CraftCreatureSpawner extends CraftBlockEntityState<SpawnerBlockEnti
     }
 
     @Override
-    public void setPotentialSpawns(Collection<SpawnerEntry> entries) {
+    public void setPotentialSpawns(@NonNull Collection<SpawnerEntry> entries) {
         CraftCreatureSpawner.setPotentialSpawns(this.getSnapshot().getSpawner(), entries);
     }
 
@@ -143,7 +144,7 @@ public class CraftCreatureSpawner extends CraftBlockEntityState<SpawnerBlockEnti
     }
 
     @Override
-    public List<SpawnerEntry> getPotentialSpawns() {
+    public @NonNull List<SpawnerEntry> getPotentialSpawns() {
         return CraftCreatureSpawner.getPotentialSpawns(this.getSnapshot().getSpawner());
     }
 
@@ -274,12 +275,12 @@ public class CraftCreatureSpawner extends CraftBlockEntityState<SpawnerBlockEnti
     }
 
     @Override
-    public CraftCreatureSpawner copy() {
+    public @NonNull CraftCreatureSpawner copy() {
         return new CraftCreatureSpawner(this, null);
     }
 
     @Override
-    public CraftCreatureSpawner copy(Location location) {
+    public @NonNull CraftCreatureSpawner copy(@NonNull Location location) {
         return new CraftCreatureSpawner(this, location);
     }
 

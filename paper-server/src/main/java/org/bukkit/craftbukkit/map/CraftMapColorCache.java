@@ -18,6 +18,7 @@ import java.util.zip.DeflaterOutputStream;
 import java.util.zip.InflaterInputStream;
 import net.minecraft.util.Util;
 import org.bukkit.map.MapPalette;
+import org.jspecify.annotations.NonNull;
 
 public class CraftMapColorCache implements MapPalette.MapColorCache {
 
@@ -157,7 +158,7 @@ public class CraftMapColorCache implements MapPalette.MapColorCache {
     }
 
     @Override
-    public byte matchColor(Color color) {
+    public byte matchColor(@NonNull Color color) {
         Preconditions.checkState(this.isCached(), "Cache not build yet");
 
         return this.cache[this.toInt(color)];

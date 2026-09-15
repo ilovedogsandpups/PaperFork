@@ -5,6 +5,7 @@ import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.entity.Creeper;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.entity.CreeperPowerEvent;
+import org.jspecify.annotations.NonNull;
 
 public class CraftCreeper extends CraftMonster implements Creeper {
 
@@ -81,7 +82,7 @@ public class CraftCreeper extends CraftMonster implements Creeper {
     }
 
     @Override
-    public void ignite(Entity entity) {
+    public void ignite(@NonNull Entity entity) {
         Preconditions.checkNotNull(entity, "entity cannot be null");
         this.getHandle().entityIgniter = ((CraftEntity) entity).getHandle();
         this.getHandle().ignite();

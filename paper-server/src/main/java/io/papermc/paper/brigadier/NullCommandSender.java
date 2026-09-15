@@ -7,14 +7,12 @@ import net.md_5.bungee.api.chat.BaseComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.Server;
 import org.bukkit.command.CommandSender;
-import org.bukkit.permissions.PermissibleBase;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.plugin.Plugin;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.framework.qual.DefaultQualifier;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 @DefaultQualifier(NonNull.class)
@@ -65,19 +63,19 @@ public final class NullCommandSender implements CommandSender {
     public final class Spigot extends CommandSender.Spigot {
 
         @Override
-        public void sendMessage(@NotNull final BaseComponent component) {
+        public void sendMessage(final BaseComponent component) {
         }
 
         @Override
-        public void sendMessage(@NonNull final @NotNull BaseComponent... components) {
+        public void sendMessage(final BaseComponent... components) {
         }
 
         @Override
-        public void sendMessage(@Nullable final UUID sender, @NotNull final BaseComponent component) {
+        public void sendMessage(@Nullable final UUID sender, final BaseComponent component) {
         }
 
         @Override
-        public void sendMessage(@Nullable final UUID sender, @NonNull final @NotNull BaseComponent... components) {
+        public void sendMessage(@Nullable final UUID sender, final BaseComponent... components) {
         }
     }
 

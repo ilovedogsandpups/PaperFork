@@ -31,6 +31,7 @@ import org.bukkit.craftbukkit.util.RandomSourceWrapper;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.loot.LootContext;
+import org.jspecify.annotations.NonNull;
 
 public class CraftLootTable implements org.bukkit.loot.LootTable {
 
@@ -67,7 +68,7 @@ public class CraftLootTable implements org.bukkit.loot.LootTable {
     }
 
     @Override
-    public Collection<ItemStack> populateLoot(Random random, LootContext context) {
+    public @NonNull Collection<ItemStack> populateLoot(Random random, @NonNull LootContext context) {
         Preconditions.checkArgument(context != null, "LootContext cannot be null");
         LootParams nmsContext = this.convertContext(context);
         List<net.minecraft.world.item.ItemStack> nmsItems = this.handle.getRandomItems(nmsContext, random == null ? null : new RandomSourceWrapper(random));
@@ -84,7 +85,7 @@ public class CraftLootTable implements org.bukkit.loot.LootTable {
     }
 
     @Override
-    public void fillInventory(Inventory inventory, Random random, LootContext context) {
+    public void fillInventory(@NonNull Inventory inventory, Random random, @NonNull LootContext context) {
         Preconditions.checkArgument(inventory != null, "Inventory cannot be null");
         Preconditions.checkArgument(context != null, "LootContext cannot be null");
         LootParams nmsContext = this.convertContext(context);
@@ -96,7 +97,7 @@ public class CraftLootTable implements org.bukkit.loot.LootTable {
     }
 
     @Override
-    public NamespacedKey getKey() {
+    public @NonNull NamespacedKey getKey() {
         return this.key;
     }
 

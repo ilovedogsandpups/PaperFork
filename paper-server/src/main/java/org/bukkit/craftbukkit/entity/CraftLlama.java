@@ -7,6 +7,7 @@ import org.bukkit.craftbukkit.inventory.CraftInventoryLlama;
 import org.bukkit.entity.Horse;
 import org.bukkit.entity.Llama;
 import org.bukkit.inventory.LlamaInventory;
+import org.jspecify.annotations.NonNull;
 
 public class CraftLlama extends CraftChestedHorse implements Llama, com.destroystokyo.paper.entity.CraftRangedEntity<net.minecraft.world.entity.animal.equine.Llama> { // Paper
 
@@ -20,7 +21,7 @@ public class CraftLlama extends CraftChestedHorse implements Llama, com.destroys
     }
 
     @Override
-    public Color getColor() {
+    public @NonNull Color getColor() {
         return Color.values()[this.getHandle().getVariant().ordinal()];
     }
 
@@ -32,7 +33,7 @@ public class CraftLlama extends CraftChestedHorse implements Llama, com.destroys
     }
 
     @Override
-    public LlamaInventory getInventory() {
+    public @NonNull LlamaInventory getInventory() {
         return new CraftInventoryLlama(this.getHandle().inventory,
             this.getHandle().createEquipmentSlotContainer(EquipmentSlot.BODY),
             this.getHandle().createEquipmentSlotContainer(EquipmentSlot.SADDLE)
@@ -53,7 +54,7 @@ public class CraftLlama extends CraftChestedHorse implements Llama, com.destroys
     }
 
     @Override
-    public Horse.Variant getVariant() {
+    public Horse.@NonNull Variant getVariant() {
         return Horse.Variant.LLAMA;
     }
 

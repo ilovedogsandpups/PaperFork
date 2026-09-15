@@ -7,6 +7,7 @@ import org.bukkit.block.Block;
 import org.bukkit.craftbukkit.block.CraftBlock;
 import org.bukkit.inventory.BlockInventoryHolder;
 import org.bukkit.inventory.Inventory;
+import org.jspecify.annotations.NonNull;
 
 public class CraftBlockInventoryHolder implements BlockInventoryHolder {
 
@@ -26,12 +27,12 @@ public class CraftBlockInventoryHolder implements BlockInventoryHolder {
     // Paper end - Add missing InventoryHolders
 
     @Override
-    public Block getBlock() {
+    public @NonNull Block getBlock() {
         return this.block;
     }
 
     @Override
-    public Inventory getInventory() {
+    public @NonNull Inventory getInventory() {
         return this.inventory;
     }
 }

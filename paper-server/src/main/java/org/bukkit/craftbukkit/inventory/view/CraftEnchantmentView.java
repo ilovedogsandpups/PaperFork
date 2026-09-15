@@ -14,6 +14,7 @@ import org.bukkit.entity.HumanEntity;
 import org.bukkit.inventory.EnchantingInventory;
 import org.bukkit.inventory.view.EnchantmentView;
 import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 public class CraftEnchantmentView extends CraftInventoryView<EnchantmentMenu, EnchantingInventory> implements EnchantmentView {
 
@@ -33,7 +34,7 @@ public class CraftEnchantmentView extends CraftInventoryView<EnchantmentMenu, En
 
     @NotNull
     @Override
-    public EnchantmentOffer[] getOffers() {
+    public EnchantmentOffer @NonNull [] getOffers() {
         IdMap<Holder<Enchantment>> registry = CraftRegistry.getMinecraftRegistry().lookupOrThrow(Registries.ENCHANTMENT).asHolderIdMap();
         EnchantmentOffer[] offers = new EnchantmentOffer[3];
         for (int i = 0; i < 3; i++) {
@@ -44,7 +45,7 @@ public class CraftEnchantmentView extends CraftInventoryView<EnchantmentMenu, En
     }
 
     @Override
-    public void setOffers(@NotNull final EnchantmentOffer[] offers) {
+    public void setOffers(@NotNull final EnchantmentOffer @NonNull [] offers) {
         Preconditions.checkArgument(offers.length == 3, "There must be 3 offers given");
         IdMap<Holder<Enchantment>> registry = CraftRegistry.getMinecraftRegistry().lookupOrThrow(Registries.ENCHANTMENT).asHolderIdMap();
         for (int i = 0; i < offers.length; i++) {

@@ -8,6 +8,7 @@ import org.bukkit.craftbukkit.inventory.CraftMerchant;
 import org.bukkit.entity.AbstractVillager;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
+import org.jspecify.annotations.NonNull;
 
 public abstract class CraftAbstractVillager extends CraftAgeable implements CraftMerchant, AbstractVillager, InventoryHolder {
 
@@ -26,7 +27,7 @@ public abstract class CraftAbstractVillager extends CraftAgeable implements Craf
     }
 
     @Override
-    public Inventory getInventory() {
+    public @NonNull Inventory getInventory() {
         return new CraftInventory(this.getHandle().getInventory());
     }
 

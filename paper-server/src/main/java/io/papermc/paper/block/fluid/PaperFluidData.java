@@ -11,7 +11,6 @@ import org.bukkit.craftbukkit.CraftWorld;
 import org.bukkit.craftbukkit.util.CraftLocation;
 import org.bukkit.craftbukkit.util.CraftVector;
 import org.bukkit.util.Vector;
-import org.jetbrains.annotations.NotNull;
 
 public class PaperFluidData implements FluidData {
 
@@ -26,12 +25,12 @@ public class PaperFluidData implements FluidData {
     }
 
     @Override
-    public final @NotNull Fluid getFluidType() {
+    public final Fluid getFluidType() {
         return CraftFluid.minecraftToBukkit(this.state.getType());
     }
 
     @Override
-    public @NotNull PaperFluidData clone() {
+    public PaperFluidData clone() {
         try {
             return (PaperFluidData) super.clone();
         } catch (final CloneNotSupportedException ex) {
@@ -40,7 +39,7 @@ public class PaperFluidData implements FluidData {
     }
 
     @Override
-    public @NotNull Vector computeFlowDirection(final Location location) {
+    public Vector computeFlowDirection(final Location location) {
         Preconditions.checkArgument(location.getWorld() != null, "Cannot compute flow direction on world-less location");
         return CraftVector.toBukkit(this.state.getFlow(
             ((CraftWorld) location.getWorld()).getHandle(),
@@ -54,7 +53,7 @@ public class PaperFluidData implements FluidData {
     }
 
     @Override
-    public float computeHeight(@NotNull final Location location) {
+    public float computeHeight(final Location location) {
         Preconditions.checkArgument(location.getWorld() != null, "Cannot compute height on world-less location");
         return this.state.getHeight(((CraftWorld) location.getWorld()).getHandle(), CraftLocation.toBlockPos(location));
     }

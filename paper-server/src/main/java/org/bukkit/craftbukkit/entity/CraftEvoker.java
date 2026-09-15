@@ -4,6 +4,7 @@ import net.minecraft.world.entity.animal.sheep.Sheep;
 import net.minecraft.world.entity.monster.illager.SpellcasterIllager;
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.entity.Evoker;
+import org.jspecify.annotations.NonNull;
 
 public class CraftEvoker extends CraftSpellcaster implements Evoker {
 
@@ -17,7 +18,7 @@ public class CraftEvoker extends CraftSpellcaster implements Evoker {
     }
 
     @Override
-    public Evoker.Spell getCurrentSpell() {
+    public Evoker.@NonNull Spell getCurrentSpell() {
         return Evoker.Spell.values()[this.getHandle().getCurrentSpell().ordinal()];
     }
 

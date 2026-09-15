@@ -134,6 +134,7 @@ import org.bukkit.inventory.meta.components.ToolComponent;
 import org.bukkit.inventory.meta.components.UseCooldownComponent;
 import org.bukkit.inventory.meta.tags.CustomItemTagContainer;
 import org.bukkit.persistence.PersistentDataContainer;
+import org.jspecify.annotations.NonNull;
 import org.slf4j.Logger;
 
 import static io.papermc.paper.util.BoundChecker.requireNonNegative;
@@ -1146,7 +1147,7 @@ public class CraftMetaItem implements ItemMeta, Damageable, Repairable, BlockDat
     }
 
     @Override
-    public String getDisplayName() {
+    public @NonNull String getDisplayName() {
         return CraftChatMessage.fromComponent(this.displayName);
     }
 
@@ -1171,7 +1172,7 @@ public class CraftMetaItem implements ItemMeta, Damageable, Repairable, BlockDat
     }
 
     @Override
-    public String getItemName() {
+    public @NonNull String getItemName() {
         return CraftChatMessage.fromComponent(this.itemName);
     }
 
@@ -1186,7 +1187,7 @@ public class CraftMetaItem implements ItemMeta, Damageable, Repairable, BlockDat
     }
 
     @Override
-    public net.kyori.adventure.text.Component itemName() {
+    public net.kyori.adventure.text.@NonNull Component itemName() {
         return io.papermc.paper.adventure.PaperAdventure.asAdventure(this.itemName);
     }
 
@@ -1196,7 +1197,7 @@ public class CraftMetaItem implements ItemMeta, Damageable, Repairable, BlockDat
     }
 
     @Override
-    public String getLocalizedName() {
+    public @NonNull String getLocalizedName() {
         return this.getDisplayName();
     }
 
@@ -1241,13 +1242,13 @@ public class CraftMetaItem implements ItemMeta, Damageable, Repairable, BlockDat
     }
 
     @Override
-    public boolean hasEnchant(Enchantment enchant) {
+    public boolean hasEnchant(@NonNull Enchantment enchant) {
         Preconditions.checkArgument(enchant != null, "Enchantment cannot be null");
         return this.hasEnchants() && this.enchantments.containsKey(enchant);
     }
 
     @Override
-    public int getEnchantLevel(Enchantment enchant) {
+    public int getEnchantLevel(@NonNull Enchantment enchant) {
         Preconditions.checkArgument(enchant != null, "Enchantment cannot be null");
         Integer level = this.hasEnchants() ? this.enchantments.get(enchant) : null;
         if (level == null) {
@@ -1257,12 +1258,12 @@ public class CraftMetaItem implements ItemMeta, Damageable, Repairable, BlockDat
     }
 
     @Override
-    public Map<Enchantment, Integer> getEnchants() {
+    public @NonNull Map<Enchantment, Integer> getEnchants() {
         return this.hasEnchants() ? ImmutableSortedMap.copyOfSorted(this.enchantments) : ImmutableMap.<Enchantment, Integer>of(); // Paper
     }
 
     @Override
-    public boolean addEnchant(Enchantment enchant, int level, boolean ignoreRestrictions) {
+    public boolean addEnchant(@NonNull Enchantment enchant, int level, boolean ignoreRestrictions) {
         Preconditions.checkArgument(enchant != null, "Enchantment cannot be null");
         if (this.enchantments == null) {
             this.enchantments = new EnchantmentMap();
@@ -1276,7 +1277,7 @@ public class CraftMetaItem implements ItemMeta, Damageable, Repairable, BlockDat
     }
 
     @Override
-    public boolean removeEnchant(Enchantment enchant) {
+    public boolean removeEnchant(@NonNull Enchantment enchant) {
         Preconditions.checkArgument(enchant != null, "Enchantment cannot be null");
         boolean enchantmentRemoved = this.hasEnchants() && this.enchantments.remove(enchant) != null;
         // If we no longer have any enchantments, then clear enchantment tag
@@ -1299,7 +1300,7 @@ public class CraftMetaItem implements ItemMeta, Damageable, Repairable, BlockDat
     }
 
     @Override
-    public boolean hasConflictingEnchant(Enchantment enchant) {
+    public boolean hasConflictingEnchant(@NonNull Enchantment enchant) {
         return CraftMetaItem.checkConflictingEnchants(this.enchantments, enchant);
     }
 
@@ -1330,7 +1331,7 @@ public class CraftMetaItem implements ItemMeta, Damageable, Repairable, BlockDat
     }
 
     @Override
-    public Set<ItemFlag> getItemFlags() {
+    public @NonNull Set<ItemFlag> getItemFlags() {
         Set<ItemFlag> currentFlags = EnumSet.noneOf(ItemFlag.class);
 
         for (ItemFlag f : ItemFlag.values()) {
@@ -1343,7 +1344,7 @@ public class CraftMetaItem implements ItemMeta, Damageable, Repairable, BlockDat
     }
 
     @Override
-    public boolean hasItemFlag(ItemFlag flag) {
+    public boolean hasItemFlag(@NonNull ItemFlag flag) {
         if (this.tooltipDisplay == null) {
             return false;
         }
@@ -1417,7 +1418,7 @@ public class CraftMetaItem implements ItemMeta, Damageable, Repairable, BlockDat
     }
 
     @Override
-    public CustomModelDataComponent getCustomModelDataComponent() {
+    public @NonNull CustomModelDataComponent getCustomModelDataComponent() {
         return (this.hasCustomModelDataComponent()) ? new CraftCustomModelDataComponent(this.customModelData) : new CraftCustomModelDataComponent(new CustomModelData(List.of(), List.of(), List.of(), List.of()));
     }
 
@@ -1453,7 +1454,7 @@ public class CraftMetaItem implements ItemMeta, Damageable, Repairable, BlockDat
     }
 
     @Override
-    public BlockData getBlockData(Material material) {
+    public @NonNull BlockData getBlockData(@NonNull Material material) {
         BlockState defaultData = CraftBlockType.bukkitToMinecraft(material).defaultBlockState();
         if (this.blockData == null) {
             return defaultData.asBlockData();
@@ -1462,7 +1463,7 @@ public class CraftMetaItem implements ItemMeta, Damageable, Repairable, BlockDat
     }
 
     @Override
-    public void setBlockData(BlockData blockData) {
+    public void setBlockData(@NonNull BlockData blockData) {
         this.blockData = (blockData == null) ? null : ((CraftBlockData) blockData).toStates(true);
     }
 
@@ -1536,7 +1537,7 @@ public class CraftMetaItem implements ItemMeta, Damageable, Repairable, BlockDat
     }
 
     @Override
-    public Boolean getEnchantmentGlintOverride() {
+    public @NonNull Boolean getEnchantmentGlintOverride() {
         Preconditions.checkState(this.hasEnchantmentGlintOverride(), "We don't have enchantment_glint_override! Check hasEnchantmentGlintOverride first!");
         return this.enchantmentGlintOverride;
     }
@@ -1626,7 +1627,7 @@ public class CraftMetaItem implements ItemMeta, Damageable, Repairable, BlockDat
     }
 
     @Override
-    public ItemRarity getRarity() {
+    public @NonNull ItemRarity getRarity() {
         Preconditions.checkState(this.hasRarity(), "We don't have rarity! Check hasRarity first!");
         return this.rarity;
     }
@@ -1658,7 +1659,7 @@ public class CraftMetaItem implements ItemMeta, Damageable, Repairable, BlockDat
     }
 
     @Override
-    public UseCooldownComponent getUseCooldown() {
+    public @NonNull UseCooldownComponent getUseCooldown() {
         return (this.hasUseCooldown()) ? new CraftUseCooldownComponent(this.useCooldown) : new CraftUseCooldownComponent(new UseCooldown(1));
     }
 
@@ -1673,7 +1674,7 @@ public class CraftMetaItem implements ItemMeta, Damageable, Repairable, BlockDat
     }
 
     @Override
-    public FoodComponent getFood() {
+    public @NonNull FoodComponent getFood() {
         return (this.hasFood()) ? new CraftFoodComponent(this.food) : new CraftFoodComponent(new FoodProperties(0, 0, false));
     }
 
@@ -1688,7 +1689,7 @@ public class CraftMetaItem implements ItemMeta, Damageable, Repairable, BlockDat
     }
 
     @Override
-    public ToolComponent getTool() {
+    public @NonNull ToolComponent getTool() {
         return (this.hasTool()) ? new CraftToolComponent(this.tool) : new CraftToolComponent(new Tool(Collections.emptyList(), 1.0F, 0, true));
     }
 
@@ -1703,7 +1704,7 @@ public class CraftMetaItem implements ItemMeta, Damageable, Repairable, BlockDat
     }
 
     @Override
-    public EquippableComponent getEquippable() {
+    public @NonNull EquippableComponent getEquippable() {
         return (this.hasEquippable()) ? new CraftEquippableComponent(this.equippable) : new CraftEquippableComponent(Equippable.builder(net.minecraft.world.entity.EquipmentSlot.HEAD).build());
     }
 
@@ -1718,7 +1719,7 @@ public class CraftMetaItem implements ItemMeta, Damageable, Repairable, BlockDat
     }
 
     @Override
-    public JukeboxPlayableComponent getJukeboxPlayable() {
+    public @NonNull JukeboxPlayableComponent getJukeboxPlayable() {
         return (this.hasJukeboxPlayable()) ? new CraftJukeboxComponent(this.jukebox) : new CraftJukeboxComponent(new JukeboxPlayable(CraftRegistry.getMinecraftRegistry(Registries.JUKEBOX_SONG).get(JukeboxSongs.THIRTEEN).orElseThrow()));
     }
 
@@ -1744,7 +1745,7 @@ public class CraftMetaItem implements ItemMeta, Damageable, Repairable, BlockDat
     }
 
     @Override
-    public Multimap<Attribute, AttributeModifier> getAttributeModifiers(@Nullable EquipmentSlot slot) {
+    public @NonNull Multimap<Attribute, AttributeModifier> getAttributeModifiers(@Nullable EquipmentSlot slot) {
         if (this.attributeModifiers == null) return LinkedHashMultimap.create(); // Paper - don't change the components
         SetMultimap<Attribute, AttributeModifier> result = LinkedHashMultimap.create();
         for (Map.Entry<Attribute, AttributeModifier> entry : this.attributeModifiers.entries()) {
@@ -1855,7 +1856,7 @@ public class CraftMetaItem implements ItemMeta, Damageable, Repairable, BlockDat
     }
 
     @Override
-    public String getAsString() {
+    public @NonNull String getAsString() {
         CraftMetaItem.Applicator tag = new CraftMetaItem.Applicator() {}; // Paper - support updating profile after resolving it
         this.applyToItem(tag);
         DataComponentPatch patch = tag.build();
@@ -1864,7 +1865,7 @@ public class CraftMetaItem implements ItemMeta, Damageable, Repairable, BlockDat
     }
 
     @Override
-    public String getAsComponentString() {
+    public @NonNull String getAsComponentString() {
         CraftMetaItem.Applicator tag = new CraftMetaItem.Applicator() {};
         this.applyToItem(tag);
         DataComponentPatch patch = tag.build();
@@ -1894,12 +1895,12 @@ public class CraftMetaItem implements ItemMeta, Damageable, Repairable, BlockDat
     }
 
     @Override
-    public CustomItemTagContainer getCustomTagContainer() {
+    public @NonNull CustomItemTagContainer getCustomTagContainer() {
         return new DeprecatedCustomTagContainer(this.getPersistentDataContainer());
     }
 
     @Override
-    public PersistentDataContainer getPersistentDataContainer() {
+    public @NonNull PersistentDataContainer getPersistentDataContainer() {
         return this.persistentDataContainer;
     }
 
@@ -2079,7 +2080,7 @@ public class CraftMetaItem implements ItemMeta, Damageable, Repairable, BlockDat
 
     @Overridden
     @Override
-    public CraftMetaItem clone() {
+    public @NonNull CraftMetaItem clone() {
         try {
             CraftMetaItem clone = (CraftMetaItem) super.clone();
             if (this.lore != null) {
@@ -2148,7 +2149,7 @@ public class CraftMetaItem implements ItemMeta, Damageable, Repairable, BlockDat
     }
 
     @Override
-    public final Map<String, Object> serialize() {
+    public final @NonNull Map<String, Object> serialize() {
         ImmutableMap.Builder<String, Object> map = ImmutableMap.builder();
         map.put(SerializableMeta.TYPE_FIELD, SerializableMeta.classMap.get(this.getClass()));
         this.serialize(map);
@@ -2567,24 +2568,24 @@ public class CraftMetaItem implements ItemMeta, Damageable, Repairable, BlockDat
     }
 
     @Override
-    public Set<com.destroystokyo.paper.Namespaced> getDestroyableKeys() {
+    public @NonNull Set<com.destroystokyo.paper.Namespaced> getDestroyableKeys() {
         return !this.hasDestroyableKeys() ? Collections.emptySet() : convertToLegacyNamespaced(this.canBreakPredicates);
     }
 
     @Override
-    public void setDestroyableKeys(final Collection<com.destroystokyo.paper.Namespaced> canDestroy) {
+    public void setDestroyableKeys(final @NonNull Collection<com.destroystokyo.paper.Namespaced> canDestroy) {
         Preconditions.checkArgument(canDestroy != null, "Cannot replace with null collection!");
         Preconditions.checkArgument(ofAcceptableType(canDestroy), "Can only use NamespacedKey or NamespacedTag objects!");
         this.canBreakPredicates = convertFromLegacyNamespaced(canDestroy);
     }
 
     @Override
-    public Set<com.destroystokyo.paper.Namespaced> getPlaceableKeys() {
+    public @NonNull Set<com.destroystokyo.paper.Namespaced> getPlaceableKeys() {
         return !this.hasPlaceableKeys() ? Collections.emptySet() : convertToLegacyNamespaced(this.canPlaceOnPredicates);
     }
 
     @Override
-    public void setPlaceableKeys(final Collection<com.destroystokyo.paper.Namespaced> canPlaceOn) {
+    public void setPlaceableKeys(final @NonNull Collection<com.destroystokyo.paper.Namespaced> canPlaceOn) {
         Preconditions.checkArgument(canPlaceOn != null, "Cannot replace with null collection!");
         Preconditions.checkArgument(ofAcceptableType(canPlaceOn), "Can only use NamespacedKey or NamespacedTag objects!");
         this.canPlaceOnPredicates = convertFromLegacyNamespaced(canPlaceOn);

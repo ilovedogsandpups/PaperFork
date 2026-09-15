@@ -7,6 +7,7 @@ import org.bukkit.entity.Display;
 import org.bukkit.util.Transformation;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
+import org.jspecify.annotations.NonNull;
 
 public class CraftDisplay extends CraftEntity implements Display {
 
@@ -20,7 +21,7 @@ public class CraftDisplay extends CraftEntity implements Display {
     }
 
     @Override
-    public Transformation getTransformation() {
+    public @NonNull Transformation getTransformation() {
         com.mojang.math.Transformation transformation = net.minecraft.world.entity.Display.createTransformation(this.getHandle().getEntityData());
         return new Transformation(new Vector3f(transformation.translation()), new Quaternionf(transformation.leftRotation()), new Vector3f(transformation.scale()), new Quaternionf(transformation.rightRotation()));
     }
@@ -33,7 +34,7 @@ public class CraftDisplay extends CraftEntity implements Display {
     }
 
     @Override
-    public void setTransformationMatrix(org.joml.Matrix4f transformationMatrix) {
+    public void setTransformationMatrix(org.joml.@NonNull Matrix4f transformationMatrix) {
         Preconditions.checkArgument(transformationMatrix != null, "Transformation matrix cannot be null");
 
         this.getHandle().setTransformation(new com.mojang.math.Transformation(transformationMatrix));
@@ -121,7 +122,7 @@ public class CraftDisplay extends CraftEntity implements Display {
     }
 
     @Override
-    public Billboard getBillboard() {
+    public @NonNull Billboard getBillboard() {
         return Billboard.valueOf(this.getHandle().getBillboardConstraints().name());
     }
 

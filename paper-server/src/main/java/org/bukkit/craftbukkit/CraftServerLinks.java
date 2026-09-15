@@ -7,6 +7,7 @@ import java.util.List;
 import net.minecraft.server.dedicated.DedicatedServer;
 import org.bukkit.ServerLinks;
 import org.bukkit.craftbukkit.util.CraftChatMessage;
+import org.jspecify.annotations.NonNull;
 
 public class CraftServerLinks implements ServerLinks {
 
@@ -27,19 +28,19 @@ public class CraftServerLinks implements ServerLinks {
     }
 
     @Override
-    public ServerLink getLink(Type type) {
+    public ServerLink getLink(@NonNull Type type) {
         Preconditions.checkArgument(type != null, "type cannot be null");
 
         return this.getServerLinks().findKnownType(CraftServerLinks.fromBukkit(type)).map(CraftServerLink::new).orElse(null);
     }
 
     @Override
-    public List<ServerLink> getLinks() {
+    public @NonNull List<ServerLink> getLinks() {
         return this.getServerLinks().entries().stream().map(nms -> (ServerLink) new CraftServerLink(nms)).toList();
     }
 
     @Override
-    public ServerLink setLink(Type type, URI url) {
+    public @NonNull ServerLink setLink(@NonNull Type type, @NonNull URI url) {
         Preconditions.checkArgument(type != null, "type cannot be null");
         Preconditions.checkArgument(url != null, "url cannot be null");
 
@@ -51,7 +52,7 @@ public class CraftServerLinks implements ServerLinks {
     }
 
     @Override
-    public ServerLink addLink(Type type, URI url) {
+    public @NonNull ServerLink addLink(@NonNull Type type, @NonNull URI url) {
         Preconditions.checkArgument(type != null, "type cannot be null");
         Preconditions.checkArgument(url != null, "url cannot be null");
 
@@ -62,7 +63,7 @@ public class CraftServerLinks implements ServerLinks {
     }
 
     @Override
-    public ServerLink addLink(net.kyori.adventure.text.Component displayName, URI url) {
+    public @NonNull ServerLink addLink(net.kyori.adventure.text.@NonNull Component displayName, @NonNull URI url) {
         Preconditions.checkArgument(displayName != null, "displayName cannot be null");
         Preconditions.checkArgument(url != null, "url cannot be null");
 
@@ -73,7 +74,7 @@ public class CraftServerLinks implements ServerLinks {
     }
 
     @Override
-    public ServerLink addLink(String displayName, URI url) {
+    public @NonNull ServerLink addLink(@NonNull String displayName, @NonNull URI url) {
         Preconditions.checkArgument(displayName != null, "displayName cannot be null");
         Preconditions.checkArgument(url != null, "url cannot be null");
 
@@ -91,7 +92,7 @@ public class CraftServerLinks implements ServerLinks {
     }
 
     @Override
-    public boolean removeLink(ServerLink link) {
+    public boolean removeLink(@NonNull ServerLink link) {
         Preconditions.checkArgument(link != null, "link cannot be null");
 
         List<net.minecraft.server.ServerLinks.Entry> lst = new ArrayList<>(this.getServerLinks().entries());
@@ -103,7 +104,7 @@ public class CraftServerLinks implements ServerLinks {
     }
 
     @Override
-    public ServerLinks copy() {
+    public @NonNull ServerLinks copy() {
         return new CraftServerLinks(this.getServerLinks());
     }
 
@@ -141,17 +142,17 @@ public class CraftServerLinks implements ServerLinks {
         }
 
         @Override
-        public String getDisplayName() {
+        public @NonNull String getDisplayName() {
             return CraftChatMessage.fromComponent(this.handle.displayName());
         }
 
         @Override
-        public net.kyori.adventure.text.Component displayName() {
+        public net.kyori.adventure.text.@NonNull Component displayName() {
             return io.papermc.paper.adventure.PaperAdventure.asAdventure(this.handle.displayName());
         }
 
         @Override
-        public URI getUrl() {
+        public @NonNull URI getUrl() {
             return this.handle.link();
         }
     }

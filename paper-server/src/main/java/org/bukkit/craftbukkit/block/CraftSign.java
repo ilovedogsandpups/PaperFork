@@ -19,6 +19,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerSignOpenEvent;
 import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
 import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 public class CraftSign<T extends SignBlockEntity> extends CraftBlockEntityState<T> implements Sign {
 
@@ -63,12 +64,12 @@ public class CraftSign<T extends SignBlockEntity> extends CraftBlockEntityState<
     }
 
     @Override
-    public String getLine(int index) throws IndexOutOfBoundsException {
+    public @NonNull String getLine(int index) throws IndexOutOfBoundsException {
         return this.front.getLine(index);
     }
 
     @Override
-    public void setLine(int index, String line) throws IndexOutOfBoundsException {
+    public void setLine(int index, @NonNull String line) throws IndexOutOfBoundsException {
         this.front.setLine(index, line);
     }
 
@@ -118,7 +119,7 @@ public class CraftSign<T extends SignBlockEntity> extends CraftBlockEntityState<
     }
 
     @Override
-    public SignSide getTargetSide(Player player) {
+    public @NonNull SignSide getTargetSide(@NonNull Player player) {
         this.ensureNoWorldGeneration();
         Preconditions.checkArgument(player != null, "player cannot be null");
 
@@ -139,12 +140,12 @@ public class CraftSign<T extends SignBlockEntity> extends CraftBlockEntityState<
     }
 
     @Override
-    public DyeColor getColor() {
+    public @NonNull DyeColor getColor() {
         return this.front.getColor();
     }
 
     @Override
-    public void setColor(DyeColor color) {
+    public void setColor(@NonNull DyeColor color) {
         this.front.setColor(color);
     }
 
@@ -157,12 +158,12 @@ public class CraftSign<T extends SignBlockEntity> extends CraftBlockEntityState<
     }
 
     @Override
-    public CraftSign<T> copy() {
+    public @NonNull CraftSign<T> copy() {
         return new CraftSign<T>(this, null);
     }
 
     @Override
-    public CraftSign<T> copy(Location location) {
+    public @NonNull CraftSign<T> copy(@NonNull Location location) {
         return new CraftSign<T>(this, location);
     }
 
@@ -216,7 +217,7 @@ public class CraftSign<T extends SignBlockEntity> extends CraftBlockEntityState<
     }
 
     @Override
-    public Side getInteractableSideFor(final double x, final double z) {
+    public @NonNull Side getInteractableSideFor(final double x, final double z) {
         this.requirePlaced();
         return this.getSnapshot().isFacingFrontText(x, z) ? Side.FRONT : Side.BACK;
     }

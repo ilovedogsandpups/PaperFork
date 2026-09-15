@@ -12,6 +12,7 @@ import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
 
 import java.io.File;
 import java.io.IOException;
@@ -108,12 +109,12 @@ public class PaperPluginClassLoader extends PaperSimplePluginClassLoader impleme
     }
 
     @Override
-    public PluginMeta getConfiguration() {
+    public @NonNull PluginMeta getConfiguration() {
         return this.configuration;
     }
 
     @Override
-    public Class<?> loadClass(@NotNull String name, boolean resolve, boolean checkGroup, boolean checkLibraries) throws ClassNotFoundException {
+    public @NonNull Class<?> loadClass(@NotNull String name, boolean resolve, boolean checkGroup, boolean checkLibraries) throws ClassNotFoundException {
         try {
             Class<?> result = super.loadClass(name, resolve);
 

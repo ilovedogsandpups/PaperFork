@@ -8,7 +8,7 @@ import io.papermc.paper.registry.entry.RegistryEntryMeta;
 import io.papermc.paper.registry.set.NamedRegistryKeySetImpl;
 import io.papermc.paper.registry.tag.Tag;
 import io.papermc.paper.util.Holderable;
-import io.papermc.paper.util.MCUtil;
+
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -29,6 +29,7 @@ import org.bukkit.craftbukkit.util.CraftNamespacedKey;
 import org.bukkit.craftbukkit.util.Handleable;
 import org.bukkit.entity.EntityType;
 import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 public class CraftRegistry<B extends Keyed, M> implements Registry<B> {
 
@@ -189,7 +190,7 @@ public class CraftRegistry<B extends Keyed, M> implements Registry<B> {
     // Paper - inline into CraftRegistry#get(Registry, NamespacedKey, ApiVersion) above
 
     @Override
-    public B get(NamespacedKey namespacedKey) {
+    public B get(@NonNull NamespacedKey namespacedKey) {
         B cached = this.cache.get(namespacedKey);
         if (cached != null) {
             return cached;
@@ -233,7 +234,7 @@ public class CraftRegistry<B extends Keyed, M> implements Registry<B> {
     }
 
     @Override
-    public Iterator<B> iterator() {
+    public @NonNull Iterator<B> iterator() {
         return this.stream().iterator();
     }
 
@@ -246,7 +247,7 @@ public class CraftRegistry<B extends Keyed, M> implements Registry<B> {
     }
 
     @Override
-    public NamespacedKey getKey(final B value) {
+    public NamespacedKey getKey(final @NonNull B value) {
         if (value instanceof Holderable<?> holderable) {
             return holderable.getKeyOrNull();
         }
@@ -260,13 +261,13 @@ public class CraftRegistry<B extends Keyed, M> implements Registry<B> {
     }
 
     @Override
-    public io.papermc.paper.registry.tag.Tag<B> getTag(final io.papermc.paper.registry.tag.TagKey<B> key) {
+    public io.papermc.paper.registry.tag.@NonNull Tag<B> getTag(final io.papermc.paper.registry.tag.@NonNull TagKey<B> key) {
         final net.minecraft.core.HolderSet.Named<M> namedHolderSet = this.minecraftRegistry.get(io.papermc.paper.registry.PaperRegistries.toNms(key)).orElseThrow();
         return new io.papermc.paper.registry.set.NamedRegistryKeySetImpl<>(key, namedHolderSet);
     }
 
     @Override
-    public Collection<Tag<B>> getTags() {
+    public @NonNull Collection<Tag<B>> getTags() {
         return this.minecraftRegistry.getTags().<Tag<B>>map(NamedRegistryKeySetImpl::new).toList();
     }
     // Paper end - RegistrySet API

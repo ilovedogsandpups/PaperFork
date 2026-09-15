@@ -9,6 +9,7 @@ import net.minecraft.world.entity.animal.frog.FrogVariant;
 import org.bukkit.craftbukkit.CraftRegistry;
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.entity.Entity;
+import org.jspecify.annotations.NonNull;
 
 public class CraftFrog extends CraftAnimals implements org.bukkit.entity.Frog {
 
@@ -36,12 +37,12 @@ public class CraftFrog extends CraftAnimals implements org.bukkit.entity.Frog {
     }
 
     @Override
-    public Variant getVariant() {
+    public @NonNull Variant getVariant() {
         return CraftVariant.minecraftHolderToBukkit(this.getHandle().getVariant());
     }
 
     @Override
-    public void setVariant(Variant variant) {
+    public void setVariant(@NonNull Variant variant) {
         Preconditions.checkArgument(variant != null, "variant cannot be null");
 
         this.getHandle().setVariant(CraftVariant.bukkitToMinecraftHolder(variant));

@@ -44,6 +44,7 @@ import org.bukkit.structure.Structure;
 import org.bukkit.util.BlockTransformer;
 import org.bukkit.util.BlockVector;
 import org.bukkit.util.EntityTransformer;
+import org.jspecify.annotations.NonNull;
 import org.slf4j.Logger;
 
 public class CraftStructure implements Structure {
@@ -59,12 +60,12 @@ public class CraftStructure implements Structure {
     }
 
     @Override
-    public void place(Location location, boolean includeEntities, StructureRotation structureRotation, Mirror mirror, int palette, float integrity, Random random) {
+    public void place(@NonNull Location location, boolean includeEntities, @NonNull StructureRotation structureRotation, @NonNull Mirror mirror, int palette, float integrity, @NonNull Random random) {
         this.place(location, includeEntities, structureRotation, mirror, palette, integrity, random, Collections.emptyList(), Collections.emptyList());
     }
 
     @Override
-    public void place(Location location, boolean includeEntities, StructureRotation structureRotation, Mirror mirror, int palette, float integrity, Random random, Collection<BlockTransformer> blockTransformers, Collection<EntityTransformer> entityTransformers) {
+    public void place(Location location, boolean includeEntities, @NonNull StructureRotation structureRotation, @NonNull Mirror mirror, int palette, float integrity, @NonNull Random random, @NonNull Collection<BlockTransformer> blockTransformers, @NonNull Collection<EntityTransformer> entityTransformers) {
         Preconditions.checkArgument(location != null, "Location cannot be null");
         location.checkFinite();
         World world = location.getWorld();
@@ -75,12 +76,12 @@ public class CraftStructure implements Structure {
     }
 
     @Override
-    public void place(RegionAccessor regionAccessor, BlockVector location, boolean includeEntities, StructureRotation structureRotation, Mirror mirror, int palette, float integrity, Random random) {
+    public void place(@NonNull RegionAccessor regionAccessor, @NonNull BlockVector location, boolean includeEntities, @NonNull StructureRotation structureRotation, @NonNull Mirror mirror, int palette, float integrity, @NonNull Random random) {
        this.place(regionAccessor, location, includeEntities, structureRotation, mirror, palette, integrity, random, Collections.emptyList(), Collections.emptyList());
     }
 
     @Override
-    public void place(RegionAccessor regionAccessor, BlockVector location, boolean includeEntities, StructureRotation structureRotation, Mirror mirror, int palette, float integrity, Random random, Collection<BlockTransformer> blockTransformers, Collection<EntityTransformer> entityTransformers) {
+    public void place(@NonNull RegionAccessor regionAccessor, BlockVector location, boolean includeEntities, StructureRotation structureRotation, Mirror mirror, int palette, float integrity, @NonNull Random random, @NonNull Collection<BlockTransformer> blockTransformers, @NonNull Collection<EntityTransformer> entityTransformers) {
         Preconditions.checkArgument(location != null, "Location cannot be null");
         Preconditions.checkArgument(regionAccessor != null, "RegionAccessor cannot be null");
         Preconditions.checkArgument(blockTransformers != null, "BlockTransformers cannot be null");
@@ -133,12 +134,12 @@ public class CraftStructure implements Structure {
     }
 
     @Override
-    public BlockVector getSize() {
+    public @NonNull BlockVector getSize() {
         return CraftBlockVector.toBukkit(this.structure.getSize());
     }
 
     @Override
-    public List<Entity> getEntities() {
+    public @NonNull List<Entity> getEntities() {
         List<Entity> entities = new ArrayList<>();
         for (StructureTemplate.StructureEntityInfo entity : this.structure.entityInfoList) {
             try (final ProblemReporter.ScopedCollector problemReporter = new ProblemReporter.ScopedCollector(
@@ -163,7 +164,7 @@ public class CraftStructure implements Structure {
     }
 
     @Override
-    public List<Palette> getPalettes() {
+    public @NonNull List<Palette> getPalettes() {
         return this.structure.palettes.stream().map((palette) -> new CraftPalette(palette, this.registry)).collect(Collectors.toList());
     }
 
@@ -173,7 +174,7 @@ public class CraftStructure implements Structure {
     }
 
     @Override
-    public PersistentDataContainer getPersistentDataContainer() {
+    public @NonNull PersistentDataContainer getPersistentDataContainer() {
         return this.getHandle().persistentDataContainer;
     }
 

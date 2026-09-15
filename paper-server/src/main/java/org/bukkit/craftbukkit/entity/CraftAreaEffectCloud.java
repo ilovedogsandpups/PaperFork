@@ -25,6 +25,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.potion.PotionType;
 import org.bukkit.projectiles.ProjectileSource;
+import org.jspecify.annotations.NonNull;
 
 public class CraftAreaEffectCloud extends CraftEntity implements AreaEffectCloud {
 
@@ -108,22 +109,22 @@ public class CraftAreaEffectCloud extends CraftEntity implements AreaEffectCloud
     }
 
     @Override
-    public Particle getParticle() {
+    public @NonNull Particle getParticle() {
         return CraftParticle.minecraftToBukkit(this.getHandle().getParticle().getType());
     }
 
     @Override
-    public void setParticle(Particle particle) {
+    public void setParticle(@NonNull Particle particle) {
         this.setParticle(particle, null);
     }
 
     @Override
-    public <T> void setParticle(Particle particle, T data) {
+    public <T> void setParticle(@NonNull Particle particle, T data) {
         this.getHandle().setCustomParticle(CraftParticle.createParticleParam(particle, data));
     }
 
     @Override
-    public Color getColor() {
+    public @NonNull Color getColor() {
         return Color.fromRGB(this.potionContents().getColor() & 0x00FFFFFF); // Paper - skip alpha channel
     }
 
@@ -152,7 +153,7 @@ public class CraftAreaEffectCloud extends CraftEntity implements AreaEffectCloud
     }
 
     @Override
-    public List<PotionEffect> getCustomEffects() {
+    public @NonNull List<PotionEffect> getCustomEffects() {
         ImmutableList.Builder<PotionEffect> builder = ImmutableList.builder();
         for (MobEffectInstance effect : this.potionContents().customEffects()) {
             builder.add(CraftPotionUtil.toBukkit(effect));
@@ -161,7 +162,7 @@ public class CraftAreaEffectCloud extends CraftEntity implements AreaEffectCloud
     }
 
     @Override
-    public boolean hasCustomEffect(PotionEffectType type) {
+    public boolean hasCustomEffect(@NonNull PotionEffectType type) {
         for (MobEffectInstance effect : this.potionContents().customEffects()) {
             if (CraftPotionUtil.equals(effect.getEffect(), type)) {
                 return true;
@@ -176,7 +177,7 @@ public class CraftAreaEffectCloud extends CraftEntity implements AreaEffectCloud
     }
 
     @Override
-    public boolean removeCustomEffect(PotionEffectType effect) {
+    public boolean removeCustomEffect(@NonNull PotionEffectType effect) {
         if (!this.hasCustomEffect(effect)) {
             return false;
         }

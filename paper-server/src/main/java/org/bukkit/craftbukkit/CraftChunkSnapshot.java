@@ -17,6 +17,7 @@ import org.bukkit.block.data.BlockData;
 import org.bukkit.craftbukkit.block.CraftBiome;
 import org.bukkit.craftbukkit.block.data.CraftBlockData;
 import org.bukkit.craftbukkit.util.CraftMagicNumbers;
+import org.jspecify.annotations.NonNull;
 
 /**
  * Represents a static, thread-safe snapshot of chunk of blocks
@@ -63,17 +64,17 @@ public class CraftChunkSnapshot implements ChunkSnapshot {
     }
 
     @Override
-    public String getWorldName() {
+    public @NonNull String getWorldName() {
         return this.worldName;
     }
 
     @Override
-    public Key getWorldKey() {
+    public @NonNull Key getWorldKey() {
         return this.worldKey;
     }
 
     @Override
-    public boolean contains(BlockData block) {
+    public boolean contains(@NonNull BlockData block) {
         Preconditions.checkArgument(block != null, "Block cannot be null");
 
         Predicate<BlockState> filter = Predicates.equalTo(((CraftBlockData) block).getState());
@@ -87,7 +88,7 @@ public class CraftChunkSnapshot implements ChunkSnapshot {
     }
 
     @Override
-    public boolean contains(Biome biome) {
+    public boolean contains(@NonNull Biome biome) {
         Preconditions.checkArgument(biome != null, "Biome cannot be null");
 
         Predicate<Holder<net.minecraft.world.level.biome.Biome>> filter = Predicates.equalTo(CraftBiome.bukkitToMinecraftHolder(biome));
@@ -101,14 +102,14 @@ public class CraftChunkSnapshot implements ChunkSnapshot {
     }
 
     @Override
-    public Material getBlockType(int x, int y, int z) {
+    public @NonNull Material getBlockType(int x, int y, int z) {
         this.validateChunkCoordinates(x, y, z);
 
         return this.blockIds[this.getSectionIndex(y)].get(x, y & 0xF, z).getBukkitMaterial(); // Paper - optimise get calls
     }
 
     @Override
-    public final BlockData getBlockData(int x, int y, int z) {
+    public final @NonNull BlockData getBlockData(int x, int y, int z) {
         this.validateChunkCoordinates(x, y, z);
 
         return this.blockIds[this.getSectionIndex(y)].get(x, y & 0xF, z).asBlockData();
@@ -148,12 +149,12 @@ public class CraftChunkSnapshot implements ChunkSnapshot {
     }
 
     @Override
-    public final Biome getBiome(int x, int z) {
+    public final @NonNull Biome getBiome(int x, int z) {
         return this.getBiome(x, 0, z);
     }
 
     @Override
-    public final Biome getBiome(int x, int y, int z) {
+    public final @NonNull Biome getBiome(int x, int y, int z) {
         Preconditions.checkState(this.biome != null, "ChunkSnapshot created without biome. Please call getSnapshot with includeBiome=true");
         this.validateChunkCoordinates(x, y, z);
 

@@ -5,6 +5,7 @@ import org.bukkit.advancement.AdvancementDisplayType;
 import org.bukkit.craftbukkit.inventory.CraftItemStack;
 import org.bukkit.craftbukkit.util.CraftChatMessage;
 import org.bukkit.inventory.ItemStack;
+import org.jspecify.annotations.NonNull;
 
 @Deprecated
 public class CraftAdvancementDisplay implements org.bukkit.advancement.AdvancementDisplay {
@@ -20,17 +21,17 @@ public class CraftAdvancementDisplay implements org.bukkit.advancement.Advanceme
     }
 
     @Override
-    public String getTitle() {
+    public @NonNull String getTitle() {
         return CraftChatMessage.fromComponent(this.handle.getTitle());
     }
 
     @Override
-    public String getDescription() {
+    public @NonNull String getDescription() {
         return CraftChatMessage.fromComponent(this.handle.getDescription());
     }
 
     @Override
-    public ItemStack getIcon() {
+    public @NonNull ItemStack getIcon() {
         return CraftItemStack.asBukkitCopy(this.handle.getIcon());
     }
 
@@ -60,7 +61,7 @@ public class CraftAdvancementDisplay implements org.bukkit.advancement.Advanceme
     }
 
     @Override
-    public AdvancementDisplayType getType() {
+    public @NonNull AdvancementDisplayType getType() {
         return AdvancementDisplayType.values()[this.handle.getType().ordinal()];
     }
 }

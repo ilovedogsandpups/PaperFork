@@ -4,6 +4,7 @@ import java.net.SocketAddress;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.rcon.RconConsoleSource;
 import org.bukkit.command.RemoteConsoleCommandSender;
+import org.jspecify.annotations.NonNull;
 
 public class CraftRemoteConsoleCommandSender extends ServerCommandSender implements RemoteConsoleCommandSender {
 
@@ -18,12 +19,12 @@ public class CraftRemoteConsoleCommandSender extends ServerCommandSender impleme
     }
 
     @Override
-    public SocketAddress getAddress() {
+    public @NonNull SocketAddress getAddress() {
        return this.listener.socketAddress;
     }
 
     @Override
-    public void sendMessage(String message) {
+    public void sendMessage(@NonNull String message) {
         this.listener.sendSystemMessage(Component.literal(message + "\n")); // Send a newline after each message, to preserve formatting.
     }
 
@@ -35,12 +36,12 @@ public class CraftRemoteConsoleCommandSender extends ServerCommandSender impleme
     }
 
     @Override
-    public String getName() {
+    public @NonNull String getName() {
         return "Rcon";
     }
 
     @Override
-    public net.kyori.adventure.text.Component name() {
+    public net.kyori.adventure.text.@NonNull Component name() {
         return net.kyori.adventure.text.Component.text(this.getName());
     }
 
@@ -55,12 +56,12 @@ public class CraftRemoteConsoleCommandSender extends ServerCommandSender impleme
     }
 
     @Override
-    public boolean hasPermission(String name) {
+    public boolean hasPermission(@NonNull String name) {
         return io.papermc.paper.configuration.GlobalConfiguration.get().console.hasAllPermissions || super.hasPermission(name);
     }
 
     @Override
-    public boolean hasPermission(org.bukkit.permissions.Permission perm) {
+    public boolean hasPermission(org.bukkit.permissions.@NonNull Permission perm) {
         return io.papermc.paper.configuration.GlobalConfiguration.get().console.hasAllPermissions || super.hasPermission(perm);
     }
 }

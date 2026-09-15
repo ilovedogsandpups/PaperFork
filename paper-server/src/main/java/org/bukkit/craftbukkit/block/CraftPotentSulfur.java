@@ -4,6 +4,7 @@ import net.minecraft.world.level.block.entity.PotentSulfurBlockEntity;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.PotentSulfur;
+import org.jspecify.annotations.NonNull;
 
 public class CraftPotentSulfur extends CraftBlockEntityState<PotentSulfurBlockEntity> implements PotentSulfur {
 
@@ -16,12 +17,12 @@ public class CraftPotentSulfur extends CraftBlockEntityState<PotentSulfurBlockEn
     }
 
     @Override
-    public CraftPotentSulfur copy() {
+    public @NonNull CraftPotentSulfur copy() {
         return new CraftPotentSulfur(this, null);
     }
 
     @Override
-    public CraftPotentSulfur copy(Location location) {
+    public @NonNull CraftPotentSulfur copy(@NonNull Location location) {
         return new CraftPotentSulfur(this, location);
     }
 }

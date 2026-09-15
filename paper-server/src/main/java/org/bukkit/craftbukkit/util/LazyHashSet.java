@@ -1,5 +1,7 @@
 package org.bukkit.craftbukkit.util;
 
+import org.jspecify.annotations.NonNull;
+
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Set;
@@ -23,17 +25,17 @@ public abstract class LazyHashSet<E> implements Set<E> {
     }
 
     @Override
-    public Iterator<E> iterator() {
+    public @NonNull Iterator<E> iterator() {
         return this.getReference().iterator();
     }
 
     @Override
-    public Object[] toArray() {
+    public Object @NonNull [] toArray() {
         return this.getReference().toArray();
     }
 
     @Override
-    public <T> T[] toArray(T[] a) {
+    public <T> T @NonNull [] toArray(T @NonNull [] a) {
         return this.getReference().toArray(a);
     }
 
@@ -48,22 +50,22 @@ public abstract class LazyHashSet<E> implements Set<E> {
     }
 
     @Override
-    public boolean containsAll(Collection<?> c) {
+    public boolean containsAll(@NonNull Collection<?> c) {
         return this.getReference().containsAll(c);
     }
 
     @Override
-    public boolean addAll(Collection<? extends E> c) {
+    public boolean addAll(@NonNull Collection<? extends E> c) {
         return this.getReference().addAll(c);
     }
 
     @Override
-    public boolean retainAll(Collection<?> c) {
+    public boolean retainAll(@NonNull Collection<?> c) {
         return this.getReference().retainAll(c);
     }
 
     @Override
-    public boolean removeAll(Collection<?> c) {
+    public boolean removeAll(@NonNull Collection<?> c) {
         return this.getReference().removeAll(c);
     }
 

@@ -18,7 +18,7 @@ public interface SharedPlayerProfile {
 
     @Nullable Property getProperty(@NotNull String propertyName);
 
-    @Nullable void setProperty(@NotNull String propertyName, @Nullable Property property);
+    void setProperty(@NotNull String propertyName, @Nullable Property property);
 
     @NotNull GameProfile buildGameProfile();
 

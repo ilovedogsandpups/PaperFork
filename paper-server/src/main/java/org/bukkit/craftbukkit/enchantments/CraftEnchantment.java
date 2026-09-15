@@ -17,6 +17,7 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.enchantments.EnchantmentTarget;
 import org.bukkit.enchantments.EnchantmentWrapper;
 import org.bukkit.inventory.ItemStack;
+import org.jspecify.annotations.NonNull;
 
 public class CraftEnchantment extends Enchantment implements Holderable<net.minecraft.world.item.enchantment.Enchantment> {
 
@@ -54,12 +55,12 @@ public class CraftEnchantment extends Enchantment implements Holderable<net.mine
     }
 
     @Override
-    public Holder<net.minecraft.world.item.enchantment.Enchantment> getHolder() {
+    public @NonNull Holder<net.minecraft.world.item.enchantment.Enchantment> getHolder() {
         return this.handle;
     }
 
     @Override
-    public NamespacedKey getKey() {
+    public @NonNull NamespacedKey getKey() {
         return Holderable.super.getKey();
     }
 
@@ -74,7 +75,7 @@ public class CraftEnchantment extends Enchantment implements Holderable<net.mine
     }
 
     @Override
-    public EnchantmentTarget getItemTarget() {
+    public @NonNull EnchantmentTarget getItemTarget() {
         throw new UnsupportedOperationException("Method no longer applicable. Use Tags instead.");
     }
 
@@ -89,12 +90,12 @@ public class CraftEnchantment extends Enchantment implements Holderable<net.mine
     }
 
     @Override
-    public boolean canEnchantItem(ItemStack item) {
+    public boolean canEnchantItem(@NonNull ItemStack item) {
         return this.getHandle().canEnchant(CraftItemStack.asNMSCopy(item));
     }
 
     @Override
-    public String getName() {
+    public @NonNull String getName() {
         // PAIL: migration paths
         if (!this.getKey().getNamespace().equals(NamespacedKey.MINECRAFT)) {
             return this.getKey().toString();
@@ -125,7 +126,7 @@ public class CraftEnchantment extends Enchantment implements Holderable<net.mine
     }
 
     @Override
-    public boolean conflictsWith(Enchantment other) {
+    public boolean conflictsWith(@NonNull Enchantment other) {
         if (other instanceof EnchantmentWrapper) {
             other = ((EnchantmentWrapper) other).getEnchantment();
         }
@@ -137,12 +138,12 @@ public class CraftEnchantment extends Enchantment implements Holderable<net.mine
     }
 
     @Override
-    public net.kyori.adventure.text.Component displayName(int level) {
+    public net.kyori.adventure.text.@NonNull Component displayName(int level) {
         return io.papermc.paper.adventure.PaperAdventure.asAdventure(net.minecraft.world.item.enchantment.Enchantment.getFullname(this.handle, level));
     }
 
     @Override
-    public String translationKey() {
+    public @NonNull String translationKey() {
         if (!(this.getHandle().description().getContents() instanceof final net.minecraft.network.chat.contents.TranslatableContents translatableContents)) {
             throw new UnsupportedOperationException("Description isn't translatable!"); // Paper
         }
@@ -179,34 +180,34 @@ public class CraftEnchantment extends Enchantment implements Holderable<net.mine
     }
 
     @Override
-    public io.papermc.paper.enchantments.EnchantmentRarity getRarity() {
+    public io.papermc.paper.enchantments.@NonNull EnchantmentRarity getRarity() {
         throw new UnsupportedOperationException("Enchantments don't have a rarity anymore in 1.20.5+.");
     }
 
     @Override
-    public float getDamageIncrease(int level, org.bukkit.entity.EntityCategory entityCategory) {
+    public float getDamageIncrease(int level, org.bukkit.entity.@NonNull EntityCategory entityCategory) {
         throw new UnsupportedOperationException("Enchantments are based on complex effect maps since 1.21, cannot compute a simple damage increase");
     }
 
     @Override
-    public float getDamageIncrease(int level, org.bukkit.entity.EntityType entityType) {
+    public float getDamageIncrease(int level, org.bukkit.entity.@NonNull EntityType entityType) {
         throw new UnsupportedOperationException("Enchantments are based on complex effect maps since 1.21, cannot compute a simple damage increase");
     }
 
     @Override
-    public java.util.Set<org.bukkit.inventory.EquipmentSlotGroup> getActiveSlotGroups() {
+    public java.util.@NonNull Set<org.bukkit.inventory.EquipmentSlotGroup> getActiveSlotGroups() {
         return this.getHandle().definition().slots().stream()
             .map(org.bukkit.craftbukkit.CraftEquipmentSlot::getSlotGroup)
             .collect(java.util.stream.Collectors.toSet());
     }
 
     @Override
-    public net.kyori.adventure.text.Component description() {
+    public net.kyori.adventure.text.@NonNull Component description() {
         return io.papermc.paper.adventure.PaperAdventure.asAdventure(this.handle.value().description());
     }
 
     @Override
-    public io.papermc.paper.registry.set.RegistryKeySet<org.bukkit.inventory.ItemType> getSupportedItems() {
+    public io.papermc.paper.registry.set.@NonNull RegistryKeySet<org.bukkit.inventory.ItemType> getSupportedItems() {
         return io.papermc.paper.registry.set.PaperRegistrySets.convertToApi(io.papermc.paper.registry.RegistryKey.ITEM, this.handle.value().getSupportedItems());
     }
 
@@ -222,12 +223,12 @@ public class CraftEnchantment extends Enchantment implements Holderable<net.mine
     }
 
     @Override
-    public io.papermc.paper.registry.set.RegistryKeySet<org.bukkit.enchantments.Enchantment> getExclusiveWith() {
+    public io.papermc.paper.registry.set.@NonNull RegistryKeySet<org.bukkit.enchantments.Enchantment> getExclusiveWith() {
         return io.papermc.paper.registry.set.PaperRegistrySets.convertToApi(io.papermc.paper.registry.RegistryKey.ENCHANTMENT, this.handle.value().exclusiveSet());
     }
 
     @Override
-    public String getTranslationKey() {
+    public @NonNull String getTranslationKey() {
         return Util.makeDescriptionId("enchantment", this.handle.unwrapKey().get().identifier());
     }
 

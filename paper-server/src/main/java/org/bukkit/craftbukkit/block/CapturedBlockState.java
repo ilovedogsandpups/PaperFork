@@ -9,6 +9,7 @@ import net.minecraft.world.level.block.entity.BlockEntityTypes;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.jspecify.annotations.NonNull;
 
 @Deprecated(forRemoval = true)
 public final class CapturedBlockState extends CraftBlockState {
@@ -64,12 +65,12 @@ public final class CapturedBlockState extends CraftBlockState {
     }
 
     @Override
-    public CapturedBlockState copy() {
+    public @NonNull CapturedBlockState copy() {
         return new CapturedBlockState(this, null);
     }
 
     @Override
-    public CapturedBlockState copy(Location location) {
+    public @NonNull CapturedBlockState copy(Location location) {
         return new CapturedBlockState(this, location);
     }
 

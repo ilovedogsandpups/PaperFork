@@ -6,6 +6,7 @@ import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.craftbukkit.inventory.CraftItemStack;
 import org.bukkit.entity.ItemDisplay;
 import org.bukkit.inventory.ItemStack;
+import org.jspecify.annotations.NonNull;
 
 public class CraftItemDisplay extends CraftDisplay implements ItemDisplay {
 
@@ -19,7 +20,7 @@ public class CraftItemDisplay extends CraftDisplay implements ItemDisplay {
     }
 
     @Override
-    public ItemStack getItemStack() {
+    public @NonNull ItemStack getItemStack() {
         return CraftItemStack.asBukkitCopy(this.getHandle().getItemStack());
     }
 
@@ -29,7 +30,7 @@ public class CraftItemDisplay extends CraftDisplay implements ItemDisplay {
     }
 
     @Override
-    public ItemDisplayTransform getItemDisplayTransform() {
+    public @NonNull ItemDisplayTransform getItemDisplayTransform() {
         return ItemDisplayTransform.values()[this.getHandle().getItemTransform().ordinal()];
     }
 

@@ -9,6 +9,7 @@ import net.minecraft.DefaultUncaughtExceptionHandler;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.server.network.ConfigurationTask;
 import net.minecraft.server.network.ServerConfigurationPacketListenerImpl;
+import org.jspecify.annotations.NonNull;
 import org.slf4j.Logger;
 
 public class PaperConfigurationTask implements ConfigurationTask {
@@ -27,7 +28,7 @@ public class PaperConfigurationTask implements ConfigurationTask {
     }
 
     @Override
-    public void start(final Consumer<Packet<?>> task) {
+    public void start(final @NonNull Consumer<Packet<?>> task) {
         if (AsyncPlayerConnectionConfigureEvent.getHandlerList().getRegisteredListeners().length == 0) {
             this.packetListener.finishCurrentTask(TYPE);
             return;
@@ -40,7 +41,7 @@ public class PaperConfigurationTask implements ConfigurationTask {
     }
 
     @Override
-    public Type type() {
+    public @NonNull Type type() {
         return TYPE;
     }
 }

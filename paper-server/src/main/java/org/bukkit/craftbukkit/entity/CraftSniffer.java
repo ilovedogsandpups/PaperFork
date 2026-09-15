@@ -9,6 +9,7 @@ import org.bukkit.Location;
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.craftbukkit.util.CraftLocation;
 import org.bukkit.entity.Sniffer;
+import org.jspecify.annotations.NonNull;
 
 public class CraftSniffer extends CraftAnimals implements Sniffer {
 
@@ -22,12 +23,12 @@ public class CraftSniffer extends CraftAnimals implements Sniffer {
     }
 
     @Override
-    public Collection<Location> getExploredLocations() {
+    public @NonNull Collection<Location> getExploredLocations() {
         return this.getHandle().getExploredPositions().map(blockPosition -> CraftLocation.toBukkit(blockPosition.pos(), this.server.getServer().getLevel(blockPosition.dimension()))).collect(Collectors.toList());
     }
 
     @Override
-    public void removeExploredLocation(Location location) {
+    public void removeExploredLocation(@NonNull Location location) {
         Preconditions.checkArgument(location != null, "location cannot be null");
 
         BlockPos pos = CraftLocation.toBlockPos(location);
@@ -47,12 +48,12 @@ public class CraftSniffer extends CraftAnimals implements Sniffer {
     }
 
     @Override
-    public Sniffer.State getState() {
+    public Sniffer.@NonNull State getState() {
         return this.stateToBukkit(this.getHandle().getState());
     }
 
     @Override
-    public void setState(Sniffer.State state) {
+    public void setState(Sniffer.@NonNull State state) {
         Preconditions.checkArgument(state != null, "state cannot be null");
         this.getHandle().transitionTo(this.stateToNMS(state));
     }

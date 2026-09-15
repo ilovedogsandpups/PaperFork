@@ -4,6 +4,7 @@ import net.minecraft.world.entity.Pose;
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.entity.Camel;
 import org.bukkit.entity.Horse;
+import org.jspecify.annotations.NonNull;
 
 public class CraftCamel extends CraftAbstractHorse implements Camel {
 
@@ -17,7 +18,7 @@ public class CraftCamel extends CraftAbstractHorse implements Camel {
     }
 
     @Override
-    public Horse.Variant getVariant() {
+    public Horse.@NonNull Variant getVariant() {
         return Horse.Variant.CAMEL;
     }
 

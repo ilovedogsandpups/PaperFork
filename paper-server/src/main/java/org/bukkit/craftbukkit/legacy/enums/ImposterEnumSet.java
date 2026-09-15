@@ -11,6 +11,7 @@ import java.util.TreeSet;
 import org.bukkit.Registry;
 import org.bukkit.util.OldEnum;
 import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 public class ImposterEnumSet extends AbstractSet<Object> {
 
@@ -238,7 +239,7 @@ public class ImposterEnumSet extends AbstractSet<Object> {
     }
 
     @Override
-    public Iterator<Object> iterator() {
+    public @NonNull Iterator<Object> iterator() {
         return this.set.iterator();
     }
 
@@ -274,13 +275,13 @@ public class ImposterEnumSet extends AbstractSet<Object> {
 
     @NotNull
     @Override
-    public Object[] toArray() {
+    public Object @NonNull [] toArray() {
         return this.set.toArray();
     }
 
     @NotNull
     @Override
-    public <T> T[] toArray(@NotNull T[] a) {
+    public <T> T @NonNull [] toArray(@NotNull T @NonNull [] a) {
         return (T[]) this.set.toArray(a);
     }
 

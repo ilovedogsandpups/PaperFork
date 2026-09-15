@@ -1,5 +1,7 @@
 package org.bukkit.craftbukkit.legacy.enums;
 
+import org.jspecify.annotations.NonNull;
+
 import java.util.AbstractMap;
 import java.util.Collection;
 import java.util.EnumMap;
@@ -96,17 +98,17 @@ public class ImposterEnumMap extends AbstractMap<Object, Object> {
     }
 
     @Override
-    public Set<Object> keySet() {
+    public @NonNull Set<Object> keySet() {
         return this.map.keySet();
     }
 
     @Override
-    public Collection<Object> values() {
+    public @NonNull Collection<Object> values() {
         return this.map.values();
     }
 
     @Override
-    public Set<Entry<Object, Object>> entrySet() {
+    public @NonNull Set<Entry<Object, Object>> entrySet() {
         return this.map.entrySet();
     }
 

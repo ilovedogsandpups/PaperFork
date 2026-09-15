@@ -5,6 +5,7 @@ import org.bukkit.block.data.BlockData;
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.craftbukkit.block.data.CraftBlockData;
 import org.bukkit.entity.BlockDisplay;
+import org.jspecify.annotations.NonNull;
 
 public class CraftBlockDisplay extends CraftDisplay implements BlockDisplay {
 
@@ -18,12 +19,12 @@ public class CraftBlockDisplay extends CraftDisplay implements BlockDisplay {
     }
 
     @Override
-    public BlockData getBlock() {
+    public @NonNull BlockData getBlock() {
         return this.getHandle().getBlockState().asBlockData();
     }
 
     @Override
-    public void setBlock(BlockData block) {
+    public void setBlock(@NonNull BlockData block) {
         Preconditions.checkArgument(block != null, "Block cannot be null");
 
         this.getHandle().setBlockState(((CraftBlockData) block).getState());

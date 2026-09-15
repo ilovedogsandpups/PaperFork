@@ -24,6 +24,7 @@ import org.bukkit.craftbukkit.util.CraftLocation;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
 import org.slf4j.Logger;
 
 public abstract class CraftBlockEntityState<T extends BlockEntity> extends CraftBlockState implements TileState { // Paper - revert upstream's revert of the block state changes
@@ -217,7 +218,7 @@ public abstract class CraftBlockEntityState<T extends BlockEntity> extends Craft
     }
 
     @Override
-    public PersistentDataContainer getPersistentDataContainer() {
+    public @NonNull PersistentDataContainer getPersistentDataContainer() {
         return this.getSnapshot().persistentDataContainer;
     }
 
@@ -227,10 +228,10 @@ public abstract class CraftBlockEntityState<T extends BlockEntity> extends Craft
     }
 
     @Override
-    public abstract CraftBlockEntityState<T> copy(); // Paper - make abstract
+    public abstract @NonNull CraftBlockEntityState<T> copy(); // Paper - make abstract
 
     @Override
-    public abstract CraftBlockEntityState<T> copy(Location location); // Paper - make abstract
+    public abstract @NonNull CraftBlockEntityState<T> copy(@NonNull Location location); // Paper - make abstract
 
     // Paper start
     @Override

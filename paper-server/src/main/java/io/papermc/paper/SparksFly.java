@@ -21,6 +21,7 @@ import org.bukkit.Server;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.craftbukkit.CraftServer;
+import org.jspecify.annotations.NonNull;
 
 // It's like electricity.
 public final class SparksFly {
@@ -189,7 +190,7 @@ public final class SparksFly {
         }
 
         @Override
-        public boolean execute(final CommandSender sender, final String commandLabel, final String[] args) {
+        public boolean execute(final CommandSender sender, final @NonNull String commandLabel, final String @NonNull [] args) {
             final SparksFly spark = ((CraftServer) sender.getServer()).spark;
             if (spark.enabled) {
                 spark.executeCommand(sender, args);
@@ -200,7 +201,7 @@ public final class SparksFly {
         }
 
         @Override
-        public List<String> tabComplete(final CommandSender sender, final String alias, final String[] args) throws IllegalArgumentException {
+        public @NonNull List<String> tabComplete(final CommandSender sender, final @NonNull String alias, final String @NonNull [] args) throws IllegalArgumentException {
             final SparksFly spark = ((CraftServer) sender.getServer()).spark;
             if (spark.enabled) {
                 return spark.tabComplete(sender, args);

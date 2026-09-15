@@ -7,6 +7,7 @@ import net.minecraft.core.component.DataComponentPatch;
 import org.bukkit.Color;
 import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.inventory.meta.ColorableArmorMeta;
+import org.jspecify.annotations.NonNull;
 
 import static org.bukkit.craftbukkit.inventory.CraftItemFactory.DEFAULT_LEATHER_COLOR;
 
@@ -54,14 +55,14 @@ public class CraftMetaColorableArmor extends CraftMetaArmor implements Colorable
     }
 
     @Override
-    public CraftMetaColorableArmor clone() {
+    public @NonNull CraftMetaColorableArmor clone() {
         CraftMetaColorableArmor clone = (CraftMetaColorableArmor) super.clone();
         clone.color = this.color;
         return clone;
     }
 
     @Override
-    public Color getColor() {
+    public @NonNull Color getColor() {
         return this.color == null ? DEFAULT_LEATHER_COLOR : Color.fromRGB(this.color & 0x00FFFFFF); // Paper - this should really be nullable
     }
 

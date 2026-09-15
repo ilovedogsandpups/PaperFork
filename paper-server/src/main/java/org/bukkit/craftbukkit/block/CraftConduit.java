@@ -13,6 +13,7 @@ import org.bukkit.block.Conduit;
 import org.bukkit.craftbukkit.entity.CraftLivingEntity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.util.BoundingBox;
+import org.jspecify.annotations.NonNull;
 
 public class CraftConduit extends CraftBlockEntityState<ConduitBlockEntity> implements Conduit {
 
@@ -25,12 +26,12 @@ public class CraftConduit extends CraftBlockEntityState<ConduitBlockEntity> impl
     }
 
     @Override
-    public CraftConduit copy() {
+    public @NonNull CraftConduit copy() {
         return new CraftConduit(this, null);
     }
 
     @Override
-    public CraftConduit copy(Location location) {
+    public @NonNull CraftConduit copy(@NonNull Location location) {
         return new CraftConduit(this, location);
     }
 
@@ -49,7 +50,7 @@ public class CraftConduit extends CraftBlockEntityState<ConduitBlockEntity> impl
     }
 
     @Override
-    public Collection<Block> getFrameBlocks() {
+    public @NonNull Collection<Block> getFrameBlocks() {
         this.ensureNoWorldGeneration();
         Collection<Block> blocks = new ArrayList<>();
 
@@ -132,7 +133,7 @@ public class CraftConduit extends CraftBlockEntityState<ConduitBlockEntity> impl
     }
 
     @Override
-    public BoundingBox getHuntingArea() {
+    public @NonNull BoundingBox getHuntingArea() {
         AABB bounds = ConduitBlockEntity.getDestroyRangeAABB(this.getPosition());
         return new BoundingBox(bounds.minX, bounds.minY, bounds.minZ, bounds.maxX, bounds.maxY, bounds.maxZ);
     }

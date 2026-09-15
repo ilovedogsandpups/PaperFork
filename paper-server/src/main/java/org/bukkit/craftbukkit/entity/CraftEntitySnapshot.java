@@ -1,7 +1,6 @@
 package org.bukkit.craftbukkit.entity;
 
 import com.google.common.base.Preconditions;
-import java.util.function.Function;
 import com.mojang.logging.LogUtils;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.ProblemReporter;
@@ -17,6 +16,7 @@ import org.bukkit.craftbukkit.CraftWorld;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntitySnapshot;
 import org.bukkit.entity.EntityType;
+import org.jspecify.annotations.NonNull;
 import org.slf4j.Logger;
 
 public class CraftEntitySnapshot implements EntitySnapshot {
@@ -32,19 +32,19 @@ public class CraftEntitySnapshot implements EntitySnapshot {
     }
 
     @Override
-    public EntityType getEntityType() {
+    public @NonNull EntityType getEntityType() {
         return this.type;
     }
 
     @Override
-    public Entity createEntity(World world) {
+    public @NonNull Entity createEntity(@NonNull World world) {
         net.minecraft.world.entity.Entity internal = this.createInternal(world);
 
         return internal.getBukkitEntity();
     }
 
     @Override
-    public Entity createEntity(Location location) {
+    public @NonNull Entity createEntity(Location location) {
         Preconditions.checkArgument(location.getWorld() != null, "Location has no world");
 
         net.minecraft.world.entity.Entity internal = this.createInternal(location.getWorld());
@@ -54,7 +54,7 @@ public class CraftEntitySnapshot implements EntitySnapshot {
     }
 
     @Override
-    public String getAsString() {
+    public @NonNull String getAsString() {
         return this.data.toString();
     }
 

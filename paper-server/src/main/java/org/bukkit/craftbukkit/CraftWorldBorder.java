@@ -5,6 +5,7 @@ import net.minecraft.core.BlockPos;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.WorldBorder;
+import org.jspecify.annotations.NonNull;
 
 public class CraftWorldBorder implements WorldBorder {
 
@@ -56,7 +57,7 @@ public class CraftWorldBorder implements WorldBorder {
     }
 
     @Override
-    public Location getCenter() {
+    public @NonNull Location getCenter() {
         double x = this.handle.getCenterX();
         double z = this.handle.getCenterZ();
 
@@ -119,7 +120,7 @@ public class CraftWorldBorder implements WorldBorder {
     }
 
     @Override
-    public boolean isInside(Location location) {
+    public boolean isInside(@NonNull Location location) {
         Preconditions.checkArgument(location != null, "location cannot be null");
 
         return (this.world == null || location.getWorld().equals(this.world)) && this.handle.isWithinBounds(BlockPos.containing(location.getX(), location.getY(), location.getZ()));

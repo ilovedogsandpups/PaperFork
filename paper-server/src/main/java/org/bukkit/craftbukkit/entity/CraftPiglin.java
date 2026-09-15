@@ -11,6 +11,7 @@ import org.bukkit.craftbukkit.inventory.CraftInventory;
 import org.bukkit.craftbukkit.inventory.CraftItemType;
 import org.bukkit.entity.Piglin;
 import org.bukkit.inventory.Inventory;
+import org.jspecify.annotations.NonNull;
 
 public class CraftPiglin extends CraftPiglinAbstract implements Piglin, com.destroystokyo.paper.entity.CraftRangedEntity<net.minecraft.world.entity.monster.piglin.Piglin> { // Paper
 
@@ -34,7 +35,7 @@ public class CraftPiglin extends CraftPiglinAbstract implements Piglin, com.dest
     }
 
     @Override
-    public boolean addBarterMaterial(Material material) {
+    public boolean addBarterMaterial(@NonNull Material material) {
         Preconditions.checkArgument(material != null, "material cannot be null");
 
         Item item = CraftItemType.bukkitToMinecraft(material);
@@ -42,7 +43,7 @@ public class CraftPiglin extends CraftPiglinAbstract implements Piglin, com.dest
     }
 
     @Override
-    public boolean removeBarterMaterial(Material material) {
+    public boolean removeBarterMaterial(@NonNull Material material) {
         Preconditions.checkArgument(material != null, "material cannot be null");
 
         Item item = CraftItemType.bukkitToMinecraft(material);
@@ -50,7 +51,7 @@ public class CraftPiglin extends CraftPiglinAbstract implements Piglin, com.dest
     }
 
     @Override
-    public boolean addMaterialOfInterest(Material material) {
+    public boolean addMaterialOfInterest(@NonNull Material material) {
         Preconditions.checkArgument(material != null, "material cannot be null");
 
         Item item = CraftItemType.bukkitToMinecraft(material);
@@ -58,7 +59,7 @@ public class CraftPiglin extends CraftPiglinAbstract implements Piglin, com.dest
     }
 
     @Override
-    public boolean removeMaterialOfInterest(Material material) {
+    public boolean removeMaterialOfInterest(@NonNull Material material) {
         Preconditions.checkArgument(material != null, "material cannot be null");
 
         Item item = CraftItemType.bukkitToMinecraft(material);
@@ -66,17 +67,17 @@ public class CraftPiglin extends CraftPiglinAbstract implements Piglin, com.dest
     }
 
     @Override
-    public Set<Material> getInterestList() {
+    public @NonNull Set<Material> getInterestList() {
         return Collections.unmodifiableSet(this.getHandle().interestItems.stream().map(CraftItemType::minecraftToBukkit).collect(Collectors.toSet()));
     }
 
     @Override
-    public Set<Material> getBarterList() {
+    public @NonNull Set<Material> getBarterList() {
         return Collections.unmodifiableSet(this.getHandle().allowedBarterItems.stream().map(CraftItemType::minecraftToBukkit).collect(Collectors.toSet()));
     }
 
     @Override
-    public Inventory getInventory() {
+    public @NonNull Inventory getInventory() {
         return new CraftInventory(this.getHandle().getInventory());
     }
 

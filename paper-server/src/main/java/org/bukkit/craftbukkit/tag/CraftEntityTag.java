@@ -7,6 +7,7 @@ import net.minecraft.core.Registry;
 import net.minecraft.tags.TagKey;
 import org.bukkit.craftbukkit.entity.CraftEntityType;
 import org.bukkit.entity.EntityType;
+import org.jspecify.annotations.NonNull;
 
 public class CraftEntityTag extends CraftTag<net.minecraft.world.entity.EntityType<?>, EntityType> {
 
@@ -15,12 +16,12 @@ public class CraftEntityTag extends CraftTag<net.minecraft.world.entity.EntityTy
     }
 
     @Override
-    public boolean isTagged(EntityType entity) {
+    public boolean isTagged(@NonNull EntityType entity) {
         return CraftEntityType.bukkitToMinecraft(entity).builtInRegistryHolder().is(this.tag);
     }
 
     @Override
-    public Set<EntityType> getValues() {
+    public @NonNull Set<EntityType> getValues() {
         return this.getHandle().stream().map(Holder::value).map(CraftEntityType::minecraftToBukkit).collect(Collectors.toUnmodifiableSet());
     }
 }

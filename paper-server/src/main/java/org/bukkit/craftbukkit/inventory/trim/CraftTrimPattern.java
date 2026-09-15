@@ -9,6 +9,7 @@ import net.minecraft.network.chat.contents.TranslatableContents;
 import org.bukkit.craftbukkit.CraftRegistry;
 import org.bukkit.inventory.meta.trim.TrimPattern;
 import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 public class CraftTrimPattern extends HolderableBase<net.minecraft.world.item.equipment.trim.TrimPattern> implements TrimPattern {
 
@@ -44,7 +45,7 @@ public class CraftTrimPattern extends HolderableBase<net.minecraft.world.item.eq
     }
 
     @Override
-    public net.kyori.adventure.text.Component description() {
+    public net.kyori.adventure.text.@NonNull Component description() {
         return io.papermc.paper.adventure.PaperAdventure.asAdventure(this.getHandle().description());
     }
 }

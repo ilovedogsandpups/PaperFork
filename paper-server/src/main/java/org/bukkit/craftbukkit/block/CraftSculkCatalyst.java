@@ -7,6 +7,7 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.SculkCatalyst;
+import org.jspecify.annotations.NonNull;
 
 public class CraftSculkCatalyst extends CraftBlockEntityState<SculkCatalystBlockEntity> implements SculkCatalyst {
 
@@ -35,18 +36,18 @@ public class CraftSculkCatalyst extends CraftBlockEntityState<SculkCatalystBlock
     }
 
     @Override
-    public CraftSculkCatalyst copy() {
+    public @NonNull CraftSculkCatalyst copy() {
         return new CraftSculkCatalyst(this, null);
     }
 
     @Override
-    public CraftSculkCatalyst copy(Location location) {
+    public @NonNull CraftSculkCatalyst copy(@NonNull Location location) {
         return new CraftSculkCatalyst(this, location);
     }
 
     // Paper start - SculkCatalyst bloom API
     @Override
-    public void bloom(io.papermc.paper.math.Position position, int charge) { // kinda a duplicate of above method
+    public void bloom(io.papermc.paper.math.@NonNull Position position, int charge) { // kinda a duplicate of above method
         Preconditions.checkArgument(position != null, "position cannot be null");
         this.requirePlaced();
 

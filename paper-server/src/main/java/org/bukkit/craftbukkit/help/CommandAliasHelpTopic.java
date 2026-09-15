@@ -5,6 +5,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.help.HelpMap;
 import org.bukkit.help.HelpTopic;
+import org.jspecify.annotations.NonNull;
 
 public class CommandAliasHelpTopic extends HelpTopic {
 
@@ -20,7 +21,7 @@ public class CommandAliasHelpTopic extends HelpTopic {
     }
 
     @Override
-    public String getFullText(CommandSender forWho) {
+    public @NonNull String getFullText(@NonNull CommandSender forWho) {
         Preconditions.checkArgument(forWho != null, "CommandServer forWho cannot be null");
         StringBuilder sb = new StringBuilder(this.shortText);
         HelpTopic aliasForTopic = this.helpMap.getHelpTopic(this.aliasFor);
@@ -32,7 +33,7 @@ public class CommandAliasHelpTopic extends HelpTopic {
     }
 
     @Override
-    public boolean canSee(CommandSender commandSender) {
+    public boolean canSee(@NonNull CommandSender commandSender) {
         Preconditions.checkArgument(commandSender != null, "CommandServer cannot be null");
         if (this.amendedPermission == null) {
             HelpTopic aliasForTopic = this.helpMap.getHelpTopic(this.aliasFor);

@@ -10,6 +10,7 @@ import net.minecraft.world.level.biome.Climate;
 import org.bukkit.craftbukkit.block.CraftBiome;
 import org.bukkit.generator.BiomeProvider;
 import org.bukkit.generator.WorldInfo;
+import org.jspecify.annotations.NonNull;
 
 public class CustomWorldChunkManager extends BiomeSource {
 
@@ -24,12 +25,12 @@ public class CustomWorldChunkManager extends BiomeSource {
     }
 
     @Override
-    protected MapCodec<? extends BiomeSource> codec() {
+    protected @NonNull MapCodec<? extends BiomeSource> codec() {
         throw new UnsupportedOperationException("Cannot serialize CustomWorldChunkManager");
     }
 
     @Override
-    public Holder<net.minecraft.world.level.biome.Biome> getNoiseBiome(int x, int y, int z, Climate.Sampler noise) {
+    public @NonNull Holder<net.minecraft.world.level.biome.Biome> getNoiseBiome(int x, int y, int z, Climate.@NonNull Sampler noise) {
         Holder<net.minecraft.world.level.biome.Biome> biome = CraftBiome.bukkitToMinecraftHolder(
             this.biomeProvider.getBiome(this.worldInfo, QuartPos.toBlock(x), QuartPos.toBlock(y), QuartPos.toBlock(z), CraftBiomeParameterPoint.createBiomeParameterPoint(noise, noise.sample(x, y, z)))
         );
@@ -39,7 +40,7 @@ public class CustomWorldChunkManager extends BiomeSource {
     }
 
     @Override
-    protected Stream<Holder<net.minecraft.world.level.biome.Biome>> collectPossibleBiomes() {
+    protected @NonNull Stream<Holder<net.minecraft.world.level.biome.Biome>> collectPossibleBiomes() {
         return this.biomeProvider.getBiomes(this.worldInfo).stream().map(biome -> {
             Holder<net.minecraft.world.level.biome.Biome> b = CraftBiome.bukkitToMinecraftHolder(biome);
             Preconditions.checkArgument(b != null, "Cannot use the biome %s", biome);

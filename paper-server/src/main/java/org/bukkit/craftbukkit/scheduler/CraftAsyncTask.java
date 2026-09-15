@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitWorker;
+import org.jspecify.annotations.NonNull;
 
 class CraftAsyncTask extends CraftTask {
 
@@ -37,7 +38,7 @@ class CraftAsyncTask extends CraftTask {
             this.workers.add(
                 new BukkitWorker() {
                     @Override
-                    public Thread getThread() {
+                    public @NonNull Thread getThread() {
                         return thread;
                     }
 
@@ -47,7 +48,7 @@ class CraftAsyncTask extends CraftTask {
                     }
 
                     @Override
-                    public Plugin getOwner() {
+                    public @NonNull Plugin getOwner() {
                         return CraftAsyncTask.this.getOwner();
                     }
                 });

@@ -41,6 +41,7 @@ import org.bukkit.generator.structure.GeneratedStructure;
 import org.bukkit.generator.structure.Structure;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.plugin.Plugin;
+import org.jspecify.annotations.NonNull;
 
 public class CraftChunk implements Chunk {
     private final ServerLevel level;
@@ -63,7 +64,7 @@ public class CraftChunk implements Chunk {
     }
 
     @Override
-    public World getWorld() {
+    public @NonNull World getWorld() {
         return this.level.getWorld();
     }
 
@@ -104,7 +105,7 @@ public class CraftChunk implements Chunk {
     }
 
     @Override
-    public Block getBlock(int x, int y, int z) {
+    public @NonNull Block getBlock(int x, int y, int z) {
         CraftChunk.validateChunkCoordinates(this.level.getMinY(), this.level.getMaxY(), x, y, z);
 
         return CraftBlock.at(this.level, new BlockPos((this.x << 4) | x, y, (this.z << 4) | z));
@@ -116,17 +117,17 @@ public class CraftChunk implements Chunk {
     }
 
     @Override
-    public Entity[] getEntities() {
+    public Entity @NonNull [] getEntities() {
         return FeatureHooks.getChunkEntities(this.level, this.x, this.z); // Paper - chunk system
     }
 
     @Override
-    public BlockState[] getTileEntities() {
+    public BlockState @NonNull [] getTileEntities() {
         return this.getTileEntities(true);
     }
 
     @Override
-    public BlockState[] getTileEntities(boolean useSnapshot) {
+    public BlockState @NonNull [] getTileEntities(boolean useSnapshot) {
         if (!this.isLoaded()) {
             this.getWorld().getChunkAt(this.x, this.z); // Transient load for this tick
         }
@@ -143,7 +144,7 @@ public class CraftChunk implements Chunk {
     }
 
     @Override
-    public Collection<BlockState> getTileEntities(Predicate<? super Block> blockPredicate, boolean useSnapshot) {
+    public @NonNull Collection<BlockState> getTileEntities(@NonNull Predicate<? super Block> blockPredicate, boolean useSnapshot) {
         Preconditions.checkArgument(blockPredicate != null, "blockPredicate cannot be null");
 
         if (!this.isLoaded()) {
@@ -210,17 +211,17 @@ public class CraftChunk implements Chunk {
     }
 
     @Override
-    public boolean addPluginChunkTicket(Plugin plugin) {
+    public boolean addPluginChunkTicket(@NonNull Plugin plugin) {
         return this.getWorld().addPluginChunkTicket(this.getX(), this.getZ(), plugin);
     }
 
     @Override
-    public boolean removePluginChunkTicket(Plugin plugin) {
+    public boolean removePluginChunkTicket(@NonNull Plugin plugin) {
         return this.getWorld().removePluginChunkTicket(this.getX(), this.getZ(), plugin);
     }
 
     @Override
-    public Collection<Plugin> getPluginChunkTickets() {
+    public @NonNull Collection<Plugin> getPluginChunkTickets() {
         return this.getWorld().getPluginChunkTickets(this.getX(), this.getZ());
     }
 
@@ -237,7 +238,7 @@ public class CraftChunk implements Chunk {
     }
 
     @Override
-    public boolean contains(BlockData block) {
+    public boolean contains(@NonNull BlockData block) {
         Preconditions.checkArgument(block != null, "Block cannot be null");
 
         Predicate<net.minecraft.world.level.block.state.BlockState> filter = Predicates.equalTo(((CraftBlockData) block).getState());
@@ -251,7 +252,7 @@ public class CraftChunk implements Chunk {
     }
 
     @Override
-    public boolean contains(Biome biome) {
+    public boolean contains(@NonNull Biome biome) {
         Preconditions.checkArgument(biome != null, "Biome cannot be null");
 
         ChunkAccess chunk = this.getHandle(ChunkStatus.BIOMES);
@@ -266,7 +267,7 @@ public class CraftChunk implements Chunk {
     }
 
     @Override
-    public ChunkSnapshot getChunkSnapshot(boolean includeMaxBlockY, boolean includeBiome, boolean includeBiomeTempRain, boolean includeLightData) {
+    public @NonNull ChunkSnapshot getChunkSnapshot(boolean includeMaxBlockY, boolean includeBiome, boolean includeBiomeTempRain, boolean includeLightData) {
         ChunkAccess chunk = this.getHandle(ChunkStatus.FULL);
 
         LevelChunkSection[] cs = chunk.getSections();
@@ -323,12 +324,12 @@ public class CraftChunk implements Chunk {
     }
 
     @Override
-    public PersistentDataContainer getPersistentDataContainer() {
+    public @NonNull PersistentDataContainer getPersistentDataContainer() {
         return this.getHandle(ChunkStatus.STRUCTURE_STARTS).persistentDataContainer;
     }
 
     @Override
-    public LoadLevel getLoadLevel() {
+    public @NonNull LoadLevel getLoadLevel() {
         net.minecraft.world.level.chunk.LevelChunk chunk = this.level.getChunkIfLoaded(this.getX(), this.getZ());
         if (chunk == null) {
             return LoadLevel.UNLOADED;
@@ -337,17 +338,17 @@ public class CraftChunk implements Chunk {
     }
 
     @Override
-    public Collection<GeneratedStructure> getStructures() {
+    public @NonNull Collection<GeneratedStructure> getStructures() {
         return this.getCraftWorld().getStructures(this.getX(), this.getZ());
     }
 
     @Override
-    public Collection<GeneratedStructure> getStructures(Structure structure) {
+    public @NonNull Collection<GeneratedStructure> getStructures(@NonNull Structure structure) {
         return this.getCraftWorld().getStructures(this.getX(), this.getZ(), structure);
     }
 
     @Override
-    public Collection<Player> getPlayersSeeingChunk() {
+    public @NonNull Collection<Player> getPlayersSeeingChunk() {
         return this.getWorld().getPlayersSeeingChunk(this);
     }
 

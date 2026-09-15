@@ -5,6 +5,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.levelgen.BitRandomSource;
 import net.minecraft.world.level.levelgen.MarsagliaPolarGaussian;
 import net.minecraft.world.level.levelgen.PositionalRandomFactory;
+import org.jspecify.annotations.NonNull;
 
 /**
  * Avoid costly CAS of superclass
@@ -50,12 +51,12 @@ public class ThreadUnsafeRandom implements BitRandomSource { // Paper - replace 
     }
 
     @Override
-    public RandomSource fork() {
+    public @NonNull RandomSource fork() {
         return new ThreadUnsafeRandom(this.nextLong());
     }
 
     @Override
-    public PositionalRandomFactory forkPositional() {
+    public @NonNull PositionalRandomFactory forkPositional() {
         return new ThreadUnsafeRandomPositionalFactory(this.nextLong());
     }
 
@@ -72,17 +73,17 @@ public class ThreadUnsafeRandom implements BitRandomSource { // Paper - replace 
         }
 
         @Override
-        public RandomSource fromHashOf(final String string) {
+        public @NonNull RandomSource fromHashOf(final String string) {
             return new ThreadUnsafeRandom((long)string.hashCode() ^ this.seed);
         }
 
         @Override
-        public RandomSource fromSeed(final long seed) {
+        public @NonNull RandomSource fromSeed(final long seed) {
             return new ThreadUnsafeRandom(seed);
         }
 
         @Override
-        public RandomSource at(final int x, final int y, final int z) {
+        public @NonNull RandomSource at(final int x, final int y, final int z) {
             return new ThreadUnsafeRandom(Mth.getSeed(x, y, z) ^ this.seed);
         }
 

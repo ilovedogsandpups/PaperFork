@@ -10,6 +10,7 @@ import org.bukkit.map.MapCursorCollection;
 import org.bukkit.map.MapFont;
 import org.bukkit.map.MapFont.CharacterSprite;
 import org.bukkit.map.MapPalette;
+import org.jspecify.annotations.NonNull;
 
 public class CraftMapCanvas implements MapCanvas {
 
@@ -24,17 +25,17 @@ public class CraftMapCanvas implements MapCanvas {
     }
 
     @Override
-    public CraftMapView getMapView() {
+    public @NonNull CraftMapView getMapView() {
         return this.mapView;
     }
 
     @Override
-    public MapCursorCollection getCursors() {
+    public @NonNull MapCursorCollection getCursors() {
         return this.cursors;
     }
 
     @Override
-    public void setCursors(MapCursorCollection cursors) {
+    public void setCursors(@NonNull MapCursorCollection cursors) {
         this.cursors = cursors;
     }
 
@@ -54,7 +55,7 @@ public class CraftMapCanvas implements MapCanvas {
     }
 
     @Override
-    public Color getBasePixelColor(int x, int y) {
+    public @NonNull Color getBasePixelColor(int x, int y) {
         return MapPalette.getColor(this.getBasePixel(x, y));
     }
 
@@ -147,7 +148,7 @@ public class CraftMapCanvas implements MapCanvas {
     }
 
     @Override
-    public void drawText(int x, int y, MapFont font, String text) {
+    public void drawText(int x, int y, MapFont font, @NonNull String text) {
         int xStart = x;
         byte color = MapPalette.DARK_GRAY;
         Preconditions.checkArgument(font.isValid(text), "text (%s) contains invalid characters", text);

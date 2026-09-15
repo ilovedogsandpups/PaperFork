@@ -63,6 +63,7 @@ import org.bukkit.entity.TippedArrow;
 import org.bukkit.entity.minecart.RideableMinecart;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.potion.PotionType;
+import org.jspecify.annotations.NonNull;
 
 public abstract class CraftRegionAccessor implements RegionAccessor {
 
@@ -73,17 +74,17 @@ public abstract class CraftRegionAccessor implements RegionAccessor {
     }
 
     @Override
-    public Biome getBiome(int x, int y, int z) {
+    public @NonNull Biome getBiome(int x, int y, int z) {
         return CraftBiome.minecraftHolderToBukkit(this.getHandle().getNoiseBiome(x >> 2, y >> 2, z >> 2));
     }
 
     @Override
-    public Biome getComputedBiome(int x, int y, int z) {
+    public @NonNull Biome getComputedBiome(int x, int y, int z) {
         return CraftBiome.minecraftHolderToBukkit(this.getHandle().getBiome(new BlockPos(x, y, z)));
     }
 
     @Override
-    public void setBiome(int x, int y, int z, Biome biome) {
+    public void setBiome(int x, int y, int z, @NonNull Biome biome) {
         Holder<net.minecraft.world.level.biome.Biome> b = CraftBiome.bukkitToMinecraftHolder(biome);
         Preconditions.checkArgument(b != null, "Cannot set the biome to %s", biome);
         this.setBiome(x, y, z, b);
@@ -92,22 +93,22 @@ public abstract class CraftRegionAccessor implements RegionAccessor {
     public abstract void setBiome(int x, int y, int z, Holder<net.minecraft.world.level.biome.Biome> biome);
 
     @Override
-    public BlockState getBlockState(int x, int y, int z) {
+    public @NonNull BlockState getBlockState(int x, int y, int z) {
         return CraftBlock.at(this.getHandle(), new BlockPos(x, y, z)).getState();
     }
 
     @Override
-    public io.papermc.paper.block.fluid.FluidData getFluidData(final int x, final int y, final int z) {
+    public io.papermc.paper.block.fluid.@NonNull FluidData getFluidData(final int x, final int y, final int z) {
         return io.papermc.paper.block.fluid.PaperFluidData.createData(getHandle().getFluidState(new BlockPos(x, y, z)));
     }
 
     @Override
-    public BlockData getBlockData(int x, int y, int z) {
+    public @NonNull BlockData getBlockData(int x, int y, int z) {
         return this.getData(x, y, z).asBlockData();
     }
 
     @Override
-    public Material getType(int x, int y, int z) {
+    public @NonNull Material getType(int x, int y, int z) {
         return CraftBlockType.minecraftToBukkit(this.getData(x, y, z).getBlock());
     }
 
@@ -116,7 +117,7 @@ public abstract class CraftRegionAccessor implements RegionAccessor {
     }
 
     @Override
-    public void setBlockData(int x, int y, int z, BlockData blockData) {
+    public void setBlockData(int x, int y, int z, @NonNull BlockData blockData) {
         BlockPos pos = new BlockPos(x, y, z);
         this.getHandle().setBlock(pos, ((CraftBlockData) blockData).getState(), Block.UPDATE_ALL);
     }
@@ -132,23 +133,23 @@ public abstract class CraftRegionAccessor implements RegionAccessor {
     }
 
     @Override
-    public int getHighestBlockYAt(int x, int z, org.bukkit.HeightMap heightMap) {
+    public int getHighestBlockYAt(int x, int z, org.bukkit.@NonNull HeightMap heightMap) {
         return this.getHandle().getHeight(CraftHeightMap.toNMS(heightMap), x, z);
     }
 
     @Override
-    public int getHighestBlockYAt(Location location, org.bukkit.HeightMap heightMap) {
+    public int getHighestBlockYAt(Location location, org.bukkit.@NonNull HeightMap heightMap) {
         return this.getHighestBlockYAt(location.getBlockX(), location.getBlockZ(), heightMap);
     }
 
     @Override
-    public boolean generateTree(Location location, Random random, TreeType treeType) {
+    public boolean generateTree(@NonNull Location location, @NonNull Random random, @NonNull TreeType treeType) {
         BlockPos pos = CraftLocation.toBlockPos(location);
         return this.generateTree(this.getHandle(), this.getHandle().getMinecraftWorld().getChunkSource().getGenerator(), pos, new RandomSourceWrapper(random), treeType);
     }
 
     @Override
-    public boolean generateTree(Location location, Random random, TreeType treeType, Consumer<? super BlockState> consumer) {
+    public boolean generateTree(@NonNull Location location, @NonNull Random random, @NonNull TreeType treeType, Consumer<? super BlockState> consumer) {
         return this.generateTree(location, random, treeType, (consumer == null) ? null : (block) -> {
             consumer.accept(block);
             return true;
@@ -156,7 +157,7 @@ public abstract class CraftRegionAccessor implements RegionAccessor {
     }
 
     @Override
-    public boolean generateTree(Location location, Random random, TreeType treeType, Predicate<? super BlockState> predicate) {
+    public boolean generateTree(@NonNull Location location, @NonNull Random random, @NonNull TreeType treeType, Predicate<? super BlockState> predicate) {
         BlockPos pos = CraftLocation.toBlockPos(location);
         BlockStateListPopulator populator = new BlockStateListPopulator(this.getHandle());
         boolean result = this.generateTree(populator, this.getHandle().getMinecraftWorld().getChunkSource().getGenerator(), pos, new RandomSourceWrapper(random), treeType);
@@ -253,12 +254,12 @@ public abstract class CraftRegionAccessor implements RegionAccessor {
     }
 
     @Override
-    public Entity spawnEntity(Location loc, EntityType type, boolean randomizeData) {
+    public @NonNull Entity spawnEntity(@NonNull Location loc, EntityType type, boolean randomizeData) {
         return this.spawn(loc, type.getEntityClass(), null, CreatureSpawnEvent.SpawnReason.CUSTOM, randomizeData);
     }
 
     @Override
-    public List<Entity> getEntities() {
+    public @NonNull List<Entity> getEntities() {
         List<Entity> list = new ArrayList<>();
 
         this.getNMSEntities().forEach(entity -> {
@@ -274,7 +275,7 @@ public abstract class CraftRegionAccessor implements RegionAccessor {
     }
 
     @Override
-    public List<LivingEntity> getLivingEntities() {
+    public @NonNull List<LivingEntity> getLivingEntities() {
         List<LivingEntity> list = new ArrayList<>();
 
         this.getNMSEntities().forEach(entity -> {
@@ -291,7 +292,7 @@ public abstract class CraftRegionAccessor implements RegionAccessor {
 
     @Override
     @SuppressWarnings("unchecked")
-    public <T extends Entity> Collection<T> getEntitiesByClass(Class<T> clazz) {
+    public <T extends Entity> @NonNull Collection<T> getEntitiesByClass(@NonNull Class<T> clazz) {
         Collection<T> list = new ArrayList<T>();
 
         this.getNMSEntities().forEach(entity -> {
@@ -312,7 +313,7 @@ public abstract class CraftRegionAccessor implements RegionAccessor {
     }
 
     @Override
-    public Collection<Entity> getEntitiesByClasses(Class<?>... classes) {
+    public @NonNull Collection<Entity> getEntitiesByClasses(Class<?>... classes) {
         Collection<Entity> list = new ArrayList<>();
 
         this.getNMSEntities().forEach(entity -> {
@@ -341,7 +342,7 @@ public abstract class CraftRegionAccessor implements RegionAccessor {
 
     @Override
     @SuppressWarnings("unchecked")
-    public <T extends Entity> T createEntity(Location location, Class<T> clazz) throws IllegalArgumentException {
+    public <T extends Entity> @NonNull T createEntity(@NonNull Location location, @NonNull Class<T> clazz) throws IllegalArgumentException {
         net.minecraft.world.entity.Entity entity = this.createEntity(location, clazz, true);
 
         if (!this.isNormalWorld()) {
@@ -352,16 +353,16 @@ public abstract class CraftRegionAccessor implements RegionAccessor {
     }
 
     @Override
-    public <T extends Entity> T spawn(Location location, Class<T> clazz, Consumer<? super T> function) throws IllegalArgumentException {
+    public <T extends Entity> @NonNull T spawn(@NonNull Location location, @NonNull Class<T> clazz, Consumer<? super T> function) throws IllegalArgumentException {
         return this.spawn(location, clazz, function, CreatureSpawnEvent.SpawnReason.CUSTOM);
     }
 
     @Override
-    public <T extends Entity> T spawn(Location location, Class<T> clazz, boolean randomizeData, Consumer<? super T> function) throws IllegalArgumentException {
+    public <T extends Entity> @NonNull T spawn(@NonNull Location location, @NonNull Class<T> clazz, boolean randomizeData, Consumer<? super T> function) throws IllegalArgumentException {
         return this.spawn(location, clazz, function, CreatureSpawnEvent.SpawnReason.CUSTOM, randomizeData);
     }
 
-    public <T extends Entity> T spawn(Location location, Class<T> clazz, Consumer<? super T> function, CreatureSpawnEvent.SpawnReason reason) throws IllegalArgumentException {
+    public <T extends Entity> @NonNull T spawn(@NonNull Location location, @NonNull Class<T> clazz, Consumer<? super T> function, CreatureSpawnEvent.@NonNull SpawnReason reason) throws IllegalArgumentException {
         return this.spawn(location, clazz, function, reason, true);
     }
 
@@ -373,7 +374,7 @@ public abstract class CraftRegionAccessor implements RegionAccessor {
 
     @Override
     @SuppressWarnings("unchecked")
-    public <T extends Entity> T addEntity(T entity) {
+    public <T extends Entity> @NonNull T addEntity(T entity) {
         Preconditions.checkArgument(!entity.isInWorld(), "Entity has already been added to a world");
         net.minecraft.world.entity.Entity nmsEntity = ((CraftEntity) entity).getHandle();
         if (nmsEntity.level() != this.getHandle().getLevel()) {
@@ -469,13 +470,13 @@ public abstract class CraftRegionAccessor implements RegionAccessor {
     }
 
     @Override
-    public io.papermc.paper.world.MoonPhase getMoonPhase() {
+    public io.papermc.paper.world.@NonNull MoonPhase getMoonPhase() {
         final MoonPhase moonPhase = this.getHandle().getLevel().environmentAttributes().getDimensionValue(EnvironmentAttributes.MOON_PHASE);
         return io.papermc.paper.world.MoonPhase.values()[moonPhase.ordinal()];
     }
 
     @Override
-    public org.bukkit.NamespacedKey getKey() {
+    public org.bukkit.@NonNull NamespacedKey getKey() {
         return org.bukkit.craftbukkit.util.CraftNamespacedKey.fromMinecraft(this.getHandle().getLevel().dimension().identifier());
     }
 
@@ -503,7 +504,7 @@ public abstract class CraftRegionAccessor implements RegionAccessor {
     }
 
     @Override
-    public java.util.Set<org.bukkit.FeatureFlag> getFeatureFlags() {
+    public java.util.@NonNull Set<org.bukkit.FeatureFlag> getFeatureFlags() {
         return io.papermc.paper.world.flag.PaperFeatureFlagProviderImpl.fromNms(this.getHandle().enabledFeatures());
     }
 }

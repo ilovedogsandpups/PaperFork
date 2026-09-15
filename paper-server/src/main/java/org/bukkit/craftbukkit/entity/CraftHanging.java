@@ -6,6 +6,7 @@ import org.bukkit.block.BlockFace;
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.craftbukkit.block.CraftBlock;
 import org.bukkit.entity.Hanging;
+import org.jspecify.annotations.NonNull;
 
 public class CraftHanging extends CraftBlockAttachedEntity implements Hanging {
 
@@ -14,12 +15,12 @@ public class CraftHanging extends CraftBlockAttachedEntity implements Hanging {
     }
 
     @Override
-    public BlockFace getAttachedFace() {
+    public @NonNull BlockFace getAttachedFace() {
         return this.getFacing().getOppositeFace();
     }
 
     @Override
-    public void setFacingDirection(BlockFace face) {
+    public void setFacingDirection(@NonNull BlockFace face) {
         this.setFacingDirection(face, false);
     }
 
@@ -52,7 +53,7 @@ public class CraftHanging extends CraftBlockAttachedEntity implements Hanging {
     }
 
     @Override
-    public BlockFace getFacing() {
+    public @NonNull BlockFace getFacing() {
         Direction direction = this.getHandle().getDirection();
         if (direction == null) return BlockFace.SELF;
         return CraftBlock.notchToBlockFace(direction);

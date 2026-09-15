@@ -9,6 +9,7 @@ import org.bukkit.Color;
 import org.bukkit.configuration.serialization.SerializableAs;
 import org.bukkit.craftbukkit.inventory.SerializableMeta;
 import org.bukkit.inventory.meta.components.CustomModelDataComponent;
+import org.jspecify.annotations.NonNull;
 
 @SerializableAs("CustomModelData")
 public final class CraftCustomModelDataComponent implements CustomModelDataComponent {
@@ -33,7 +34,7 @@ public final class CraftCustomModelDataComponent implements CustomModelDataCompo
     }
 
     @Override
-    public Map<String, Object> serialize() {
+    public @NonNull Map<String, Object> serialize() {
         Map<String, Object> result = new LinkedHashMap<>();
 
         result.put("floats", this.getFloats());
@@ -49,37 +50,37 @@ public final class CraftCustomModelDataComponent implements CustomModelDataCompo
     }
 
     @Override
-    public List<Float> getFloats() {
+    public @NonNull List<Float> getFloats() {
         return Collections.unmodifiableList(this.handle.floats());
     }
 
     @Override
-    public void setFloats(List<Float> floats) {
+    public void setFloats(@NonNull List<Float> floats) {
         this.handle = new CustomModelData(List.copyOf(floats), this.handle.flags(), this.handle.strings(), this.handle.colors());
     }
 
     @Override
-    public List<Boolean> getFlags() {
+    public @NonNull List<Boolean> getFlags() {
         return Collections.unmodifiableList(this.handle.flags());
     }
 
     @Override
-    public void setFlags(List<Boolean> flags) {
+    public void setFlags(@NonNull List<Boolean> flags) {
         this.handle = new CustomModelData(this.handle.floats(), List.copyOf(flags), this.handle.strings(), this.handle.colors());
     }
 
     @Override
-    public List<String> getStrings() {
+    public @NonNull List<String> getStrings() {
         return Collections.unmodifiableList(this.handle.strings());
     }
 
     @Override
-    public void setStrings(List<String> strings) {
+    public void setStrings(@NonNull List<String> strings) {
         this.handle = new CustomModelData(this.handle.floats(), this.handle.flags(), List.copyOf(strings), this.handle.colors());
     }
 
     @Override
-    public List<Color> getColors() {
+    public @NonNull List<Color> getColors() {
         return this.getHandle().colors().stream().map(color -> Color.fromRGB(color & 0x00FFFFFF)).toList(); // skip alpha channel
     }
 

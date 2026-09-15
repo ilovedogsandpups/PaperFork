@@ -2,6 +2,7 @@ package io.papermc.paper.plugin.provider.configuration.serializer;
 
 import com.google.common.collect.ImmutableCollection;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jspecify.annotations.NonNull;
 import org.spongepowered.configurate.ConfigurationNode;
 import org.spongepowered.configurate.ConfigurationOptions;
 import org.spongepowered.configurate.serialize.SerializationException;
@@ -20,7 +21,7 @@ public abstract class ImmutableCollectionSerializer<B extends ImmutableCollectio
     }
 
     @Override
-    public final T deserialize(final Type type, final ConfigurationNode node) throws SerializationException {
+    public final T deserialize(final @NonNull Type type, final ConfigurationNode node) throws SerializationException {
         final Type entryType = this.elementType(type);
         final @Nullable TypeSerializer<?> entrySerial = node.options().serializers().get(entryType);
         if (entrySerial == null) {
@@ -52,7 +53,7 @@ public abstract class ImmutableCollectionSerializer<B extends ImmutableCollectio
 
     @SuppressWarnings({"unchecked", "rawtypes"})
     @Override
-    public final void serialize(final Type type, final @Nullable T obj, final ConfigurationNode node) throws SerializationException {
+    public final void serialize(final @NonNull Type type, final @Nullable T obj, final ConfigurationNode node) throws SerializationException {
         final Type entryType = this.elementType(type);
         final @Nullable TypeSerializer entrySerial = node.options().serializers().get(entryType);
         if (entrySerial == null) {
@@ -75,7 +76,7 @@ public abstract class ImmutableCollectionSerializer<B extends ImmutableCollectio
 
     @SuppressWarnings({"unchecked"})
     @Override
-    public @Nullable T emptyValue(final Type specificType, final ConfigurationOptions options) {
+    public @Nullable T emptyValue(final @NonNull Type specificType, final @NonNull ConfigurationOptions options) {
         return (T) this.createNew(0).build();
     }
 

@@ -1,5 +1,7 @@
 package io.papermc.paper.util.concurrent;
 
+import org.jspecify.annotations.NonNull;
+
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.RejectedExecutionHandler;
@@ -44,12 +46,12 @@ public final class ScalingThreadPool {
         }
 
         @Override
-        public boolean offer(final E e) {
+        public boolean offer(final @NonNull E e) {
             return this.idleThreads.get() > 0 && super.offer(e);
         }
 
         @Override
-        public E take() throws InterruptedException {
+        public @NonNull E take() throws InterruptedException {
             this.idleThreads.incrementAndGet();
             try {
                 return super.take();
@@ -69,7 +71,7 @@ public final class ScalingThreadPool {
         }
 
         @Override
-        public boolean add(final E e) {
+        public boolean add(final @NonNull E e) {
             return super.offer(e);
         }
     }

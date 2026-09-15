@@ -13,6 +13,7 @@ import net.minecraft.world.item.component.BundleContents;
 import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BundleMeta;
+import org.jspecify.annotations.NonNull;
 
 @DelegateDeserialization(SerializableMeta.class)
 public class CraftMetaBundle extends CraftMetaItem implements BundleMeta {
@@ -90,7 +91,7 @@ public class CraftMetaBundle extends CraftMetaItem implements BundleMeta {
     }
 
     @Override
-    public List<ItemStack> getItems() {
+    public @NonNull List<ItemStack> getItems() {
         return (this.items == null) ? ImmutableList.of() : ImmutableList.copyOf(this.items);
     }
 
@@ -108,7 +109,7 @@ public class CraftMetaBundle extends CraftMetaItem implements BundleMeta {
     }
 
     @Override
-    public void addItem(ItemStack item) {
+    public void addItem(@NonNull ItemStack item) {
         Preconditions.checkArgument(item != null && !item.isEmpty(), "item is null or empty");
 
         if (this.items == null) {
@@ -147,7 +148,7 @@ public class CraftMetaBundle extends CraftMetaItem implements BundleMeta {
     }
 
     @Override
-    public CraftMetaBundle clone() {
+    public @NonNull CraftMetaBundle clone() {
         return (CraftMetaBundle) super.clone();
     }
 

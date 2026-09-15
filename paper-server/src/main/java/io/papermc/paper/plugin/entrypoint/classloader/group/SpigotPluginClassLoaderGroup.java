@@ -4,6 +4,7 @@ import io.papermc.paper.plugin.provider.classloader.ClassLoaderAccess;
 import io.papermc.paper.plugin.provider.classloader.ConfiguredPluginClassLoader;
 import org.bukkit.plugin.java.PluginClassLoader;
 import org.jetbrains.annotations.ApiStatus;
+import org.jspecify.annotations.NonNull;
 
 import java.util.function.Predicate;
 
@@ -34,7 +35,7 @@ public class SpigotPluginClassLoaderGroup extends SimpleListPluginClassLoaderGro
 
     // Don't allow other plugins to access spigot dependencies, they should instead reference the global list
     @Override
-    public ClassLoaderAccess getAccess() {
+    public @NonNull ClassLoaderAccess getAccess() {
         return v -> false;
     }
 

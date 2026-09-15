@@ -13,6 +13,7 @@ import org.bukkit.craftbukkit.entity.CraftEntityType;
 import org.bukkit.craftbukkit.potion.CraftPotionType;
 import org.bukkit.entity.EntityType;
 import org.bukkit.potion.PotionType;
+import org.jspecify.annotations.NonNull;
 
 public class PaperFeatureFlagProviderImpl implements FeatureFlagProvider {
 
@@ -26,7 +27,7 @@ public class PaperFeatureFlagProviderImpl implements FeatureFlagProvider {
     );
 
     @Override
-    public Set<FeatureFlag> requiredFeatures(final FeatureDependant dependant) {
+    public @NonNull Set<FeatureFlag> requiredFeatures(final @NonNull FeatureDependant dependant) {
         final FeatureFlagSet requiredFeatures = getFeatureElement(dependant).requiredFeatures();
         return fromNms(requiredFeatures);
     }

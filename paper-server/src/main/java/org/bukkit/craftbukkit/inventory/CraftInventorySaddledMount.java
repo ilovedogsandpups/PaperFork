@@ -6,6 +6,7 @@ import net.minecraft.world.inventory.AbstractMountInventoryMenu;
 import org.apache.commons.lang3.ArrayUtils;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.SaddledMountInventory;
+import org.jspecify.annotations.NonNull;
 
 public class CraftInventorySaddledMount extends CraftInventory implements SaddledMountInventory {
 
@@ -59,7 +60,7 @@ public class CraftInventorySaddledMount extends CraftInventory implements Saddle
     }
 
     @Override
-    public ItemStack[] getContents() {
+    public ItemStack @NonNull [] getContents() {
         ItemStack[] items = new ItemStack[this.getSize()];
 
         items[AbstractMountInventoryMenu.SLOT_SADDLE] = this.getSaddle();

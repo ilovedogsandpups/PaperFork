@@ -16,6 +16,7 @@ import org.bukkit.craftbukkit.CraftWorld;
 import org.bukkit.craftbukkit.inventory.CraftInventory;
 import org.bukkit.craftbukkit.inventory.CraftInventoryDoubleChest;
 import org.bukkit.inventory.Inventory;
+import org.jspecify.annotations.NonNull;
 
 public class CraftChest extends CraftLootable<ChestBlockEntity> implements Chest {
 
@@ -28,12 +29,12 @@ public class CraftChest extends CraftLootable<ChestBlockEntity> implements Chest
     }
 
     @Override
-    public Inventory getSnapshotInventory() {
+    public @NonNull Inventory getSnapshotInventory() {
         return new CraftInventory(this.getSnapshot());
     }
 
     @Override
-    public Inventory getBlockInventory() {
+    public @NonNull Inventory getBlockInventory() {
         if (!this.isPlaced()) {
             return this.getSnapshotInventory();
         }
@@ -42,7 +43,7 @@ public class CraftChest extends CraftLootable<ChestBlockEntity> implements Chest
     }
 
     @Override
-    public Inventory getInventory() {
+    public @NonNull Inventory getInventory() {
         CraftInventory inventory = (CraftInventory) this.getBlockInventory();
         if (!this.isPlaced() || this.isWorldGeneration()) {
             return inventory;
@@ -115,12 +116,12 @@ public class CraftChest extends CraftLootable<ChestBlockEntity> implements Chest
     }
 
     @Override
-    public CraftChest copy() {
+    public @NonNull CraftChest copy() {
         return new CraftChest(this, null);
     }
 
     @Override
-    public CraftChest copy(Location location) {
+    public @NonNull CraftChest copy(@NonNull Location location) {
         return new CraftChest(this, location);
     }
 }

@@ -10,6 +10,7 @@ import org.bukkit.World;
 import org.bukkit.block.ShulkerBox;
 import org.bukkit.craftbukkit.inventory.CraftInventory;
 import org.bukkit.inventory.Inventory;
+import org.jspecify.annotations.NonNull;
 
 public class CraftShulkerBox extends CraftLootable<ShulkerBoxBlockEntity> implements ShulkerBox {
 
@@ -22,12 +23,12 @@ public class CraftShulkerBox extends CraftLootable<ShulkerBoxBlockEntity> implem
     }
 
     @Override
-    public Inventory getSnapshotInventory() {
+    public @NonNull Inventory getSnapshotInventory() {
         return new CraftInventory(this.getSnapshot());
     }
 
     @Override
-    public Inventory getInventory() {
+    public @NonNull Inventory getInventory() {
         if (!this.isPlaced()) {
             return this.getSnapshotInventory();
         }
@@ -65,12 +66,12 @@ public class CraftShulkerBox extends CraftLootable<ShulkerBoxBlockEntity> implem
     }
 
     @Override
-    public CraftShulkerBox copy() {
+    public @NonNull CraftShulkerBox copy() {
         return new CraftShulkerBox(this, null);
     }
 
     @Override
-    public CraftShulkerBox copy(Location location) {
+    public @NonNull CraftShulkerBox copy(@NonNull Location location) {
         return new CraftShulkerBox(this, location);
     }
 

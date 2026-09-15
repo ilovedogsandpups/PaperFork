@@ -4,11 +4,11 @@ import ca.spottedleaf.concurrentutil.executor.thread.BalancedPrioritisedThreadPo
 import ca.spottedleaf.concurrentutil.numa.OSNuma;
 import ca.spottedleaf.moonrise.common.PlatformHooks;
 import com.mojang.logging.LogUtils;
+import org.jspecify.annotations.NonNull;
 import org.slf4j.Logger;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.function.Consumer;
 
 public final class MoonriseCommon {
 
@@ -21,7 +21,7 @@ public final class MoonriseCommon {
             private final AtomicInteger idGenerator = new AtomicInteger();
 
             @Override
-            public Thread newThread(final Runnable run) {
+            public Thread newThread(final @NonNull Runnable run) {
                 final Thread thread = new Thread(run, PlatformHooks.get().getBrand() + " Common Worker #" + this.idGenerator.getAndIncrement());
 
                 thread.setDaemon(true);
@@ -69,7 +69,7 @@ public final class MoonriseCommon {
                 private final AtomicInteger idGenerator = new AtomicInteger();
 
                 @Override
-                public Thread newThread(final Runnable run) {
+                public Thread newThread(final @NonNull Runnable run) {
                     final Thread thread = new Thread(run, PlatformHooks.get().getBrand() + " I/O Worker #" + this.idGenerator.getAndIncrement());
 
                     thread.setDaemon(true);

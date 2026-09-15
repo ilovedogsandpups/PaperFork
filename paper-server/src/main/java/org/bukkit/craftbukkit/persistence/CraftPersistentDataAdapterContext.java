@@ -1,6 +1,7 @@
 package org.bukkit.craftbukkit.persistence;
 
 import org.bukkit.persistence.PersistentDataAdapterContext;
+import org.jspecify.annotations.NonNull;
 
 public final class CraftPersistentDataAdapterContext implements PersistentDataAdapterContext {
 
@@ -16,7 +17,7 @@ public final class CraftPersistentDataAdapterContext implements PersistentDataAd
      * @return the fresh container instance
      */
     @Override
-    public CraftPersistentDataContainer newPersistentDataContainer() {
+    public @NonNull CraftPersistentDataContainer newPersistentDataContainer() {
         return new CraftPersistentDataContainer(this.registry);
     }
 }

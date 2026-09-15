@@ -20,6 +20,7 @@ import org.bukkit.event.world.AsyncStructureGenerateEvent.Cause;
 import org.bukkit.util.BlockTransformer;
 import org.bukkit.util.BlockTransformer.TransformationState;
 import org.bukkit.util.EntityTransformer;
+import org.jspecify.annotations.NonNull;
 
 public class CraftStructureTransformer {
 
@@ -37,7 +38,7 @@ public class CraftStructureTransformer {
         }
 
         @Override
-        public BlockState getOriginal() {
+        public @NonNull BlockState getOriginal() {
             if (this.originalCopy != null) {
                 return this.originalCopy;
             }
@@ -45,7 +46,7 @@ public class CraftStructureTransformer {
         }
 
         @Override
-        public BlockState getWorld() {
+        public @NonNull BlockState getWorld() {
             if (this.worldCopy != null) {
                 return this.worldCopy;
             }

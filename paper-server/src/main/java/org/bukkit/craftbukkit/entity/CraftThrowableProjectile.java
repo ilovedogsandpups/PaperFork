@@ -5,6 +5,7 @@ import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.craftbukkit.inventory.CraftItemStack;
 import org.bukkit.entity.ThrowableProjectile;
 import org.bukkit.inventory.ItemStack;
+import org.jspecify.annotations.NonNull;
 
 public abstract class CraftThrowableProjectile extends CraftProjectile implements ThrowableProjectile {
 
@@ -18,12 +19,12 @@ public abstract class CraftThrowableProjectile extends CraftProjectile implement
     }
 
     @Override
-    public ItemStack getItem() {
+    public @NonNull ItemStack getItem() {
         return CraftItemStack.asBukkitCopy(this.getHandle().getItem());
     }
 
     @Override
-    public void setItem(ItemStack item) {
+    public void setItem(@NonNull ItemStack item) {
         this.getHandle().setItem(CraftItemStack.asNMSCopy(item));
     }
 }

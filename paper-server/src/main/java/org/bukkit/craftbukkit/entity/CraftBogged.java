@@ -3,6 +3,7 @@ package org.bukkit.craftbukkit.entity;
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.entity.Bogged;
 import org.bukkit.entity.Skeleton;
+import org.jspecify.annotations.NonNull;
 
 public class CraftBogged extends CraftAbstractSkeleton implements Bogged, io.papermc.paper.entity.PaperShearable { // Paper - Shear API
 
@@ -16,7 +17,7 @@ public class CraftBogged extends CraftAbstractSkeleton implements Bogged, io.pap
     }
 
     @Override
-    public Skeleton.SkeletonType getSkeletonType() {
+    public Skeleton.@NonNull SkeletonType getSkeletonType() {
         return Skeleton.SkeletonType.BOGGED;
     }
 

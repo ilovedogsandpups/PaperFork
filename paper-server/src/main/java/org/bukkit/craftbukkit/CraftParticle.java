@@ -41,6 +41,7 @@ import org.bukkit.craftbukkit.util.CraftMagicNumbers;
 import org.bukkit.craftbukkit.util.CraftNamespacedKey;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.MaterialData;
+import org.jspecify.annotations.NonNull;
 
 public abstract class CraftParticle<D> implements Keyed {
 
@@ -107,7 +108,7 @@ public abstract class CraftParticle<D> implements Keyed {
     public abstract ParticleOptions createParticleParam(D data);
 
     @Override
-    public NamespacedKey getKey() {
+    public @NonNull NamespacedKey getKey() {
         return this.key;
     }
 

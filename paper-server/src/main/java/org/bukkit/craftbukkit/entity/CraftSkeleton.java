@@ -3,6 +3,7 @@ package org.bukkit.craftbukkit.entity;
 import com.google.common.base.Preconditions;
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.entity.Skeleton;
+import org.jspecify.annotations.NonNull;
 
 public class CraftSkeleton extends CraftAbstractSkeleton implements Skeleton {
 
@@ -37,7 +38,7 @@ public class CraftSkeleton extends CraftAbstractSkeleton implements Skeleton {
     }
 
     @Override
-    public SkeletonType getSkeletonType() {
+    public @NonNull SkeletonType getSkeletonType() {
        return SkeletonType.NORMAL;
     }
 

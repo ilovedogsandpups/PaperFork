@@ -2,13 +2,13 @@ package io.papermc.paper.adventure;
 
 import com.google.common.base.Suppliers;
 import com.mojang.datafixers.util.Pair;
-import com.mojang.serialization.JavaOps;
+
 import java.util.function.Supplier;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.ComponentSerializer;
 import net.minecraft.network.chat.ComponentSerialization;
 import net.minecraft.resources.RegistryOps;
-import org.bukkit.craftbukkit.CraftRegistry;
+import org.jspecify.annotations.NonNull;
 
 public final class WrapperAwareSerializer implements ComponentSerializer<Component, Component, net.minecraft.network.chat.Component> {
 
@@ -19,7 +19,7 @@ public final class WrapperAwareSerializer implements ComponentSerializer<Compone
     }
 
     @Override
-    public Component deserialize(final net.minecraft.network.chat.Component input) {
+    public @NonNull Component deserialize(final net.minecraft.network.chat.@NonNull Component input) {
         if (input instanceof AdventureComponent) {
             return ((AdventureComponent) input).adventure;
         }
@@ -32,7 +32,7 @@ public final class WrapperAwareSerializer implements ComponentSerializer<Compone
     }
 
     @Override
-    public net.minecraft.network.chat.Component serialize(final Component component) {
+    public net.minecraft.network.chat.@NonNull Component serialize(final @NonNull Component component) {
         final RegistryOps<Object> ops = this.javaOps.get();
         final Object obj = AdventureCodecs.COMPONENT_CODEC.encodeStart(ops, component)
             .getOrThrow(s -> new RuntimeException("Failed to encode adventure Component: " + component + "; " + s));

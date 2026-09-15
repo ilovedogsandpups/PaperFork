@@ -13,6 +13,7 @@ import org.bukkit.craftbukkit.util.CraftNamespacedKey;
 import org.bukkit.inventory.CookingRecipe;
 import org.bukkit.inventory.FurnaceInventory;
 import org.bukkit.inventory.Recipe;
+import org.jspecify.annotations.NonNull;
 
 public abstract class CraftFurnace<T extends AbstractFurnaceBlockEntity> extends CraftContainer<T> implements Furnace {
 
@@ -25,12 +26,12 @@ public abstract class CraftFurnace<T extends AbstractFurnaceBlockEntity> extends
     }
 
     @Override
-    public FurnaceInventory getSnapshotInventory() {
+    public @NonNull FurnaceInventory getSnapshotInventory() {
         return new CraftInventoryFurnace(this.getSnapshot());
     }
 
     @Override
-    public FurnaceInventory getInventory() {
+    public @NonNull FurnaceInventory getInventory() {
         if (!this.isPlaced()) {
             return this.getSnapshotInventory();
         }
@@ -71,7 +72,7 @@ public abstract class CraftFurnace<T extends AbstractFurnaceBlockEntity> extends
     }
 
     @Override
-    public Map<CookingRecipe<?>, Integer> getRecipesUsed() {
+    public @NonNull Map<CookingRecipe<?>, Integer> getRecipesUsed() {
         ImmutableMap.Builder<CookingRecipe<?>, Integer> recipesUsed = ImmutableMap.builder();
         this.getSnapshot().recipesUsed.reference2IntEntrySet().fastForEach(entrySet -> {
             Recipe recipe = Bukkit.getRecipe(CraftNamespacedKey.fromMinecraft(entrySet.getKey().identifier()));
@@ -84,10 +85,10 @@ public abstract class CraftFurnace<T extends AbstractFurnaceBlockEntity> extends
     }
 
     @Override
-    public abstract CraftFurnace<T> copy();
+    public abstract @NonNull CraftFurnace<T> copy();
 
     @Override
-    public abstract CraftFurnace<T> copy(Location location);
+    public abstract @NonNull CraftFurnace<T> copy(@NonNull Location location);
 
     // Paper start - cook speed multiplier API
     @Override
@@ -105,12 +106,12 @@ public abstract class CraftFurnace<T extends AbstractFurnaceBlockEntity> extends
     }
 
     @Override
-    public int getRecipeUsedCount(org.bukkit.NamespacedKey furnaceRecipe) {
+    public int getRecipeUsedCount(org.bukkit.@NonNull NamespacedKey furnaceRecipe) {
         return this.getSnapshot().recipesUsed.getInt(CraftNamespacedKey.toResourceKey(net.minecraft.core.registries.Registries.RECIPE, furnaceRecipe));
     }
 
     @Override
-    public boolean hasRecipeUsedCount(org.bukkit.NamespacedKey furnaceRecipe) {
+    public boolean hasRecipeUsedCount(org.bukkit.@NonNull NamespacedKey furnaceRecipe) {
         return this.getSnapshot().recipesUsed.containsKey(CraftNamespacedKey.toResourceKey(net.minecraft.core.registries.Registries.RECIPE, furnaceRecipe));
     }
 

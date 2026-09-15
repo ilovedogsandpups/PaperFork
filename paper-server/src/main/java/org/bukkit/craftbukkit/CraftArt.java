@@ -7,6 +7,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.decoration.painting.PaintingVariant;
 import org.bukkit.Art;
+import org.jspecify.annotations.NonNull;
 
 public class CraftArt extends OldEnumHolderable<Art, PaintingVariant> implements Art {
 
@@ -45,7 +46,7 @@ public class CraftArt extends OldEnumHolderable<Art, PaintingVariant> implements
     }
 
     @Override
-    public net.kyori.adventure.key.Key assetId() {
+    public net.kyori.adventure.key.@NonNull Key assetId() {
         return PaperAdventure.asAdventure(this.getHandle().assetId());
     }
 

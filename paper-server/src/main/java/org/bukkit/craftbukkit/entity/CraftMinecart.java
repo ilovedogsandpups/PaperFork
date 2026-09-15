@@ -12,6 +12,8 @@ import org.bukkit.craftbukkit.util.CraftMagicNumbers;
 import org.bukkit.entity.Minecart;
 import org.bukkit.material.MaterialData;
 import org.bukkit.util.Vector;
+import org.jspecify.annotations.NonNull;
+
 import java.util.Optional;
 
 public abstract class CraftMinecart extends CraftVehicle implements Minecart {
@@ -58,28 +60,28 @@ public abstract class CraftMinecart extends CraftVehicle implements Minecart {
     }
 
     @Override
-    public Vector getFlyingVelocityMod() {
+    public @NonNull Vector getFlyingVelocityMod() {
         return this.getHandle().getFlyingVelocityMod();
     }
 
     @Override
-    public void setFlyingVelocityMod(Vector flying) {
+    public void setFlyingVelocityMod(@NonNull Vector flying) {
         this.getHandle().setFlyingVelocityMod(flying);
     }
 
     @Override
-    public Vector getDerailedVelocityMod() {
+    public @NonNull Vector getDerailedVelocityMod() {
         return this.getHandle().getDerailedVelocityMod();
     }
 
     @Override
-    public void setDerailedVelocityMod(Vector derailed) {
+    public void setDerailedVelocityMod(@NonNull Vector derailed) {
         this.getHandle().setDerailedVelocityMod(derailed);
     }
 
     // Paper start
     @Override
-    public Material getMinecartMaterial() {
+    public @NonNull Material getMinecartMaterial() {
         return CraftMagicNumbers.getMaterial(this.getHandle().getDropItem());
     }
     // Paper end
@@ -95,13 +97,13 @@ public abstract class CraftMinecart extends CraftVehicle implements Minecart {
     }
 
     @Override
-    public MaterialData getDisplayBlock() {
+    public @NonNull MaterialData getDisplayBlock() {
         BlockState state = this.getHandle().getDisplayBlockState();
         return CraftMagicNumbers.getMaterial(state);
     }
 
     @Override
-    public BlockData getDisplayBlockData() {
+    public @NonNull BlockData getDisplayBlockData() {
         return this.getHandle().getDisplayBlockState().asBlockData();
     }
 

@@ -10,6 +10,7 @@ import net.minecraft.world.item.enchantment.ItemEnchantments;
 import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
+import org.jspecify.annotations.NonNull;
 
 @DelegateDeserialization(SerializableMeta.class)
 public class CraftMetaEnchantedBook extends CraftMetaItem implements EnchantmentStorageMeta {
@@ -84,7 +85,7 @@ public class CraftMetaEnchantedBook extends CraftMetaItem implements Enchantment
     }
 
     @Override
-    public CraftMetaEnchantedBook clone() {
+    public @NonNull CraftMetaEnchantedBook clone() {
         CraftMetaEnchantedBook meta = (CraftMetaEnchantedBook) super.clone();
 
         if (this.enchantments != null) {
@@ -108,12 +109,12 @@ public class CraftMetaEnchantedBook extends CraftMetaItem implements Enchantment
     }
 
     @Override
-    public boolean hasStoredEnchant(Enchantment enchant) {
+    public boolean hasStoredEnchant(@NonNull Enchantment enchant) {
         return this.hasStoredEnchants() && this.enchantments.containsKey(enchant);
     }
 
     @Override
-    public int getStoredEnchantLevel(Enchantment enchant) {
+    public int getStoredEnchantLevel(@NonNull Enchantment enchant) {
         Integer level = this.hasStoredEnchants() ? this.enchantments.get(enchant) : null;
         if (level == null) {
             return 0;
@@ -122,12 +123,12 @@ public class CraftMetaEnchantedBook extends CraftMetaItem implements Enchantment
     }
 
     @Override
-    public Map<Enchantment, Integer> getStoredEnchants() {
+    public @NonNull Map<Enchantment, Integer> getStoredEnchants() {
         return this.hasStoredEnchants() ? ImmutableMap.copyOf(this.enchantments) : ImmutableMap.<Enchantment, Integer>of();
     }
 
     @Override
-    public boolean addStoredEnchant(Enchantment enchant, int level, boolean ignoreRestrictions) {
+    public boolean addStoredEnchant(@NonNull Enchantment enchant, int level, boolean ignoreRestrictions) {
         if (this.enchantments == null) {
             this.enchantments = new LinkedHashMap<>(4);
         }
@@ -140,7 +141,7 @@ public class CraftMetaEnchantedBook extends CraftMetaItem implements Enchantment
     }
 
     @Override
-    public boolean removeStoredEnchant(Enchantment enchant) {
+    public boolean removeStoredEnchant(@NonNull Enchantment enchant) {
         return this.hasStoredEnchants() && this.enchantments.remove(enchant) != null;
     }
 
@@ -150,7 +151,7 @@ public class CraftMetaEnchantedBook extends CraftMetaItem implements Enchantment
     }
 
     @Override
-    public boolean hasConflictingStoredEnchant(Enchantment enchant) {
+    public boolean hasConflictingStoredEnchant(@NonNull Enchantment enchant) {
         return checkConflictingEnchants(this.enchantments, enchant);
     }
 }

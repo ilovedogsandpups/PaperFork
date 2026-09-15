@@ -5,6 +5,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import org.bukkit.GameEvent;
 import org.bukkit.NamespacedKey;
+import org.jspecify.annotations.NonNull;
 
 public class CraftGameEvent extends GameEvent implements Holderable<net.minecraft.world.level.gameevent.GameEvent> {
 
@@ -23,7 +24,7 @@ public class CraftGameEvent extends GameEvent implements Holderable<net.minecraf
     }
 
     @Override
-    public Holder<net.minecraft.world.level.gameevent.GameEvent> getHolder() {
+    public @NonNull Holder<net.minecraft.world.level.gameevent.GameEvent> getHolder() {
         return this.holder;
     }
 
@@ -38,7 +39,7 @@ public class CraftGameEvent extends GameEvent implements Holderable<net.minecraf
     }
 
     @Override
-    public NamespacedKey getKey() {
+    public @NonNull NamespacedKey getKey() {
         return Holderable.super.getKey();
     }
 

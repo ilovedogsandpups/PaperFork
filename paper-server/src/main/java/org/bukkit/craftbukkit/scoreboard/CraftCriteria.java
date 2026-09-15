@@ -6,6 +6,7 @@ import net.minecraft.world.scores.Objective;
 import net.minecraft.world.scores.criteria.ObjectiveCriteria;
 import org.bukkit.scoreboard.Criteria;
 import org.bukkit.scoreboard.RenderType;
+import org.jspecify.annotations.NonNull;
 
 public final class CraftCriteria implements Criteria {
     private static final Map<String, CraftCriteria> DEFAULTS;
@@ -39,7 +40,7 @@ public final class CraftCriteria implements Criteria {
     }
 
     @Override
-    public String getName() {
+    public @NonNull String getName() {
         return this.name;
     }
 
@@ -49,7 +50,7 @@ public final class CraftCriteria implements Criteria {
     }
 
     @Override
-    public RenderType getDefaultRenderType() {
+    public @NonNull RenderType getDefaultRenderType() {
         return RenderType.values()[this.criteria.getDefaultRenderType().ordinal()];
     }
 

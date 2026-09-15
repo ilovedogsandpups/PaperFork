@@ -44,6 +44,7 @@ import org.bukkit.craftbukkit.util.RandomSourceWrapper;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.generator.ChunkGenerator.BiomeGrid;
 import org.bukkit.generator.ChunkGenerator.ChunkData;
+import org.jspecify.annotations.NonNull;
 
 public class CustomChunkGenerator extends InternalChunkGenerator {
 
@@ -66,24 +67,24 @@ public class CustomChunkGenerator extends InternalChunkGenerator {
         }
 
         @Override
-        public Biome getBiome(int x, int z) {
+        public @NonNull Biome getBiome(int x, int z) {
             return this.getBiome(x, 0, z);
         }
 
         @Override
-        public void setBiome(int x, int z, Biome biome) {
+        public void setBiome(int x, int z, @NonNull Biome biome) {
             for (int y = CustomChunkGenerator.this.world.getWorld().getMinHeight(); y < CustomChunkGenerator.this.world.getWorld().getMaxHeight(); y += 4) {
                 this.setBiome(x, y, z, biome);
             }
         }
 
         @Override
-        public Biome getBiome(int x, int y, int z) {
+        public @NonNull Biome getBiome(int x, int y, int z) {
             return CraftBiome.minecraftHolderToBukkit(this.chunk.getNoiseBiome(QuartPos.fromBlock(x), QuartPos.fromBlock(y), QuartPos.fromBlock(z)));
         }
 
         @Override
-        public void setBiome(int x, int y, int z, Biome biome) {
+        public void setBiome(int x, int y, int z, @NonNull Biome biome) {
             Holder<net.minecraft.world.level.biome.Biome> b = CraftBiome.bukkitToMinecraftHolder(biome);
             Preconditions.checkArgument(b != null, "Cannot set the biome to %s", biome);
             this.chunk.setNoiseBiome(QuartPos.fromBlock(x), QuartPos.fromBlock(y), QuartPos.fromBlock(z), b);
@@ -107,7 +108,7 @@ public class CustomChunkGenerator extends InternalChunkGenerator {
     }
 
     @Override
-    public BiomeSource getBiomeSource() {
+    public @NonNull BiomeSource getBiomeSource() {
         return this.delegate.getBiomeSource();
     }
 
@@ -122,7 +123,7 @@ public class CustomChunkGenerator extends InternalChunkGenerator {
     }
 
     @Override
-    public void createStructures(RegistryAccess registryAccess, ChunkGeneratorStructureState state, StructureManager structureManager, ChunkAccess centerChunk, StructureTemplateManager structureTemplateManager, ResourceKey<Level> level) {
+    public void createStructures(@NonNull RegistryAccess registryAccess, @NonNull ChunkGeneratorStructureState state, @NonNull StructureManager structureManager, ChunkAccess centerChunk, @NonNull StructureTemplateManager structureTemplateManager, @NonNull ResourceKey<Level> level) {
         WorldgenRandom random = CustomChunkGenerator.getSeededRandom();
         int x = centerChunk.getPos().x();
         int z = centerChunk.getPos().z();
@@ -134,7 +135,7 @@ public class CustomChunkGenerator extends InternalChunkGenerator {
     }
 
     @Override
-    public void buildSurface(WorldGenRegion level, StructureManager structureManager, RandomState randomState, ChunkAccess protoChunk) {
+    public void buildSurface(WorldGenRegion level, @NonNull StructureManager structureManager, @NonNull RandomState randomState, ChunkAccess protoChunk) {
         WorldgenRandom random = getSeededRandom();
         int x = protoChunk.getPos().x();
         int z = protoChunk.getPos().z();
@@ -232,7 +233,7 @@ public class CustomChunkGenerator extends InternalChunkGenerator {
     }
 
     @Override
-    public void applyCarvers(WorldGenRegion region, long seed, RandomState randomState, BiomeManager biomeManager, StructureManager structureManager, ChunkAccess chunk) {
+    public void applyCarvers(WorldGenRegion region, long seed, @NonNull RandomState randomState, @NonNull BiomeManager biomeManager, @NonNull StructureManager structureManager, ChunkAccess chunk) {
         WorldgenRandom random = getSeededRandom();
         int x = chunk.getPos().x();
         int z = chunk.getPos().z();
@@ -252,7 +253,7 @@ public class CustomChunkGenerator extends InternalChunkGenerator {
     }
 
     @Override
-    public CompletableFuture<ChunkAccess> fillFromNoise(Blender blender, RandomState randomState, StructureManager structureManager, ChunkAccess centerChunk) {
+    public @NonNull CompletableFuture<ChunkAccess> fillFromNoise(@NonNull Blender blender, @NonNull RandomState randomState, @NonNull StructureManager structureManager, ChunkAccess centerChunk) {
         CompletableFuture<ChunkAccess> future = null;
         WorldgenRandom random = getSeededRandom();
         int x = centerChunk.getPos().x();
@@ -276,7 +277,7 @@ public class CustomChunkGenerator extends InternalChunkGenerator {
     }
 
     @Override
-    public int getBaseHeight(int x, int z, Heightmap.Types type, LevelHeightAccessor heightAccessor, RandomState randomState) {
+    public int getBaseHeight(int x, int z, Heightmap.@NonNull Types type, @NonNull LevelHeightAccessor heightAccessor, @NonNull RandomState randomState) {
         if (this.implementBaseHeight) {
             try {
                 WorldgenRandom random = getSeededRandom();
@@ -292,12 +293,12 @@ public class CustomChunkGenerator extends InternalChunkGenerator {
     }
 
     @Override
-    public WeightedList<MobSpawnSettings.SpawnerData> getMobsAt(Holder<net.minecraft.world.level.biome.Biome> biome, StructureManager structureManager, MobCategory mobCategory, BlockPos pos) {
+    public @NonNull WeightedList<MobSpawnSettings.SpawnerData> getMobsAt(@NonNull Holder<net.minecraft.world.level.biome.Biome> biome, @NonNull StructureManager structureManager, @NonNull MobCategory mobCategory, @NonNull BlockPos pos) {
         return this.delegate.getMobsAt(biome, structureManager, mobCategory, pos);
     }
 
     @Override
-    public void applyBiomeDecoration(WorldGenLevel level, ChunkAccess chunk, StructureManager structureManager) {
+    public void applyBiomeDecoration(WorldGenLevel level, ChunkAccess chunk, @NonNull StructureManager structureManager) {
         WorldgenRandom random = getSeededRandom();
         int x = chunk.getPos().x();
         int z = chunk.getPos().z();
@@ -307,7 +308,7 @@ public class CustomChunkGenerator extends InternalChunkGenerator {
     }
 
     @Override
-    public void addDebugScreenInfo(List<String> result, RandomState randomState, BlockPos feetPos) {
+    public void addDebugScreenInfo(@NonNull List<String> result, @NonNull RandomState randomState, @NonNull BlockPos feetPos) {
         this.delegate.addDebugScreenInfo(result, randomState, feetPos);
     }
 
@@ -324,7 +325,7 @@ public class CustomChunkGenerator extends InternalChunkGenerator {
     }
 
     @Override
-    public int getSpawnHeight(LevelHeightAccessor heightAccessor) {
+    public int getSpawnHeight(@NonNull LevelHeightAccessor heightAccessor) {
         return this.delegate.getSpawnHeight(heightAccessor);
     }
 
@@ -334,12 +335,12 @@ public class CustomChunkGenerator extends InternalChunkGenerator {
     }
 
     @Override
-    public NoiseColumn getBaseColumn(int x, int z, LevelHeightAccessor heightAccessor, RandomState randomState) {
+    public @NonNull NoiseColumn getBaseColumn(int x, int z, @NonNull LevelHeightAccessor heightAccessor, @NonNull RandomState randomState) {
         return this.delegate.getBaseColumn(x, z, heightAccessor, randomState);
     }
 
     @Override
-    protected MapCodec<? extends net.minecraft.world.level.chunk.ChunkGenerator> codec() {
+    protected @NonNull MapCodec<? extends net.minecraft.world.level.chunk.ChunkGenerator> codec() {
         return MapCodec.unit(null);
     }
 }

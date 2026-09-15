@@ -4,6 +4,7 @@ import net.minecraft.world.level.block.entity.DaylightDetectorBlockEntity;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.DaylightDetector;
+import org.jspecify.annotations.NonNull;
 
 public class CraftDaylightDetector extends CraftBlockEntityState<DaylightDetectorBlockEntity> implements DaylightDetector {
 
@@ -16,12 +17,12 @@ public class CraftDaylightDetector extends CraftBlockEntityState<DaylightDetecto
     }
 
     @Override
-    public CraftDaylightDetector copy() {
+    public @NonNull CraftDaylightDetector copy() {
         return new CraftDaylightDetector(this, null);
     }
 
     @Override
-    public CraftDaylightDetector copy(Location location) {
+    public @NonNull CraftDaylightDetector copy(@NonNull Location location) {
         return new CraftDaylightDetector(this, location);
     }
 }

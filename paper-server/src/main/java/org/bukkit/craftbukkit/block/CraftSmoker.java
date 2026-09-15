@@ -4,6 +4,7 @@ import net.minecraft.world.level.block.entity.SmokerBlockEntity;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Smoker;
+import org.jspecify.annotations.NonNull;
 
 public class CraftSmoker extends CraftFurnace<SmokerBlockEntity> implements Smoker {
 
@@ -16,12 +17,12 @@ public class CraftSmoker extends CraftFurnace<SmokerBlockEntity> implements Smok
     }
 
     @Override
-    public CraftSmoker copy() {
+    public @NonNull CraftSmoker copy() {
         return new CraftSmoker(this, null);
     }
 
     @Override
-    public CraftSmoker copy(Location location) {
+    public @NonNull CraftSmoker copy(@NonNull Location location) {
         return new CraftSmoker(this, location);
     }
 }

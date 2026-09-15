@@ -5,6 +5,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.levelgen.BitRandomSource;
 import net.minecraft.world.level.levelgen.MarsagliaPolarGaussian;
 import net.minecraft.world.level.levelgen.PositionalRandomFactory;
+import org.jspecify.annotations.NonNull;
 
 /**
  * Avoid costly CAS of superclass + division in nextInt
@@ -61,12 +62,12 @@ public final class SimpleThreadUnsafeRandom implements BitRandomSource {
     }
 
     @Override
-    public RandomSource fork() {
+    public @NonNull RandomSource fork() {
         return new SimpleThreadUnsafeRandom(this.nextLong());
     }
 
     @Override
-    public PositionalRandomFactory forkPositional() {
+    public @NonNull PositionalRandomFactory forkPositional() {
         return new SimpleRandomPositionalFactory(this.nextLong());
     }
 
@@ -83,17 +84,17 @@ public final class SimpleThreadUnsafeRandom implements BitRandomSource {
         }
 
         @Override
-        public RandomSource fromHashOf(final String string) {
+        public @NonNull RandomSource fromHashOf(final String string) {
             return new SimpleThreadUnsafeRandom((long)string.hashCode() ^ this.seed);
         }
 
         @Override
-        public RandomSource fromSeed(final long seed) {
+        public @NonNull RandomSource fromSeed(final long seed) {
             return new SimpleThreadUnsafeRandom(seed);
         }
 
         @Override
-        public RandomSource at(final int x, final int y, final int z) {
+        public @NonNull RandomSource at(final int x, final int y, final int z) {
             return new SimpleThreadUnsafeRandom(Mth.getSeed(x, y, z) ^ this.seed);
         }
 

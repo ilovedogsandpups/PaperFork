@@ -4,6 +4,7 @@ import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.craftbukkit.inventory.CraftInventory;
 import org.bukkit.entity.Pillager;
 import org.bukkit.inventory.Inventory;
+import org.jspecify.annotations.NonNull;
 
 public class CraftPillager extends CraftIllager implements Pillager, com.destroystokyo.paper.entity.CraftRangedEntity<net.minecraft.world.entity.monster.illager.Pillager> { // Paper
 
@@ -17,7 +18,7 @@ public class CraftPillager extends CraftIllager implements Pillager, com.destroy
     }
 
     @Override
-    public Inventory getInventory() {
+    public @NonNull Inventory getInventory() {
         return new CraftInventory(this.getHandle().getInventory());
     }
 }

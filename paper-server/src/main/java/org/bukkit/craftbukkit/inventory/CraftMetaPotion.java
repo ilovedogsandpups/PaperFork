@@ -27,6 +27,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.potion.PotionType;
 import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 @DelegateDeserialization(SerializableMeta.class)
 public class CraftMetaPotion extends CraftMetaItem implements PotionMeta {
@@ -157,7 +158,7 @@ public class CraftMetaPotion extends CraftMetaItem implements PotionMeta {
     }
 
     @Override
-    public CraftMetaPotion clone() {
+    public @NonNull CraftMetaPotion clone() {
         CraftMetaPotion clone = (CraftMetaPotion) super.clone();
         clone.type = this.type;
         if (this.customEffects != null) {
@@ -197,7 +198,7 @@ public class CraftMetaPotion extends CraftMetaItem implements PotionMeta {
     }
 
     @Override
-    public List<PotionEffect> getCustomEffects() {
+    public @NonNull List<PotionEffect> getCustomEffects() {
         if (this.hasCustomEffects()) {
             return ImmutableList.copyOf(this.customEffects);
         }
@@ -243,7 +244,7 @@ public class CraftMetaPotion extends CraftMetaItem implements PotionMeta {
     }
 
     @Override
-    public boolean removeCustomEffect(PotionEffectType type) {
+    public boolean removeCustomEffect(@NonNull PotionEffectType type) {
         Preconditions.checkArgument(type != null, "Potion effect type cannot be null");
 
         if (!this.hasCustomEffects()) {
@@ -266,13 +267,13 @@ public class CraftMetaPotion extends CraftMetaItem implements PotionMeta {
     }
 
     @Override
-    public boolean hasCustomEffect(PotionEffectType type) {
+    public boolean hasCustomEffect(@NonNull PotionEffectType type) {
         Preconditions.checkArgument(type != null, "Potion effect type cannot be null");
         return this.indexOfEffect(type) != -1;
     }
 
     @Override
-    public boolean setMainEffect(PotionEffectType type) {
+    public boolean setMainEffect(@NonNull PotionEffectType type) {
         Preconditions.checkArgument(type != null, "Potion effect type cannot be null");
         int index = this.indexOfEffect(type);
         if (index == -1 || index == 0) {

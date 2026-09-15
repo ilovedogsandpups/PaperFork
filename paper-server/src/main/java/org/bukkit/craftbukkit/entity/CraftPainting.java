@@ -7,6 +7,7 @@ import org.bukkit.block.BlockFace;
 import org.bukkit.craftbukkit.CraftArt;
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.entity.Painting;
+import org.jspecify.annotations.NonNull;
 
 public class CraftPainting extends CraftHanging implements Painting {
 
@@ -20,17 +21,17 @@ public class CraftPainting extends CraftHanging implements Painting {
     }
 
     @Override
-    public Art getArt() {
+    public @NonNull Art getArt() {
         return CraftArt.minecraftHolderToBukkit(this.getHandle().getVariant());
     }
 
     @Override
-    public boolean setArt(Art art) {
+    public boolean setArt(@NonNull Art art) {
         return this.setArt(art, false);
     }
 
     @Override
-    public boolean setArt(Art art, boolean force) {
+    public boolean setArt(@NonNull Art art, boolean force) {
         net.minecraft.world.entity.decoration.painting.Painting painting = this.getHandle();
         Holder<PaintingVariant> oldArt = painting.getVariant();
         painting.setVariant(CraftArt.bukkitToMinecraftHolder(art));
@@ -46,7 +47,7 @@ public class CraftPainting extends CraftHanging implements Painting {
     }
 
     @Override
-    public boolean setFacingDirection(BlockFace face, boolean force) {
+    public boolean setFacingDirection(@NonNull BlockFace face, boolean force) {
         if (super.setFacingDirection(face, force)) {
             this.update();
             return true;

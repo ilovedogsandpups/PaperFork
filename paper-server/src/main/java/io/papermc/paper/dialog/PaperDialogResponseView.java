@@ -3,6 +3,7 @@ package io.papermc.paper.dialog;
 import io.papermc.paper.adventure.PaperAdventure;
 import net.kyori.adventure.nbt.api.BinaryTagHolder;
 import net.minecraft.nbt.CompoundTag;
+import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 
 public class PaperDialogResponseView implements DialogResponseView {
@@ -18,12 +19,12 @@ public class PaperDialogResponseView implements DialogResponseView {
     }
 
     @Override
-    public BinaryTagHolder payload() {
+    public @NonNull BinaryTagHolder payload() {
         return BinaryTagHolder.encode(this.payload, PaperAdventure.NBT_CODEC);
     }
 
     @Override
-    public @Nullable String getText(final String key) {
+    public @Nullable String getText(final @NonNull String key) {
         if (!this.payload.contains(key)) {
             return null;
         }
@@ -31,7 +32,7 @@ public class PaperDialogResponseView implements DialogResponseView {
     }
 
     @Override
-    public @Nullable Boolean getBoolean(final String key) {
+    public @Nullable Boolean getBoolean(final @NonNull String key) {
         if (!this.payload.contains(key)) {
             return null;
         }
@@ -39,7 +40,7 @@ public class PaperDialogResponseView implements DialogResponseView {
     }
 
     @Override
-    public @Nullable Float getFloat(final String key) {
+    public @Nullable Float getFloat(final @NonNull String key) {
         if (!this.payload.contains(key)) {
             return null;
         }

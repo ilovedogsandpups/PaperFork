@@ -16,6 +16,7 @@ import java.util.stream.LongStream;
 import java.util.stream.Stream;
 import net.minecraft.nbt.Tag;
 import net.minecraft.util.AbstractListBuilder;
+import org.jspecify.annotations.NonNull;
 
 public final class CountingOps implements DynamicOps<CountingOps.Value> {
     public static final CountingOps INSTANCE = new CountingOps(Tag.MAX_DEPTH);
@@ -265,18 +266,18 @@ public final class CountingOps implements DynamicOps<CountingOps.Value> {
         }
 
         @Override
-        protected Accumulator initBuilder() {
+        protected @NonNull Accumulator initBuilder() {
             return new Accumulator();
         }
 
         @Override
-        protected Accumulator append(final Accumulator builder, final Value value) {
+        protected @NonNull Accumulator append(final Accumulator builder, final @NonNull Value value) {
             builder.accept(value);
             return builder;
         }
 
         @Override
-        protected DataResult<Value> build(final Accumulator builder, final Value prefix) {
+        protected @NonNull DataResult<Value> build(final @NonNull Accumulator builder, final Value prefix) {
             if (prefix.kind == Value.Kind.LIST) {
                 builder.acceptDepth(prefix.depth - 1);
             } else if (prefix.kind != Value.Kind.EMPTY) {

@@ -11,6 +11,7 @@ import org.bukkit.craftbukkit.inventory.CraftItemStack;
 import org.bukkit.entity.Firework;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.meta.FireworkMeta;
+import org.jspecify.annotations.NonNull;
 
 public class CraftFirework extends CraftProjectile implements Firework {
 
@@ -26,12 +27,12 @@ public class CraftFirework extends CraftProjectile implements Firework {
     }
 
     @Override
-    public FireworkMeta getFireworkMeta() {
+    public @NonNull FireworkMeta getFireworkMeta() {
         return (FireworkMeta) CraftItemStack.getItemMeta(this.getHandle().getItem(), org.bukkit.inventory.ItemType.FIREWORK_ROCKET);
     }
 
     @Override
-    public void setFireworkMeta(FireworkMeta meta) {
+    public void setFireworkMeta(@NonNull FireworkMeta meta) {
         final ItemStack item = this.getHandle().getItem();
         CraftItemStack.applyMetaToItem(item, meta);
 
@@ -108,7 +109,7 @@ public class CraftFirework extends CraftProjectile implements Firework {
     }
 
     @Override
-    public org.bukkit.inventory.ItemStack getItem() {
+    public org.bukkit.inventory.@NonNull ItemStack getItem() {
         return CraftItemStack.asBukkitCopy(this.getHandle().getItem());
     }
 

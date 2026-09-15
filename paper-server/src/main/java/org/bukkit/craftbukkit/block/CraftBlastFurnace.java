@@ -4,6 +4,7 @@ import net.minecraft.world.level.block.entity.BlastFurnaceBlockEntity;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.BlastFurnace;
+import org.jspecify.annotations.NonNull;
 
 public class CraftBlastFurnace extends CraftFurnace<BlastFurnaceBlockEntity> implements BlastFurnace {
 
@@ -16,12 +17,12 @@ public class CraftBlastFurnace extends CraftFurnace<BlastFurnaceBlockEntity> imp
     }
 
     @Override
-    public CraftBlastFurnace copy() {
+    public @NonNull CraftBlastFurnace copy() {
         return new CraftBlastFurnace(this, null);
     }
 
     @Override
-    public CraftBlastFurnace copy(Location location) {
+    public @NonNull CraftBlastFurnace copy(@NonNull Location location) {
         return new CraftBlastFurnace(this, location);
     }
 }

@@ -16,6 +16,7 @@ import org.bukkit.block.banner.PatternType;
 import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.craftbukkit.block.banner.CraftPatternType;
 import org.bukkit.inventory.meta.BannerMeta;
+import org.jspecify.annotations.NonNull;
 
 @DelegateDeserialization(SerializableMeta.class)
 public class CraftMetaBanner extends CraftMetaItem implements BannerMeta {
@@ -83,32 +84,32 @@ public class CraftMetaBanner extends CraftMetaItem implements BannerMeta {
     }
 
     @Override
-    public List<Pattern> getPatterns() {
+    public @NonNull List<Pattern> getPatterns() {
         return new ArrayList<>(this.patterns);
     }
 
     @Override
-    public void setPatterns(List<Pattern> patterns) {
+    public void setPatterns(@NonNull List<Pattern> patterns) {
         this.patterns = new ArrayList<>(patterns);
     }
 
     @Override
-    public void addPattern(Pattern pattern) {
+    public void addPattern(@NonNull Pattern pattern) {
         this.patterns.add(pattern);
     }
 
     @Override
-    public Pattern getPattern(int i) {
+    public @NonNull Pattern getPattern(int i) {
         return this.patterns.get(i);
     }
 
     @Override
-    public Pattern removePattern(int i) {
+    public @NonNull Pattern removePattern(int i) {
         return this.patterns.remove(i);
     }
 
     @Override
-    public void setPattern(int i, Pattern pattern) {
+    public void setPattern(int i, @NonNull Pattern pattern) {
         this.patterns.set(i, pattern);
     }
 
@@ -160,7 +161,7 @@ public class CraftMetaBanner extends CraftMetaItem implements BannerMeta {
     }
 
     @Override
-    public CraftMetaBanner clone() {
+    public @NonNull CraftMetaBanner clone() {
         CraftMetaBanner meta = (CraftMetaBanner) super.clone();
         meta.patterns = new ArrayList<>(this.patterns);
         return meta;

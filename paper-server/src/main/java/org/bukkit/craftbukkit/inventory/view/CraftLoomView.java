@@ -11,6 +11,7 @@ import org.bukkit.craftbukkit.inventory.CraftInventoryView;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.inventory.LoomInventory;
 import org.bukkit.inventory.view.LoomView;
+import org.jspecify.annotations.NonNull;
 
 public class CraftLoomView extends CraftInventoryView<LoomMenu, LoomInventory> implements LoomView {
 
@@ -19,7 +20,7 @@ public class CraftLoomView extends CraftInventoryView<LoomMenu, LoomInventory> i
     }
 
     @Override
-    public List<PatternType> getSelectablePatterns() {
+    public @NonNull List<PatternType> getSelectablePatterns() {
         final List<Holder<BannerPattern>> selectablePatterns = this.container.getSelectablePatterns();
         final List<PatternType> patternTypes = new ArrayList<>(selectablePatterns.size());
         for (final Holder<BannerPattern> selectablePattern : selectablePatterns) {

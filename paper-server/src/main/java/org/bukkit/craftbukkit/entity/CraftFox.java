@@ -8,6 +8,7 @@ import net.minecraft.world.entity.LivingEntity;
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.entity.AnimalTamer;
 import org.bukkit.entity.Fox;
+import org.jspecify.annotations.NonNull;
 
 public class CraftFox extends CraftAnimals implements Fox {
 
@@ -21,7 +22,7 @@ public class CraftFox extends CraftAnimals implements Fox {
     }
 
     @Override
-    public Type getFoxType() {
+    public @NonNull Type getFoxType() {
         return Type.values()[this.getHandle().getVariant().ordinal()];
     }
 

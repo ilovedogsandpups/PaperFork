@@ -4,6 +4,7 @@ import com.google.common.base.Preconditions;
 import net.minecraft.world.entity.Leashable;
 import org.bukkit.craftbukkit.entity.CraftEntity;
 import org.bukkit.entity.Entity;
+import org.jspecify.annotations.NonNull;
 
 public interface PaperLeashable extends io.papermc.paper.entity.Leashable {
 
@@ -15,7 +16,7 @@ public interface PaperLeashable extends io.papermc.paper.entity.Leashable {
     }
 
     @Override
-    default Entity getLeashHolder() throws IllegalStateException {
+    default @NonNull Entity getLeashHolder() throws IllegalStateException {
         Preconditions.checkState(this.isLeashed(), "Entity not leashed");
         return this.getHandle().getLeashHolder().getBukkitEntity();
     }

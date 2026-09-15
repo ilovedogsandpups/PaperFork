@@ -26,6 +26,8 @@ import org.bukkit.entity.ThrownPotion;
 import org.bukkit.entity.TippedArrow;
 import org.bukkit.projectiles.BlockProjectileSource;
 import org.bukkit.util.Vector;
+import org.jspecify.annotations.NonNull;
+
 import java.util.function.Consumer;
 
 public class CraftBlockProjectileSource implements BlockProjectileSource {
@@ -36,12 +38,12 @@ public class CraftBlockProjectileSource implements BlockProjectileSource {
     }
 
     @Override
-    public Block getBlock() {
+    public @NonNull Block getBlock() {
         return CraftBlock.at(this.dispenserBlock.getLevel(), this.dispenserBlock.getBlockPos());
     }
 
     @Override
-    public <T extends Projectile> T launchProjectile(Class<? extends T> projectile, Vector velocity, Consumer<? super T> function) {
+    public <T extends Projectile> @NonNull T launchProjectile(@NonNull Class<? extends T> projectile, Vector velocity, Consumer<? super T> function) {
         Preconditions.checkArgument(this.getBlock().getType() == Material.DISPENSER, "Block is no longer dispenser");
 
         // Copied from DispenserBlock#dispenseFrom

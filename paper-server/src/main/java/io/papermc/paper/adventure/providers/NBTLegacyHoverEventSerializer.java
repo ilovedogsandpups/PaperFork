@@ -14,6 +14,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.nbt.TagParser;
 import org.intellij.lang.annotations.Subst;
+import org.jspecify.annotations.NonNull;
 
 final class NBTLegacyHoverEventSerializer implements LegacyHoverEventSerializer {
     public static final NBTLegacyHoverEventSerializer INSTANCE = new NBTLegacyHoverEventSerializer();
@@ -31,7 +32,7 @@ final class NBTLegacyHoverEventSerializer implements LegacyHoverEventSerializer 
     }
 
     @Override
-    public HoverEvent.ShowItem deserializeShowItem(final Component input) throws IOException {
+    public HoverEvent.@NonNull ShowItem deserializeShowItem(final @NonNull Component input) throws IOException {
         final String raw = PlainTextComponentSerializer.plainText().serialize(input);
         try {
             final CompoundTag contents = SNBT_CODEC.decode(raw);
@@ -48,7 +49,7 @@ final class NBTLegacyHoverEventSerializer implements LegacyHoverEventSerializer 
     }
 
     @Override
-    public HoverEvent.ShowEntity deserializeShowEntity(final Component input, final Codec.Decoder<Component, String, ? extends RuntimeException> componentCodec) throws IOException {
+    public HoverEvent.@NonNull ShowEntity deserializeShowEntity(final @NonNull Component input, final Codec.Decoder<Component, String, ? extends RuntimeException> componentCodec) throws IOException {
         final String raw = PlainTextComponentSerializer.plainText().serialize(input);
         try {
             final CompoundTag contents = SNBT_CODEC.decode(raw);
@@ -64,7 +65,7 @@ final class NBTLegacyHoverEventSerializer implements LegacyHoverEventSerializer 
     }
 
     @Override
-    public Component serializeShowItem(final HoverEvent.ShowItem input) throws IOException {
+    public @NonNull Component serializeShowItem(final HoverEvent.ShowItem input) throws IOException {
         final CompoundTag tag = new CompoundTag();
         tag.putString(ITEM_TYPE, input.item().asString());
         tag.putByte(ITEM_COUNT, (byte) input.count());
@@ -79,7 +80,7 @@ final class NBTLegacyHoverEventSerializer implements LegacyHoverEventSerializer 
     }
 
     @Override
-    public Component serializeShowEntity(final HoverEvent.ShowEntity input, final Codec.Encoder<Component, String, ? extends RuntimeException> componentCodec) {
+    public @NonNull Component serializeShowEntity(final HoverEvent.ShowEntity input, final Codec.@NonNull Encoder<Component, String, ? extends RuntimeException> componentCodec) {
         final CompoundTag tag = new CompoundTag();
         tag.putString(ENTITY_ID, input.id().toString());
         tag.putString(ENTITY_TYPE, input.type().asString());

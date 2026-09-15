@@ -162,6 +162,7 @@ import org.bukkit.util.StructureSearchResult;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
 
 public class CraftWorld extends CraftRegionAccessor implements World {
     private static final PointersSupplier<World> POINTERS_SUPPLIER = PointersSupplier.<World>builder()
@@ -251,7 +252,7 @@ public class CraftWorld extends CraftRegionAccessor implements World {
     }
 
     @Override
-    public BiomeProvider vanillaBiomeProvider() {
+    public @NonNull BiomeProvider vanillaBiomeProvider() {
         ServerChunkCache serverCache = this.getHandle().getChunkSource();
 
         final net.minecraft.world.level.chunk.ChunkGenerator gen = serverCache.getGenerator();
@@ -272,12 +273,12 @@ public class CraftWorld extends CraftRegionAccessor implements World {
             .toList();
         return new BiomeProvider() {
             @Override
-            public Biome getBiome(final org.bukkit.generator.WorldInfo worldInfo, final int x, final int y, final int z) {
+            public @NonNull Biome getBiome(final org.bukkit.generator.@NonNull WorldInfo worldInfo, final int x, final int y, final int z) {
                 return CraftBiome.minecraftHolderToBukkit(finalBiomeSource.getNoiseBiome(x >> 2, y >> 2, z >> 2, sampler));
             }
 
             @Override
-            public List<Biome> getBiomes(final org.bukkit.generator.WorldInfo worldInfo) {
+            public @NonNull List<Biome> getBiomes(final org.bukkit.generator.@NonNull WorldInfo worldInfo) {
                 return possibleBiomes;
             }
         };
@@ -285,7 +286,7 @@ public class CraftWorld extends CraftRegionAccessor implements World {
     // Paper end
     // Paper start - structure check API
     @Override
-    public boolean hasStructureAt(final io.papermc.paper.math.Position position, final Structure structure) {
+    public boolean hasStructureAt(final io.papermc.paper.math.@NonNull Position position, final @NonNull Structure structure) {
         return this.world.structureManager().getStructureWithPieceAt(
             io.papermc.paper.util.MCUtil.toBlockPos(position),
             CraftStructure.bukkitToMinecraft(structure)
@@ -317,12 +318,12 @@ public class CraftWorld extends CraftRegionAccessor implements World {
     }
 
     @Override
-    public Block getBlockAt(int x, int y, int z) {
+    public @NonNull Block getBlockAt(int x, int y, int z) {
         return CraftBlock.at(this.world, new BlockPos(x, y, z));
     }
 
     @Override
-    public Location getSpawnLocation() {
+    public @NonNull Location getSpawnLocation() {
         final var respawnData = this.world.serverLevelData.getRespawnData();
         return CraftLocation.toBukkit(respawnData.pos(), this, respawnData.yaw(), respawnData.pitch());
     }
@@ -369,7 +370,7 @@ public class CraftWorld extends CraftRegionAccessor implements World {
     // Paper end
 
     @Override
-    public Chunk getChunkAt(int x, int z) {
+    public @NonNull Chunk getChunkAt(int x, int z) {
         warnUnsafeChunk("getting a faraway chunk", x, z); // Paper
         net.minecraft.world.level.chunk.LevelChunk chunk = (net.minecraft.world.level.chunk.LevelChunk) this.world.getChunk(x, z, ChunkStatus.FULL, true);
         return new CraftChunk(chunk);
@@ -386,7 +387,7 @@ public class CraftWorld extends CraftRegionAccessor implements World {
     }
 
     @Override
-    public Chunk getChunkAt(Block block) {
+    public @NonNull Chunk getChunkAt(Block block) {
         Preconditions.checkArgument(block != null, "null block");
 
         return this.getChunkAt(block.getX() >> 4, block.getZ() >> 4);
@@ -424,7 +425,7 @@ public class CraftWorld extends CraftRegionAccessor implements World {
     }
 
     @Override
-    public Chunk[] getLoadedChunks() {
+    public Chunk @NonNull [] getLoadedChunks() {
         ServerChunkCache serverChunkCache = this.getHandle().getChunkSource();
         ReferenceList<Chunk> chunks = new ReferenceList<>(new Chunk[serverChunkCache.fullChunks.size()]);
 
@@ -494,14 +495,14 @@ public class CraftWorld extends CraftRegionAccessor implements World {
     }
 
     @Override
-    public Collection<Player> getPlayersSeeingChunk(Chunk chunk) {
+    public @NonNull Collection<Player> getPlayersSeeingChunk(Chunk chunk) {
         Preconditions.checkArgument(chunk != null, "chunk cannot be null");
 
         return this.getPlayersSeeingChunk(chunk.getX(), chunk.getZ());
     }
 
     @Override
-    public Collection<Player> getPlayersSeeingChunk(int x, int z) {
+    public @NonNull Collection<Player> getPlayersSeeingChunk(int x, int z) {
         if (!this.isChunkLoaded(x, z)) {
             return Collections.emptySet();
         }
@@ -573,7 +574,7 @@ public class CraftWorld extends CraftRegionAccessor implements World {
     }
 
     @Override
-    public boolean removePluginChunkTicket(int x, int z, Plugin plugin) {
+    public boolean removePluginChunkTicket(int x, int z, @NonNull Plugin plugin) {
         Preconditions.checkNotNull(plugin, "null plugin");
 
         final DistanceManager distanceManager = this.world.getChunkSource().chunkMap.getDistanceManager();
@@ -581,7 +582,7 @@ public class CraftWorld extends CraftRegionAccessor implements World {
     }
 
     @Override
-    public void removePluginChunkTickets(Plugin plugin) {
+    public void removePluginChunkTickets(@NonNull Plugin plugin) {
         Preconditions.checkNotNull(plugin, "null plugin");
 
         DistanceManager chunkDistanceManager = this.world.getChunkSource().chunkMap.getDistanceManager();
@@ -589,12 +590,12 @@ public class CraftWorld extends CraftRegionAccessor implements World {
     }
 
     @Override
-    public Collection<Plugin> getPluginChunkTickets(int x, int z) {
+    public @NonNull Collection<Plugin> getPluginChunkTickets(int x, int z) {
         return FeatureHooks.getPluginChunkTickets(this.world, x, z); // Paper - chunk system
     }
 
     @Override
-    public Map<Plugin, Collection<Chunk>> getPluginChunkTickets() {
+    public @NonNull Map<Plugin, Collection<Chunk>> getPluginChunkTickets() {
         return FeatureHooks.getPluginChunkTickets(this.world); // Paper - chunk system
     }
 
@@ -629,7 +630,7 @@ public class CraftWorld extends CraftRegionAccessor implements World {
     }
 
     @Override
-    public Collection<Chunk> getForceLoadedChunks() {
+    public @NonNull Collection<Chunk> getForceLoadedChunks() {
         Set<Chunk> chunks = new HashSet<>();
 
         for (long pos : this.getHandle().getForceLoadedChunks()) {
@@ -644,7 +645,7 @@ public class CraftWorld extends CraftRegionAccessor implements World {
     }
 
     @Override
-    public org.bukkit.entity.Item dropItem(Location location, ItemStack item, Consumer<? super org.bukkit.entity.Item> function) {
+    public org.bukkit.entity.@NonNull Item dropItem(Location location, @NonNull ItemStack item, Consumer<? super org.bukkit.entity.Item> function) {
         Preconditions.checkArgument(location != null, "Location cannot be null");
         Preconditions.checkArgument(item != null, "ItemStack cannot be null");
 
@@ -659,7 +660,7 @@ public class CraftWorld extends CraftRegionAccessor implements World {
     }
 
     @Override
-    public org.bukkit.entity.Item dropItemNaturally(Location location, ItemStack item, Consumer<? super org.bukkit.entity.Item> function) {
+    public org.bukkit.entity.@NonNull Item dropItemNaturally(@NonNull Location location, @NonNull ItemStack item, Consumer<? super org.bukkit.entity.Item> function) {
         Preconditions.checkArgument(location != null, "Location cannot be null");
         Preconditions.checkArgument(item != null, "ItemStack cannot be null");
 
@@ -671,7 +672,7 @@ public class CraftWorld extends CraftRegionAccessor implements World {
     }
 
     @Override
-    public <T extends AbstractArrow> T spawnArrow(Location location, Vector direction, float speed, float spread, Class<T> clazz) {
+    public <T extends AbstractArrow> @NonNull T spawnArrow(@NonNull Location location, @NonNull Vector direction, float speed, float spread, @NonNull Class<T> clazz) {
         Preconditions.checkArgument(location != null, "Location cannot be null");
         Preconditions.checkArgument(direction != null, "Vector cannot be null");
         Preconditions.checkArgument(clazz != null, "clazz Entity for the arrow cannot be null");
@@ -695,12 +696,12 @@ public class CraftWorld extends CraftRegionAccessor implements World {
     }
 
     @Override
-    public LightningStrike strikeLightning(Location loc) {
+    public @NonNull LightningStrike strikeLightning(@NonNull Location loc) {
         return this.strikeLightning0(loc, false);
     }
 
     @Override
-    public LightningStrike strikeLightningEffect(Location loc) {
+    public @NonNull LightningStrike strikeLightningEffect(@NonNull Location loc) {
         return this.strikeLightning0(loc, true);
     }
 
@@ -716,7 +717,7 @@ public class CraftWorld extends CraftRegionAccessor implements World {
 
     // Paper start - Add methods to find targets for lightning strikes
     @Override
-    public Location findLightningRod(Location location) {
+    public Location findLightningRod(@NonNull Location location) {
         return this.world.findLightningRod(CraftLocation.toBlockPos(location))
             .map(blockPos -> CraftLocation.toBukkit(blockPos, this.world)
                 // get the actual rod pos
@@ -725,19 +726,19 @@ public class CraftWorld extends CraftRegionAccessor implements World {
     }
 
     @Override
-    public Location findLightningTarget(Location location) {
+    public Location findLightningTarget(@NonNull Location location) {
         final BlockPos pos = this.world.findLightningTargetAround(CraftLocation.toBlockPos(location), true);
         return pos == null ? null : CraftLocation.toBukkit(pos, this.world);
     }
     // Paper end - Add methods to find targets for lightning strikes
 
     @Override
-    public boolean generateTree(Location loc, TreeType type) {
+    public boolean generateTree(@NonNull Location loc, @NonNull TreeType type) {
         return this.generateTree(loc, CraftWorld.rand, type);
     }
 
     @Override
-    public boolean generateTree(Location loc, TreeType type, BlockChangeDelegate delegate) {
+    public boolean generateTree(@NonNull Location loc, @NonNull TreeType type, @NonNull BlockChangeDelegate delegate) {
         this.world.captureTreeGeneration = true;
         this.world.captureBlockStates = true;
         List<org.bukkit.craftbukkit.block.CraftBlockState> capturedBlockStates;
@@ -765,17 +766,17 @@ public class CraftWorld extends CraftRegionAccessor implements World {
     }
 
     @Override
-    public String getName() {
+    public @NonNull String getName() {
         return this.world.bukkitName;
     }
 
     @Override
-    public UUID getUID() {
+    public @NonNull UUID getUID() {
         return this.world.uuid;
     }
 
     @Override
-    public NamespacedKey getKey() {
+    public @NonNull NamespacedKey getKey() {
         return this.key;
     }
 
@@ -885,7 +886,7 @@ public class CraftWorld extends CraftRegionAccessor implements World {
     }
 
     @Override
-    public List<BlockPopulator> getPopulators() {
+    public @NonNull List<BlockPopulator> getPopulators() {
         return this.populators;
     }
 
@@ -897,14 +898,14 @@ public class CraftWorld extends CraftRegionAccessor implements World {
     }
 
     @Override
-    public int getHighestBlockYAt(int x, int z, org.bukkit.HeightMap heightMap) {
+    public int getHighestBlockYAt(int x, int z, org.bukkit.@NonNull HeightMap heightMap) {
         warnUnsafeChunk("getting a faraway chunk", x >> 4, z >> 4); // Paper
         // Transient load for this tick
         return this.world.getChunk(x >> 4, z >> 4).getHeight(CraftHeightMap.toNMS(heightMap), x, z);
     }
 
     @Override
-    public void setBiome(int x, int z, Biome bio) {
+    public void setBiome(int x, int z, @NonNull Biome bio) {
         for (int y = this.getMinHeight(); y < this.getMaxHeight(); y++) {
             this.setBiome(x, y, z, bio);
         }
@@ -935,7 +936,7 @@ public class CraftWorld extends CraftRegionAccessor implements World {
     @Override
     @SuppressWarnings("unchecked")
     @Deprecated
-    public <T extends Entity> Collection<T> getEntitiesByClass(Class<T>... classes) {
+    public <T extends Entity> @NonNull Collection<T> getEntitiesByClass(Class<T>... classes) {
         return (Collection<T>) this.getEntitiesByClasses(classes);
     }
 
@@ -955,7 +956,7 @@ public class CraftWorld extends CraftRegionAccessor implements World {
     }
 
     @Override
-    public Collection<Entity> getNearbyEntities(Location location, double x, double y, double z, Predicate<? super Entity> filter) {
+    public @NonNull Collection<Entity> getNearbyEntities(Location location, double x, double y, double z, Predicate<? super Entity> filter) {
         Preconditions.checkArgument(location != null, "Location cannot be null");
         Preconditions.checkArgument(this.equals(location.getWorld()), "Location cannot be in a different world");
 
@@ -964,7 +965,7 @@ public class CraftWorld extends CraftRegionAccessor implements World {
     }
 
     @Override
-    public Collection<Entity> getNearbyEntities(BoundingBox boundingBox, Predicate<? super Entity> filter) {
+    public @NonNull Collection<Entity> getNearbyEntities(BoundingBox boundingBox, Predicate<? super Entity> filter) {
         org.spigotmc.AsyncCatcher.catchOp("getNearbyEntities"); // Spigot
         Preconditions.checkArgument(boundingBox != null, "BoundingBox cannot be null");
 
@@ -1025,7 +1026,7 @@ public class CraftWorld extends CraftRegionAccessor implements World {
     }
 
     @Override
-    public RayTraceResult rayTraceBlocks(io.papermc.paper.math.Position start, Vector direction, double maxDistance, FluidCollisionMode fluidCollisionMode, boolean ignorePassableBlocks, Predicate<? super Block> canCollide) {
+    public RayTraceResult rayTraceBlocks(io.papermc.paper.math.@NonNull Position start, @NonNull Vector direction, double maxDistance, @NonNull FluidCollisionMode fluidCollisionMode, boolean ignorePassableBlocks, Predicate<? super Block> canCollide) {
         return this.rayTraceBlocks(start, direction, maxDistance, fluidCollisionMode, ignorePassableBlocks ? BlockCollisionMode.COLLIDER : BlockCollisionMode.OUTLINE, canCollide);
     }
 
@@ -1054,7 +1055,7 @@ public class CraftWorld extends CraftRegionAccessor implements World {
     }
 
     @Override
-    public RayTraceResult rayTrace(io.papermc.paper.math.Position start, Vector direction, double maxDistance, FluidCollisionMode fluidCollisionMode, boolean ignorePassableBlocks, double raySize, Predicate<? super Entity> filter, Predicate<? super Block> canCollide) {
+    public RayTraceResult rayTrace(io.papermc.paper.math.@NonNull Position start, @NonNull Vector direction, double maxDistance, @NonNull FluidCollisionMode fluidCollisionMode, boolean ignorePassableBlocks, double raySize, Predicate<? super Entity> filter, Predicate<? super Block> canCollide) {
         return this.rayTrace(start, direction, maxDistance, fluidCollisionMode, ignorePassableBlocks ? BlockCollisionMode.COLLIDER : BlockCollisionMode.OUTLINE, raySize, filter, canCollide);
     }
 
@@ -1108,7 +1109,7 @@ public class CraftWorld extends CraftRegionAccessor implements World {
     }
 
     @Override
-    public List<Player> getPlayers() {
+    public @NonNull List<Player> getPlayers() {
         List<Player> list = new ArrayList<Player>(this.world.players().size());
 
         for (net.minecraft.world.entity.player.Player human : this.world.players()) {
@@ -1124,7 +1125,7 @@ public class CraftWorld extends CraftRegionAccessor implements World {
 
     // Paper start - getEntity by UUID API
     @Override
-    public Entity getEntity(UUID uuid) {
+    public Entity getEntity(@NonNull UUID uuid) {
         Preconditions.checkArgument(uuid != null, "UUID cannot be null");
         net.minecraft.world.entity.Entity entity = world.getEntity(uuid);
         return entity == null ? null : entity.getBukkitEntity();
@@ -1154,12 +1155,12 @@ public class CraftWorld extends CraftRegionAccessor implements World {
     }
 
     @Override
-    public void setDifficulty(Difficulty difficulty) {
+    public void setDifficulty(@NonNull Difficulty difficulty) {
         this.getHandle().getServer().setDifficulty(this.getHandle(), CraftDifficulty.toMinecraft(difficulty), null, true);
     }
 
     @Override
-    public Difficulty getDifficulty() {
+    public @NonNull Difficulty getDifficulty() {
         return CraftDifficulty.toBukkit(this.getHandle().getDifficulty());
     }
 
@@ -1252,7 +1253,7 @@ public class CraftWorld extends CraftRegionAccessor implements World {
     }
 
     @Override
-    public <T> void playEffect(Location loc, Effect effect, T data, int radius) {
+    public <T> void playEffect(@NonNull Location loc, @NonNull Effect effect, T data, int radius) {
         if (data != null) {
             Preconditions.checkArgument(effect.getData() != null, "Effect.%s does not have a valid data", effect.name());
             Preconditions.checkArgument(effect.isApplicable(data), "%s data cannot be used for the %s effect", data.getClass().getName(), effect); // Paper
@@ -1287,13 +1288,13 @@ public class CraftWorld extends CraftRegionAccessor implements World {
     }
 
     @Override
-    public FallingBlock spawnFallingBlock(Location location, MaterialData data) throws IllegalArgumentException {
+    public @NonNull FallingBlock spawnFallingBlock(@NonNull Location location, MaterialData data) throws IllegalArgumentException {
         Preconditions.checkArgument(data != null, "MaterialData cannot be null");
         return this.spawnFallingBlock(location, data.getItemType(), data.getData());
     }
 
     @Override
-    public FallingBlock spawnFallingBlock(Location location, org.bukkit.Material material, byte data) throws IllegalArgumentException {
+    public @NonNull FallingBlock spawnFallingBlock(Location location, org.bukkit.@NonNull Material material, byte data) throws IllegalArgumentException {
         Preconditions.checkArgument(location != null, "Location cannot be null");
         Preconditions.checkArgument(material != null, "Material cannot be null");
         Preconditions.checkArgument(material.isBlock(), "Material.%s must be a block", material);
@@ -1308,7 +1309,7 @@ public class CraftWorld extends CraftRegionAccessor implements World {
     }
 
     @Override
-    public FallingBlock spawnFallingBlock(Location location, BlockData data) throws IllegalArgumentException {
+    public @NonNull FallingBlock spawnFallingBlock(Location location, @NonNull BlockData data) throws IllegalArgumentException {
         Preconditions.checkArgument(location != null, "Location cannot be null");
         Preconditions.checkArgument(data != null, "BlockData cannot be null");
 
@@ -1322,7 +1323,7 @@ public class CraftWorld extends CraftRegionAccessor implements World {
     }
 
     @Override
-    public ChunkSnapshot getEmptyChunkSnapshot(int x, int z, boolean includeBiome, boolean includeBiomeTempRain) {
+    public @NonNull ChunkSnapshot getEmptyChunkSnapshot(int x, int z, boolean includeBiome, boolean includeBiomeTempRain) {
         return CraftChunk.getEmptyChunkSnapshot(x, z, this, includeBiome, includeBiomeTempRain);
     }
 
@@ -1434,12 +1435,12 @@ public class CraftWorld extends CraftRegionAccessor implements World {
     }
 
     @Override
-    public Path getWorldPath() {
+    public @NonNull Path getWorldPath() {
         return this.world.getServer().storageSource.getDimensionPath(this.world.dimension());
     }
 
     @Override
-    public void sendPluginMessage(Plugin source, String channel, byte[] message) {
+    public void sendPluginMessage(@NonNull Plugin source, @NonNull String channel, byte @NonNull [] message) {
         StandardMessenger.validatePluginMessage(this.server.getMessenger(), source, channel, message);
 
         for (Player player : this.getPlayers()) {
@@ -1448,7 +1449,7 @@ public class CraftWorld extends CraftRegionAccessor implements World {
     }
 
     @Override
-    public Set<String> getListeningPluginChannels() {
+    public @NonNull Set<String> getListeningPluginChannels() {
         Set<String> result = new HashSet<String>();
 
         for (Player player : this.getPlayers()) {
@@ -1484,7 +1485,7 @@ public class CraftWorld extends CraftRegionAccessor implements World {
     }
 
     @Override
-    public void setTicksPerSpawns(SpawnCategory spawnCategory, int ticksPerCategorySpawn) {
+    public void setTicksPerSpawns(@NonNull SpawnCategory spawnCategory, int ticksPerCategorySpawn) {
         Preconditions.checkArgument(spawnCategory != null, "SpawnCategory cannot be null");
         Preconditions.checkArgument(CraftSpawnCategory.isValidForLimits(spawnCategory), "SpawnCategory.%s are not supported", spawnCategory);
 
@@ -1492,7 +1493,7 @@ public class CraftWorld extends CraftRegionAccessor implements World {
     }
 
     @Override
-    public long getTicksPerSpawns(SpawnCategory spawnCategory) {
+    public long getTicksPerSpawns(@NonNull SpawnCategory spawnCategory) {
         Preconditions.checkArgument(spawnCategory != null, "SpawnCategory cannot be null");
         Preconditions.checkArgument(CraftSpawnCategory.isValidForLimits(spawnCategory), "SpawnCategory.%s are not supported", spawnCategory);
 
@@ -1500,27 +1501,27 @@ public class CraftWorld extends CraftRegionAccessor implements World {
     }
 
     @Override
-    public void setMetadata(String metadataKey, MetadataValue newMetadataValue) {
+    public void setMetadata(@NonNull String metadataKey, @NonNull MetadataValue newMetadataValue) {
         this.server.getWorldMetadata().setMetadata(this, metadataKey, newMetadataValue);
     }
 
     @Override
-    public List<MetadataValue> getMetadata(String metadataKey) {
+    public @NonNull List<MetadataValue> getMetadata(@NonNull String metadataKey) {
         return this.server.getWorldMetadata().getMetadata(this, metadataKey);
     }
 
     @Override
-    public boolean hasMetadata(String metadataKey) {
+    public boolean hasMetadata(@NonNull String metadataKey) {
         return this.server.getWorldMetadata().hasMetadata(this, metadataKey);
     }
 
     @Override
-    public void removeMetadata(String metadataKey, Plugin owningPlugin) {
+    public void removeMetadata(@NonNull String metadataKey, @NonNull Plugin owningPlugin) {
         this.server.getWorldMetadata().removeMetadata(this, metadataKey, owningPlugin);
     }
 
     @Override
-    public int getSpawnLimit(SpawnCategory spawnCategory) {
+    public int getSpawnLimit(@NonNull SpawnCategory spawnCategory) {
         Preconditions.checkArgument(spawnCategory != null, "SpawnCategory cannot be null");
         Preconditions.checkArgument(CraftSpawnCategory.isValidForLimits(spawnCategory), "SpawnCategory.%s are not supported", spawnCategory);
 
@@ -1536,7 +1537,7 @@ public class CraftWorld extends CraftRegionAccessor implements World {
     }
 
     @Override
-    public void setSpawnLimit(SpawnCategory spawnCategory, int limit) {
+    public void setSpawnLimit(@NonNull SpawnCategory spawnCategory, int limit) {
         Preconditions.checkArgument(spawnCategory != null, "SpawnCategory cannot be null");
         Preconditions.checkArgument(CraftSpawnCategory.isValidForLimits(spawnCategory), "SpawnCategory.%s are not supported", spawnCategory);
 
@@ -1544,17 +1545,17 @@ public class CraftWorld extends CraftRegionAccessor implements World {
     }
 
     @Override
-    public void playSound(Location loc, Sound sound, org.bukkit.SoundCategory category, float volume, float pitch) {
+    public void playSound(@NonNull Location loc, @NonNull Sound sound, org.bukkit.@NonNull SoundCategory category, float volume, float pitch) {
         this.playSound(loc, sound, category, volume, pitch, this.getHandle().getRandom().nextLong());
     }
 
     @Override
-    public void playSound(Location loc, String sound, org.bukkit.SoundCategory category, float volume, float pitch) {
+    public void playSound(@NonNull Location loc, @NonNull String sound, org.bukkit.@NonNull SoundCategory category, float volume, float pitch) {
         this.playSound(loc, sound, category, volume, pitch, this.getHandle().getRandom().nextLong());
     }
 
     @Override
-    public void playSound(Location loc, Sound sound, org.bukkit.SoundCategory category, float volume, float pitch, long seed) {
+    public void playSound(@NonNull Location loc, @NonNull Sound sound, org.bukkit.@NonNull SoundCategory category, float volume, float pitch, long seed) {
         org.spigotmc.AsyncCatcher.catchOp("play sound"); // Paper
         if (loc == null || sound == null || category == null) return;
 
@@ -1566,7 +1567,7 @@ public class CraftWorld extends CraftRegionAccessor implements World {
     }
 
     @Override
-    public void playSound(Location loc, String sound, org.bukkit.SoundCategory category, float volume, float pitch, long seed) {
+    public void playSound(@NonNull Location loc, @NonNull String sound, org.bukkit.@NonNull SoundCategory category, float volume, float pitch, long seed) {
         org.spigotmc.AsyncCatcher.catchOp("play sound"); // Paper
         if (loc == null || sound == null || category == null) return;
 
@@ -1579,17 +1580,17 @@ public class CraftWorld extends CraftRegionAccessor implements World {
     }
 
     @Override
-    public void playSound(Entity entity, Sound sound, org.bukkit.SoundCategory category, float volume, float pitch) {
+    public void playSound(@NonNull Entity entity, @NonNull Sound sound, org.bukkit.@NonNull SoundCategory category, float volume, float pitch) {
         this.playSound(entity, sound, category, volume, pitch, this.getHandle().getRandom().nextLong());
     }
 
     @Override
-    public void playSound(Entity entity, String sound, org.bukkit.SoundCategory category, float volume, float pitch) {
+    public void playSound(@NonNull Entity entity, @NonNull String sound, org.bukkit.@NonNull SoundCategory category, float volume, float pitch) {
         this.playSound(entity, sound, category, volume, pitch, this.getHandle().getRandom().nextLong());
     }
 
     @Override
-    public void playSound(Entity entity, Sound sound, org.bukkit.SoundCategory category, float volume, float pitch, long seed) {
+    public void playSound(@NonNull Entity entity, @NonNull Sound sound, org.bukkit.@NonNull SoundCategory category, float volume, float pitch, long seed) {
         org.spigotmc.AsyncCatcher.catchOp("play sound"); // Paper
         if (!(entity instanceof CraftEntity craftEntity) || entity.getWorld() != this || sound == null || category == null) return;
 
@@ -1610,7 +1611,7 @@ public class CraftWorld extends CraftRegionAccessor implements World {
     }
 
     @Override
-    public void playSound(Entity entity, String sound, org.bukkit.SoundCategory category, float volume, float pitch, long seed) {
+    public void playSound(@NonNull Entity entity, @NonNull String sound, org.bukkit.@NonNull SoundCategory category, float volume, float pitch, long seed) {
         org.spigotmc.AsyncCatcher.catchOp("play sound"); // Paper
         if (!(entity instanceof CraftEntity craftEntity) || entity.getWorld() != this || sound == null || category == null) return;
 
@@ -1622,13 +1623,13 @@ public class CraftWorld extends CraftRegionAccessor implements World {
     }
 
     @Override
-    public void playSound(final net.kyori.adventure.sound.Sound sound, final double x, final double y, final double z) {
+    public void playSound(final net.kyori.adventure.sound.@NonNull Sound sound, final double x, final double y, final double z) {
         org.spigotmc.AsyncCatcher.catchOp("play sound"); // Paper
         io.papermc.paper.adventure.PaperAdventure.asSoundPacket(sound, x, y, z, sound.seed().orElseGet(this.world.getRandom()::nextLong), this.playSound0(x, y, z));
     }
 
     @Override
-    public void playSound(final net.kyori.adventure.sound.Sound sound, final net.kyori.adventure.sound.Sound.Emitter emitter) {
+    public void playSound(final net.kyori.adventure.sound.Sound sound, final net.kyori.adventure.sound.Sound.@NonNull Emitter emitter) {
         org.spigotmc.AsyncCatcher.catchOp("play sound"); // Paper
         final long seed = sound.seed().orElseGet(this.getHandle().getRandom()::nextLong);
         if (emitter == net.kyori.adventure.sound.Sound.Emitter.self()) {
@@ -1665,7 +1666,7 @@ public class CraftWorld extends CraftRegionAccessor implements World {
 
     @SuppressWarnings({"unchecked", "rawtypes"})
     @Override
-    public boolean setGameRuleValue(String rule, String value) {
+    public boolean setGameRuleValue(@NonNull String rule, @NonNull String value) {
         // No null values allowed
         if (rule == null || value == null) return false;
 
@@ -1682,7 +1683,7 @@ public class CraftWorld extends CraftRegionAccessor implements World {
     }
 
     @Override
-    public String[] getGameRules() {
+    public String @NonNull [] getGameRules() {
         return this.getHandle().getGameRules().availableRules()
                 .map(GameRule::id)
                 .toArray(String[]::new);
@@ -1733,7 +1734,7 @@ public class CraftWorld extends CraftRegionAccessor implements World {
     }
 
     @Override
-    public WorldBorder getWorldBorder() {
+    public @NonNull WorldBorder getWorldBorder() {
         if (this.worldBorder == null) {
             this.worldBorder = new CraftWorldBorder(this);
         }
@@ -1742,12 +1743,12 @@ public class CraftWorld extends CraftRegionAccessor implements World {
     }
 
     @Override
-    public <T> void spawnParticle(Particle particle, double x, double y, double z, int count, double offsetX, double offsetY, double offsetZ, double extra, T data) {
+    public <T> void spawnParticle(@NonNull Particle particle, double x, double y, double z, int count, double offsetX, double offsetY, double offsetZ, double extra, T data) {
         this.spawnParticle(particle, x, y, z, count, offsetX, offsetY, offsetZ, extra, data, false);
     }
 
     @Override
-    public <T> void spawnParticle(Particle particle, List<Player> receivers, Player sender, double x, double y, double z, int count, double offsetX, double offsetY, double offsetZ, double extra, T data, boolean force) {
+    public <T> void spawnParticle(@NonNull Particle particle, List<Player> receivers, Player sender, double x, double y, double z, int count, double offsetX, double offsetY, double offsetZ, double extra, T data, boolean force) {
         data = CraftParticle.convertLegacy(data);
         if (data != null) {
             Preconditions.checkArgument(particle.getDataType().isInstance(data), "data (%s) should be %s", data.getClass(), particle.getDataType());
@@ -1768,7 +1769,7 @@ public class CraftWorld extends CraftRegionAccessor implements World {
 
     @Deprecated
     @Override
-    public Location locateNearestStructure(Location origin, org.bukkit.StructureType structureType, int radius, boolean findUnexplored) {
+    public Location locateNearestStructure(@NonNull Location origin, org.bukkit.@NonNull StructureType structureType, int radius, boolean findUnexplored) {
         StructureSearchResult result = null;
 
         // Manually map the mess of the old StructureType to the new StructureType and normal Structure
@@ -1814,7 +1815,7 @@ public class CraftWorld extends CraftRegionAccessor implements World {
     }
 
     @Override
-    public StructureSearchResult locateNearestStructure(Location origin, StructureType structureType, int radius, boolean findUnexplored) {
+    public StructureSearchResult locateNearestStructure(@NonNull Location origin, @NonNull StructureType structureType, int radius, boolean findUnexplored) {
         List<Structure> structures = new ArrayList<>();
         for (Structure structure : RegistryAccess.registryAccess().getRegistry(RegistryKey.STRUCTURE)) {
             if (structure.getStructureType() == structureType) {
@@ -1826,7 +1827,7 @@ public class CraftWorld extends CraftRegionAccessor implements World {
     }
 
     @Override
-    public StructureSearchResult locateNearestStructure(Location origin, Structure structure, int radius, boolean findUnexplored) {
+    public StructureSearchResult locateNearestStructure(@NonNull Location origin, @NonNull Structure structure, int radius, boolean findUnexplored) {
         return this.locateNearestStructure(origin, List.of(structure), radius, findUnexplored);
     }
 
@@ -1857,18 +1858,18 @@ public class CraftWorld extends CraftRegionAccessor implements World {
     }
 
     @Override
-    public Collection<org.bukkit.Material> getInfiniburn() {
+    public @NonNull Collection<org.bukkit.Material> getInfiniburn() {
         return com.google.common.collect.Sets.newHashSet(com.google.common.collect.Iterators.transform(this.getHandle().dimensionType().infiniburn().iterator(), blockHolder -> CraftBlockType.minecraftToBukkit(blockHolder.value())));
     }
 
     @Override
-    public void sendGameEvent(Entity sourceEntity, org.bukkit.GameEvent gameEvent, Vector position) {
+    public void sendGameEvent(Entity sourceEntity, org.bukkit.GameEvent gameEvent, @NonNull Vector position) {
         getHandle().gameEvent(sourceEntity != null ? ((CraftEntity) sourceEntity).getHandle(): null, net.minecraft.core.registries.BuiltInRegistries.GAME_EVENT.get(org.bukkit.craftbukkit.util.CraftNamespacedKey.toMinecraft(gameEvent.getKey())).orElseThrow(), org.bukkit.craftbukkit.util.CraftVector.toBlockPos(position));
     }
     // Paper end
 
     @Override
-    public BiomeSearchResult locateNearestBiome(Location origin, int radius, int horizontalInterval, int verticalInterval, Biome... biomes) {
+    public BiomeSearchResult locateNearestBiome(@NonNull Location origin, int radius, int horizontalInterval, int verticalInterval, Biome... biomes) {
         BlockPos originPos = CraftLocation.toBlockPos(origin);
         Set<Holder<net.minecraft.world.level.biome.Biome>> holders = new HashSet<>();
 
@@ -1921,7 +1922,7 @@ public class CraftWorld extends CraftRegionAccessor implements World {
     }
 
     @Override
-    public Raid locateNearestRaid(Location location, int radius) {
+    public Raid locateNearestRaid(@NonNull Location location, int radius) {
         Preconditions.checkArgument(location != null, "Location cannot be null");
         Preconditions.checkArgument(radius >= 0, "Radius value (%s) cannot be negative", radius);
 
@@ -1939,7 +1940,7 @@ public class CraftWorld extends CraftRegionAccessor implements World {
     // Paper end - more Raid API
 
     @Override
-    public List<Raid> getRaids() {
+    public @NonNull List<Raid> getRaids() {
         Raids persistentRaid = this.world.getRaids();
         return persistentRaid.raidMap.values().stream().map(raid -> new CraftRaid(raid, this.world)).collect(Collectors.toList());
     }
@@ -1950,12 +1951,12 @@ public class CraftWorld extends CraftRegionAccessor implements World {
     }
 
     @Override
-    public Collection<GeneratedStructure> getStructures(int x, int z) {
+    public @NonNull Collection<GeneratedStructure> getStructures(int x, int z) {
         return this.getStructures(x, z, struct -> true);
     }
 
     @Override
-    public Collection<GeneratedStructure> getStructures(int x, int z, Structure structure) {
+    public @NonNull Collection<GeneratedStructure> getStructures(int x, int z, @NonNull Structure structure) {
         Preconditions.checkArgument(structure != null, "Structure cannot be null");
 
         net.minecraft.core.Registry<net.minecraft.world.level.levelgen.structure.Structure> registry = CraftRegistry.getMinecraftRegistry(Registries.STRUCTURE);
@@ -1974,7 +1975,7 @@ public class CraftWorld extends CraftRegionAccessor implements World {
     }
 
     @Override
-    public PersistentDataContainer getPersistentDataContainer() {
+    public @NonNull PersistentDataContainer getPersistentDataContainer() {
         return this.getHandle().persistentDataContainer;
     }
 
@@ -1982,17 +1983,17 @@ public class CraftWorld extends CraftRegionAccessor implements World {
     private final org.bukkit.World.Spigot spigot = new org.bukkit.World.Spigot() {
 
         @Override
-        public LightningStrike strikeLightning(Location loc, boolean isSilent) {
+        public @NonNull LightningStrike strikeLightning(@NonNull Location loc, boolean isSilent) {
             return CraftWorld.this.strikeLightning(loc);
         }
 
         @Override
-        public LightningStrike strikeLightningEffect(Location loc, boolean isSilent) {
+        public @NonNull LightningStrike strikeLightningEffect(@NonNull Location loc, boolean isSilent) {
             return CraftWorld.this.strikeLightningEffect(loc);
         }
     };
 
-    public org.bukkit.World.Spigot spigot() {
+    public org.bukkit.World.@NonNull Spigot spigot() {
         return this.spigot;
     }
     // Spigot end
@@ -2011,7 +2012,7 @@ public class CraftWorld extends CraftRegionAccessor implements World {
     }
 
     @Override
-    public void getChunksAtAsync(int minX, int minZ, int maxX, int maxZ, boolean urgent, Runnable cb) {
+    public void getChunksAtAsync(int minX, int minZ, int maxX, int maxZ, boolean urgent, @NonNull Runnable cb) {
         warnUnsafeChunk("getting a faraway chunk async", minX, minZ); // Paper
         warnUnsafeChunk("getting a faraway chunk async", maxX, maxZ); // Paper
         this.getHandle().loadChunks(
@@ -2045,7 +2046,7 @@ public class CraftWorld extends CraftRegionAccessor implements World {
 
     // Paper start - implement pointers
     @Override
-    public net.kyori.adventure.pointer.Pointers pointers() {
+    public net.kyori.adventure.pointer.@NonNull Pointers pointers() {
         return POINTERS_SUPPLIER.view(this);
     }
     // Paper end

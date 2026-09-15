@@ -2,6 +2,8 @@ package ca.spottedleaf.moonrise.common.list;
 
 import it.unimi.dsi.fastutil.ints.Int2IntOpenHashMap;
 import net.minecraft.world.entity.Entity;
+import org.jspecify.annotations.NonNull;
+
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -93,7 +95,7 @@ public final class EntityList implements Iterable<Entity> {
     }
 
     @Override
-    public Iterator<Entity> iterator() {
+    public @NonNull Iterator<Entity> iterator() {
         return new Iterator<>() {
             private Entity lastRet;
             private int current;

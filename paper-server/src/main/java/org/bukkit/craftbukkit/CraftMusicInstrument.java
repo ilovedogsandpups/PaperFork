@@ -12,6 +12,7 @@ import org.bukkit.MusicInstrument;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Sound;
 import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 public class CraftMusicInstrument extends MusicInstrument implements io.papermc.paper.util.Holderable<Instrument> {
 
@@ -57,7 +58,7 @@ public class CraftMusicInstrument extends MusicInstrument implements io.papermc.
     }
 
     @Override
-    public Holder<Instrument> getHolder() {
+    public @NonNull Holder<Instrument> getHolder() {
         return this.holder;
     }
 
@@ -72,12 +73,12 @@ public class CraftMusicInstrument extends MusicInstrument implements io.papermc.
     }
 
     @Override
-    public Component description() {
+    public @NonNull Component description() {
         return PaperAdventure.asAdventure(this.getHandle().description());
     }
 
     @Override
-    public Sound getSound() {
+    public @NonNull Sound getSound() {
         return CraftSound.minecraftHolderToBukkit(this.getHandle().soundEvent());
     }
 

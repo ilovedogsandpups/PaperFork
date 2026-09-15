@@ -3,6 +3,7 @@ package org.bukkit.craftbukkit.block;
 import net.minecraft.world.level.block.piston.PistonMovingBlockEntity;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.jspecify.annotations.NonNull;
 
 public class CraftMovingPiston extends CraftBlockEntityState<PistonMovingBlockEntity> implements io.papermc.paper.block.MovingPiston { // Paper - Add Moving Piston API
 
@@ -15,23 +16,23 @@ public class CraftMovingPiston extends CraftBlockEntityState<PistonMovingBlockEn
     }
 
     @Override
-    public CraftMovingPiston copy() {
+    public @NonNull CraftMovingPiston copy() {
         return new CraftMovingPiston(this, null);
     }
 
     @Override
-    public CraftMovingPiston copy(Location location) {
+    public @NonNull CraftMovingPiston copy(@NonNull Location location) {
         return new CraftMovingPiston(this, location);
     }
 
     // Paper start - Add Moving Piston API
     @Override
-    public org.bukkit.block.data.BlockData getMovingBlock() {
+    public org.bukkit.block.data.@NonNull BlockData getMovingBlock() {
         return this.getBlockEntity().getMovedState().asBlockData();
     }
 
     @Override
-    public org.bukkit.block.BlockFace getDirection() {
+    public org.bukkit.block.@NonNull BlockFace getDirection() {
         return org.bukkit.craftbukkit.block.CraftBlock.notchToBlockFace(this.getBlockEntity().getDirection());
     }
 

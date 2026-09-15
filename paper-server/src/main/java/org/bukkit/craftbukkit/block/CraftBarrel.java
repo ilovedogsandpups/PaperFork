@@ -1,7 +1,5 @@
 package org.bukkit.craftbukkit.block;
 
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.level.block.BarrelBlock;
 import net.minecraft.world.level.block.entity.BarrelBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.bukkit.Location;
@@ -9,6 +7,7 @@ import org.bukkit.World;
 import org.bukkit.block.Barrel;
 import org.bukkit.craftbukkit.inventory.CraftInventory;
 import org.bukkit.inventory.Inventory;
+import org.jspecify.annotations.NonNull;
 
 public class CraftBarrel extends CraftLootable<BarrelBlockEntity> implements Barrel {
 
@@ -21,12 +20,12 @@ public class CraftBarrel extends CraftLootable<BarrelBlockEntity> implements Bar
     }
 
     @Override
-    public Inventory getSnapshotInventory() {
+    public @NonNull Inventory getSnapshotInventory() {
         return new CraftInventory(this.getSnapshot());
     }
 
     @Override
-    public Inventory getInventory() {
+    public @NonNull Inventory getInventory() {
         if (!this.isPlaced()) {
             return this.getSnapshotInventory();
         }
@@ -61,12 +60,12 @@ public class CraftBarrel extends CraftLootable<BarrelBlockEntity> implements Bar
     }
 
     @Override
-    public CraftBarrel copy() {
+    public @NonNull CraftBarrel copy() {
         return new CraftBarrel(this, null);
     }
 
     @Override
-    public CraftBarrel copy(Location location) {
+    public @NonNull CraftBarrel copy(@NonNull Location location) {
         return new CraftBarrel(this, location);
     }
 

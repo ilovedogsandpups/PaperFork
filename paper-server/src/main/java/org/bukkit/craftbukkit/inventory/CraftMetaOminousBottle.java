@@ -9,6 +9,7 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.component.OminousBottleAmplifier;
 import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.inventory.meta.OminousBottleMeta;
+import org.jspecify.annotations.NonNull;
 
 import static io.papermc.paper.util.BoundChecker.requireRange;
 
@@ -60,7 +61,7 @@ public class CraftMetaOminousBottle extends CraftMetaItem implements OminousBott
     }
 
     @Override
-    public CraftMetaOminousBottle clone() {
+    public @NonNull CraftMetaOminousBottle clone() {
         CraftMetaOminousBottle clone = ((CraftMetaOminousBottle) super.clone());
         return clone;
     }

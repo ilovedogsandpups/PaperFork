@@ -4,9 +4,8 @@ import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import org.bukkit.Location;
 import org.bukkit.Nameable;
 import org.bukkit.World;
-import org.bukkit.craftbukkit.CraftLootTable;
-import org.bukkit.loot.LootTable;
 import org.bukkit.loot.Lootable;
+import org.jspecify.annotations.NonNull;
 
 public abstract class CraftLootable<T extends RandomizableContainerBlockEntity> extends CraftContainer<T> implements Nameable, Lootable, com.destroystokyo.paper.loottable.PaperLootableBlockInventory { // Paper
 
@@ -29,7 +28,7 @@ public abstract class CraftLootable<T extends RandomizableContainerBlockEntity> 
 
     // Paper start - move to PaperLootableBlockInventory
     @Override
-    public net.minecraft.world.level.Level getNMSWorld() {
+    public net.minecraft.world.level.@NonNull Level getNMSWorld() {
         return ((org.bukkit.craftbukkit.CraftWorld) this.getWorld()).getHandle();
     }
 
@@ -40,8 +39,8 @@ public abstract class CraftLootable<T extends RandomizableContainerBlockEntity> 
     // Paper end - move to PaperLootableBlockInventory
 
     @Override
-    public abstract CraftLootable<T> copy();
+    public abstract @NonNull CraftLootable<T> copy();
 
     @Override
-    public abstract CraftLootable<T> copy(Location location);
+    public abstract @NonNull CraftLootable<T> copy(Location location);
 }

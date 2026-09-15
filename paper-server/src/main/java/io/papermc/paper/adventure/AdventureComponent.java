@@ -11,6 +11,7 @@ import net.minecraft.network.chat.contents.PlainTextContents;
 import net.minecraft.util.FormattedCharSequence;
 import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
 import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
 
 public final class AdventureComponent implements net.minecraft.network.chat.Component {
     final Component adventure;
@@ -34,12 +35,12 @@ public final class AdventureComponent implements net.minecraft.network.chat.Comp
     }
 
     @Override
-    public Style getStyle() {
+    public @NonNull Style getStyle() {
         return this.deepConverted().getStyle();
     }
 
     @Override
-    public ComponentContents getContents() {
+    public @NonNull ComponentContents getContents() {
         if (this.adventure instanceof TextComponent) {
             return PlainTextContents.create(((TextComponent) this.adventure).content());
         } else {
@@ -48,27 +49,27 @@ public final class AdventureComponent implements net.minecraft.network.chat.Comp
     }
 
     @Override
-    public String getString() {
+    public @NonNull String getString() {
         return PlainTextComponentSerializer.plainText().serialize(this.adventure);
     }
 
     @Override
-    public List<net.minecraft.network.chat.Component> getSiblings() {
+    public @NonNull List<net.minecraft.network.chat.Component> getSiblings() {
         return this.deepConverted().getSiblings();
     }
 
     @Override
-    public MutableComponent plainCopy() {
+    public @NonNull MutableComponent plainCopy() {
         return this.deepConverted().plainCopy();
     }
 
     @Override
-    public MutableComponent copy() {
+    public @NonNull MutableComponent copy() {
         return this.deepConverted().copy();
     }
 
     @Override
-    public FormattedCharSequence getVisualOrderText() {
+    public @NonNull FormattedCharSequence getVisualOrderText() {
         return this.deepConverted().getVisualOrderText();
     }
 

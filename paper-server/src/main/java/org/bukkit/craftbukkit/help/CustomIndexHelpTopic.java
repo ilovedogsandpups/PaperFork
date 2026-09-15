@@ -8,6 +8,7 @@ import org.bukkit.help.HelpMap;
 import org.bukkit.help.HelpTopic;
 import org.bukkit.help.IndexHelpTopic;
 import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 public class CustomIndexHelpTopic extends IndexHelpTopic {
     private List<String> futureTopics;
@@ -27,7 +28,7 @@ public class CustomIndexHelpTopic extends IndexHelpTopic {
     }
 
     @Override
-    public String getFullText(CommandSender sender) {
+    public @NonNull String getFullText(@NonNull CommandSender sender) {
         this.computeTopics();
 
         return super.getFullText(sender);

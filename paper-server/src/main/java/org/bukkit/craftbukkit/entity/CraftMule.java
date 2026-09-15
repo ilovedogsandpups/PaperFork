@@ -3,6 +3,7 @@ package org.bukkit.craftbukkit.entity;
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.entity.Horse.Variant;
 import org.bukkit.entity.Mule;
+import org.jspecify.annotations.NonNull;
 
 public class CraftMule extends CraftChestedHorse implements Mule {
 
@@ -11,7 +12,7 @@ public class CraftMule extends CraftChestedHorse implements Mule {
     }
 
     @Override
-    public Variant getVariant() {
+    public @NonNull Variant getVariant() {
         return Variant.MULE;
     }
 }

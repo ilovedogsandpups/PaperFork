@@ -11,6 +11,7 @@ import org.bukkit.craftbukkit.util.CraftMagicNumbers;
 import org.bukkit.entity.Enderman;
 import org.bukkit.entity.Entity;
 import org.bukkit.material.MaterialData;
+import org.jspecify.annotations.NonNull;
 
 public class CraftEnderman extends CraftMonster implements Enderman {
 
@@ -29,7 +30,7 @@ public class CraftEnderman extends CraftMonster implements Enderman {
     }
 
     @Override
-    public MaterialData getCarriedMaterial() {
+    public @NonNull MaterialData getCarriedMaterial() {
         BlockState carried = this.getHandle().getCarriedBlock();
         return (carried == null) ? Material.AIR.getNewData((byte) 0) : CraftMagicNumbers.getMaterial(carried);
     }
@@ -41,7 +42,7 @@ public class CraftEnderman extends CraftMonster implements Enderman {
     }
 
     @Override
-    public void setCarriedMaterial(MaterialData data) {
+    public void setCarriedMaterial(@NonNull MaterialData data) {
         this.getHandle().setCarriedBlock(CraftMagicNumbers.getBlock(data));
     }
 
@@ -76,7 +77,7 @@ public class CraftEnderman extends CraftMonster implements Enderman {
     }
 
     @Override
-    public boolean teleportTowards(Entity entity) {
+    public boolean teleportTowards(@NonNull Entity entity) {
         Preconditions.checkArgument(entity != null, "entity cannot be null");
 
         return this.getHandle().teleportTowards(((CraftEntity) entity).getHandle());

@@ -5,6 +5,7 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.CommandBlock;
 import org.bukkit.craftbukkit.util.CraftChatMessage;
+import org.jspecify.annotations.NonNull;
 
 public class CraftCommandBlock extends CraftBlockEntityState<CommandBlockEntity> implements CommandBlock, io.papermc.paper.commands.PaperCommandBlockHolder {
 
@@ -17,7 +18,7 @@ public class CraftCommandBlock extends CraftBlockEntityState<CommandBlockEntity>
     }
 
     @Override
-    public String getCommand() {
+    public @NonNull String getCommand() {
         return this.getSnapshot().getCommandBlock().getCommand();
     }
 
@@ -27,7 +28,7 @@ public class CraftCommandBlock extends CraftBlockEntityState<CommandBlockEntity>
     }
 
     @Override
-    public String getName() {
+    public @NonNull String getName() {
         return CraftChatMessage.fromComponent(this.getSnapshot().getCommandBlock().getName());
     }
 
@@ -37,17 +38,17 @@ public class CraftCommandBlock extends CraftBlockEntityState<CommandBlockEntity>
     }
 
     @Override
-    public CraftCommandBlock copy() {
+    public @NonNull CraftCommandBlock copy() {
         return new CraftCommandBlock(this, null);
     }
 
     @Override
-    public CraftCommandBlock copy(Location location) {
+    public @NonNull CraftCommandBlock copy(@NonNull Location location) {
         return new CraftCommandBlock(this, location);
     }
 
     @Override
-    public net.kyori.adventure.text.Component name() {
+    public net.kyori.adventure.text.@NonNull Component name() {
         return io.papermc.paper.adventure.PaperAdventure.asAdventure(this.getSnapshot().getCommandBlock().getName());
     }
 
@@ -57,7 +58,7 @@ public class CraftCommandBlock extends CraftBlockEntityState<CommandBlockEntity>
     }
 
     @Override
-    public net.minecraft.world.level.BaseCommandBlock getCommandBlockHandle() {
+    public net.minecraft.world.level.@NonNull BaseCommandBlock getCommandBlockHandle() {
         return this.getSnapshot().getCommandBlock();
     }
 }

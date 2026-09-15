@@ -3,6 +3,7 @@ package org.bukkit.craftbukkit.entity;
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.entity.Horse.Variant;
 import org.bukkit.entity.ZombieHorse;
+import org.jspecify.annotations.NonNull;
 
 public class CraftZombieHorse extends CraftAbstractHorse implements ZombieHorse {
 
@@ -11,7 +12,7 @@ public class CraftZombieHorse extends CraftAbstractHorse implements ZombieHorse 
     }
 
     @Override
-    public Variant getVariant() {
+    public @NonNull Variant getVariant() {
         return Variant.UNDEAD_HORSE;
     }
 }

@@ -6,6 +6,7 @@ import org.bukkit.block.BlockFace;
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.craftbukkit.block.CraftBlock;
 import org.bukkit.entity.Shulker;
+import org.jspecify.annotations.NonNull;
 
 public class CraftShulker extends CraftGolem implements Shulker, CraftEnemy {
 
@@ -40,12 +41,12 @@ public class CraftShulker extends CraftGolem implements Shulker, CraftEnemy {
     }
 
     @Override
-    public BlockFace getAttachedFace() {
+    public @NonNull BlockFace getAttachedFace() {
         return CraftBlock.notchToBlockFace(this.getHandle().getAttachFace());
     }
 
     @Override
-    public void setAttachedFace(BlockFace face) {
+    public void setAttachedFace(@NonNull BlockFace face) {
         Preconditions.checkNotNull(face, "face cannot be null");
         Preconditions.checkArgument(face.isCartesian(), "%s is not a valid block face to attach a shulker to, a cartesian block face is expected", face);
         this.getHandle().setAttachFace(CraftBlock.blockFaceToNotch(face));

@@ -4,6 +4,7 @@ import net.minecraft.world.level.block.entity.ComparatorBlockEntity;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Comparator;
+import org.jspecify.annotations.NonNull;
 
 public class CraftComparator extends CraftBlockEntityState<ComparatorBlockEntity> implements Comparator {
 
@@ -16,12 +17,12 @@ public class CraftComparator extends CraftBlockEntityState<ComparatorBlockEntity
     }
 
     @Override
-    public CraftComparator copy() {
+    public @NonNull CraftComparator copy() {
         return new CraftComparator(this, null);
     }
 
     @Override
-    public CraftComparator copy(Location location) {
+    public @NonNull CraftComparator copy(@NonNull Location location) {
         return new CraftComparator(this, location);
     }
 }

@@ -7,6 +7,7 @@ import io.papermc.paper.plugin.provider.PluginProvider;
 import java.nio.file.Path;
 import net.kyori.adventure.text.logger.slf4j.ComponentLogger;
 import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 public final class PluginBootstrapContextImpl implements BootstrapContext {
 
@@ -59,7 +60,7 @@ public final class PluginBootstrapContextImpl implements BootstrapContext {
     }
 
     @Override
-    public LifecycleEventManager<BootstrapContext> getLifecycleManager() {
+    public @NonNull LifecycleEventManager<BootstrapContext> getLifecycleManager() {
         return this.lifecycleEventManager;
     }
 

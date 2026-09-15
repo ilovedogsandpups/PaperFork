@@ -18,6 +18,7 @@ import org.bukkit.craftbukkit.block.CraftCreatureSpawner;
 import org.bukkit.entity.EntitySnapshot;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.minecart.SpawnerMinecart;
+import org.jspecify.annotations.NonNull;
 
 public class CraftMinecartMobSpawner extends CraftMinecart implements SpawnerMinecart, org.bukkit.craftbukkit.spawner.PaperSharedSpawnerLogic { // Paper - more spawner API
 
@@ -83,7 +84,7 @@ public class CraftMinecartMobSpawner extends CraftMinecart implements SpawnerMin
     }
 
     @Override
-    public void addPotentialSpawn(EntitySnapshot snapshot, int weight, SpawnRule spawnRule) {
+    public void addPotentialSpawn(@NonNull EntitySnapshot snapshot, int weight, SpawnRule spawnRule) {
         CraftCreatureSpawner.addPotentialSpawn(this.getHandle().getSpawner(), snapshot, weight, spawnRule, null);
     }
 
@@ -95,12 +96,12 @@ public class CraftMinecartMobSpawner extends CraftMinecart implements SpawnerMin
     }
 
     @Override
-    public void setPotentialSpawns(Collection<SpawnerEntry> entries) {
+    public void setPotentialSpawns(@NonNull Collection<SpawnerEntry> entries) {
         CraftCreatureSpawner.setPotentialSpawns(this.getHandle().getSpawner(), entries);
     }
 
     @Override
-    public List<SpawnerEntry> getPotentialSpawns() {
+    public @NonNull List<SpawnerEntry> getPotentialSpawns() {
         return CraftCreatureSpawner.getPotentialSpawns(this.getHandle().getSpawner());
     }
 

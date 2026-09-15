@@ -5,6 +5,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import org.bukkit.attribute.Attributable;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
+import org.jspecify.annotations.NonNull;
 
 public class CraftAttributeMap implements Attributable {
 
@@ -45,7 +46,7 @@ public class CraftAttributeMap implements Attributable {
     }
 
     @Override
-    public AttributeInstance getAttribute(Attribute attribute) {
+    public AttributeInstance getAttribute(@NonNull Attribute attribute) {
         Preconditions.checkArgument(attribute != null, "attribute");
         net.minecraft.world.entity.ai.attributes.AttributeInstance nms = this.handle.getInstance(CraftAttribute.bukkitToMinecraftHolder(attribute));
 
@@ -53,7 +54,7 @@ public class CraftAttributeMap implements Attributable {
     }
 
     @Override
-    public void registerAttribute(Attribute attribute) {
+    public void registerAttribute(@NonNull Attribute attribute) {
         Preconditions.checkArgument(attribute != null, "attribute");
         this.handle.registerAttribute(CraftAttribute.bukkitToMinecraftHolder(attribute));
     }

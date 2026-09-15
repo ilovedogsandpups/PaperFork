@@ -7,6 +7,7 @@ import org.bukkit.block.data.BlockData;
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.craftbukkit.block.data.CraftBlockData;
 import org.bukkit.entity.FallingBlock;
+import org.jspecify.annotations.NonNull;
 
 public class CraftFallingBlock extends CraftEntity implements FallingBlock {
 
@@ -20,17 +21,17 @@ public class CraftFallingBlock extends CraftEntity implements FallingBlock {
     }
 
     @Override
-    public Material getMaterial() {
+    public @NonNull Material getMaterial() {
         return this.getBlockData().getMaterial();
     }
 
     @Override
-    public BlockData getBlockData() {
+    public @NonNull BlockData getBlockData() {
         return this.getHandle().getBlockState().asBlockData();
     }
 
     @Override
-    public void setBlockData(final BlockData blockData) {
+    public void setBlockData(final @NonNull BlockData blockData) {
         Preconditions.checkArgument(blockData != null, "blockData");
         final net.minecraft.world.level.block.state.BlockState oldState = this.getHandle().blockState, newState = ((CraftBlockData) blockData).getState();
         this.getHandle().blockState = newState;
@@ -40,7 +41,7 @@ public class CraftFallingBlock extends CraftEntity implements FallingBlock {
     }
 
     @Override
-    public org.bukkit.block.BlockState getBlockState() {
+    public org.bukkit.block.@NonNull BlockState getBlockState() {
         return org.bukkit.craftbukkit.block.CraftBlockStates.getBlockState(this.getHandle().getBlockState(), this.getHandle().blockData);
     }
 

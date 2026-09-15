@@ -5,6 +5,7 @@ import java.util.List;
 import net.kyori.adventure.text.Component;
 import net.minecraft.commands.functions.StringTemplate;
 import net.minecraft.server.dialog.body.PlainMessage;
+import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 
 import static io.papermc.paper.util.BoundChecker.requireRange;
@@ -43,19 +44,19 @@ public record SingleOptionDialogInputImpl(
         }
 
         @Override
-        public BuilderImpl width(final int width) {
+        public @NonNull BuilderImpl width(final int width) {
             this.width = requireRange(width, "width", 1, 1024);
             return this;
         }
 
         @Override
-        public BuilderImpl labelVisible(final boolean labelVisible) {
+        public @NonNull BuilderImpl labelVisible(final boolean labelVisible) {
             this.labelVisible = labelVisible;
             return this;
         }
 
         @Override
-        public SingleOptionDialogInput build() {
+        public @NonNull SingleOptionDialogInput build() {
             return new SingleOptionDialogInputImpl(this.key, this.width, this.entries, this.label, this.labelVisible);
         }
     }

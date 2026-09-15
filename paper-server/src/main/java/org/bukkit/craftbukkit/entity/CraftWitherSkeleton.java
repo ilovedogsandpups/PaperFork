@@ -3,6 +3,7 @@ package org.bukkit.craftbukkit.entity;
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.entity.Skeleton.SkeletonType;
 import org.bukkit.entity.WitherSkeleton;
+import org.jspecify.annotations.NonNull;
 
 public class CraftWitherSkeleton extends CraftAbstractSkeleton implements WitherSkeleton {
 
@@ -11,7 +12,7 @@ public class CraftWitherSkeleton extends CraftAbstractSkeleton implements Wither
     }
 
     @Override
-    public SkeletonType getSkeletonType() {
+    public @NonNull SkeletonType getSkeletonType() {
         return SkeletonType.WITHER;
     }
 }

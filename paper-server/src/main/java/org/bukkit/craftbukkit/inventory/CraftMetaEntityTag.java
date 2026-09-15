@@ -13,6 +13,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.component.TypedEntityData;
 import org.bukkit.Material;
 import org.bukkit.configuration.serialization.DelegateDeserialization;
+import org.jspecify.annotations.NonNull;
 
 @DelegateDeserialization(SerializableMeta.class)
 public class CraftMetaEntityTag extends CraftMetaItem {
@@ -126,7 +127,7 @@ public class CraftMetaEntityTag extends CraftMetaItem {
     }
 
     @Override
-    public CraftMetaEntityTag clone() {
+    public @NonNull CraftMetaEntityTag clone() {
         CraftMetaEntityTag clone = (CraftMetaEntityTag) super.clone();
 
         if (this.entityTag != null) {

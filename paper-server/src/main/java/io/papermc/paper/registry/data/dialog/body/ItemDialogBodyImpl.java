@@ -3,6 +3,7 @@ package io.papermc.paper.registry.data.dialog.body;
 import org.bukkit.craftbukkit.inventory.CraftItemStack;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.Range;
+import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 
 import static io.papermc.paper.util.BoundChecker.requireRange;
@@ -26,37 +27,37 @@ public record ItemDialogBodyImpl(
         }
 
         @Override
-        public ItemDialogBody.Builder description(final @Nullable PlainMessageDialogBody description) {
+        public ItemDialogBody.@NonNull Builder description(final @Nullable PlainMessageDialogBody description) {
             this.description = description;
             return this;
         }
 
         @Override
-        public ItemDialogBody.Builder showDecorations(final boolean showDecorations) {
+        public ItemDialogBody.@NonNull Builder showDecorations(final boolean showDecorations) {
             this.showDecorations = showDecorations;
             return this;
         }
 
         @Override
-        public ItemDialogBody.Builder showTooltip(final boolean showTooltip) {
+        public ItemDialogBody.@NonNull Builder showTooltip(final boolean showTooltip) {
             this.showTooltip = showTooltip;
             return this;
         }
 
         @Override
-        public ItemDialogBody.Builder width(final @Range(from = 1, to = 256) int width) {
+        public ItemDialogBody.@NonNull Builder width(final @Range(from = 1, to = 256) int width) {
             this.width = requireRange(width, "width", 1, 256);
             return this;
         }
 
         @Override
-        public ItemDialogBody.Builder height(final @Range(from = 1, to = 256) int height) {
+        public ItemDialogBody.@NonNull Builder height(final @Range(from = 1, to = 256) int height) {
             this.height = requireRange(height, "height", 1, 256);
             return this;
         }
 
         @Override
-        public ItemDialogBody build() {
+        public @NonNull ItemDialogBody build() {
             return new ItemDialogBodyImpl(this.item, this.description, this.showDecorations, this.showTooltip, this.width, this.height);
         }
     }

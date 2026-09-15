@@ -2,11 +2,12 @@ package org.bukkit.craftbukkit.tag;
 
 import java.util.Set;
 import java.util.stream.Collectors;
-import net.minecraft.core.Holder;
+
 import net.minecraft.core.Registry;
 import net.minecraft.tags.TagKey;
 import org.bukkit.craftbukkit.damage.CraftDamageType;
 import org.bukkit.damage.DamageType;
+import org.jspecify.annotations.NonNull;
 
 public class CraftDamageTag extends CraftTag<net.minecraft.world.damagesource.DamageType, DamageType> {
 
@@ -15,12 +16,12 @@ public class CraftDamageTag extends CraftTag<net.minecraft.world.damagesource.Da
     }
 
     @Override
-    public boolean isTagged(DamageType type) {
+    public boolean isTagged(@NonNull DamageType type) {
         return CraftDamageType.bukkitToMinecraftHolder(type).is(this.tag);
     }
 
     @Override
-    public Set<DamageType> getValues() {
+    public @NonNull Set<DamageType> getValues() {
         return this.getHandle().stream().map(CraftDamageType::minecraftHolderToBukkit).collect(Collectors.toUnmodifiableSet());
     }
 }

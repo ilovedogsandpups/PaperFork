@@ -4,8 +4,7 @@ import net.minecraft.commands.CommandSource;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.network.chat.Component;
 import org.bukkit.command.CommandSender;
-
-import java.util.UUID;
+import org.jspecify.annotations.NonNull;
 
 public class DelegatingCommandSource implements CommandSource {
 
@@ -16,7 +15,7 @@ public class DelegatingCommandSource implements CommandSource {
     }
 
     @Override
-    public void sendSystemMessage(Component message) {
+    public void sendSystemMessage(@NonNull Component message) {
         delegate.sendSystemMessage(message);
     }
 
@@ -36,7 +35,7 @@ public class DelegatingCommandSource implements CommandSource {
     }
 
     @Override
-    public CommandSender getBukkitSender(CommandSourceStack wrapper) {
+    public @NonNull CommandSender getBukkitSender(@NonNull CommandSourceStack wrapper) {
         return delegate.getBukkitSender(wrapper);
     }
 }

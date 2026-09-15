@@ -1,6 +1,8 @@
 package org.bukkit.craftbukkit.util;
 
 import com.google.common.base.Preconditions;
+import org.jspecify.annotations.NonNull;
+
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -51,7 +53,7 @@ public final class WeakCollection<E> implements Collection<E> {
     }
 
     @Override
-    public boolean containsAll(Collection<?> collection) {
+    public boolean containsAll(@NonNull Collection<?> collection) {
         return this.toCollection().containsAll(collection);
     }
 
@@ -61,7 +63,7 @@ public final class WeakCollection<E> implements Collection<E> {
     }
 
     @Override
-    public Iterator<E> iterator() {
+    public @NonNull Iterator<E> iterator() {
         return new Iterator<E>() {
             final Iterator<WeakReference<E>> it = WeakCollection.this.collection.iterator();
             Object value = WeakCollection.NO_VALUE;
@@ -128,7 +130,7 @@ public final class WeakCollection<E> implements Collection<E> {
     }
 
     @Override
-    public boolean removeAll(Collection<?> collection) {
+    public boolean removeAll(@NonNull Collection<?> collection) {
         Iterator<E> it = this.iterator();
         boolean ret = false;
         while (it.hasNext()) {
@@ -141,7 +143,7 @@ public final class WeakCollection<E> implements Collection<E> {
     }
 
     @Override
-    public boolean retainAll(Collection<?> collection) {
+    public boolean retainAll(@NonNull Collection<?> collection) {
         Iterator<E> it = this.iterator();
         boolean ret = false;
         while (it.hasNext()) {
@@ -163,12 +165,12 @@ public final class WeakCollection<E> implements Collection<E> {
     }
 
     @Override
-    public Object[] toArray() {
+    public Object @NonNull [] toArray() {
         return this.toArray(new Object[0]);
     }
 
     @Override
-    public <T> T[] toArray(T[] array) {
+    public <T> T @NonNull [] toArray(T @NonNull [] array) {
         return this.toCollection().toArray(array);
     }
 

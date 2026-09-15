@@ -13,6 +13,7 @@ import org.bukkit.craftbukkit.inventory.CraftInventoryJukebox;
 import org.bukkit.craftbukkit.inventory.CraftItemStack;
 import org.bukkit.craftbukkit.inventory.CraftItemType;
 import org.bukkit.inventory.JukeboxInventory;
+import org.jspecify.annotations.NonNull;
 
 public class CraftJukebox extends CraftBlockEntityState<JukeboxBlockEntity> implements Jukebox {
 
@@ -25,12 +26,12 @@ public class CraftJukebox extends CraftBlockEntityState<JukeboxBlockEntity> impl
     }
 
     @Override
-    public JukeboxInventory getSnapshotInventory() {
+    public @NonNull JukeboxInventory getSnapshotInventory() {
         return new CraftInventoryJukebox(this.getSnapshot());
     }
 
     @Override
-    public JukeboxInventory getInventory() {
+    public @NonNull JukeboxInventory getInventory() {
         if (!this.isPlaced()) {
             return this.getSnapshotInventory();
         }
@@ -55,7 +56,7 @@ public class CraftJukebox extends CraftBlockEntityState<JukeboxBlockEntity> impl
     }
 
     @Override
-    public Material getPlaying() {
+    public @NonNull Material getPlaying() {
         return this.getRecord().getType();
     }
 
@@ -74,7 +75,7 @@ public class CraftJukebox extends CraftBlockEntityState<JukeboxBlockEntity> impl
     }
 
     @Override
-    public org.bukkit.inventory.ItemStack getRecord() {
+    public org.bukkit.inventory.@NonNull ItemStack getRecord() {
         ItemStack record = this.getSnapshot().getTheItem();
         return CraftItemStack.asBukkitCopy(record);
     }
@@ -141,12 +142,12 @@ public class CraftJukebox extends CraftBlockEntityState<JukeboxBlockEntity> impl
     }
 
     @Override
-    public CraftJukebox copy() {
+    public @NonNull CraftJukebox copy() {
         return new CraftJukebox(this, null);
     }
 
     @Override
-    public CraftJukebox copy(Location location) {
+    public @NonNull CraftJukebox copy(@NonNull Location location) {
         return new CraftJukebox(this, location);
     }
 }

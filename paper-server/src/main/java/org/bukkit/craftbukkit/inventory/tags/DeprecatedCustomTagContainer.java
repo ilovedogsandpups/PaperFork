@@ -6,6 +6,7 @@ import org.bukkit.inventory.meta.tags.CustomItemTagContainer;
 import org.bukkit.inventory.meta.tags.ItemTagAdapterContext;
 import org.bukkit.inventory.meta.tags.ItemTagType;
 import org.bukkit.persistence.PersistentDataContainer;
+import org.jspecify.annotations.NonNull;
 
 /**
  * The {@link DeprecatedCustomTagContainer} is a simply wrapper implementation
@@ -21,7 +22,7 @@ public final class DeprecatedCustomTagContainer implements CustomItemTagContaine
     }
 
     @Override
-    public <T, Z> void setCustomTag(NamespacedKey key, ItemTagType<T, Z> type, Z value) {
+    public <T, Z> void setCustomTag(@NonNull NamespacedKey key, ItemTagType<T, Z> type, @NonNull Z value) {
         if (Objects.equals(CustomItemTagContainer.class, type.getPrimitiveType())) {
             this.wrapped.set(key, new DeprecatedContainerTagType<>((ItemTagType<CustomItemTagContainer, Z>) type), value);
         } else {
@@ -30,7 +31,7 @@ public final class DeprecatedCustomTagContainer implements CustomItemTagContaine
     }
 
     @Override
-    public <T, Z> boolean hasCustomTag(NamespacedKey key, ItemTagType<T, Z> type) {
+    public <T, Z> boolean hasCustomTag(@NonNull NamespacedKey key, ItemTagType<T, Z> type) {
         if (Objects.equals(CustomItemTagContainer.class, type.getPrimitiveType())) {
             return this.wrapped.has(key, new DeprecatedContainerTagType<>((ItemTagType<CustomItemTagContainer, Z>) type));
         } else {
@@ -39,7 +40,7 @@ public final class DeprecatedCustomTagContainer implements CustomItemTagContaine
     }
 
     @Override
-    public <T, Z> Z getCustomTag(NamespacedKey key, ItemTagType<T, Z> type) {
+    public <T, Z> Z getCustomTag(@NonNull NamespacedKey key, ItemTagType<T, Z> type) {
         if (Objects.equals(CustomItemTagContainer.class, type.getPrimitiveType())) {
             return this.wrapped.get(key, new DeprecatedContainerTagType<>((ItemTagType<CustomItemTagContainer, Z>) type));
         } else {
@@ -48,7 +49,7 @@ public final class DeprecatedCustomTagContainer implements CustomItemTagContaine
     }
 
     @Override
-    public void removeCustomTag(NamespacedKey key) {
+    public void removeCustomTag(@NonNull NamespacedKey key) {
         this.wrapped.remove(key);
     }
 
@@ -58,7 +59,7 @@ public final class DeprecatedCustomTagContainer implements CustomItemTagContaine
     }
 
     @Override
-    public ItemTagAdapterContext getAdapterContext() {
+    public @NonNull ItemTagAdapterContext getAdapterContext() {
         return new DeprecatedItemAdapterContext(this.wrapped.getAdapterContext());
     }
 

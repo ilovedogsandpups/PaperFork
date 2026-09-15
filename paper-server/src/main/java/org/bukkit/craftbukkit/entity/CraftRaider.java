@@ -9,6 +9,7 @@ import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.craftbukkit.CraftSound;
 import org.bukkit.craftbukkit.block.CraftBlock;
 import org.bukkit.entity.Raider;
+import org.jspecify.annotations.NonNull;
 
 public abstract class CraftRaider extends CraftMonster implements Raider {
 
@@ -99,7 +100,7 @@ public abstract class CraftRaider extends CraftMonster implements Raider {
     }
 
     @Override
-    public Sound getCelebrationSound() {
+    public @NonNull Sound getCelebrationSound() {
         return CraftSound.minecraftToBukkit(this.getHandle().getCelebrateSound());
     }
 }

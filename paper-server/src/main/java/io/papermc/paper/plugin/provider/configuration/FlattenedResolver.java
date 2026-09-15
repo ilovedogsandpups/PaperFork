@@ -1,6 +1,7 @@
 package io.papermc.paper.plugin.provider.configuration;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jspecify.annotations.NonNull;
 import org.spongepowered.configurate.objectmapping.meta.NodeResolver;
 
 import java.lang.annotation.ElementType;
@@ -16,7 +17,7 @@ public @interface FlattenedResolver {
     final class Factory implements NodeResolver.Factory {
 
         @Override
-        public @Nullable NodeResolver make(String name, AnnotatedElement element) {
+        public @Nullable NodeResolver make(@NonNull String name, AnnotatedElement element) {
             if (element.isAnnotationPresent(FlattenedResolver.class)) {
                 return (node) -> node;
             } else {

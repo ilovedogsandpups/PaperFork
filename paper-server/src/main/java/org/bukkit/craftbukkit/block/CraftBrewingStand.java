@@ -6,6 +6,7 @@ import org.bukkit.World;
 import org.bukkit.block.BrewingStand;
 import org.bukkit.craftbukkit.inventory.CraftInventoryBrewer;
 import org.bukkit.inventory.BrewerInventory;
+import org.jspecify.annotations.NonNull;
 
 public class CraftBrewingStand extends CraftContainer<BrewingStandBlockEntity> implements BrewingStand {
 
@@ -18,12 +19,12 @@ public class CraftBrewingStand extends CraftContainer<BrewingStandBlockEntity> i
     }
 
     @Override
-    public BrewerInventory getSnapshotInventory() {
+    public @NonNull BrewerInventory getSnapshotInventory() {
         return new CraftInventoryBrewer(this.getSnapshot());
     }
 
     @Override
-    public BrewerInventory getInventory() {
+    public @NonNull BrewerInventory getInventory() {
         if (!this.isPlaced()) {
             return this.getSnapshotInventory();
         }
@@ -65,12 +66,12 @@ public class CraftBrewingStand extends CraftContainer<BrewingStandBlockEntity> i
     }
 
     @Override
-    public CraftBrewingStand copy() {
+    public @NonNull CraftBrewingStand copy() {
         return new CraftBrewingStand(this, null);
     }
 
     @Override
-    public CraftBrewingStand copy(Location location) {
+    public @NonNull CraftBrewingStand copy(@NonNull Location location) {
         return new CraftBrewingStand(this, location);
     }
 }

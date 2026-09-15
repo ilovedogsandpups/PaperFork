@@ -14,6 +14,7 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
+import org.jspecify.annotations.NonNull;
 
 public class CraftInventoryView<T extends AbstractContainerMenu, I extends Inventory> extends CraftAbstractInventoryView {
     protected final T container;
@@ -32,22 +33,22 @@ public class CraftInventoryView<T extends AbstractContainerMenu, I extends Inven
     }
 
     @Override
-    public I getTopInventory() {
+    public @NonNull I getTopInventory() {
         return this.viewing;
     }
 
     @Override
-    public Inventory getBottomInventory() {
+    public @NonNull Inventory getBottomInventory() {
         return this.player.getInventory();
     }
 
     @Override
-    public HumanEntity getPlayer() {
+    public @NonNull HumanEntity getPlayer() {
         return this.player;
     }
 
     @Override
-    public InventoryType getType() {
+    public @NonNull InventoryType getType() {
         InventoryType type = this.viewing.getType();
         if (type == InventoryType.CRAFTING && this.player.getGameMode() == GameMode.CREATIVE) {
             return InventoryType.CREATIVE;
@@ -74,22 +75,22 @@ public class CraftInventoryView<T extends AbstractContainerMenu, I extends Inven
     }
 
     @Override
-    public net.kyori.adventure.text.Component title() {
+    public net.kyori.adventure.text.@NonNull Component title() {
         return io.papermc.paper.adventure.PaperAdventure.asAdventure(this.container.getTitle());
     }
 
     @Override
-    public String getTitle() {
+    public @NonNull String getTitle() {
         return this.title;
     }
 
     @Override
-    public String getOriginalTitle() {
+    public @NonNull String getOriginalTitle() {
         return this.originalTitle;
     }
 
     @Override
-    public void setTitle(String title) {
+    public void setTitle(@NonNull String title) {
         CraftInventoryView.sendInventoryTitleChange(this, title);
         this.title = title;
     }

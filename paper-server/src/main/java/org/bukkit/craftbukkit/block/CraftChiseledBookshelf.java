@@ -11,6 +11,7 @@ import org.bukkit.block.data.Directional;
 import org.bukkit.craftbukkit.inventory.CraftInventoryChiseledBookshelf;
 import org.bukkit.inventory.ChiseledBookshelfInventory;
 import org.bukkit.util.Vector;
+import org.jspecify.annotations.NonNull;
 
 public class CraftChiseledBookshelf extends CraftBlockEntityState<ChiseledBookShelfBlockEntity> implements ChiseledBookshelf {
 
@@ -33,12 +34,12 @@ public class CraftChiseledBookshelf extends CraftBlockEntityState<ChiseledBookSh
     }
 
     @Override
-    public ChiseledBookshelfInventory getSnapshotInventory() {
+    public @NonNull ChiseledBookshelfInventory getSnapshotInventory() {
         return new CraftInventoryChiseledBookshelf(this.getSnapshot());
     }
 
     @Override
-    public ChiseledBookshelfInventory getInventory() {
+    public @NonNull ChiseledBookshelfInventory getInventory() {
         if (!this.isPlaced()) {
             return this.getSnapshotInventory();
         }
@@ -47,7 +48,7 @@ public class CraftChiseledBookshelf extends CraftBlockEntityState<ChiseledBookSh
     }
 
     @Override
-    public int getSlot(Vector clickVector) {
+    public int getSlot(@NonNull Vector clickVector) {
         BlockFace facing = ((Directional) this.getBlockData()).getFacing();
 
         Vec2 faceVector;
@@ -82,12 +83,12 @@ public class CraftChiseledBookshelf extends CraftBlockEntityState<ChiseledBookSh
     }
 
     @Override
-    public CraftChiseledBookshelf copy() {
+    public @NonNull CraftChiseledBookshelf copy() {
         return new CraftChiseledBookshelf(this, null);
     }
 
     @Override
-    public CraftChiseledBookshelf copy(Location location) {
+    public @NonNull CraftChiseledBookshelf copy(@NonNull Location location) {
         return new CraftChiseledBookshelf(this, location);
     }
 }

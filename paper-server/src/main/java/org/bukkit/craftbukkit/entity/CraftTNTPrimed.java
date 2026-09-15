@@ -6,6 +6,7 @@ import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.TNTPrimed;
+import org.jspecify.annotations.NonNull;
 
 public class CraftTNTPrimed extends CraftEntity implements TNTPrimed {
 
@@ -65,13 +66,13 @@ public class CraftTNTPrimed extends CraftEntity implements TNTPrimed {
     }
 
     @Override
-    public void setBlockData(org.bukkit.block.data.BlockData data) {
+    public void setBlockData(org.bukkit.block.data.@NonNull BlockData data) {
         com.google.common.base.Preconditions.checkArgument(data != null, "The visual block data of this tnt cannot be null. To reset it just set to the TNT default block data");
         this.getHandle().setBlockState(((org.bukkit.craftbukkit.block.data.CraftBlockData) data).getState());
     }
 
     @Override
-    public org.bukkit.block.data.BlockData getBlockData() {
+    public org.bukkit.block.data.@NonNull BlockData getBlockData() {
         return this.getHandle().getBlockState().asBlockData();
     }
 }

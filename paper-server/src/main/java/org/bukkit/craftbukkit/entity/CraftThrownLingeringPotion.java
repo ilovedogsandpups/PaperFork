@@ -6,6 +6,7 @@ import org.bukkit.craftbukkit.inventory.CraftItemStack;
 import org.bukkit.entity.LingeringPotion;
 import org.bukkit.inventory.ItemType;
 import org.bukkit.inventory.meta.PotionMeta;
+import org.jspecify.annotations.NonNull;
 
 public class CraftThrownLingeringPotion extends CraftThrownPotion implements LingeringPotion {
 
@@ -19,7 +20,7 @@ public class CraftThrownLingeringPotion extends CraftThrownPotion implements Lin
     }
 
     @Override
-    public PotionMeta getPotionMeta() {
+    public @NonNull PotionMeta getPotionMeta() {
         return (PotionMeta) CraftItemStack.getItemMeta(this.getHandle().getItem(), ItemType.LINGERING_POTION);
     }
 }

@@ -7,6 +7,7 @@ import net.minecraft.world.item.Items;
 import org.bukkit.Material;
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.entity.Strider;
+import org.jspecify.annotations.NonNull;
 
 public class CraftStrider extends CraftAnimals implements Strider {
 
@@ -69,7 +70,7 @@ public class CraftStrider extends CraftAnimals implements Strider {
     }
 
     @Override
-    public Material getSteerMaterial() {
+    public @NonNull Material getSteerMaterial() {
         return Material.WARPED_FUNGUS_ON_A_STICK;
     }
 }

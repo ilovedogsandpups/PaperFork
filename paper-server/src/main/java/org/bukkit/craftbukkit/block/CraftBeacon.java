@@ -22,6 +22,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.jspecify.annotations.NonNull;
 
 public class CraftBeacon extends CraftBlockEntityState<BeaconBlockEntity> implements Beacon {
 
@@ -34,7 +35,7 @@ public class CraftBeacon extends CraftBlockEntityState<BeaconBlockEntity> implem
     }
 
     @Override
-    public Collection<LivingEntity> getEntitiesInRange() {
+    public @NonNull Collection<LivingEntity> getEntitiesInRange() {
         this.ensureNoWorldGeneration();
 
         BlockEntity blockEntity = this.getBlockEntityFromWorld();
@@ -108,7 +109,7 @@ public class CraftBeacon extends CraftBlockEntityState<BeaconBlockEntity> implem
     }
 
     @Override
-    public String getLock() {
+    public @NonNull String getLock() {
         Component customName = this.getSnapshot().lockKey.predicate().components().exact().asPatch().get(DataComponentMap.EMPTY, DataComponents.CUSTOM_NAME);
         return (customName != null) ? CraftChatMessage.fromComponent(customName) : "";
     }
@@ -138,12 +139,12 @@ public class CraftBeacon extends CraftBlockEntityState<BeaconBlockEntity> implem
     }
 
     @Override
-    public CraftBeacon copy() {
+    public @NonNull CraftBeacon copy() {
         return new CraftBeacon(this, null);
     }
 
     @Override
-    public CraftBeacon copy(Location location) {
+    public @NonNull CraftBeacon copy(@NonNull Location location) {
         return new CraftBeacon(this, location);
     }
 

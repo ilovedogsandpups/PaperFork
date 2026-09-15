@@ -29,7 +29,6 @@ import net.minecraft.world.inventory.AbstractMountInventoryMenu;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.MerchantMenu;
-import net.minecraft.world.item.ItemCooldowns;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.block.BedBlock;
@@ -53,7 +52,6 @@ import org.bukkit.craftbukkit.inventory.CraftInventoryPlayer;
 import org.bukkit.craftbukkit.inventory.CraftInventoryView;
 import org.bukkit.craftbukkit.inventory.CraftItemStack;
 import org.bukkit.craftbukkit.inventory.CraftMerchantCustom;
-import org.bukkit.craftbukkit.inventory.CraftRecipe;
 import org.bukkit.craftbukkit.inventory.util.CraftMenus;
 import org.bukkit.craftbukkit.util.CraftLocation;
 import org.bukkit.craftbukkit.util.CraftNamespacedKey;
@@ -76,6 +74,7 @@ import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
 
 public class CraftHumanEntity extends CraftLivingEntity implements HumanEntity {
 
@@ -108,27 +107,27 @@ public class CraftHumanEntity extends CraftLivingEntity implements HumanEntity {
     }
 
     @Override
-    public PlayerInventory getInventory() {
+    public @NonNull PlayerInventory getInventory() {
         return this.inventory;
     }
 
     @Override
-    public EntityEquipment getEquipment() {
+    public @NonNull EntityEquipment getEquipment() {
         return this.inventory;
     }
 
     @Override
-    public Inventory getEnderChest() {
+    public @NonNull Inventory getEnderChest() {
         return this.enderChest;
     }
 
     @Override
-    public MainHand getMainHand() {
+    public @NonNull MainHand getMainHand() {
         return this.getHandle().getMainArm() == HumanoidArm.LEFT ? MainHand.LEFT : MainHand.RIGHT;
     }
 
     @Override
-    public ItemStack getItemInHand() {
+    public @NonNull ItemStack getItemInHand() {
         return this.getInventory().getItemInMainHand();
     }
 
@@ -138,7 +137,7 @@ public class CraftHumanEntity extends CraftLivingEntity implements HumanEntity {
     }
 
     @Override
-    public ItemStack getItemOnCursor() {
+    public @NonNull ItemStack getItemOnCursor() {
         return CraftItemStack.asCraftMirror(this.getHandle().containerMenu.getCarried());
     }
 
@@ -228,7 +227,7 @@ public class CraftHumanEntity extends CraftLivingEntity implements HumanEntity {
     }
 
     @Override
-    public Location getBedLocation() {
+    public @NonNull Location getBedLocation() {
         Preconditions.checkState(this.isSleeping(), "Not sleeping");
 
         BlockPos bed = this.getHandle().getSleepingPos().get();
@@ -236,7 +235,7 @@ public class CraftHumanEntity extends CraftLivingEntity implements HumanEntity {
     }
 
     @Override
-    public String getName() {
+    public @NonNull String getName() {
         return this.getHandle().getScoreboardName();
     }
 
@@ -246,47 +245,47 @@ public class CraftHumanEntity extends CraftLivingEntity implements HumanEntity {
     }
 
     @Override
-    public boolean isPermissionSet(String name) {
+    public boolean isPermissionSet(@NonNull String name) {
         return this.perm.isPermissionSet(name);
     }
 
     @Override
-    public boolean isPermissionSet(Permission perm) {
+    public boolean isPermissionSet(@NonNull Permission perm) {
         return this.perm.isPermissionSet(perm);
     }
 
     @Override
-    public boolean hasPermission(String name) {
+    public boolean hasPermission(@NonNull String name) {
         return this.perm.hasPermission(name);
     }
 
     @Override
-    public boolean hasPermission(Permission perm) {
+    public boolean hasPermission(@NonNull Permission perm) {
         return this.perm.hasPermission(perm);
     }
 
     @Override
-    public PermissionAttachment addAttachment(Plugin plugin, String name, boolean value) {
+    public @NonNull PermissionAttachment addAttachment(@NonNull Plugin plugin, @NonNull String name, boolean value) {
         return this.perm.addAttachment(plugin, name, value);
     }
 
     @Override
-    public PermissionAttachment addAttachment(Plugin plugin) {
+    public @NonNull PermissionAttachment addAttachment(@NonNull Plugin plugin) {
         return this.perm.addAttachment(plugin);
     }
 
     @Override
-    public PermissionAttachment addAttachment(Plugin plugin, String name, boolean value, int ticks) {
+    public PermissionAttachment addAttachment(@NonNull Plugin plugin, @NonNull String name, boolean value, int ticks) {
         return this.perm.addAttachment(plugin, name, value, ticks);
     }
 
     @Override
-    public PermissionAttachment addAttachment(Plugin plugin, int ticks) {
+    public PermissionAttachment addAttachment(@NonNull Plugin plugin, int ticks) {
         return this.perm.addAttachment(plugin, ticks);
     }
 
     @Override
-    public void removeAttachment(PermissionAttachment attachment) {
+    public void removeAttachment(@NonNull PermissionAttachment attachment) {
         this.perm.removeAttachment(attachment);
     }
 
@@ -302,29 +301,29 @@ public class CraftHumanEntity extends CraftLivingEntity implements HumanEntity {
     }
 
     @Override
-    public Set<PermissionAttachmentInfo> getEffectivePermissions() {
+    public @NonNull Set<PermissionAttachmentInfo> getEffectivePermissions() {
         return this.perm.getEffectivePermissions();
     }
 
     @Override
-    public GameMode getGameMode() {
+    public @NonNull GameMode getGameMode() {
         return this.mode;
     }
 
     @Override
-    public void setGameMode(GameMode mode) {
+    public void setGameMode(@NonNull GameMode mode) {
         Preconditions.checkArgument(mode != null, "GameMode cannot be null");
 
         this.mode = mode;
     }
 
     @Override
-    public InventoryView getOpenInventory() {
+    public @NonNull InventoryView getOpenInventory() {
         return this.getHandle().containerMenu.getBukkitView();
     }
 
     @Override
-    public InventoryView openInventory(Inventory inventory) {
+    public InventoryView openInventory(@NonNull Inventory inventory) {
         if (!(this.getHandle() instanceof ServerPlayer)) return null;
         ServerPlayer player = (ServerPlayer) this.getHandle();
         AbstractContainerMenu formerContainer = this.getHandle().containerMenu;
@@ -499,7 +498,7 @@ public class CraftHumanEntity extends CraftLivingEntity implements HumanEntity {
     }
 
     @Override
-    public InventoryView openMerchant(Merchant merchant, boolean force) {
+    public InventoryView openMerchant(@NonNull Merchant merchant, boolean force) {
         Preconditions.checkNotNull(merchant, "merchant cannot be null");
 
         if (!force && merchant.isTrading()) {
@@ -595,7 +594,7 @@ public class CraftHumanEntity extends CraftLivingEntity implements HumanEntity {
     }
 
     @Override
-    public void closeInventory(org.bukkit.event.inventory.InventoryCloseEvent.Reason reason) {
+    public void closeInventory(org.bukkit.event.inventory.InventoryCloseEvent.@NonNull Reason reason) {
         this.getHandle().closeContainer(reason);
     }
 
@@ -610,7 +609,7 @@ public class CraftHumanEntity extends CraftLivingEntity implements HumanEntity {
     }
 
     @Override
-    public boolean setWindowProperty(InventoryView.Property prop, int value) {
+    public boolean setWindowProperty(InventoryView.@NonNull Property prop, int value) {
         return false;
     }
 
@@ -635,7 +634,7 @@ public class CraftHumanEntity extends CraftLivingEntity implements HumanEntity {
     }
 
     @Override
-    public boolean hasCooldown(Material material) {
+    public boolean hasCooldown(@NonNull Material material) {
         Preconditions.checkArgument(material != null, "Material cannot be null");
         Preconditions.checkArgument(material.isItem(), "Material %s is not an item", material);
 
@@ -643,7 +642,7 @@ public class CraftHumanEntity extends CraftLivingEntity implements HumanEntity {
     }
 
     @Override
-    public int getCooldown(Material material) {
+    public int getCooldown(@NonNull Material material) {
         Preconditions.checkArgument(material != null, "Material cannot be null");
         Preconditions.checkArgument(material.isItem(), "Material %s is not an item", material);
 
@@ -651,14 +650,14 @@ public class CraftHumanEntity extends CraftLivingEntity implements HumanEntity {
     }
 
     @Override
-    public boolean hasCooldown(ItemStack item) {
+    public boolean hasCooldown(@NonNull ItemStack item) {
         Preconditions.checkArgument(item != null, "Item cannot be null");
 
         return this.getHandle().getCooldowns().isOnCooldown(CraftItemStack.asNMSCopy(item));
     }
 
     @Override
-    public int getCooldown(ItemStack item) {
+    public int getCooldown(@NonNull ItemStack item) {
         Preconditions.checkArgument(item != null, "Item cannot be null");
 
         Identifier cooldownGroup = this.getHandle().getCooldowns().getCooldownGroup(CraftItemStack.asNMSCopy(item));
@@ -666,7 +665,7 @@ public class CraftHumanEntity extends CraftLivingEntity implements HumanEntity {
     }
 
     @Override
-    public void setCooldown(ItemStack item, int ticks) {
+    public void setCooldown(@NonNull ItemStack item, int ticks) {
         Preconditions.checkArgument(item != null, "Item cannot be null");
         Preconditions.checkArgument(ticks >= 0, "Cannot have negative cooldown");
 
@@ -674,14 +673,14 @@ public class CraftHumanEntity extends CraftLivingEntity implements HumanEntity {
     }
 
     @Override
-    public int getCooldown(Key cooldownGroup) {
+    public int getCooldown(@NonNull Key cooldownGroup) {
         Preconditions.checkArgument(cooldownGroup != null, "cooldownGroup cannot be null");
 
         return this.getHandle().getCooldowns().getRemainingCooldown(PaperAdventure.asVanilla(cooldownGroup));
     }
 
     @Override
-    public void setCooldown(Key cooldownGroup, int ticks) {
+    public void setCooldown(@NonNull Key cooldownGroup, int ticks) {
         Preconditions.checkArgument(cooldownGroup != null, "cooldownGroup cannot be null");
         Preconditions.checkArgument(ticks >= 0, "Cannot have negative cooldown");
 
@@ -699,22 +698,22 @@ public class CraftHumanEntity extends CraftLivingEntity implements HumanEntity {
     }
 
     @Override
-    public int discoverRecipes(Collection<NamespacedKey> recipes) {
+    public int discoverRecipes(@NonNull Collection<NamespacedKey> recipes) {
         return this.getHandle().awardRecipes(this.bukkitKeysToMinecraftRecipes(recipes));
     }
 
     @Override
-    public int undiscoverRecipes(Collection<NamespacedKey> recipes) {
+    public int undiscoverRecipes(@NonNull Collection<NamespacedKey> recipes) {
         return this.getHandle().resetRecipes(this.bukkitKeysToMinecraftRecipes(recipes));
     }
 
     @Override
-    public boolean hasDiscoveredRecipe(NamespacedKey recipe) {
+    public boolean hasDiscoveredRecipe(@NonNull NamespacedKey recipe) {
         return false;
     }
 
     @Override
-    public Set<NamespacedKey> getDiscoveredRecipes() {
+    public @NonNull Set<NamespacedKey> getDiscoveredRecipes() {
         return ImmutableSet.of();
     }
 
@@ -761,7 +760,7 @@ public class CraftHumanEntity extends CraftLivingEntity implements HumanEntity {
     }
 
     @Override
-    public void openSign(final org.bukkit.block.Sign sign, final org.bukkit.block.sign.Side side) {
+    public void openSign(final org.bukkit.block.@NonNull Sign sign, final org.bukkit.block.sign.@NonNull Side side) {
         org.bukkit.craftbukkit.block.CraftSign.openSign(sign, (CraftPlayer) this, side);
     }
 
@@ -891,7 +890,7 @@ public class CraftHumanEntity extends CraftLivingEntity implements HumanEntity {
     }
 
     @Override
-    public Firework fireworkBoost(ItemStack boosterItem) {
+    public Firework fireworkBoost(@NonNull ItemStack boosterItem) {
         Preconditions.checkArgument(boosterItem != null, "boosterItem cannot be null");
 
         FireworkRocketEntity fireworks = new FireworkRocketEntity(this.getHandle().level(), CraftItemStack.asNMSCopy(boosterItem), this.getHandle());
@@ -900,18 +899,18 @@ public class CraftHumanEntity extends CraftLivingEntity implements HumanEntity {
     }
 
     @Override
-    public boolean canUseEquipmentSlot(org.bukkit.inventory.EquipmentSlot slot) {
+    public boolean canUseEquipmentSlot(org.bukkit.inventory.@NonNull EquipmentSlot slot) {
         net.minecraft.world.entity.EquipmentSlot equipmentSlot = CraftEquipmentSlot.getNMS(slot);
         return (equipmentSlot.getType() == net.minecraft.world.entity.EquipmentSlot.Type.HUMANOID_ARMOR || equipmentSlot.getType() == net.minecraft.world.entity.EquipmentSlot.Type.HAND) && super.canUseEquipmentSlot(slot);
     }
 
     @Override
-    public org.bukkit.entity.Entity copy() {
+    public org.bukkit.entity.@NonNull Entity copy() {
         throw new UnsupportedOperationException("Cannot copy human entities");
     }
 
     @Override
-    public org.bukkit.entity.Entity copy(Location location) {
+    public org.bukkit.entity.@NonNull Entity copy(@NonNull Location location) {
         throw new UnsupportedOperationException("Cannot copy human entities");
     }
 }

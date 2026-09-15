@@ -10,6 +10,7 @@ import org.bukkit.configuration.serialization.SerializableAs;
 import org.bukkit.craftbukkit.inventory.SerializableMeta;
 import org.bukkit.craftbukkit.util.CraftNamespacedKey;
 import org.bukkit.inventory.meta.components.UseCooldownComponent;
+import org.jspecify.annotations.NonNull;
 
 import static io.papermc.paper.util.BoundChecker.requirePositive;
 
@@ -34,7 +35,7 @@ public final class CraftUseCooldownComponent implements UseCooldownComponent {
     }
 
     @Override
-    public Map<String, Object> serialize() {
+    public @NonNull Map<String, Object> serialize() {
         Map<String, Object> result = new LinkedHashMap<>();
         result.put("seconds", this.getCooldownSeconds());
         if (this.getCooldownGroup() != null) {

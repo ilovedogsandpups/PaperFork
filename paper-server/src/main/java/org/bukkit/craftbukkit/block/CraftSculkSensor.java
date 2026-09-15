@@ -5,6 +5,7 @@ import net.minecraft.world.level.block.entity.SculkSensorBlockEntity;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.SculkSensor;
+import org.jspecify.annotations.NonNull;
 
 public class CraftSculkSensor<T extends SculkSensorBlockEntity> extends CraftBlockEntityState<T> implements SculkSensor {
 
@@ -28,12 +29,12 @@ public class CraftSculkSensor<T extends SculkSensorBlockEntity> extends CraftBlo
     }
 
     @Override
-    public CraftSculkSensor<T> copy() {
+    public @NonNull CraftSculkSensor<T> copy() {
         return new CraftSculkSensor<>(this, null);
     }
 
     @Override
-    public CraftSculkSensor<T> copy(Location location) {
+    public @NonNull CraftSculkSensor<T> copy(@NonNull Location location) {
         return new CraftSculkSensor<>(this, location);
     }
 

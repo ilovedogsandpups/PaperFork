@@ -10,6 +10,7 @@ import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.craftbukkit.inventory.CraftItemStack;
 import org.bukkit.entity.Animals;
 import org.bukkit.inventory.ItemStack;
+import org.jspecify.annotations.NonNull;
 
 public class CraftAnimals extends CraftAgeable implements Animals {
 
@@ -49,12 +50,12 @@ public class CraftAnimals extends CraftAgeable implements Animals {
     }
 
     @Override
-    public boolean isBreedItem(ItemStack itemStack) {
+    public boolean isBreedItem(@NonNull ItemStack itemStack) {
         return this.getHandle().isFood(CraftItemStack.asNMSCopy(itemStack));
     }
 
     @Override
-    public boolean isBreedItem(Material material) {
+    public boolean isBreedItem(@NonNull Material material) {
         return this.isBreedItem(new ItemStack(material));
     }
 }

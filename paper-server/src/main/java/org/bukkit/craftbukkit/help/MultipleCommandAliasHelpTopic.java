@@ -6,6 +6,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.command.MultipleCommandAlias;
 import org.bukkit.help.HelpTopic;
+import org.jspecify.annotations.NonNull;
 
 /**
  * This is a help topic implementation for {@link MultipleCommandAlias} commands.
@@ -35,7 +36,7 @@ public class MultipleCommandAliasHelpTopic extends HelpTopic {
     }
 
     @Override
-    public boolean canSee(CommandSender sender) {
+    public boolean canSee(@NonNull CommandSender sender) {
         if (this.amendedPermission == null) {
             if (sender instanceof ConsoleCommandSender) {
                 return true;

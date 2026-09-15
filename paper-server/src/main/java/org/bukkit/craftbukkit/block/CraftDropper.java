@@ -11,6 +11,7 @@ import org.bukkit.block.Dropper;
 import org.bukkit.craftbukkit.CraftWorld;
 import org.bukkit.craftbukkit.inventory.CraftInventory;
 import org.bukkit.inventory.Inventory;
+import org.jspecify.annotations.NonNull;
 
 public class CraftDropper extends CraftLootable<DropperBlockEntity> implements Dropper {
 
@@ -23,12 +24,12 @@ public class CraftDropper extends CraftLootable<DropperBlockEntity> implements D
     }
 
     @Override
-    public Inventory getSnapshotInventory() {
+    public @NonNull Inventory getSnapshotInventory() {
         return new CraftInventory(this.getSnapshot());
     }
 
     @Override
-    public Inventory getInventory() {
+    public @NonNull Inventory getInventory() {
         if (!this.isPlaced()) {
             return this.getSnapshotInventory();
         }
@@ -48,12 +49,12 @@ public class CraftDropper extends CraftLootable<DropperBlockEntity> implements D
     }
 
     @Override
-    public CraftDropper copy() {
+    public @NonNull CraftDropper copy() {
         return new CraftDropper(this, null);
     }
 
     @Override
-    public CraftDropper copy(Location location) {
+    public @NonNull CraftDropper copy(@NonNull Location location) {
         return new CraftDropper(this, location);
     }
 }

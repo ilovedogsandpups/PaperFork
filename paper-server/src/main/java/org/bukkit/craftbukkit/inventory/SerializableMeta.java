@@ -13,6 +13,7 @@ import org.bukkit.block.Banner;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.configuration.serialization.SerializableAs;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.jspecify.annotations.NonNull;
 
 @SerializableAs("ItemMeta")
 public final class SerializableMeta implements ConfigurationSerializable {
@@ -94,7 +95,7 @@ public final class SerializableMeta implements ConfigurationSerializable {
     }
 
     @Override
-    public Map<String, Object> serialize() {
+    public @NonNull Map<String, Object> serialize() {
         throw new AssertionError();
     }
 

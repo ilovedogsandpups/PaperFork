@@ -6,7 +6,7 @@ import com.mojang.brigadier.tree.CommandNode;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
 import io.papermc.paper.command.brigadier.PaperBrigadier;
 import io.papermc.paper.command.brigadier.PaperCommands;
-import io.papermc.paper.command.brigadier.PluginVanillaCommandWrapper;
+
 import java.util.AbstractCollection;
 import java.util.AbstractSet;
 import java.util.ArrayList;
@@ -23,6 +23,7 @@ import org.bukkit.command.Command;
 import org.bukkit.craftbukkit.command.VanillaCommandWrapper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
 
 /*
 This map is supposed to act as a legacy bridge for the command map and the command dispatcher.
@@ -164,7 +165,7 @@ public class BukkitBrigForwardingMap extends HashMap<String, Command> {
     final class Values extends AbstractCollection<Command> {
 
         @Override
-        public Iterator<Command> iterator() {
+        public @NonNull Iterator<Command> iterator() {
             // AVOID CME since commands can modify multiple commands now through aliases, which means it may appear in the iterator even if removed.
             // Oh well!
             Iterator<CommandNode<CommandSourceStack>> iterator = new ArrayList<>(BukkitBrigForwardingMap.this.getDispatcher().getRoot().getChildren()).iterator();
@@ -226,7 +227,7 @@ public class BukkitBrigForwardingMap extends HashMap<String, Command> {
         }
 
         @Override
-        public Iterator<String> iterator() {
+        public @NonNull Iterator<String> iterator() {
             return Iterators.transform(BukkitBrigForwardingMap.this.values.iterator(), Command::getName); // Wrap around the values iterator for consistency
         }
 
@@ -241,7 +242,7 @@ public class BukkitBrigForwardingMap extends HashMap<String, Command> {
         }
 
         @Override
-        public Spliterator<String> spliterator() {
+        public @NonNull Spliterator<String> spliterator() {
             return this.entryStream().spliterator();
         }
 
@@ -268,7 +269,7 @@ public class BukkitBrigForwardingMap extends HashMap<String, Command> {
         }
 
         @Override
-        public Iterator<Entry<String, Command>> iterator() {
+        public @NonNull Iterator<Entry<String, Command>> iterator() {
             return this.entryStream().iterator();
         }
 
@@ -294,7 +295,7 @@ public class BukkitBrigForwardingMap extends HashMap<String, Command> {
         }
 
         @Override
-        public Spliterator<Entry<String, Command>> spliterator() {
+        public @NonNull Spliterator<Entry<String, Command>> spliterator() {
             return this.entryStream().spliterator();
         }
 

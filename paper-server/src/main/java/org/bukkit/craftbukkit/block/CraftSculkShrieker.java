@@ -7,6 +7,7 @@ import org.bukkit.World;
 import org.bukkit.block.SculkShrieker;
 import org.bukkit.craftbukkit.entity.CraftPlayer;
 import org.bukkit.entity.Player;
+import org.jspecify.annotations.NonNull;
 
 public class CraftSculkShrieker extends CraftBlockEntityState<SculkShriekerBlockEntity> implements SculkShrieker {
 
@@ -37,12 +38,12 @@ public class CraftSculkShrieker extends CraftBlockEntityState<SculkShriekerBlock
     }
 
     @Override
-    public CraftSculkShrieker copy() {
+    public @NonNull CraftSculkShrieker copy() {
         return new CraftSculkShrieker(this, null);
     }
 
     @Override
-    public CraftSculkShrieker copy(Location location) {
+    public @NonNull CraftSculkShrieker copy(@NonNull Location location) {
         return new CraftSculkShrieker(this, location);
     }
 }

@@ -5,6 +5,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.entity.Interaction;
+import org.jspecify.annotations.NonNull;
 
 public class CraftInteraction extends CraftEntity implements Interaction {
 
@@ -72,7 +73,7 @@ public class CraftInteraction extends CraftEntity implements Interaction {
         }
 
         @Override
-        public OfflinePlayer getPlayer() {
+        public @NonNull OfflinePlayer getPlayer() {
             return Bukkit.getOfflinePlayer(this.uuid);
         }
 

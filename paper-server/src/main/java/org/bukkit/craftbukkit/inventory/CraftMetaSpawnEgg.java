@@ -17,6 +17,7 @@ import org.bukkit.craftbukkit.entity.CraftEntityType;
 import org.bukkit.entity.EntitySnapshot;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.meta.SpawnEggMeta;
+import org.jspecify.annotations.NonNull;
 
 @DelegateDeserialization(SerializableMeta.class)
 public class CraftMetaSpawnEgg extends CraftMetaItem implements SpawnEggMeta {
@@ -164,7 +165,7 @@ public class CraftMetaSpawnEgg extends CraftMetaItem implements SpawnEggMeta {
     }
 
     @Override
-    public CraftMetaSpawnEgg clone() {
+    public @NonNull CraftMetaSpawnEgg clone() {
         CraftMetaSpawnEgg clone = (CraftMetaSpawnEgg) super.clone();
 
         if (this.entityTag != null) {

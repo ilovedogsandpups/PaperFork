@@ -3,6 +3,7 @@ package io.papermc.paper.threadedregions.scheduler;
 import com.mojang.logging.LogUtils;
 import org.bukkit.plugin.IllegalPluginAccessException;
 import org.bukkit.plugin.Plugin;
+import org.jspecify.annotations.NonNull;
 import org.slf4j.Logger;
 import java.util.Objects;
 import java.util.Set;
@@ -29,7 +30,7 @@ public final class FoliaAsyncScheduler implements AsyncScheduler {
             private final AtomicInteger idGenerator = new AtomicInteger();
 
             @Override
-            public Thread newThread(final Runnable run) {
+            public Thread newThread(final @NonNull Runnable run) {
                 final Thread ret = new Thread(run);
 
                 ret.setName("Folia Async Scheduler Thread #" + this.idGenerator.getAndIncrement());
@@ -45,7 +46,7 @@ public final class FoliaAsyncScheduler implements AsyncScheduler {
 
     private final ScheduledExecutorService timerThread = Executors.newSingleThreadScheduledExecutor(new ThreadFactory() {
         @Override
-        public Thread newThread(final Runnable run) {
+        public Thread newThread(final @NonNull Runnable run) {
             final Thread ret = new Thread(run);
 
             ret.setName("Folia Async Scheduler Thread Timer");
@@ -61,7 +62,7 @@ public final class FoliaAsyncScheduler implements AsyncScheduler {
     private final Set<AsyncScheduledTask> tasks = ConcurrentHashMap.newKeySet();
 
     @Override
-    public ScheduledTask runNow(final Plugin plugin, final Consumer<ScheduledTask> task) {
+    public @NonNull ScheduledTask runNow(final @NonNull Plugin plugin, final @NonNull Consumer<ScheduledTask> task) {
         Objects.requireNonNull(plugin, "Plugin may not be null");
         Objects.requireNonNull(task, "Task may not be null");
 
@@ -83,8 +84,8 @@ public final class FoliaAsyncScheduler implements AsyncScheduler {
     }
 
     @Override
-    public ScheduledTask runDelayed(final Plugin plugin, final Consumer<ScheduledTask> task, final long delay,
-                                    final TimeUnit unit) {
+    public @NonNull ScheduledTask runDelayed(final @NonNull Plugin plugin, final @NonNull Consumer<ScheduledTask> task, final long delay,
+                                             final @NonNull TimeUnit unit) {
         Objects.requireNonNull(plugin, "Plugin may not be null");
         Objects.requireNonNull(task, "Task may not be null");
         Objects.requireNonNull(unit, "Time unit may not be null");
@@ -100,8 +101,8 @@ public final class FoliaAsyncScheduler implements AsyncScheduler {
     }
 
     @Override
-    public ScheduledTask runAtFixedRate(final Plugin plugin, final Consumer<ScheduledTask> task, final long initialDelay,
-                                        final long period, final TimeUnit unit) {
+    public @NonNull ScheduledTask runAtFixedRate(final @NonNull Plugin plugin, final @NonNull Consumer<ScheduledTask> task, final long initialDelay,
+                                                 final long period, final @NonNull TimeUnit unit) {
         Objects.requireNonNull(plugin, "Plugin may not be null");
         Objects.requireNonNull(task, "Task may not be null");
         Objects.requireNonNull(unit, "Time unit may not be null");
@@ -142,7 +143,7 @@ public final class FoliaAsyncScheduler implements AsyncScheduler {
     }
 
     @Override
-    public void cancelTasks(final Plugin plugin) {
+    public void cancelTasks(final @NonNull Plugin plugin) {
         Objects.requireNonNull(plugin, "Plugin may not be null");
 
         for (final AsyncScheduledTask task : this.tasks) {
@@ -245,7 +246,7 @@ public final class FoliaAsyncScheduler implements AsyncScheduler {
         }
 
         @Override
-        public Plugin getOwningPlugin() {
+        public @NonNull Plugin getOwningPlugin() {
             return this.plugin;
         }
 
@@ -255,7 +256,7 @@ public final class FoliaAsyncScheduler implements AsyncScheduler {
         }
 
         @Override
-        public CancelledState cancel() {
+        public @NonNull CancelledState cancel() {
             ScheduledFuture<?> delay = null;
             CancelledState ret;
             synchronized (this) {
@@ -303,7 +304,7 @@ public final class FoliaAsyncScheduler implements AsyncScheduler {
         }
 
         @Override
-        public ExecutionState getExecutionState() {
+        public @NonNull ExecutionState getExecutionState() {
             synchronized (this) {
                 switch (this.state) {
                     case STATE_ON_TIMER:

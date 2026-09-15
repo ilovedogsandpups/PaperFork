@@ -3,6 +3,7 @@ package org.bukkit.craftbukkit.block;
 import net.minecraft.world.level.block.entity.FurnaceBlockEntity;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.jspecify.annotations.NonNull;
 
 public class CraftFurnaceFurnace extends CraftFurnace<FurnaceBlockEntity> {
 
@@ -15,12 +16,12 @@ public class CraftFurnaceFurnace extends CraftFurnace<FurnaceBlockEntity> {
     }
 
     @Override
-    public CraftFurnaceFurnace copy() {
+    public @NonNull CraftFurnaceFurnace copy() {
         return new CraftFurnaceFurnace(this, null);
     }
 
     @Override
-    public CraftFurnaceFurnace copy(Location location) {
+    public @NonNull CraftFurnaceFurnace copy(Location location) {
         return new CraftFurnaceFurnace(this, location);
     }
 }

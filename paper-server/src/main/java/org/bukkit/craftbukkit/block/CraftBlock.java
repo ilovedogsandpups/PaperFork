@@ -64,6 +64,7 @@ import org.bukkit.util.BlockVector;
 import org.bukkit.util.BoundingBox;
 import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
+import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 
 public class CraftBlock implements Block {
@@ -92,7 +93,7 @@ public class CraftBlock implements Block {
     }
 
     @Override
-    public World getWorld() {
+    public @NonNull World getWorld() {
         return this.level.getMinecraftWorld().getWorld();
     }
 
@@ -101,7 +102,7 @@ public class CraftBlock implements Block {
     }
 
     @Override
-    public Location getLocation() {
+    public @NonNull Location getLocation() {
         return CraftLocation.toBukkit(this.position, this.getWorld());
     }
 
@@ -138,7 +139,7 @@ public class CraftBlock implements Block {
     }
 
     @Override
-    public Chunk getChunk() {
+    public @NonNull Chunk getChunk() {
         return this.getWorld().getChunkAt(this);
     }
 
@@ -160,12 +161,12 @@ public class CraftBlock implements Block {
     }
 
     @Override
-    public BlockData getBlockData() {
+    public @NonNull BlockData getBlockData() {
         return this.getBlockState().asBlockData();
     }
 
     @Override
-    public void setType(final Material type) {
+    public void setType(final @NonNull Material type) {
         this.setType(type, true);
     }
 
@@ -176,12 +177,12 @@ public class CraftBlock implements Block {
     }
 
     @Override
-    public void setBlockData(BlockData data) {
+    public void setBlockData(@NonNull BlockData data) {
         this.setBlockData(data, true);
     }
 
     @Override
-    public void setBlockData(BlockData data, boolean applyPhysics) {
+    public void setBlockData(@NonNull BlockData data, boolean applyPhysics) {
         Preconditions.checkArgument(data != null, "BlockData cannot be null");
         this.setBlockState(((CraftBlockData) data).getState(), applyPhysics);
     }
@@ -202,7 +203,7 @@ public class CraftBlock implements Block {
     }
 
     @Override
-    public Material getType() {
+    public @NonNull Material getType() {
         return this.getBlockState().getBukkitMaterial();
     }
 
@@ -222,22 +223,22 @@ public class CraftBlock implements Block {
     }
 
     @Override
-    public Block getRelative(final int modX, final int modY, final int modZ) {
+    public @NonNull Block getRelative(final int modX, final int modY, final int modZ) {
         return this.getWorld().getBlockAt(this.getX() + modX, this.getY() + modY, this.getZ() + modZ);
     }
 
     @Override
-    public Block getRelative(BlockFace face) {
+    public @NonNull Block getRelative(@NonNull BlockFace face) {
         return this.getRelative(face, 1);
     }
 
     @Override
-    public Block getRelative(BlockFace face, int distance) {
+    public @NonNull Block getRelative(BlockFace face, int distance) {
         return this.getRelative(face.getModX() * distance, face.getModY() * distance, face.getModZ() * distance);
     }
 
     @Override
-    public BlockFace getFace(final Block block) {
+    public BlockFace getFace(final @NonNull Block block) {
         BlockFace[] values = BlockFace.values();
 
         for (BlockFace face : values) {
@@ -291,27 +292,27 @@ public class CraftBlock implements Block {
     }
 
     @Override
-    public org.bukkit.block.BlockState getState() {
+    public org.bukkit.block.@NonNull BlockState getState() {
         return CraftBlockStates.getBlockState(this);
     }
 
     @Override
-    public org.bukkit.block.BlockState getState(boolean useSnapshot) {
+    public org.bukkit.block.@NonNull BlockState getState(boolean useSnapshot) {
         return CraftBlockStates.getBlockState(this, useSnapshot);
     }
 
     @Override
-    public Biome getBiome() {
+    public @NonNull Biome getBiome() {
         return this.getWorld().getBiome(this.getX(), this.getY(), this.getZ());
     }
 
     @Override
-    public Biome getComputedBiome() {
+    public @NonNull Biome getComputedBiome() {
         return this.getWorld().getComputedBiome(this.getX(), this.getY(), this.getZ());
     }
 
     @Override
-    public void setBiome(Biome bio) {
+    public void setBiome(@NonNull Biome bio) {
         this.getWorld().setBiome(this.getX(), this.getY(), this.getZ(), bio);
     }
 
@@ -353,14 +354,14 @@ public class CraftBlock implements Block {
     }
 
     @Override
-    public boolean isBlockFacePowered(BlockFace face) {
+    public boolean isBlockFacePowered(@NonNull BlockFace face) {
         Direction direction = blockFaceToNotch(face);
         Preconditions.checkArgument(direction != null, face + " is not a valid cartesian face");
         return this.level.getMinecraftWorld().hasSignal(this.position, direction);
     }
 
     @Override
-    public boolean isBlockFaceIndirectlyPowered(BlockFace face) {
+    public boolean isBlockFaceIndirectlyPowered(@NonNull BlockFace face) {
         Direction direction = blockFaceToNotch(face);
         Preconditions.checkArgument(direction != null, face + " is not a valid cartesian face");
         if (this.level.getMinecraftWorld().hasSignal(this.position, direction)) {
@@ -376,7 +377,7 @@ public class CraftBlock implements Block {
     }
 
     @Override
-    public int getBlockPower(BlockFace face) {
+    public int getBlockPower(@NonNull BlockFace face) {
         Preconditions.checkArgument(face != null, "face cannot be null");
 
         net.minecraft.world.level.Level level = this.level.getMinecraftWorld();
@@ -447,7 +448,7 @@ public class CraftBlock implements Block {
     }
 
     @Override
-    public PistonMoveReaction getPistonMoveReaction() {
+    public @NonNull PistonMoveReaction getPistonMoveReaction() {
         return PistonMoveReaction.getById(this.getBlockState().getPistonPushReaction().ordinal());
     }
 
@@ -467,12 +468,12 @@ public class CraftBlock implements Block {
     }
 
     @Override
-    public boolean breakNaturally(ItemStack item, boolean triggerEffect, boolean dropExperience) {
+    public boolean breakNaturally(@NonNull ItemStack item, boolean triggerEffect, boolean dropExperience) {
         return this.breakNaturally(item, triggerEffect, dropExperience, false);
     }
 
     @Override
-    public boolean breakNaturally(ItemStack item, boolean triggerEffect, boolean dropExperience, boolean forceEffect) {
+    public boolean breakNaturally(@NonNull ItemStack item, boolean triggerEffect, boolean dropExperience, boolean forceEffect) {
         // Order matters here, need to drop before setting to air so skulls can get their data
         BlockState state = this.getBlockState();
         net.minecraft.world.level.block.Block block = state.getBlock();
@@ -510,7 +511,7 @@ public class CraftBlock implements Block {
     }
 
     @Override
-    public boolean applyBoneMeal(BlockFace face) {
+    public boolean applyBoneMeal(@NonNull BlockFace face) {
         Direction direction = blockFaceToNotch(face);
         Preconditions.checkArgument(direction != null, face + " is not a valid cartesian face");
 
@@ -559,17 +560,17 @@ public class CraftBlock implements Block {
     }
 
     @Override
-    public Collection<ItemStack> getDrops() {
+    public @NonNull Collection<ItemStack> getDrops() {
         return this.getDrops(null);
     }
 
     @Override
-    public Collection<ItemStack> getDrops(ItemStack item) {
+    public @NonNull Collection<ItemStack> getDrops(ItemStack item) {
         return this.getDrops(item, null);
     }
 
     @Override
-    public Collection<ItemStack> getDrops(ItemStack item, Entity entity) {
+    public @NonNull Collection<ItemStack> getDrops(ItemStack item, Entity entity) {
         BlockState state = this.getBlockState();
         net.minecraft.world.item.ItemStack nms = CraftItemStack.asNMSCopy(item);
 
@@ -583,33 +584,33 @@ public class CraftBlock implements Block {
     }
 
     @Override
-    public boolean isPreferredTool(ItemStack item) {
+    public boolean isPreferredTool(@NonNull ItemStack item) {
         return CraftBlockData.isPreferredTool(this.getBlockState(), CraftItemStack.asNMSCopy(item));
     }
 
     @Override
-    public float getBreakSpeed(Player player) {
+    public float getBreakSpeed(@NonNull Player player) {
         Preconditions.checkArgument(player != null, "player cannot be null");
         return this.getBlockState().getDestroyProgress(((CraftPlayer) player).getHandle(), this.level, this.position);
     }
 
     @Override
-    public void setMetadata(String metadataKey, MetadataValue newMetadataValue) {
+    public void setMetadata(@NonNull String metadataKey, @NonNull MetadataValue newMetadataValue) {
         this.getCraftWorld().getBlockMetadata().setMetadata(this, metadataKey, newMetadataValue);
     }
 
     @Override
-    public List<MetadataValue> getMetadata(String metadataKey) {
+    public @NonNull List<MetadataValue> getMetadata(@NonNull String metadataKey) {
         return this.getCraftWorld().getBlockMetadata().getMetadata(this, metadataKey);
     }
 
     @Override
-    public boolean hasMetadata(String metadataKey) {
+    public boolean hasMetadata(@NonNull String metadataKey) {
         return this.getCraftWorld().getBlockMetadata().hasMetadata(this, metadataKey);
     }
 
     @Override
-    public void removeMetadata(String metadataKey, Plugin owningPlugin) {
+    public void removeMetadata(@NonNull String metadataKey, @NonNull Plugin owningPlugin) {
         this.getCraftWorld().getBlockMetadata().removeMetadata(this, metadataKey, owningPlugin);
     }
 
@@ -619,7 +620,7 @@ public class CraftBlock implements Block {
     }
 
     @Override
-    public RayTraceResult rayTrace(Location start, Vector direction, double maxDistance, FluidCollisionMode fluidCollisionMode) {
+    public RayTraceResult rayTrace(Location start, Vector direction, double maxDistance, @NonNull FluidCollisionMode fluidCollisionMode) {
         Preconditions.checkArgument(start != null, "Location start cannot be null");
         Preconditions.checkArgument(this.getWorld().equals(start.getWorld()), "Location start cannot be a different world");
         start.checkFinite();
@@ -642,7 +643,7 @@ public class CraftBlock implements Block {
     }
 
     @Override
-    public BoundingBox getBoundingBox() {
+    public @NonNull BoundingBox getBoundingBox() {
         VoxelShape shape = this.getBlockState().getShape(this.level, this.position);
 
         if (shape.isEmpty()) {
@@ -654,13 +655,13 @@ public class CraftBlock implements Block {
     }
 
     @Override
-    public org.bukkit.util.VoxelShape getCollisionShape() {
+    public org.bukkit.util.@NonNull VoxelShape getCollisionShape() {
         VoxelShape shape = this.getBlockState().getCollisionShape(this.level, this.position);
         return new CraftVoxelShape(shape);
     }
 
     @Override
-    public boolean canPlace(BlockData data) {
+    public boolean canPlace(@NonNull BlockData data) {
         Preconditions.checkArgument(data != null, "BlockData cannot be null");
 
         BlockState state = ((CraftBlockData) data).getState();
@@ -668,7 +669,7 @@ public class CraftBlock implements Block {
     }
 
     @Override
-    public String getTranslationKey() {
+    public @NonNull String getTranslationKey() {
         return this.getBlockState().getBlock().getDescriptionId();
     }
 
@@ -678,22 +679,22 @@ public class CraftBlock implements Block {
     }
 
     @Override
-    public com.destroystokyo.paper.block.BlockSoundGroup getSoundGroup() {
+    public com.destroystokyo.paper.block.@NonNull BlockSoundGroup getSoundGroup() {
         return new com.destroystokyo.paper.block.CraftBlockSoundGroup(this.getBlockState().getSoundType());
     }
 
     @Override
-    public org.bukkit.SoundGroup getBlockSoundGroup() {
+    public org.bukkit.@NonNull SoundGroup getBlockSoundGroup() {
         return org.bukkit.craftbukkit.CraftSoundGroup.getSoundGroup(this.getBlockState().getSoundType());
     }
 
     @Override
-    public String translationKey() {
+    public @NonNull String translationKey() {
         return this.getBlockState().getBlock().getDescriptionId();
     }
 
     @Override
-    public boolean isValidTool(ItemStack tool) {
+    public boolean isValidTool(@NonNull ItemStack tool) {
         return !this.getDrops(tool).isEmpty();
     }
 

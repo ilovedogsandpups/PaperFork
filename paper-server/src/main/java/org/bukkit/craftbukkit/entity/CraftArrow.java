@@ -17,6 +17,7 @@ import org.bukkit.potion.PotionData;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.potion.PotionType;
+import org.jspecify.annotations.NonNull;
 
 public class CraftArrow extends CraftAbstractArrow implements Arrow {
 
@@ -48,7 +49,7 @@ public class CraftArrow extends CraftAbstractArrow implements Arrow {
     }
 
     @Override
-    public List<PotionEffect> getCustomEffects() {
+    public @NonNull List<PotionEffect> getCustomEffects() {
         ImmutableList.Builder<PotionEffect> builder = ImmutableList.builder();
         for (MobEffectInstance effect : this.getHandle().getPotionContents().customEffects()) {
             builder.add(CraftPotionUtil.toBukkit(effect));
@@ -72,7 +73,7 @@ public class CraftArrow extends CraftAbstractArrow implements Arrow {
     }
 
     @Override
-    public boolean removeCustomEffect(PotionEffectType effect) {
+    public boolean removeCustomEffect(@NonNull PotionEffectType effect) {
         if (!this.hasCustomEffect(effect)) {
             return false;
         }

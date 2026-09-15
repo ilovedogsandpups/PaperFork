@@ -5,6 +5,7 @@ import io.papermc.paper.plugin.provider.classloader.ConfiguredPluginClassLoader;
 import io.papermc.paper.plugin.provider.classloader.PluginClassLoaderGroup;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,7 +23,7 @@ public class LockingClassLoaderGroup implements PluginClassLoaderGroup {
     }
 
     @Override
-    public @Nullable Class<?> getClassByName(String name, boolean resolve, ConfiguredPluginClassLoader requester) {
+    public @Nullable Class<?> getClassByName(@NonNull String name, boolean resolve, @NonNull ConfiguredPluginClassLoader requester) {
         // make MT safe
         ClassLockEntry lock;
         synchronized (this.classLoadLock) {
@@ -45,17 +46,17 @@ public class LockingClassLoaderGroup implements PluginClassLoaderGroup {
     }
 
     @Override
-    public void remove(ConfiguredPluginClassLoader configuredPluginClassLoader) {
+    public void remove(@NonNull ConfiguredPluginClassLoader configuredPluginClassLoader) {
         this.parent.remove(configuredPluginClassLoader);
     }
 
     @Override
-    public void add(ConfiguredPluginClassLoader configuredPluginClassLoader) {
+    public void add(@NonNull ConfiguredPluginClassLoader configuredPluginClassLoader) {
         this.parent.add(configuredPluginClassLoader);
     }
 
     @Override
-    public ClassLoaderAccess getAccess() {
+    public @NonNull ClassLoaderAccess getAccess() {
         return this.parent.getAccess();
     }
 

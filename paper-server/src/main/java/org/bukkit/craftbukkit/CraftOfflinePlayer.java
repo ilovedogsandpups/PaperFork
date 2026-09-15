@@ -32,6 +32,7 @@ import org.bukkit.configuration.serialization.SerializableAs;
 import org.bukkit.craftbukkit.util.CraftLocation;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import org.jspecify.annotations.NonNull;
 
 @SerializableAs("Player")
 public class CraftOfflinePlayer implements OfflinePlayer, ConfigurationSerializable {
@@ -77,12 +78,12 @@ public class CraftOfflinePlayer implements OfflinePlayer, ConfigurationSerializa
     }
 
     @Override
-    public UUID getUniqueId() {
+    public @NonNull UUID getUniqueId() {
         return this.nameAndId.id();
     }
 
     @Override
-    public com.destroystokyo.paper.profile.PlayerProfile getPlayerProfile() { // Paper
+    public com.destroystokyo.paper.profile.@NonNull PlayerProfile getPlayerProfile() { // Paper
         return com.destroystokyo.paper.profile.CraftPlayerProfile.asBukkitCopy(this.nameAndId.toUncompletedGameProfile()); // Paper
     }
 
@@ -151,7 +152,7 @@ public class CraftOfflinePlayer implements OfflinePlayer, ConfigurationSerializa
     }
 
     @Override
-    public Map<String, Object> serialize() {
+    public @NonNull Map<String, Object> serialize() {
         Map<String, Object> result = new LinkedHashMap<>();
 
         result.put("UUID", this.nameAndId.id().toString());
@@ -303,7 +304,7 @@ public class CraftOfflinePlayer implements OfflinePlayer, ConfigurationSerializa
     private io.papermc.paper.persistence.@org.checkerframework.checker.nullness.qual.MonotonicNonNull PersistentDataContainerView persistentDataContainerView;
 
     @Override
-    public io.papermc.paper.persistence.PersistentDataContainerView getPersistentDataContainer() {
+    public io.papermc.paper.persistence.@NonNull PersistentDataContainerView getPersistentDataContainer() {
         if (this.persistentDataContainerView == null) {
             this.persistentDataContainerView = new io.papermc.paper.persistence.PaperPersistentDataContainerView(DATA_TYPE_REGISTRY) {
 
@@ -312,12 +313,12 @@ public class CraftOfflinePlayer implements OfflinePlayer, ConfigurationSerializa
                 }
 
                 @Override
-                public CompoundTag toTagCompound() {
+                public @NonNull CompoundTag toTagCompound() {
                     return java.util.Objects.requireNonNullElseGet(this.getPersistentTag(), CompoundTag::new);
                 }
 
                 @Override
-                public net.minecraft.nbt.Tag getTag(String key) {
+                public net.minecraft.nbt.Tag getTag(@NonNull String key) {
                     return net.minecraft.Optionull.map(this.getPersistentTag(), tag -> tag.get(key));
                 }
 
@@ -389,7 +390,7 @@ public class CraftOfflinePlayer implements OfflinePlayer, ConfigurationSerializa
     }
 
     @Override
-    public void incrementStatistic(Statistic statistic) {
+    public void incrementStatistic(@NonNull Statistic statistic) {
         if (this.isOnline()) {
             this.getPlayer().incrementStatistic(statistic);
         } else {
@@ -400,7 +401,7 @@ public class CraftOfflinePlayer implements OfflinePlayer, ConfigurationSerializa
     }
 
     @Override
-    public void decrementStatistic(Statistic statistic) {
+    public void decrementStatistic(@NonNull Statistic statistic) {
         if (this.isOnline()) {
             this.getPlayer().decrementStatistic(statistic);
         } else {
@@ -411,7 +412,7 @@ public class CraftOfflinePlayer implements OfflinePlayer, ConfigurationSerializa
     }
 
     @Override
-    public int getStatistic(Statistic statistic) {
+    public int getStatistic(@NonNull Statistic statistic) {
         if (this.isOnline()) {
             return this.getPlayer().getStatistic(statistic);
         } else {
@@ -420,7 +421,7 @@ public class CraftOfflinePlayer implements OfflinePlayer, ConfigurationSerializa
     }
 
     @Override
-    public void incrementStatistic(Statistic statistic, int amount) {
+    public void incrementStatistic(@NonNull Statistic statistic, int amount) {
         if (this.isOnline()) {
             this.getPlayer().incrementStatistic(statistic, amount);
         } else {
@@ -431,7 +432,7 @@ public class CraftOfflinePlayer implements OfflinePlayer, ConfigurationSerializa
     }
 
     @Override
-    public void decrementStatistic(Statistic statistic, int amount) {
+    public void decrementStatistic(@NonNull Statistic statistic, int amount) {
         if (this.isOnline()) {
             this.getPlayer().decrementStatistic(statistic, amount);
         } else {
@@ -442,7 +443,7 @@ public class CraftOfflinePlayer implements OfflinePlayer, ConfigurationSerializa
     }
 
     @Override
-    public void setStatistic(Statistic statistic, int newValue) {
+    public void setStatistic(@NonNull Statistic statistic, int newValue) {
         if (this.isOnline()) {
             this.getPlayer().setStatistic(statistic, newValue);
         } else {
@@ -453,7 +454,7 @@ public class CraftOfflinePlayer implements OfflinePlayer, ConfigurationSerializa
     }
 
     @Override
-    public void incrementStatistic(Statistic statistic, Material material) {
+    public void incrementStatistic(@NonNull Statistic statistic, @NonNull Material material) {
         if (this.isOnline()) {
             this.getPlayer().incrementStatistic(statistic, material);
         } else {
@@ -464,7 +465,7 @@ public class CraftOfflinePlayer implements OfflinePlayer, ConfigurationSerializa
     }
 
     @Override
-    public void decrementStatistic(Statistic statistic, Material material) {
+    public void decrementStatistic(@NonNull Statistic statistic, @NonNull Material material) {
         if (this.isOnline()) {
             this.getPlayer().decrementStatistic(statistic, material);
         } else {
@@ -475,7 +476,7 @@ public class CraftOfflinePlayer implements OfflinePlayer, ConfigurationSerializa
     }
 
     @Override
-    public int getStatistic(Statistic statistic, Material material) {
+    public int getStatistic(@NonNull Statistic statistic, @NonNull Material material) {
         if (this.isOnline()) {
             return this.getPlayer().getStatistic(statistic, material);
         } else {
@@ -484,7 +485,7 @@ public class CraftOfflinePlayer implements OfflinePlayer, ConfigurationSerializa
     }
 
     @Override
-    public void incrementStatistic(Statistic statistic, Material material, int amount) {
+    public void incrementStatistic(@NonNull Statistic statistic, @NonNull Material material, int amount) {
         if (this.isOnline()) {
             this.getPlayer().incrementStatistic(statistic, material, amount);
         } else {
@@ -495,7 +496,7 @@ public class CraftOfflinePlayer implements OfflinePlayer, ConfigurationSerializa
     }
 
     @Override
-    public void decrementStatistic(Statistic statistic, Material material, int amount) {
+    public void decrementStatistic(@NonNull Statistic statistic, @NonNull Material material, int amount) {
         if (this.isOnline()) {
             this.getPlayer().decrementStatistic(statistic, material, amount);
         } else {
@@ -506,7 +507,7 @@ public class CraftOfflinePlayer implements OfflinePlayer, ConfigurationSerializa
     }
 
     @Override
-    public void setStatistic(Statistic statistic, Material material, int newValue) {
+    public void setStatistic(@NonNull Statistic statistic, @NonNull Material material, int newValue) {
         if (this.isOnline()) {
             this.getPlayer().setStatistic(statistic, material, newValue);
         } else {
@@ -517,7 +518,7 @@ public class CraftOfflinePlayer implements OfflinePlayer, ConfigurationSerializa
     }
 
     @Override
-    public void incrementStatistic(Statistic statistic, EntityType entityType) {
+    public void incrementStatistic(@NonNull Statistic statistic, @NonNull EntityType entityType) {
         if (this.isOnline()) {
             this.getPlayer().incrementStatistic(statistic, entityType);
         } else {
@@ -528,7 +529,7 @@ public class CraftOfflinePlayer implements OfflinePlayer, ConfigurationSerializa
     }
 
     @Override
-    public void decrementStatistic(Statistic statistic, EntityType entityType) {
+    public void decrementStatistic(@NonNull Statistic statistic, @NonNull EntityType entityType) {
         if (this.isOnline()) {
             this.getPlayer().decrementStatistic(statistic, entityType);
         } else {
@@ -539,7 +540,7 @@ public class CraftOfflinePlayer implements OfflinePlayer, ConfigurationSerializa
     }
 
     @Override
-    public int getStatistic(Statistic statistic, EntityType entityType) {
+    public int getStatistic(@NonNull Statistic statistic, @NonNull EntityType entityType) {
         if (this.isOnline()) {
             return this.getPlayer().getStatistic(statistic, entityType);
         } else {
@@ -548,7 +549,7 @@ public class CraftOfflinePlayer implements OfflinePlayer, ConfigurationSerializa
     }
 
     @Override
-    public void incrementStatistic(Statistic statistic, EntityType entityType, int amount) {
+    public void incrementStatistic(@NonNull Statistic statistic, @NonNull EntityType entityType, int amount) {
         if (this.isOnline()) {
             this.getPlayer().incrementStatistic(statistic, entityType, amount);
         } else {
@@ -559,7 +560,7 @@ public class CraftOfflinePlayer implements OfflinePlayer, ConfigurationSerializa
     }
 
     @Override
-    public void decrementStatistic(Statistic statistic, EntityType entityType, int amount) {
+    public void decrementStatistic(@NonNull Statistic statistic, @NonNull EntityType entityType, int amount) {
         if (this.isOnline()) {
             this.getPlayer().decrementStatistic(statistic, entityType, amount);
         } else {
@@ -570,7 +571,7 @@ public class CraftOfflinePlayer implements OfflinePlayer, ConfigurationSerializa
     }
 
     @Override
-    public void setStatistic(Statistic statistic, EntityType entityType, int newValue) {
+    public void setStatistic(@NonNull Statistic statistic, @NonNull EntityType entityType, int newValue) {
         if (this.isOnline()) {
             this.getPlayer().setStatistic(statistic, entityType, newValue);
         } else {

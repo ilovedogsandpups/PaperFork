@@ -13,6 +13,7 @@ import org.bukkit.inventory.meta.ArmorMeta;
 import org.bukkit.inventory.meta.trim.ArmorTrim;
 import org.bukkit.inventory.meta.trim.TrimMaterial;
 import org.bukkit.inventory.meta.trim.TrimPattern;
+import org.jspecify.annotations.NonNull;
 
 @DelegateDeserialization(SerializableMeta.class)
 public class CraftMetaArmor extends CraftMetaItem implements ArmorMeta {
@@ -111,7 +112,7 @@ public class CraftMetaArmor extends CraftMetaItem implements ArmorMeta {
     }
 
     @Override
-    public CraftMetaArmor clone() {
+    public @NonNull CraftMetaArmor clone() {
         CraftMetaArmor meta = (CraftMetaArmor) super.clone();
         meta.trim = this.trim;
         return meta;

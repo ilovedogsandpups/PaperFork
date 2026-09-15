@@ -9,6 +9,7 @@ import net.minecraft.world.item.component.FireworkExplosion;
 import org.bukkit.FireworkEffect;
 import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.inventory.meta.FireworkEffectMeta;
+import org.jspecify.annotations.NonNull;
 
 @DelegateDeserialization(SerializableMeta.class)
 public class CraftMetaCharge extends CraftMetaItem implements FireworkEffectMeta {
@@ -104,7 +105,7 @@ public class CraftMetaCharge extends CraftMetaItem implements FireworkEffectMeta
     }
 
     @Override
-    public CraftMetaCharge clone() {
+    public @NonNull CraftMetaCharge clone() {
         return (CraftMetaCharge) super.clone();
     }
 

@@ -345,17 +345,17 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
     }
 
     @Override
-    public CompletableFuture<byte @Nullable []> retrieveCookie(final NamespacedKey key) {
+    public @NonNull CompletableFuture<byte @Nullable []> retrieveCookie(final @NonNull NamespacedKey key) {
         return this.getHandle().connection.playerGameConnection.retrieveCookie(key);
     }
 
     @Override
-    public void storeCookie(NamespacedKey key, byte[] value) {
+    public void storeCookie(@NonNull NamespacedKey key, byte @NonNull [] value) {
         this.getHandle().connection.playerGameConnection.storeCookie(key, value);
     }
 
     @Override
-    public void transfer(String host, int port) {
+    public void transfer(@NonNull String host, int port) {
         this.getHandle().connection.playerGameConnection.transfer(host, port);
     }
 
@@ -383,12 +383,12 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
     }
 
     @Override
-    public void sendRawMessage(String message) {
+    public void sendRawMessage(@NonNull String message) {
         this.sendRawMessage(null, message);
     }
 
     @Override
-    public void sendRawMessage(UUID sender, String message) {
+    public void sendRawMessage(UUID sender, @NonNull String message) {
         Preconditions.checkArgument(message != null, "message cannot be null");
 
         if (this.getHandle().connection == null) return;
@@ -399,7 +399,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
     }
 
     @Override
-    public void sendMessage(String message) {
+    public void sendMessage(@NonNull String message) {
         if (!this.conversationTracker.isConversingModaly()) {
             this.sendRawMessage(message);
         }
@@ -413,7 +413,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
     }
 
     @Override
-    public void sendMessage(UUID sender, String message) {
+    public void sendMessage(UUID sender, @NonNull String message) {
         if (!this.conversationTracker.isConversingModaly()) {
             this.sendRawMessage(sender, message);
         }
@@ -429,7 +429,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
     // Paper start
     @Override
     @Deprecated
-    public void sendActionBar(BaseComponent[] message) {
+    public void sendActionBar(BaseComponent @NonNull [] message) {
         if (getHandle().connection == null || message == null) return;
         net.minecraft.network.protocol.game.ClientboundSetActionBarTextPacket packet = new net.minecraft.network.protocol.game.ClientboundSetActionBarTextPacket(org.bukkit.craftbukkit.util.CraftChatMessage.bungeeToVanilla(message));
         getHandle().connection.send(packet);
@@ -437,14 +437,14 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
 
     @Override
     @Deprecated
-    public void sendActionBar(String message) {
+    public void sendActionBar(@NonNull String message) {
         if (getHandle().connection == null || message == null || message.isEmpty()) return;
         getHandle().connection.send(new net.minecraft.network.protocol.game.ClientboundSetActionBarTextPacket(CraftChatMessage.fromStringOrNull(message)));
     }
 
     @Override
     @Deprecated
-    public void sendActionBar(char alternateChar, String message) {
+    public void sendActionBar(char alternateChar, @NonNull String message) {
         if (message == null || message.isEmpty()) return;
         sendActionBar(org.bukkit.ChatColor.translateAlternateColorCodes(alternateChar, message));
     }
@@ -480,18 +480,18 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
     }
 
     @Override
-    public void setSubtitle(BaseComponent[] subtitle) {
+    public void setSubtitle(BaseComponent @NonNull [] subtitle) {
         final ClientboundSetSubtitleTextPacket packet = new ClientboundSetSubtitleTextPacket(org.bukkit.craftbukkit.util.CraftChatMessage.bungeeToVanilla(subtitle));
         getHandle().connection.send(packet);
     }
 
     @Override
-    public void setSubtitle(BaseComponent subtitle) {
+    public void setSubtitle(@NonNull BaseComponent subtitle) {
         setSubtitle(new BaseComponent[]{subtitle});
     }
 
     @Override
-    public void showTitle(BaseComponent[] title) {
+    public void showTitle(BaseComponent @NonNull [] title) {
         final ClientboundSetTitleTextPacket packet = new ClientboundSetTitleTextPacket(org.bukkit.craftbukkit.util.CraftChatMessage.bungeeToVanilla(title));
         getHandle().connection.send(packet);
     }
@@ -502,7 +502,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
     }
 
     @Override
-    public void showTitle(BaseComponent[] title, BaseComponent[] subtitle, int fadeInTicks, int stayTicks, int fadeOutTicks) {
+    public void showTitle(BaseComponent @NonNull [] title, BaseComponent @NonNull [] subtitle, int fadeInTicks, int stayTicks, int fadeOutTicks) {
         setTitleTimes(fadeInTicks, stayTicks, fadeOutTicks);
         setSubtitle(subtitle);
         showTitle(title);
@@ -516,7 +516,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
     }
 
     @Override
-    public void sendTitle(com.destroystokyo.paper.Title title) {
+    public void sendTitle(com.destroystokyo.paper.@NonNull Title title) {
         Preconditions.checkNotNull(title, "Title is null");
         setTitleTimes(title.getFadeIn(), title.getStay(), title.getFadeOut());
         setSubtitle(title.getSubtitle() == null ? new BaseComponent[0] : title.getSubtitle());
@@ -524,7 +524,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
     }
 
     @Override
-    public void updateTitle(com.destroystokyo.paper.Title title) {
+    public void updateTitle(com.destroystokyo.paper.@NonNull Title title) {
         Preconditions.checkNotNull(title, "Title is null");
         setTitleTimes(title.getFadeIn(), title.getStay(), title.getFadeOut());
         if (title.getSubtitle() != null) {
@@ -540,7 +540,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
     // Paper end
 
     @Override
-    public String getDisplayName() {
+    public @NonNull String getDisplayName() {
         if (true) return io.papermc.paper.adventure.DisplayNames.getLegacy(this); // Paper
         return this.getHandle().displayName;
     }
@@ -563,7 +563,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
         }
     }
     @Override
-    public net.kyori.adventure.text.Component playerListName() {
+    public net.kyori.adventure.text.@NonNull Component playerListName() {
         return getHandle().listName == null ? net.kyori.adventure.text.Component.text(getName()) : io.papermc.paper.adventure.PaperAdventure.asAdventure(getHandle().listName);
     }
     @Override
@@ -576,7 +576,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
     }
     // Paper end
     @Override
-    public String getPlayerListName() {
+    public @NonNull String getPlayerListName() {
         return this.getHandle().listName == null ? this.getName() : CraftChatMessage.fromComponent(this.getHandle().listName);
     }
 
@@ -660,7 +660,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
     }
 
     @Override
-    public void kick(net.kyori.adventure.text.Component message, org.bukkit.event.player.PlayerKickEvent.Cause cause) {
+    public void kick(net.kyori.adventure.text.Component message, org.bukkit.event.player.PlayerKickEvent.@NonNull Cause cause) {
         org.spigotmc.AsyncCatcher.catchOp("player kick");
         final ServerGamePacketListenerImpl connection = this.getHandle().connection;
         if (connection != null) {
@@ -669,7 +669,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
     }
 
     @Override
-    public <T> T getClientOption(com.destroystokyo.paper.ClientOption<T> type) {
+    public <T> @NonNull T getClientOption(com.destroystokyo.paper.@NonNull ClientOption<T> type) {
         if (com.destroystokyo.paper.ClientOption.SKIN_PARTS == type) {
             return type.getType().cast(new com.destroystokyo.paper.PaperSkinParts(this.getHandle().getEntityData().get(net.minecraft.world.entity.player.Player.DATA_PLAYER_MODE_CUSTOMISATION)));
         } else if (com.destroystokyo.paper.ClientOption.CHAT_COLORS_ENABLED == type) {
@@ -716,7 +716,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
     }
 
     @Override
-    public void setCompassTarget(Location loc) {
+    public void setCompassTarget(@NonNull Location loc) {
         Preconditions.checkArgument(loc != null, "Location cannot be null");
 
         if (this.getHandle().connection == null) return;
@@ -733,12 +733,12 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
     }
 
     @Override
-    public Location getCompassTarget() {
+    public @NonNull Location getCompassTarget() {
         return this.getHandle().compassTarget;
     }
 
     @Override
-    public void chat(String msg) {
+    public void chat(@NonNull String msg) {
         Preconditions.checkArgument(msg != null, "msg cannot be null");
 
         if (this.getHandle().connection == null) return;
@@ -760,13 +760,13 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
     }
 
     @Override
-    public boolean performCommand(String command) {
+    public boolean performCommand(@NonNull String command) {
         Preconditions.checkArgument(command != null, "command cannot be null");
         return this.server.dispatchCommand(this, command);
     }
 
     @Override
-    public void playNote(Location loc, Instrument instrument, Note note) {
+    public void playNote(@NonNull Location loc, @NonNull Instrument instrument, @NonNull Note note) {
         Preconditions.checkArgument(loc != null, "Location cannot be null");
         Preconditions.checkArgument(instrument != null, "Instrument cannot be null");
         Preconditions.checkArgument(note != null, "Note cannot be null");
@@ -784,24 +784,24 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
     }
 
     @Override
-    public void playSound(Location loc, Sound sound, org.bukkit.SoundCategory category, float volume, float pitch) {
+    public void playSound(@NonNull Location loc, @NonNull Sound sound, org.bukkit.@NonNull SoundCategory category, float volume, float pitch) {
         this.playSound(loc, sound, category, volume, pitch, this.getHandle().getRandom().nextLong());
     }
 
     @Override
-    public void playSound(Location loc, String sound, org.bukkit.SoundCategory category, float volume, float pitch) {
+    public void playSound(@NonNull Location loc, @NonNull String sound, org.bukkit.@NonNull SoundCategory category, float volume, float pitch) {
         this.playSound(loc, sound, category, volume, pitch, this.getHandle().getRandom().nextLong());
     }
 
     @Override
-    public void playSound(Location loc, Sound sound, org.bukkit.SoundCategory category, float volume, float pitch, long seed) {
+    public void playSound(@NonNull Location loc, @NonNull Sound sound, org.bukkit.@NonNull SoundCategory category, float volume, float pitch, long seed) {
         if (loc == null || sound == null || category == null || this.getHandle().connection == null) return;
 
         this.playSound0(loc, CraftSound.bukkitToMinecraftHolder(sound), net.minecraft.sounds.SoundSource.valueOf(category.name()), volume, pitch, seed);
     }
 
     @Override
-    public void playSound(Location loc, String sound, org.bukkit.SoundCategory category, float volume, float pitch, long seed) {
+    public void playSound(@NonNull Location loc, @NonNull String sound, org.bukkit.@NonNull SoundCategory category, float volume, float pitch, long seed) {
         if (loc == null || sound == null || category == null || this.getHandle().connection == null) return;
 
         this.playSound0(loc, Holder.direct(SoundEvent.createVariableRangeEvent(Identifier.parse(sound))), net.minecraft.sounds.SoundSource.valueOf(category.name()), volume, pitch, seed);
@@ -817,24 +817,24 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
     }
 
     @Override
-    public void playSound(org.bukkit.entity.Entity entity, Sound sound, org.bukkit.SoundCategory category, float volume, float pitch) {
+    public void playSound(org.bukkit.entity.@NonNull Entity entity, @NonNull Sound sound, org.bukkit.@NonNull SoundCategory category, float volume, float pitch) {
         this.playSound(entity, sound, category, volume, pitch, this.getHandle().getRandom().nextLong());
     }
 
     @Override
-    public void playSound(org.bukkit.entity.Entity entity, String sound, org.bukkit.SoundCategory category, float volume, float pitch) {
+    public void playSound(org.bukkit.entity.@NonNull Entity entity, @NonNull String sound, org.bukkit.@NonNull SoundCategory category, float volume, float pitch) {
         this.playSound(entity, sound, category, volume, pitch, this.getHandle().getRandom().nextLong());
     }
 
     @Override
-    public void playSound(org.bukkit.entity.Entity entity, Sound sound, org.bukkit.SoundCategory category, float volume, float pitch, long seed) {
+    public void playSound(org.bukkit.entity.@NonNull Entity entity, @NonNull Sound sound, org.bukkit.@NonNull SoundCategory category, float volume, float pitch, long seed) {
         if (!(entity instanceof CraftEntity) || sound == null || category == null || this.getHandle().connection == null) return;
 
         this.playSound0(entity, CraftSound.bukkitToMinecraftHolder(sound), net.minecraft.sounds.SoundSource.valueOf(category.name()), volume, pitch, seed);
     }
 
     @Override
-    public void playSound(org.bukkit.entity.Entity entity, String sound, org.bukkit.SoundCategory category, float volume, float pitch, long seed) {
+    public void playSound(org.bukkit.entity.@NonNull Entity entity, @NonNull String sound, org.bukkit.@NonNull SoundCategory category, float volume, float pitch, long seed) {
         if (!(entity instanceof CraftEntity) || sound == null || category == null || this.getHandle().connection == null) return;
 
         this.playSound0(entity, Holder.direct(SoundEvent.createVariableRangeEvent(Identifier.parse(sound))), net.minecraft.sounds.SoundSource.valueOf(category.name()), volume, pitch, seed);
@@ -853,14 +853,14 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
     }
 
     @Override
-    public void stopSound(String sound, org.bukkit.SoundCategory category) {
+    public void stopSound(@NonNull String sound, org.bukkit.SoundCategory category) {
         if (this.getHandle().connection == null) return;
 
         this.getHandle().connection.send(new ClientboundStopSoundPacket(Identifier.parse(sound), category == null ? net.minecraft.sounds.SoundSource.MASTER : net.minecraft.sounds.SoundSource.valueOf(category.name())));
     }
 
     @Override
-    public void stopSound(org.bukkit.SoundCategory category) {
+    public void stopSound(org.bukkit.@NonNull SoundCategory category) {
         if (this.getHandle().connection == null) return;
 
         this.getHandle().connection.send(new ClientboundStopSoundPacket(null, net.minecraft.sounds.SoundSource.valueOf(category.name())));
@@ -874,7 +874,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
     }
 
     @Override
-    public void playEffect(Location loc, Effect effect, int data) {
+    public void playEffect(@NonNull Location loc, @NonNull Effect effect, int data) {
         Preconditions.checkArgument(effect != null, "Effect cannot be null");
         Preconditions.checkArgument(loc != null, "Location cannot be null");
 
@@ -886,7 +886,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
     }
 
     @Override
-    public <T> void playEffect(Location loc, Effect effect, T data) {
+    public <T> void playEffect(@NonNull Location loc, @NonNull Effect effect, T data) {
         Preconditions.checkArgument(effect != null, "Effect cannot be null");
         if (data != null) {
             Preconditions.checkArgument(effect.getData() != null, "Effect.%s does not have a valid data", effect.name());
@@ -909,7 +909,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
     }
 
     @Override
-    public void sendBlockChange(Location loc, Material material, byte data) {
+    public void sendBlockChange(@NonNull Location loc, @NonNull Material material, byte data) {
         if (this.getHandle().connection == null) return;
 
         ClientboundBlockUpdatePacket packet = new ClientboundBlockUpdatePacket(CraftLocation.toBlockPos(loc), CraftMagicNumbers.getBlock(material, data));
@@ -917,7 +917,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
     }
 
     @Override
-    public void sendBlockChange(Location loc, BlockData block) {
+    public void sendBlockChange(@NonNull Location loc, @NonNull BlockData block) {
         if (this.getHandle().connection == null) return;
 
         ClientboundBlockUpdatePacket packet = new ClientboundBlockUpdatePacket(CraftLocation.toBlockPos(loc), ((CraftBlockData) block).getState());
@@ -925,7 +925,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
     }
 
     @Override
-    public void sendMultiBlockChange(final Map<? extends io.papermc.paper.math.Position, BlockData> blockChanges) {
+    public void sendMultiBlockChange(final @NonNull Map<? extends io.papermc.paper.math.Position, BlockData> blockChanges) {
         if (this.getHandle().connection == null) return;
 
         Map<SectionPos, it.unimi.dsi.fastutil.shorts.Short2ObjectMap<net.minecraft.world.level.block.state.BlockState>> sectionMap = new HashMap<>();
@@ -949,7 +949,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
     }
 
     @Override
-    public void sendBlockChanges(Collection<BlockState> blocks) {
+    public void sendBlockChanges(@NonNull Collection<BlockState> blocks) {
         Preconditions.checkArgument(blocks != null, "blocks must not be null");
 
         if (this.getHandle().connection == null || blocks.isEmpty()) {
@@ -987,13 +987,13 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
     }
 
     @Override
-    public void sendBlockDamage(Location loc, float progress, org.bukkit.entity.Entity source) {
+    public void sendBlockDamage(@NonNull Location loc, float progress, org.bukkit.entity.Entity source) {
         Preconditions.checkArgument(source != null, "source must not be null");
         this.sendBlockDamage(loc, progress, source.getEntityId());
     }
 
     @Override
-    public void sendBlockDamage(Location loc, float progress, int sourceId) {
+    public void sendBlockDamage(@NonNull Location loc, float progress, int sourceId) {
         Preconditions.checkArgument(loc != null, "loc must not be null");
         Preconditions.checkArgument(progress >= 0.0 && progress <= 1.0, "progress must be between 0.0 and 1.0 (inclusive)");
 
@@ -1010,7 +1010,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
 
     // Paper start
     @Override
-    public void sendSignChange(Location loc, @Nullable List<? extends net.kyori.adventure.text.Component> lines, DyeColor dyeColor, boolean hasGlowingText) {
+    public void sendSignChange(@NonNull Location loc, @Nullable List<? extends net.kyori.adventure.text.Component> lines, @NonNull DyeColor dyeColor, boolean hasGlowingText) {
         if (getHandle().connection == null) {
             return;
         }
@@ -1028,17 +1028,17 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
     // Paper end
 
     @Override
-    public void sendSignChange(Location loc, @Nullable String @Nullable [] lines) {
+    public void sendSignChange(@NonNull Location loc, @Nullable String @Nullable [] lines) {
         this.sendSignChange(loc, lines, DyeColor.BLACK);
     }
 
     @Override
-    public void sendSignChange(Location loc, @Nullable String @Nullable [] lines, DyeColor dyeColor) {
+    public void sendSignChange(@NonNull Location loc, @Nullable String @Nullable [] lines, @NonNull DyeColor dyeColor) {
         this.sendSignChange(loc, lines, dyeColor, false);
     }
 
     @Override
-    public void sendSignChange(Location loc, @Nullable String @Nullable [] lines, DyeColor dyeColor, boolean hasGlowingText) {
+    public void sendSignChange(@NonNull Location loc, @Nullable String @Nullable [] lines, @NonNull DyeColor dyeColor, boolean hasGlowingText) {
         Preconditions.checkArgument(loc != null, "Location cannot be null");
         Preconditions.checkArgument(dyeColor != null, "DyeColor cannot be null");
 
@@ -1080,12 +1080,12 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
     }
 
     @Override
-    public void sendEquipmentChange(LivingEntity entity, EquipmentSlot slot, @Nullable ItemStack item) {
+    public void sendEquipmentChange(@NonNull LivingEntity entity, @NonNull EquipmentSlot slot, @Nullable ItemStack item) {
         this.sendEquipmentChange(entity, java.util.Collections.singletonMap(slot, item));
     }
 
     @Override
-    public void sendEquipmentChange(LivingEntity entity, Map<EquipmentSlot, @Nullable ItemStack> items) {
+    public void sendEquipmentChange(@NonNull LivingEntity entity, Map<EquipmentSlot, @Nullable ItemStack> items) {
         Preconditions.checkArgument(entity != null, "Entity cannot be null");
         Preconditions.checkArgument(items != null, "items cannot be null");
         Preconditions.checkArgument(!items.isEmpty(), "items cannot be empty");
@@ -1106,7 +1106,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
     }
 
     @Override
-    public void sendPotionEffectChange(LivingEntity entity, PotionEffect effect) {
+    public void sendPotionEffectChange(@NonNull LivingEntity entity, @NonNull PotionEffect effect) {
         Preconditions.checkArgument(entity != null, "Entity cannot be null");
         Preconditions.checkArgument(effect != null, "Effect cannot be null");
 
@@ -1118,7 +1118,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
     }
 
     @Override
-    public void sendPotionEffectChangeRemove(LivingEntity entity, PotionEffectType type) {
+    public void sendPotionEffectChangeRemove(@NonNull LivingEntity entity, @NonNull PotionEffectType type) {
         Preconditions.checkArgument(entity != null, "Entity cannot be null");
         Preconditions.checkArgument(type != null, "Type cannot be null");
 
@@ -1169,35 +1169,35 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
     private BorderChangeListener createWorldBorderListener() {
         return new BorderChangeListener() {
             @Override
-            public void onSetSize(net.minecraft.world.level.border.WorldBorder border, double newSize) {
+            public void onSetSize(net.minecraft.world.level.border.@NonNull WorldBorder border, double newSize) {
                 CraftPlayer.this.getHandle().connection.send(new ClientboundSetBorderSizePacket(border));
             }
 
             @Override
-            public void onLerpSize(net.minecraft.world.level.border.WorldBorder border, double fromSize, double targetSize, long ticks, long gameTime) {
+            public void onLerpSize(net.minecraft.world.level.border.@NonNull WorldBorder border, double fromSize, double targetSize, long ticks, long gameTime) {
                 CraftPlayer.this.getHandle().connection.send(new ClientboundSetBorderLerpSizePacket(border));
             }
 
             @Override
-            public void onSetCenter(net.minecraft.world.level.border.WorldBorder border, double x, double z) {
+            public void onSetCenter(net.minecraft.world.level.border.@NonNull WorldBorder border, double x, double z) {
                 CraftPlayer.this.getHandle().connection.send(new ClientboundSetBorderCenterPacket(border));
             }
 
             @Override
-            public void onSetWarningTime(net.minecraft.world.level.border.WorldBorder border, int time) {
+            public void onSetWarningTime(net.minecraft.world.level.border.@NonNull WorldBorder border, int time) {
                 CraftPlayer.this.getHandle().connection.send(new ClientboundSetBorderWarningDelayPacket(border));
             }
 
             @Override
-            public void onSetWarningBlocks(net.minecraft.world.level.border.WorldBorder border, int blocks) {
+            public void onSetWarningBlocks(net.minecraft.world.level.border.@NonNull WorldBorder border, int blocks) {
                 CraftPlayer.this.getHandle().connection.send(new ClientboundSetBorderWarningDistancePacket(border));
             }
 
             @Override
-            public void onSetDamagePerBlock(net.minecraft.world.level.border.WorldBorder border, double damagePerBlock) {} // NO OP
+            public void onSetDamagePerBlock(net.minecraft.world.level.border.@NonNull WorldBorder border, double damagePerBlock) {} // NO OP
 
             @Override
-            public void onSetSafeZone(net.minecraft.world.level.border.WorldBorder border, double safeZone) {} // NO OP
+            public void onSetSafeZone(net.minecraft.world.level.border.@NonNull WorldBorder border, double safeZone) {} // NO OP
         };
     }
 
@@ -1206,7 +1206,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
     }
 
     @Override
-    public void sendMap(MapView map) {
+    public void sendMap(@NonNull MapView map) {
         if (this.getHandle().connection == null) return;
 
         RenderData data = ((CraftMapView) map).render(this);
@@ -1241,7 +1241,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
     }
 
     @Override
-    public void sendLinks(ServerLinks links) {
+    public void sendLinks(@NonNull ServerLinks links) {
         if (this.getHandle().connection == null) {
             return;
         }
@@ -1252,17 +1252,17 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
     }
 
     @Override
-    public void addCustomChatCompletions(Collection<String> completions) {
+    public void addCustomChatCompletions(@NonNull Collection<String> completions) {
         this.sendCustomChatCompletionPacket(completions, ClientboundCustomChatCompletionsPacket.Action.ADD);
     }
 
     @Override
-    public void removeCustomChatCompletions(Collection<String> completions) {
+    public void removeCustomChatCompletions(@NonNull Collection<String> completions) {
         this.sendCustomChatCompletionPacket(completions, ClientboundCustomChatCompletionsPacket.Action.REMOVE);
     }
 
     @Override
-    public void setCustomChatCompletions(Collection<String> completions) {
+    public void setCustomChatCompletions(@NonNull Collection<String> completions) {
         this.sendCustomChatCompletionPacket(completions, ClientboundCustomChatCompletionsPacket.Action.SET);
     }
 
@@ -1414,17 +1414,17 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
     }
 
     @Override
-    public Collection<EnderPearl> getEnderPearls() {
+    public @NonNull Collection<EnderPearl> getEnderPearls() {
         return this.getHandle().getEnderPearls().stream().map((e) -> (EnderPearl) e.getBukkitEntity()).collect(Collectors.toList());
     }
 
     @Override
-    public Input getCurrentInput() {
+    public @NonNull Input getCurrentInput() {
         return new CraftInput(this.getHandle().getLastClientInput());
     }
 
     @Override
-    public Location getBedLocation() {
+    public @NonNull Location getBedLocation() {
         Preconditions.checkState(this.isSleeping(), "Not sleeping");
 
         BlockPos bed = this.getHandle().getRespawnConfig().respawnData().pos();
@@ -1432,105 +1432,105 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
     }
 
     @Override
-    public boolean hasDiscoveredRecipe(NamespacedKey recipe) {
+    public boolean hasDiscoveredRecipe(@NonNull NamespacedKey recipe) {
         Preconditions.checkArgument(recipe != null, "recipe cannot be null");
         return this.getHandle().getRecipeBook().contains(CraftNamespacedKey.toResourceKey(Registries.RECIPE, recipe));
     }
 
     @Override
-    public Set<NamespacedKey> getDiscoveredRecipes() {
+    public @NonNull Set<NamespacedKey> getDiscoveredRecipes() {
         ImmutableSet.Builder<NamespacedKey> bukkitRecipeKeys = ImmutableSet.builder();
         this.getHandle().getRecipeBook().known.forEach(key -> bukkitRecipeKeys.add(CraftNamespacedKey.fromMinecraft(key.identifier())));
         return bukkitRecipeKeys.build();
     }
 
     @Override
-    public void incrementStatistic(Statistic statistic) {
+    public void incrementStatistic(@NonNull Statistic statistic) {
         CraftStatistic.incrementStatistic(this.getHandle().getStats(), statistic, this.getHandle());
     }
 
     @Override
-    public void decrementStatistic(Statistic statistic) {
+    public void decrementStatistic(@NonNull Statistic statistic) {
         CraftStatistic.decrementStatistic(this.getHandle().getStats(), statistic, this.getHandle());
     }
 
     @Override
-    public int getStatistic(Statistic statistic) {
+    public int getStatistic(@NonNull Statistic statistic) {
         return CraftStatistic.getStatistic(this.getHandle().getStats(), statistic);
     }
 
     @Override
-    public void incrementStatistic(Statistic statistic, int amount) {
+    public void incrementStatistic(@NonNull Statistic statistic, int amount) {
         CraftStatistic.incrementStatistic(this.getHandle().getStats(), statistic, amount, this.getHandle());
     }
 
     @Override
-    public void decrementStatistic(Statistic statistic, int amount) {
+    public void decrementStatistic(@NonNull Statistic statistic, int amount) {
         CraftStatistic.decrementStatistic(this.getHandle().getStats(), statistic, amount, this.getHandle());
     }
 
     @Override
-    public void setStatistic(Statistic statistic, int newValue) {
+    public void setStatistic(@NonNull Statistic statistic, int newValue) {
         CraftStatistic.setStatistic(this.getHandle().getStats(), statistic, newValue, this.getHandle());
     }
 
     @Override
-    public void incrementStatistic(Statistic statistic, Material material) {
+    public void incrementStatistic(@NonNull Statistic statistic, @NonNull Material material) {
         CraftStatistic.incrementStatistic(this.getHandle().getStats(), statistic, material, this.getHandle());
     }
 
     @Override
-    public void decrementStatistic(Statistic statistic, Material material) {
+    public void decrementStatistic(@NonNull Statistic statistic, @NonNull Material material) {
         CraftStatistic.decrementStatistic(this.getHandle().getStats(), statistic, material, this.getHandle());
     }
 
     @Override
-    public int getStatistic(Statistic statistic, Material material) {
+    public int getStatistic(@NonNull Statistic statistic, @NonNull Material material) {
         return CraftStatistic.getStatistic(this.getHandle().getStats(), statistic, material);
     }
 
     @Override
-    public void incrementStatistic(Statistic statistic, Material material, int amount) {
+    public void incrementStatistic(@NonNull Statistic statistic, @NonNull Material material, int amount) {
         CraftStatistic.incrementStatistic(this.getHandle().getStats(), statistic, material, amount, this.getHandle());
     }
 
     @Override
-    public void decrementStatistic(Statistic statistic, Material material, int amount) {
+    public void decrementStatistic(@NonNull Statistic statistic, @NonNull Material material, int amount) {
         CraftStatistic.decrementStatistic(this.getHandle().getStats(), statistic, material, amount, this.getHandle());
     }
 
     @Override
-    public void setStatistic(Statistic statistic, Material material, int newValue) {
+    public void setStatistic(@NonNull Statistic statistic, @NonNull Material material, int newValue) {
         CraftStatistic.setStatistic(this.getHandle().getStats(), statistic, material, newValue, this.getHandle());
     }
 
     @Override
-    public void incrementStatistic(Statistic statistic, EntityType entityType) {
+    public void incrementStatistic(@NonNull Statistic statistic, @NonNull EntityType entityType) {
         CraftStatistic.incrementStatistic(this.getHandle().getStats(), statistic, entityType, this.getHandle());
     }
 
     @Override
-    public void decrementStatistic(Statistic statistic, EntityType entityType) {
+    public void decrementStatistic(@NonNull Statistic statistic, @NonNull EntityType entityType) {
         CraftStatistic.decrementStatistic(this.getHandle().getStats(), statistic, entityType, this.getHandle());
     }
 
     @Override
-    public int getStatistic(Statistic statistic, EntityType entityType) {
+    public int getStatistic(@NonNull Statistic statistic, @NonNull EntityType entityType) {
         return CraftStatistic.getStatistic(this.getHandle().getStats(), statistic, entityType);
     }
 
     @Override
-    public void incrementStatistic(Statistic statistic, EntityType entityType, int amount) {
+    public void incrementStatistic(@NonNull Statistic statistic, @NonNull EntityType entityType, int amount) {
         CraftStatistic.incrementStatistic(this.getHandle().getStats(), statistic, entityType, amount, this.getHandle());
     }
 
     @Override
-    public void decrementStatistic(Statistic statistic, EntityType entityType, int amount) {
+    public void decrementStatistic(@NonNull Statistic statistic, @NonNull EntityType entityType, int amount) {
         CraftStatistic.decrementStatistic(this.getHandle().getStats(), statistic, entityType, amount, this.getHandle());
     }
 
     @Override
-    public void setStatistic(Statistic statistic, EntityType entityType, int newValue) {
+    public void setStatistic(@NonNull Statistic statistic, @NonNull EntityType entityType, int newValue) {
         CraftStatistic.setStatistic(this.getHandle().getStats(), statistic, entityType, newValue, this.getHandle());
     }
 
@@ -1568,7 +1568,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
     }
 
     @Override
-    public void setPlayerWeather(WeatherType type) {
+    public void setPlayerWeather(@NonNull WeatherType type) {
         this.getHandle().setPlayerWeather(type, true);
     }
 
@@ -1666,7 +1666,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
     }
 
     @Override
-    public void setGameMode(GameMode mode) {
+    public void setGameMode(@NonNull GameMode mode) {
         Preconditions.checkArgument(mode != null, "GameMode cannot be null");
         if (this.getHandle().connection == null) return;
 
@@ -1674,7 +1674,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
     }
 
     @Override
-    public GameMode getGameMode() {
+    public @NonNull GameMode getGameMode() {
         return GameMode.getByValue(this.getHandle().gameMode.getGameModeForPlayer().getId());
     }
 
@@ -1829,12 +1829,12 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
 
     @Override
     @Deprecated
-    public void hidePlayer(Player player) {
+    public void hidePlayer(@NonNull Player player) {
         this.hideEntity0(null, player);
     }
 
     @Override
-    public void hideEntity(Plugin plugin, org.bukkit.entity.Entity entity) {
+    public void hideEntity(Plugin plugin, org.bukkit.entity.@NonNull Entity entity) {
         Preconditions.checkArgument(plugin != null, "Plugin cannot be null");
         Preconditions.checkArgument(plugin.isEnabled(), "Plugin (%s) cannot be disabled", plugin.getName());
 
@@ -1911,12 +1911,12 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
 
     @Override
     @Deprecated
-    public void showPlayer(Player player) {
+    public void showPlayer(@NonNull Player player) {
         this.showEntity0(null, player);
     }
 
     @Override
-    public void showEntity(Plugin plugin, org.bukkit.entity.Entity entity) {
+    public void showEntity(@NonNull Plugin plugin, org.bukkit.entity.@NonNull Entity entity) {
         Preconditions.checkArgument(plugin != null, "Plugin cannot be null");
         // Don't require that plugin be enabled. A plugin must be allowed to call
         // showPlayer during its onDisable() method.
@@ -1982,7 +1982,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
     }
     // Paper start
     @Override
-    public void setPlayerProfile(com.destroystokyo.paper.profile.PlayerProfile profile) {
+    public void setPlayerProfile(com.destroystokyo.paper.profile.@NonNull PlayerProfile profile) {
         ServerPlayer self = this.getHandle();
         GameProfile gameProfile = com.destroystokyo.paper.profile.CraftPlayerProfile.asAuthlibCopy(profile);
         if (!self.sentListPacket) {
@@ -2025,7 +2025,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
         }
     }
     // Paper start
-    public com.destroystokyo.paper.profile.PlayerProfile getPlayerProfile() {
+    public com.destroystokyo.paper.profile.@NonNull PlayerProfile getPlayerProfile() {
         return new com.destroystokyo.paper.profile.CraftPlayerProfile(this);
     }
 
@@ -2058,12 +2058,12 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
     }
 
     @Override
-    public boolean canSee(Player player) {
+    public boolean canSee(@NonNull Player player) {
         return this.canSee((org.bukkit.entity.Entity) player);
     }
 
     @Override
-    public boolean canSee(org.bukkit.entity.Entity entity) {
+    public boolean canSee(org.bukkit.entity.@NonNull Entity entity) {
         return this.equals(entity) || entity.isVisibleByDefault() ^ this.invertedVisibilityEntities.containsKey(entity.getUniqueId()); // SPIGOT-7312: Can always see self
     }
 
@@ -2109,7 +2109,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
     // Paper end - Add Listing API for Player
 
     @Override
-    public Map<String, Object> serialize() {
+    public @NonNull Map<String, Object> serialize() {
         Map<String, Object> result = new LinkedHashMap<>();
 
         result.put("name", this.getName());
@@ -2190,22 +2190,22 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
     }
 
     @Override
-    public boolean beginConversation(Conversation conversation) {
+    public boolean beginConversation(@NonNull Conversation conversation) {
         return this.conversationTracker.beginConversation(conversation);
     }
 
     @Override
-    public void abandonConversation(Conversation conversation) {
+    public void abandonConversation(@NonNull Conversation conversation) {
         this.conversationTracker.abandonConversation(conversation, new ConversationAbandonedEvent(conversation, new ManuallyAbandonedConversationCanceller()));
     }
 
     @Override
-    public void abandonConversation(Conversation conversation, ConversationAbandonedEvent details) {
+    public void abandonConversation(@NonNull Conversation conversation, @NonNull ConversationAbandonedEvent details) {
         this.conversationTracker.abandonConversation(conversation, details);
     }
 
     @Override
-    public void acceptConversationInput(String input) {
+    public void acceptConversationInput(@NonNull String input) {
         this.conversationTracker.acceptConversationInput(input);
     }
 
@@ -2215,7 +2215,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
     }
 
     @Override
-    public void sendPluginMessage(Plugin source, String channel, byte[] message) {
+    public void sendPluginMessage(@NonNull Plugin source, @NonNull String channel, byte @NonNull [] message) {
         StandardMessenger.validatePluginMessage(this.server.getMessenger(), source, channel, message);
         if (this.getHandle().connection == null) return;
 
@@ -2231,14 +2231,14 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
     }
 
     @Override
-    public void setResourcePack(String url, byte @Nullable [] hash, String prompt, boolean force) {
+    public void setResourcePack(@NonNull String url, byte @Nullable [] hash, String prompt, boolean force) {
         Preconditions.checkArgument(url != null, "Resource pack URL cannot be null");
 
         this.setResourcePack(UUID.nameUUIDFromBytes(url.getBytes(StandardCharsets.UTF_8)), url, hash, prompt, force);
     }
 
     @Override
-    public void setResourcePack(UUID id, String url, byte @Nullable [] hash, String prompt, boolean force) {
+    public void setResourcePack(@NonNull UUID id, @NonNull String url, byte @Nullable [] hash, String prompt, boolean force) {
         Preconditions.checkArgument(id != null, "Resource pack ID cannot be null");
         Preconditions.checkArgument(url != null, "Resource pack URL cannot be null");
 
@@ -2252,7 +2252,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
     }
 
     @Override
-    public void addResourcePack(UUID id, String url, byte @Nullable [] hash, String prompt, boolean force) {
+    public void addResourcePack(@NonNull UUID id, @NonNull String url, byte @Nullable [] hash, String prompt, boolean force) {
         Preconditions.checkArgument(url != null, "Resource pack URL cannot be null");
 
         String hashStr = "";
@@ -2266,7 +2266,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
 
     // Paper start - adventure
     @Override
-    public void setResourcePack(final UUID uuid, final String url, final byte @Nullable [] hashBytes, final net.kyori.adventure.text.Component prompt, final boolean force) {
+    public void setResourcePack(final @NonNull UUID uuid, final @NonNull String url, final byte @Nullable [] hashBytes, final net.kyori.adventure.text.Component prompt, final boolean force) {
         Preconditions.checkArgument(uuid != null, "Resource pack UUID cannot be null");
         Preconditions.checkArgument(url != null, "Resource pack URL cannot be null");
         final String hash;
@@ -2286,7 +2286,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
     }
 
     @Override
-    public void sendResourcePacks(final net.kyori.adventure.resource.ResourcePackRequest request) {
+    public void sendResourcePacks(final net.kyori.adventure.resource.@NonNull ResourcePackRequest request) {
         if (this.getHandle().connection == null) return;
         final List<ClientboundResourcePackPushPacket> packs = new java.util.ArrayList<>(request.packs().size());
         if (request.replace()) {
@@ -2305,7 +2305,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
     }
 
     @Override
-    public void removeResourcePacks(final UUID id, final UUID... others) {
+    public void removeResourcePacks(final @NonNull UUID id, final UUID @NonNull ... others) {
         if (this.getHandle().connection == null) return;
         this.sendBundle(net.kyori.adventure.util.MonkeyBars.nonEmptyArrayToList(pack -> new ClientboundResourcePackPopPacket(Optional.of(pack)), id, others));
     }
@@ -2318,7 +2318,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
     // Paper end - adventure
 
     @Override
-    public void showDialog(final DialogLike dialog) {
+    public void showDialog(final @NonNull DialogLike dialog) {
         if (this.getHandle().connection == null) return;
         this.getHandle().openDialog(PaperDialog.bukkitToMinecraftHolder((Dialog) dialog));
     }
@@ -2338,7 +2338,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
     // Paper end - more resource pack API
 
     @Override
-    public void removeResourcePack(UUID id) {
+    public void removeResourcePack(@NonNull UUID id) {
         Preconditions.checkArgument(id != null, "Resource pack id cannot be null");
         if (this.getHandle().connection == null) return;
         this.getHandle().connection.send(new ClientboundResourcePackPopPacket(Optional.of(id)));
@@ -2360,14 +2360,14 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
     }
 
     @Override
-    public Set<String> channels() {
+    public @NonNull Set<String> channels() {
         if (this.getHandle().connection == null) return new HashSet<>();
 
         return this.getHandle().connection.pluginMessagerChannels;
     }
 
     @Override
-    public Set<String> getListeningPluginChannels() {
+    public @NonNull Set<String> getListeningPluginChannels() {
         return ImmutableSet.copyOf(this.channels());
     }
 
@@ -2392,22 +2392,22 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
     }
 
     @Override
-    public void setMetadata(String metadataKey, MetadataValue newMetadataValue) {
+    public void setMetadata(@NonNull String metadataKey, @NonNull MetadataValue newMetadataValue) {
         this.server.getPlayerMetadata().setMetadata(this, metadataKey, newMetadataValue);
     }
 
     @Override
-    public List<MetadataValue> getMetadata(String metadataKey) {
+    public @NonNull List<MetadataValue> getMetadata(@NonNull String metadataKey) {
         return this.server.getPlayerMetadata().getMetadata(this, metadataKey);
     }
 
     @Override
-    public boolean hasMetadata(String metadataKey) {
+    public boolean hasMetadata(@NonNull String metadataKey) {
         return this.server.getPlayerMetadata().hasMetadata(this, metadataKey);
     }
 
     @Override
-    public void removeMetadata(String metadataKey, Plugin owningPlugin) {
+    public void removeMetadata(@NonNull String metadataKey, @NonNull Plugin owningPlugin) {
         this.server.getPlayerMetadata().removeMetadata(this, metadataKey, owningPlugin);
     }
 
@@ -2525,7 +2525,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
     }
 
     @Override
-    public CraftScoreboard getScoreboard() {
+    public @NonNull CraftScoreboard getScoreboard() {
         return this.server.getScoreboardManager().getPlayerBoard(this);
     }
 
@@ -2538,7 +2538,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
     }
 
     @Override
-    public void setScoreboard(Scoreboard scoreboard) {
+    public void setScoreboard(@NonNull Scoreboard scoreboard) {
         Preconditions.checkArgument(scoreboard != null, "Scoreboard cannot be null");
         Preconditions.checkState(this.getHandle().connection != null, "Cannot set scoreboard yet (invalid player connection)");
         if (!(scoreboard instanceof CraftScoreboard craftScoreboard)) {
@@ -2688,13 +2688,13 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
     }
 
     @Override
-    public <T> void spawnParticle(Particle particle, double x, double y, double z, int count, double offsetX, double offsetY, double offsetZ, double extra, T data, boolean force) {
+    public <T> void spawnParticle(@NonNull Particle particle, double x, double y, double z, int count, double offsetX, double offsetY, double offsetZ, double extra, T data, boolean force) {
         ClientboundLevelParticlesPacket packet = new ClientboundLevelParticlesPacket(CraftParticle.createParticleParam(particle, data), force, false, x, y, z, (float) offsetX, (float) offsetY, (float) offsetZ, (float) extra, count); // Paper - fix x/y/z precision loss
         this.getHandle().connection.send(packet);
     }
 
     @Override
-    public org.bukkit.advancement.AdvancementProgress getAdvancementProgress(org.bukkit.advancement.Advancement advancement) {
+    public org.bukkit.advancement.@NonNull AdvancementProgress getAdvancementProgress(org.bukkit.advancement.@NonNull Advancement advancement) {
         Preconditions.checkArgument(advancement != null, "advancement");
 
         CraftAdvancement craft = (CraftAdvancement) advancement;
@@ -2711,7 +2711,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
 
     // Paper start
     @Override
-    public java.util.Locale locale() {
+    public java.util.@NonNull Locale locale() {
         return getHandle().adventure$locale;
     }
     // Paper end
@@ -2723,7 +2723,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
     }
 
     @Override
-    public String getLocale() {
+    public @NonNull String getLocale() {
         // Paper start - Locale change event
         final String locale = this.getHandle().language;
         return locale != null ? locale : "en_us";
@@ -2754,7 +2754,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
     }
 
     @Override
-    public void openVirtualSign(Position block, Side side) {
+    public void openVirtualSign(@NonNull Position block, @NonNull Side side) {
         if (this.getHandle().connection == null) return;
 
         this.getHandle().connection.send(new ClientboundOpenSignEditorPacket(MCUtil.toBlockPos(block), side == Side.FRONT));
@@ -2774,7 +2774,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
 
     // Paper start
     @Override
-    public net.kyori.adventure.text.Component displayName() {
+    public net.kyori.adventure.text.@NonNull Component displayName() {
         return this.getHandle().adventure$displayName;
     }
 
@@ -2785,7 +2785,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
     }
 
     @Override
-    public void deleteMessage(net.kyori.adventure.chat.SignedMessage.Signature signature) {
+    public void deleteMessage(net.kyori.adventure.chat.SignedMessage.@NonNull Signature signature) {
         if (getHandle().connection == null) return;
         net.minecraft.network.chat.MessageSignature sig = new net.minecraft.network.chat.MessageSignature(signature.bytes());
 
@@ -2803,7 +2803,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
     }
 
     @Override
-    public void sendMessage(net.kyori.adventure.text.Component message, net.kyori.adventure.chat.ChatType.Bound boundChatType) {
+    public void sendMessage(net.kyori.adventure.text.@NonNull Component message, net.kyori.adventure.chat.ChatType.@NonNull Bound boundChatType) {
         if (getHandle().connection == null) return;
 
         net.minecraft.network.chat.Component component = io.papermc.paper.adventure.PaperAdventure.asVanilla(message);
@@ -2811,7 +2811,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
     }
 
     @Override
-    public void sendMessage(net.kyori.adventure.chat.SignedMessage signedMessage, net.kyori.adventure.chat.ChatType.Bound boundChatType) {
+    public void sendMessage(net.kyori.adventure.chat.@NonNull SignedMessage signedMessage, net.kyori.adventure.chat.ChatType.@NonNull Bound boundChatType) {
         if (getHandle().connection == null) return;
 
         if (signedMessage instanceof PlayerChatMessage.AdventureView view) {
@@ -2836,31 +2836,31 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
     }
 
     @Override
-    public void sendMessage(final net.kyori.adventure.text.Component message) {
+    public void sendMessage(final net.kyori.adventure.text.@NonNull Component message) {
         if (getHandle().connection == null) return;
         this.getHandle().connection.send(new net.minecraft.network.protocol.game.ClientboundSystemChatPacket(message, false));
     }
 
     @Override
-    public void sendActionBar(final net.kyori.adventure.text.Component message) {
+    public void sendActionBar(final net.kyori.adventure.text.@NonNull Component message) {
         final net.minecraft.network.protocol.game.ClientboundSetActionBarTextPacket packet = new net.minecraft.network.protocol.game.ClientboundSetActionBarTextPacket(io.papermc.paper.adventure.PaperAdventure.asVanillaNullToEmpty(message));
         this.getHandle().connection.send(packet);
     }
 
     @Override
-    public void sendPlayerListHeader(final net.kyori.adventure.text.Component header) {
+    public void sendPlayerListHeader(final net.kyori.adventure.text.@NonNull Component header) {
         this.playerListHeader = header;
         this.adventure$sendPlayerListHeaderAndFooter();
     }
 
     @Override
-    public void sendPlayerListFooter(final net.kyori.adventure.text.Component footer) {
+    public void sendPlayerListFooter(final net.kyori.adventure.text.@NonNull Component footer) {
         this.playerListFooter = footer;
         this.adventure$sendPlayerListHeaderAndFooter();
     }
 
     @Override
-    public void sendPlayerListHeaderAndFooter(final net.kyori.adventure.text.Component header, final net.kyori.adventure.text.Component footer) {
+    public void sendPlayerListHeaderAndFooter(final net.kyori.adventure.text.@NonNull Component header, final net.kyori.adventure.text.@NonNull Component footer) {
         this.playerListHeader = header;
         this.playerListFooter = footer;
         this.adventure$sendPlayerListHeaderAndFooter();
@@ -2890,7 +2890,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
     }
 
     @Override
-    public <T> void sendTitlePart(final net.kyori.adventure.title.TitlePart<T> part, T value) {
+    public <T> void sendTitlePart(final net.kyori.adventure.title.@NonNull TitlePart<T> part, @NonNull T value) {
         Preconditions.checkArgument(part != null, "part cannot be null");
         Preconditions.checkArgument(value != null, "value cannot be null");
         if (part == net.kyori.adventure.title.TitlePart.TITLE) {
@@ -2932,7 +2932,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
     }
 
     @Override
-    public void showBossBar(final net.kyori.adventure.bossbar.BossBar bar) {
+    public void showBossBar(final net.kyori.adventure.bossbar.@NonNull BossBar bar) {
         net.kyori.adventure.bossbar.BossBarImplementation.get(bar, io.papermc.paper.adventure.BossBarImplementationImpl.class).playerShow(this);
         if (this.activeBossBars == null) {
             this.activeBossBars = new HashSet<>();
@@ -2941,7 +2941,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
     }
 
     @Override
-    public void hideBossBar(final net.kyori.adventure.bossbar.BossBar bar) {
+    public void hideBossBar(final net.kyori.adventure.bossbar.@NonNull BossBar bar) {
         net.kyori.adventure.bossbar.BossBarImplementation.get(bar, io.papermc.paper.adventure.BossBarImplementationImpl.class).playerHide(this);
         if (this.activeBossBars != null) {
             this.activeBossBars.remove(bar);
@@ -2952,18 +2952,18 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
     }
 
     @Override
-    public void playSound(final net.kyori.adventure.sound.Sound sound) {
+    public void playSound(final net.kyori.adventure.sound.@NonNull Sound sound) {
         final net.minecraft.world.phys.Vec3 pos = this.getHandle().position();
         this.playSound(sound, pos.x, pos.y, pos.z);
     }
 
     @Override
-    public void playSound(final net.kyori.adventure.sound.Sound sound, final double x, final double y, final double z) {
+    public void playSound(final net.kyori.adventure.sound.@NonNull Sound sound, final double x, final double y, final double z) {
         this.getHandle().connection.send(io.papermc.paper.adventure.PaperAdventure.asSoundPacket(sound, x, y, z, sound.seed().orElseGet(this.getHandle().getRandom()::nextLong), null));
     }
 
     @Override
-    public void playSound(final net.kyori.adventure.sound.Sound sound, final net.kyori.adventure.sound.Sound.Emitter emitter) {
+    public void playSound(final net.kyori.adventure.sound.@NonNull Sound sound, final net.kyori.adventure.sound.Sound.@NonNull Emitter emitter) {
         final Entity entity;
         if (emitter == net.kyori.adventure.sound.Sound.Emitter.self()) {
             entity = this.getHandle();
@@ -3014,7 +3014,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
     }
 
     @Override
-    public net.kyori.adventure.pointer.Pointers pointers() {
+    public net.kyori.adventure.pointer.@NonNull Pointers pointers() {
         return POINTERS_SUPPLIER.view(this);
     }
 
@@ -3037,7 +3037,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
     private final Player.Spigot spigot = new Player.Spigot() {
 
         @Override
-        public InetSocketAddress getRawAddress() {
+        public @NonNull InetSocketAddress getRawAddress() {
             return (InetSocketAddress) CraftPlayer.this.getHandle().connection.getRawAddress();
         }
 
@@ -3050,7 +3050,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
         }
 
         @Override
-        public Set<Player> getHiddenPlayers() {
+        public @NonNull Set<Player> getHiddenPlayers() {
             Set<Player> ret = new HashSet<>();
             for (Player player : CraftPlayer.this.getServer().getOnlinePlayers()) {
                 if (!CraftPlayer.this.canSee(player)) {
@@ -3062,17 +3062,17 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
         }
 
         @Override
-        public void sendMessage(BaseComponent component) {
+        public void sendMessage(@NonNull BaseComponent component) {
             this.sendMessage(new BaseComponent[]{component});
         }
 
         @Override
-        public void sendMessage(BaseComponent... components) {
+        public void sendMessage(BaseComponent @NonNull ... components) {
             this.sendMessage(net.md_5.bungee.api.ChatMessageType.SYSTEM, components);
         }
 
         @Override
-        public void sendMessage(UUID sender, BaseComponent component) {
+        public void sendMessage(UUID sender, @NonNull BaseComponent component) {
             this.sendMessage(net.md_5.bungee.api.ChatMessageType.CHAT, sender, component);
         }
 
@@ -3082,22 +3082,22 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
         }
 
         @Override
-        public void sendMessage(net.md_5.bungee.api.ChatMessageType position, BaseComponent component) {
+        public void sendMessage(net.md_5.bungee.api.@NonNull ChatMessageType position, @NonNull BaseComponent component) {
             this.sendMessage(position, new BaseComponent[]{component});
         }
 
         @Override
-        public void sendMessage(net.md_5.bungee.api.ChatMessageType position, BaseComponent... components) {
+        public void sendMessage(net.md_5.bungee.api.@NonNull ChatMessageType position, BaseComponent @NonNull ... components) {
             this.sendMessage(position, null, components);
         }
 
         @Override
-        public void sendMessage(net.md_5.bungee.api.ChatMessageType position, UUID sender, BaseComponent component) {
+        public void sendMessage(net.md_5.bungee.api.@NonNull ChatMessageType position, UUID sender, @NonNull BaseComponent component) {
             this.sendMessage(position, sender, new BaseComponent[]{component});
         }
 
         @Override
-        public void sendMessage(net.md_5.bungee.api.ChatMessageType position, UUID sender, BaseComponent... components) {
+        public void sendMessage(net.md_5.bungee.api.@NonNull ChatMessageType position, UUID sender, BaseComponent @NonNull ... components) {
             if (CraftPlayer.this.getHandle().connection == null) return;
 
             CraftPlayer.this.getHandle().connection.send(new net.minecraft.network.protocol.game.ClientboundSystemChatPacket(components, position == net.md_5.bungee.api.ChatMessageType.ACTION_BAR));
@@ -3163,7 +3163,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
 
     // Paper start
     @Override
-    public Duration getIdleDuration() {
+    public @NonNull Duration getIdleDuration() {
         return Duration.ofMillis(net.minecraft.util.Util.getMillis() - this.getHandle().getLastActionTime());
     }
 
@@ -3175,13 +3175,13 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
 
     // Paper start - Add chunk view API
     @Override
-    public Set<java.lang.Long> getSentChunkKeys() {
+    public @NonNull Set<java.lang.Long> getSentChunkKeys() {
         org.spigotmc.AsyncCatcher.catchOp("accessing sent chunks");
         return FeatureHooks.getSentChunkKeys(this.getHandle());
     }
 
     @Override
-    public Set<org.bukkit.Chunk> getSentChunks() {
+    public @NonNull Set<org.bukkit.Chunk> getSentChunks() {
         org.spigotmc.AsyncCatcher.catchOp("accessing sent chunks");
         return FeatureHooks.getSentChunks(this.getHandle());
     }
@@ -3193,7 +3193,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
     }
     // Paper end
 
-    public Player.Spigot spigot() {
+    public Player.@NonNull Spigot spigot() {
         return this.spigot;
     }
     // Spigot end
@@ -3230,7 +3230,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
 
     // Paper start - entity effect API
     @Override
-    public void sendEntityEffect(final EntityEffect effect, final org.bukkit.entity.Entity target) {
+    public void sendEntityEffect(final @NonNull EntityEffect effect, final org.bukkit.entity.@NonNull Entity target) {
         if (this.getHandle().connection == null) {
             return;
         }
@@ -3297,7 +3297,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
     }
 
     @Override
-    public PlayerGameConnection getConnection() {
+    public @NonNull PlayerGameConnection getConnection() {
         return this.getHandle().connection.playerGameConnection;
     }
 

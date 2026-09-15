@@ -4,6 +4,7 @@ import net.minecraft.world.damagesource.DamageEffects;
 import org.bukkit.Sound;
 import org.bukkit.craftbukkit.CraftSound;
 import org.bukkit.damage.DamageEffect;
+import org.jspecify.annotations.NonNull;
 
 public class CraftDamageEffect implements DamageEffect {
 
@@ -18,7 +19,7 @@ public class CraftDamageEffect implements DamageEffect {
     }
 
     @Override
-    public Sound getSound() {
+    public @NonNull Sound getSound() {
         return CraftSound.minecraftToBukkit(this.getHandle().sound());
     }
 

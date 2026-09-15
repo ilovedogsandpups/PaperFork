@@ -9,6 +9,7 @@ import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.craftbukkit.inventory.CraftInventory;
 import org.bukkit.craftbukkit.util.CraftLocation;
 import org.bukkit.inventory.Inventory;
+import org.jspecify.annotations.NonNull;
 
 public class CraftAllay extends CraftCreature implements org.bukkit.entity.Allay {
 
@@ -22,7 +23,7 @@ public class CraftAllay extends CraftCreature implements org.bukkit.entity.Allay
     }
 
     @Override
-    public Inventory getInventory() {
+    public @NonNull Inventory getInventory() {
         return new CraftInventory(this.getHandle().getInventory());
     }
 

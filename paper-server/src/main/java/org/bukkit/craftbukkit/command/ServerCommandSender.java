@@ -11,6 +11,7 @@ import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.plugin.Plugin;
+import org.jspecify.annotations.NonNull;
 
 public abstract class ServerCommandSender implements CommandSender {
     private static final PointersSupplier<ServerCommandSender> POINTERS_SUPPLIER = PointersSupplier.<ServerCommandSender>builder()
@@ -29,47 +30,47 @@ public abstract class ServerCommandSender implements CommandSender {
     }
 
     @Override
-    public boolean isPermissionSet(String name) {
+    public boolean isPermissionSet(@NonNull String name) {
         return this.perm.isPermissionSet(name);
     }
 
     @Override
-    public boolean isPermissionSet(Permission perm) {
+    public boolean isPermissionSet(@NonNull Permission perm) {
         return this.perm.isPermissionSet(perm);
     }
 
     @Override
-    public boolean hasPermission(String name) {
+    public boolean hasPermission(@NonNull String name) {
         return this.perm.hasPermission(name);
     }
 
     @Override
-    public boolean hasPermission(Permission perm) {
+    public boolean hasPermission(@NonNull Permission perm) {
         return this.perm.hasPermission(perm);
     }
 
     @Override
-    public PermissionAttachment addAttachment(Plugin plugin, String name, boolean value) {
+    public @NonNull PermissionAttachment addAttachment(@NonNull Plugin plugin, @NonNull String name, boolean value) {
         return this.perm.addAttachment(plugin, name, value);
     }
 
     @Override
-    public PermissionAttachment addAttachment(Plugin plugin) {
+    public @NonNull PermissionAttachment addAttachment(@NonNull Plugin plugin) {
         return this.perm.addAttachment(plugin);
     }
 
     @Override
-    public PermissionAttachment addAttachment(Plugin plugin, String name, boolean value, int ticks) {
+    public PermissionAttachment addAttachment(@NonNull Plugin plugin, @NonNull String name, boolean value, int ticks) {
         return this.perm.addAttachment(plugin, name, value, ticks);
     }
 
     @Override
-    public PermissionAttachment addAttachment(Plugin plugin, int ticks) {
+    public PermissionAttachment addAttachment(@NonNull Plugin plugin, int ticks) {
         return this.perm.addAttachment(plugin, ticks);
     }
 
     @Override
-    public void removeAttachment(PermissionAttachment attachment) {
+    public void removeAttachment(@NonNull PermissionAttachment attachment) {
         this.perm.removeAttachment(attachment);
     }
 
@@ -79,7 +80,7 @@ public abstract class ServerCommandSender implements CommandSender {
     }
 
     @Override
-    public Set<PermissionAttachmentInfo> getEffectivePermissions() {
+    public @NonNull Set<PermissionAttachmentInfo> getEffectivePermissions() {
         return this.perm.getEffectivePermissions();
     }
 
@@ -88,12 +89,12 @@ public abstract class ServerCommandSender implements CommandSender {
     }
 
     @Override
-    public Server getServer() {
+    public @NonNull Server getServer() {
         return Bukkit.getServer();
     }
 
     @Override
-    public void sendMessage(UUID uuid, String message) {
+    public void sendMessage(UUID uuid, @NonNull String message) {
         this.sendMessage(message); // ServerCommandSenders have no use for senders
     }
 
@@ -104,7 +105,7 @@ public abstract class ServerCommandSender implements CommandSender {
 
     private final org.bukkit.command.CommandSender.Spigot spigot = new org.bukkit.command.CommandSender.Spigot() {
         @Override
-        public void sendMessage(net.md_5.bungee.api.chat.BaseComponent component) {
+        public void sendMessage(net.md_5.bungee.api.chat.@NonNull BaseComponent component) {
             ServerCommandSender.this.sendMessage(net.md_5.bungee.api.chat.TextComponent.toLegacyText(component));
         }
 
@@ -119,18 +120,18 @@ public abstract class ServerCommandSender implements CommandSender {
         }
 
         @Override
-        public void sendMessage(UUID sender, net.md_5.bungee.api.chat.BaseComponent component) {
+        public void sendMessage(UUID sender, net.md_5.bungee.api.chat.@NonNull BaseComponent component) {
             this.sendMessage(component);
         }
     };
 
     @Override
-    public org.bukkit.command.CommandSender.Spigot spigot() {
+    public org.bukkit.command.CommandSender.@NonNull Spigot spigot() {
         return this.spigot;
     }
 
     @Override
-    public net.kyori.adventure.pointer.Pointers pointers() {
+    public net.kyori.adventure.pointer.@NonNull Pointers pointers() {
         return POINTERS_SUPPLIER.view(this);
     }
 }

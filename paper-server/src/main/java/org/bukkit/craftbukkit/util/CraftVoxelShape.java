@@ -7,6 +7,7 @@ import java.util.List;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.bukkit.util.BoundingBox;
+import org.jspecify.annotations.NonNull;
 
 public final class CraftVoxelShape implements org.bukkit.util.VoxelShape {
 
@@ -17,7 +18,7 @@ public final class CraftVoxelShape implements org.bukkit.util.VoxelShape {
     }
 
     @Override
-    public Collection<BoundingBox> getBoundingBoxes() {
+    public @NonNull Collection<BoundingBox> getBoundingBoxes() {
         List<AABB> boxes = this.shape.toAabbs();
         List<BoundingBox> craftBoxes = new ArrayList<>(boxes.size());
         for (AABB aabb : boxes) {
@@ -27,7 +28,7 @@ public final class CraftVoxelShape implements org.bukkit.util.VoxelShape {
     }
 
     @Override
-    public boolean overlaps(BoundingBox other) {
+    public boolean overlaps(@NonNull BoundingBox other) {
         Preconditions.checkArgument(other != null, "Other cannot be null");
 
         for (BoundingBox box : this.getBoundingBoxes()) {

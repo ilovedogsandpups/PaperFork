@@ -1,6 +1,8 @@
 package org.bukkit.craftbukkit.util;
 
 import com.google.common.base.Preconditions;
+import org.jspecify.annotations.NonNull;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -168,7 +170,7 @@ public class UnsafeList<E> extends AbstractList<E> implements List<E>, RandomAcc
     }
 
     @Override
-    public Iterator<E> iterator() {
+    public @NonNull Iterator<E> iterator() {
         // Try to find an iterator that isn't in use
         for (Iterator iter : this.iterPool) {
             if (!((Itr) iter).valid) {

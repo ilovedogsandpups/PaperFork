@@ -20,6 +20,7 @@ import org.bukkit.plugin.PluginLoadOrder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.TestOnly;
+import org.jspecify.annotations.NonNull;
 import org.spongepowered.configurate.CommentedConfigurationNode;
 import org.spongepowered.configurate.ConfigurateException;
 import org.spongepowered.configurate.loader.HeaderMode;
@@ -83,7 +84,7 @@ public class PaperPluginMeta implements PluginMeta {
                     serializers
                         .register(new ScalarSerializer<>(ApiVersion.class) {
                             @Override
-                            public ApiVersion deserialize(final Type type, final Object obj) throws SerializationException {
+                            public ApiVersion deserialize(final @NonNull Type type, final @NonNull Object obj) throws SerializationException {
                                 try {
                                     final ApiVersion version = ApiVersion.getOrCreateVersion(obj.toString());
                                     if (version.isOlderThan(MINIMUM)) {
@@ -96,7 +97,7 @@ public class PaperPluginMeta implements PluginMeta {
                             }
 
                             @Override
-                            protected Object serialize(final ApiVersion item, final Predicate<Class<?>> typeSupported) {
+                            protected @NonNull Object serialize(final ApiVersion item, final @NonNull Predicate<Class<?>> typeSupported) {
                                 return item.getVersionString();
                             }
                         })

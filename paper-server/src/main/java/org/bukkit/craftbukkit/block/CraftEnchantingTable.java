@@ -5,6 +5,7 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.EnchantingTable;
 import org.bukkit.craftbukkit.util.CraftChatMessage;
+import org.jspecify.annotations.NonNull;
 
 public class CraftEnchantingTable extends CraftBlockEntityState<EnchantingTableBlockEntity> implements EnchantingTable {
 
@@ -48,12 +49,12 @@ public class CraftEnchantingTable extends CraftBlockEntityState<EnchantingTableB
     }
 
     @Override
-    public CraftEnchantingTable copy() {
+    public @NonNull CraftEnchantingTable copy() {
         return new CraftEnchantingTable(this, null);
     }
 
     @Override
-    public CraftEnchantingTable copy(Location location) {
+    public @NonNull CraftEnchantingTable copy(@NonNull Location location) {
         return new CraftEnchantingTable(this, location);
     }
 }

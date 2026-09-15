@@ -22,6 +22,7 @@ import org.bukkit.craftbukkit.entity.CraftEntity;
 import org.bukkit.craftbukkit.entity.CraftMinecartCommand;
 import org.bukkit.craftbukkit.entity.CraftPlayer;
 import org.bukkit.entity.minecart.CommandMinecart;
+import org.jspecify.annotations.NonNull;
 
 public class VanillaCommandWrapper extends BukkitCommand { // Paper
 
@@ -46,7 +47,7 @@ public class VanillaCommandWrapper extends BukkitCommand { // Paper
     }
 
     @Override
-    public boolean execute(CommandSender sender, String commandLabel, String[] args) {
+    public boolean execute(@NonNull CommandSender sender, @NonNull String commandLabel, String @NonNull [] args) {
         if (!this.testPermission(sender)) return true;
 
         CommandSourceStack source = VanillaCommandWrapper.getListener(sender);
@@ -55,7 +56,7 @@ public class VanillaCommandWrapper extends BukkitCommand { // Paper
     }
 
     @Override
-    public List<String> tabComplete(CommandSender sender, String alias, String[] args, Location location) throws IllegalArgumentException {
+    public @NonNull List<String> tabComplete(@NonNull CommandSender sender, @NonNull String alias, String @NonNull [] args, Location location) throws IllegalArgumentException {
         Preconditions.checkArgument(sender != null, "Sender cannot be null");
         Preconditions.checkArgument(args != null, "Arguments cannot be null");
         Preconditions.checkArgument(alias != null, "Alias cannot be null");

@@ -23,6 +23,7 @@ import org.bukkit.plugin.SimplePluginManager;
 import org.bukkit.plugin.UnknownDependencyException;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
 
 import java.io.File;
 import java.util.List;
@@ -115,12 +116,12 @@ public class PaperPluginManagerImpl implements PluginManager, DependencyContext 
     }
 
     @Override
-    public boolean isTransitiveDependency(PluginMeta pluginMeta, PluginMeta dependencyConfig) {
+    public boolean isTransitiveDependency(@NonNull PluginMeta pluginMeta, @NonNull PluginMeta dependencyConfig) {
         return this.instanceManager.isTransitiveDepend(pluginMeta, dependencyConfig);
     }
 
     @Override
-    public boolean hasDependency(String pluginIdentifier) {
+    public boolean hasDependency(@NonNull String pluginIdentifier) {
         return this.instanceManager.hasDependency(pluginIdentifier);
     }
 

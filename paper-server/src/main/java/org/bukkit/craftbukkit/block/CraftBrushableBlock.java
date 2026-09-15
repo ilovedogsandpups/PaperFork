@@ -8,6 +8,7 @@ import org.bukkit.craftbukkit.CraftLootTable;
 import org.bukkit.craftbukkit.inventory.CraftItemStack;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.loot.LootTable;
+import org.jspecify.annotations.NonNull;
 
 public class CraftBrushableBlock extends CraftBlockEntityState<BrushableBlockEntity> implements BrushableBlock {
 
@@ -20,7 +21,7 @@ public class CraftBrushableBlock extends CraftBlockEntityState<BrushableBlockEnt
     }
 
     @Override
-    public ItemStack getItem() {
+    public @NonNull ItemStack getItem() {
         return CraftItemStack.asBukkitCopy(this.getSnapshot().getItem());
     }
 
@@ -64,12 +65,12 @@ public class CraftBrushableBlock extends CraftBlockEntityState<BrushableBlockEnt
     }
 
     @Override
-    public CraftBrushableBlock copy() {
+    public @NonNull CraftBrushableBlock copy() {
         return new CraftBrushableBlock(this, null);
     }
 
     @Override
-    public CraftBrushableBlock copy(Location location) {
+    public @NonNull CraftBrushableBlock copy(@NonNull Location location) {
         return new CraftBrushableBlock(this, location);
     }
 }

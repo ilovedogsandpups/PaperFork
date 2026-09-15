@@ -3,6 +3,7 @@ package org.bukkit.craftbukkit.block;
 import net.minecraft.world.level.block.entity.TheEndPortalBlockEntity;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.jspecify.annotations.NonNull;
 
 public class CraftEndPortal extends CraftBlockEntityState<TheEndPortalBlockEntity> {
 
@@ -15,12 +16,12 @@ public class CraftEndPortal extends CraftBlockEntityState<TheEndPortalBlockEntit
     }
 
     @Override
-    public CraftEndPortal copy() {
+    public @NonNull CraftEndPortal copy() {
         return new CraftEndPortal(this, null);
     }
 
     @Override
-    public CraftEndPortal copy(Location location) {
+    public @NonNull CraftEndPortal copy(Location location) {
         return new CraftEndPortal(this, location);
     }
 }

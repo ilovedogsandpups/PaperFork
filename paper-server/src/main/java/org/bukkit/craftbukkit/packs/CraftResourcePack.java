@@ -4,6 +4,7 @@ import java.util.UUID;
 import net.minecraft.server.MinecraftServer;
 import org.bukkit.craftbukkit.util.CraftChatMessage;
 import org.bukkit.packs.ResourcePack;
+import org.jspecify.annotations.NonNull;
 
 public class CraftResourcePack implements ResourcePack {
 
@@ -14,12 +15,12 @@ public class CraftResourcePack implements ResourcePack {
     }
 
     @Override
-    public UUID getId() {
+    public @NonNull UUID getId() {
         return this.handle.id();
     }
 
     @Override
-    public String getUrl() {
+    public @NonNull String getUrl() {
         return this.handle.url();
     }
 

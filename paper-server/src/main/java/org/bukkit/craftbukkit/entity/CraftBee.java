@@ -6,6 +6,7 @@ import org.bukkit.Location;
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.craftbukkit.util.CraftLocation;
 import org.bukkit.entity.Bee;
+import org.jspecify.annotations.NonNull;
 
 public class CraftBee extends CraftAnimals implements Bee {
 
@@ -83,7 +84,7 @@ public class CraftBee extends CraftAnimals implements Bee {
     }
 
     @Override
-    public void setRollingOverride(net.kyori.adventure.util.TriState rolling) {
+    public void setRollingOverride(net.kyori.adventure.util.@NonNull TriState rolling) {
         this.getHandle().rollingOverride = rolling;
 
         this.getHandle().setRolling(this.getHandle().isRolling()); // Refresh rolling state
@@ -95,7 +96,7 @@ public class CraftBee extends CraftAnimals implements Bee {
     }
 
     @Override
-    public net.kyori.adventure.util.TriState getRollingOverride() {
+    public net.kyori.adventure.util.@NonNull TriState getRollingOverride() {
         return this.getHandle().rollingOverride;
     }
 

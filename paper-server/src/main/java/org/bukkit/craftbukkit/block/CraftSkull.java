@@ -3,7 +3,6 @@ package org.bukkit.craftbukkit.block;
 import com.destroystokyo.paper.profile.SharedPlayerProfile;
 import com.google.common.base.Preconditions;
 import com.mojang.authlib.GameProfile;
-import com.mojang.datafixers.util.Either;
 import io.papermc.paper.adventure.PaperAdventure;
 import io.papermc.paper.datacomponent.item.PaperResolvableProfile;
 import net.kyori.adventure.text.Component;
@@ -11,7 +10,6 @@ import net.minecraft.util.Util;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.players.NameAndId;
-import net.minecraft.world.entity.player.PlayerSkin;
 import net.minecraft.world.item.component.ResolvableProfile;
 import net.minecraft.world.level.block.entity.SkullBlockEntity;
 import org.bukkit.Bukkit;
@@ -30,7 +28,7 @@ import org.bukkit.craftbukkit.profile.CraftPlayerProfile;
 import org.bukkit.craftbukkit.util.CraftNamespacedKey;
 import org.bukkit.profile.PlayerProfile;
 import org.jetbrains.annotations.Nullable;
-import java.util.Objects;
+import org.jspecify.annotations.NonNull;
 
 public class CraftSkull extends CraftBlockEntityState<SkullBlockEntity> implements Skull {
 
@@ -117,7 +115,7 @@ public class CraftSkull extends CraftBlockEntityState<SkullBlockEntity> implemen
     }
 
     @Override
-    public void setOwningPlayer(OfflinePlayer player) {
+    public void setOwningPlayer(@NonNull OfflinePlayer player) {
         Preconditions.checkNotNull(player, "player");
 
         if (player instanceof CraftPlayer craftPlayer) {
@@ -129,7 +127,7 @@ public class CraftSkull extends CraftBlockEntityState<SkullBlockEntity> implemen
 
     // Paper start
     @Override
-    public void setPlayerProfile(com.destroystokyo.paper.profile.PlayerProfile profile) {
+    public void setPlayerProfile(com.destroystokyo.paper.profile.@NonNull PlayerProfile profile) {
         Preconditions.checkNotNull(profile, "profile");
         this.profile = com.destroystokyo.paper.profile.CraftPlayerProfile.asResolvableProfileCopy(profile);
     }
@@ -177,13 +175,13 @@ public class CraftSkull extends CraftBlockEntityState<SkullBlockEntity> implemen
     }
 
     @Override
-    public BlockFace getRotation() {
+    public @NonNull BlockFace getRotation() {
         BlockData blockData = this.getBlockData();
         return (blockData instanceof Rotatable rotatable) ? rotatable.getRotation() : ((Directional) blockData).getFacing();
     }
 
     @Override
-    public void setRotation(BlockFace rotation) {
+    public void setRotation(@NonNull BlockFace rotation) {
         BlockData blockData = this.getBlockData();
         if (blockData instanceof Rotatable) {
             ((Rotatable) blockData).setRotation(rotation);
@@ -194,7 +192,7 @@ public class CraftSkull extends CraftBlockEntityState<SkullBlockEntity> implemen
     }
 
     @Override
-    public SkullType getSkullType() {
+    public @NonNull SkullType getSkullType() {
         switch (this.getType()) {
             case SKELETON_SKULL:
             case SKELETON_WALL_SKULL:
@@ -237,12 +235,12 @@ public class CraftSkull extends CraftBlockEntityState<SkullBlockEntity> implemen
     }
 
     @Override
-    public CraftSkull copy() {
+    public @NonNull CraftSkull copy() {
         return new CraftSkull(this, null);
     }
 
     @Override
-    public CraftSkull copy(Location location) {
+    public @NonNull CraftSkull copy(@NonNull Location location) {
         return new CraftSkull(this, location);
     }
 

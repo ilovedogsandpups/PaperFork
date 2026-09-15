@@ -5,6 +5,7 @@ import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.entity.ComplexEntityPart;
 import org.bukkit.entity.ComplexLivingEntity;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.jspecify.annotations.NonNull;
 
 public class CraftComplexPart extends CraftEntity implements ComplexEntityPart {
 
@@ -18,7 +19,7 @@ public class CraftComplexPart extends CraftEntity implements ComplexEntityPart {
     }
 
     @Override
-    public ComplexLivingEntity getParent() {
+    public @NonNull ComplexLivingEntity getParent() {
         return (ComplexLivingEntity) this.getHandle().parentMob.getBukkitEntity();
     }
 

@@ -7,6 +7,7 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.entity.Villager;
 import org.bukkit.entity.ZombieVillager;
+import org.jspecify.annotations.NonNull;
 
 public class CraftVillagerZombie extends CraftZombie implements ZombieVillager {
 
@@ -20,23 +21,23 @@ public class CraftVillagerZombie extends CraftZombie implements ZombieVillager {
     }
 
     @Override
-    public Villager.Profession getVillagerProfession() {
+    public Villager.@NonNull Profession getVillagerProfession() {
         return CraftVillager.CraftProfession.minecraftHolderToBukkit(this.getHandle().getVillagerData().profession());
     }
 
     @Override
-    public void setVillagerProfession(Villager.Profession profession) {
+    public void setVillagerProfession(Villager.@NonNull Profession profession) {
         Preconditions.checkArgument(profession != null, "Villager.Profession cannot be null");
         this.getHandle().setVillagerData(this.getHandle().getVillagerData().withProfession(CraftVillager.CraftProfession.bukkitToMinecraftHolder(profession)));
     }
 
     @Override
-    public Villager.Type getVillagerType() {
+    public Villager.@NonNull Type getVillagerType() {
         return CraftVillager.CraftType.minecraftHolderToBukkit(this.getHandle().getVillagerData().type());
     }
 
     @Override
-    public void setVillagerType(Villager.Type type) {
+    public void setVillagerType(Villager.@NonNull Type type) {
         Preconditions.checkArgument(type != null, "Villager.Type cannot be null");
         this.getHandle().setVillagerData(this.getHandle().getVillagerData().withType(CraftVillager.CraftType.bukkitToMinecraftHolder(type)));
     }

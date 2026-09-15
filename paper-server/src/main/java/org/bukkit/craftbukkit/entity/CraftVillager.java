@@ -27,6 +27,7 @@ import org.bukkit.entity.Villager;
 import org.bukkit.entity.ZombieVillager;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityTransformEvent;
+import org.jspecify.annotations.NonNull;
 
 public class CraftVillager extends CraftAbstractVillager implements Villager {
 
@@ -47,23 +48,23 @@ public class CraftVillager extends CraftAbstractVillager implements Villager {
     }
 
     @Override
-    public Profession getProfession() {
+    public @NonNull Profession getProfession() {
         return CraftProfession.minecraftHolderToBukkit(this.getHandle().getVillagerData().profession());
     }
 
     @Override
-    public void setProfession(Profession profession) {
+    public void setProfession(@NonNull Profession profession) {
         Preconditions.checkArgument(profession != null, "Profession cannot be null");
         this.getHandle().setVillagerData(this.getHandle().getVillagerData().withProfession(CraftProfession.bukkitToMinecraftHolder(profession)));
     }
 
     @Override
-    public Type getVillagerType() {
+    public @NonNull Type getVillagerType() {
         return CraftType.minecraftHolderToBukkit(this.getHandle().getVillagerData().type());
     }
 
     @Override
-    public void setVillagerType(Type type) {
+    public void setVillagerType(@NonNull Type type) {
         Preconditions.checkArgument(type != null, "Type cannot be null");
         this.getHandle().setVillagerData(this.getHandle().getVillagerData().withType(CraftType.bukkitToMinecraftHolder(type)));
     }
@@ -198,7 +199,7 @@ public class CraftVillager extends CraftAbstractVillager implements Villager {
     }
 
     @Override
-    public Reputation getReputation(UUID uniqueId) {
+    public @NonNull Reputation getReputation(@NonNull UUID uniqueId) {
         GossipContainer.EntityGossips gossips = this.getHandle().getGossips().gossips.get(uniqueId);
         if (gossips == null) {
             return new Reputation(new EnumMap<>(ReputationType.class));
@@ -208,14 +209,14 @@ public class CraftVillager extends CraftAbstractVillager implements Villager {
     }
 
     @Override
-    public Map<UUID, Reputation> getReputations() {
+    public @NonNull Map<UUID, Reputation> getReputations() {
         return this.getHandle().getGossips().gossips.entrySet()
             .stream()
             .collect(Collectors.toMap(Map.Entry::getKey, entry -> entry.getValue().asReputation()));
     }
 
     @Override
-    public void setReputation(UUID uniqueId, Reputation reputation) {
+    public void setReputation(@NonNull UUID uniqueId, @NonNull Reputation reputation) {
         GossipContainer.EntityGossips gossips = this.getHandle().getGossips().gossips.computeIfAbsent(
             uniqueId, _ -> new GossipContainer.EntityGossips()
         );

@@ -8,13 +8,14 @@ import net.minecraft.world.item.trading.MerchantOffers;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.inventory.Merchant;
 import org.bukkit.inventory.MerchantRecipe;
+import org.jspecify.annotations.NonNull;
 
 public interface CraftMerchant extends Merchant {
 
     net.minecraft.world.item.trading.Merchant getMerchant();
 
     @Override
-    default List<MerchantRecipe> getRecipes() {
+    default @NonNull List<MerchantRecipe> getRecipes() {
         return List.copyOf(Lists.transform(this.getMerchant().getOffers(), new Function<net.minecraft.world.item.trading.MerchantOffer, MerchantRecipe>() { // Paper - javadoc says 'an immutable list of trades' - not 'an unmodifiable view of a list of trades'. fixes issue with setRecipes(getRecipes())
             @Override
             public MerchantRecipe apply(net.minecraft.world.item.trading.MerchantOffer recipe) {
@@ -33,12 +34,12 @@ public interface CraftMerchant extends Merchant {
     }
 
     @Override
-    default MerchantRecipe getRecipe(int i) {
+    default @NonNull MerchantRecipe getRecipe(int i) {
         return this.getMerchant().getOffers().get(i).asBukkit();
     }
 
     @Override
-    default void setRecipe(int i, MerchantRecipe merchantRecipe) {
+    default void setRecipe(int i, @NonNull MerchantRecipe merchantRecipe) {
         this.getMerchant().getOffers().set(i, CraftMerchantRecipe.fromBukkit(merchantRecipe).toMinecraft());
     }
 

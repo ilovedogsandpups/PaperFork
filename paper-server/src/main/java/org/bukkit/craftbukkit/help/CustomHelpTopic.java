@@ -3,6 +3,7 @@ package org.bukkit.craftbukkit.help;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.help.HelpTopic;
+import org.jspecify.annotations.NonNull;
 
 /**
  * This is a help topic implementation for general topics registered in the help.yml file.
@@ -18,7 +19,7 @@ public class CustomHelpTopic extends HelpTopic {
     }
 
     @Override
-    public boolean canSee(CommandSender sender) {
+    public boolean canSee(@NonNull CommandSender sender) {
         if (sender instanceof ConsoleCommandSender) {
             return true;
         }

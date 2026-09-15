@@ -15,6 +15,7 @@ import org.bukkit.craftbukkit.boss.CraftBossBar;
 import org.bukkit.craftbukkit.util.CraftLocation;
 import org.bukkit.entity.Raider;
 import org.bukkit.persistence.PersistentDataContainer;
+import org.jspecify.annotations.NonNull;
 
 public final class CraftRaid implements Raid {
 
@@ -49,13 +50,13 @@ public final class CraftRaid implements Raid {
     }
 
     @Override
-    public Location getLocation() {
+    public @NonNull Location getLocation() {
         BlockPos pos = this.handle.getCenter();
         return CraftLocation.toBukkit(pos, this.level);
     }
 
     @Override
-    public RaidStatus getStatus() {
+    public @NonNull RaidStatus getStatus() {
         if (this.handle.isStopped()) {
             return RaidStatus.STOPPED;
         } else if (this.handle.isVictory()) {
@@ -96,12 +97,12 @@ public final class CraftRaid implements Raid {
     }
 
     @Override
-    public Set<UUID> getHeroes() {
+    public @NonNull Set<UUID> getHeroes() {
         return Collections.unmodifiableSet(this.handle.heroesOfTheVillage);
     }
 
     @Override
-    public List<Raider> getRaiders() {
+    public @NonNull List<Raider> getRaiders() {
         return this.handle.getRaiders().stream().map(entityRaider -> (Raider) entityRaider.getBukkitEntity()).collect(ImmutableList.toImmutableList());
     }
 
@@ -115,12 +116,12 @@ public final class CraftRaid implements Raid {
     }
 
     @Override
-    public BossBar getBossBar() {
+    public @NonNull BossBar getBossBar() {
         return new CraftBossBar(this.handle.raidEvent);
     }
 
     @Override
-    public PersistentDataContainer getPersistentDataContainer() {
+    public @NonNull PersistentDataContainer getPersistentDataContainer() {
         return this.handle.persistentDataContainer;
     }
 

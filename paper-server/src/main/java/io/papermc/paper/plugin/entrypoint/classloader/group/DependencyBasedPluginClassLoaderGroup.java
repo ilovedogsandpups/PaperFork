@@ -3,6 +3,7 @@ package io.papermc.paper.plugin.entrypoint.classloader.group;
 import io.papermc.paper.plugin.provider.classloader.ClassLoaderAccess;
 import io.papermc.paper.plugin.provider.classloader.ConfiguredPluginClassLoader;
 import org.jetbrains.annotations.ApiStatus;
+import org.jspecify.annotations.NonNull;
 
 import java.util.ArrayList;
 
@@ -32,7 +33,7 @@ public class DependencyBasedPluginClassLoaderGroup extends SimpleListPluginClass
     }
 
     @Override
-    public ClassLoaderAccess getAccess() {
+    public @NonNull ClassLoaderAccess getAccess() {
         return this.access;
     }
 

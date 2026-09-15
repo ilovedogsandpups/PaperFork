@@ -3,6 +3,8 @@ package io.papermc.paper.registry.data.dialog.type;
 import com.google.common.base.Preconditions;
 import io.papermc.paper.registry.data.dialog.ActionButton;
 import java.util.List;
+
+import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 
 import static io.papermc.paper.util.BoundChecker.requirePositive;
@@ -28,19 +30,19 @@ public record MultiActionTypeImpl(
         }
 
         @Override
-        public Builder exitAction(final @Nullable ActionButton exitAction) {
+        public @NonNull Builder exitAction(final @Nullable ActionButton exitAction) {
             this.exitAction = exitAction;
             return this;
         }
 
         @Override
-        public Builder columns(final int columns) {
+        public @NonNull Builder columns(final int columns) {
             this.columns = requirePositive(columns, "columns");
             return this;
         }
 
         @Override
-        public MultiActionType build() {
+        public @NonNull MultiActionType build() {
             return new MultiActionTypeImpl(this.actions, this.exitAction, this.columns);
         }
     }

@@ -21,6 +21,7 @@ import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.craftbukkit.CraftWorld;
 import org.bukkit.craftbukkit.util.CraftLocation;
 import org.bukkit.inventory.meta.CompassMeta;
+import org.jspecify.annotations.NonNull;
 
 @DelegateDeserialization(SerializableMeta.class)
 public class CraftMetaCompass extends CraftMetaItem implements CompassMeta {
@@ -94,7 +95,7 @@ public class CraftMetaCompass extends CraftMetaItem implements CompassMeta {
     }
 
     @Override
-    public CraftMetaCompass clone() {
+    public @NonNull CraftMetaCompass clone() {
         CraftMetaCompass clone = ((CraftMetaCompass) super.clone());
         return clone;
     }

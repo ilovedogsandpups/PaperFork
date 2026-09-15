@@ -36,6 +36,7 @@ import net.minecraft.server.network.ConfigurationTask;
 import net.minecraft.server.network.ServerConfigurationPacketListenerImpl;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.messaging.StandardMessenger;
+import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 
 public class PaperPlayerConfigurationConnection extends PaperCommonConnection<ServerConfigurationPacketListenerImpl> implements PlayerConfigurationConnection, Audience, PluginMessageBridgeImpl {
@@ -91,7 +92,7 @@ public class PaperPlayerConfigurationConnection extends PaperCommonConnection<Se
     }
 
     @Override
-    public void removeResourcePacks(final UUID id, final UUID... others) {
+    public void removeResourcePacks(final @NonNull UUID id, final UUID @NonNull ... others) {
         net.kyori.adventure.util.MonkeyBars.nonEmptyArrayToList(pack -> new ClientboundResourcePackPopPacket(Optional.of(pack)), id, others).forEach(this.packetListener::send);
     }
 
@@ -101,7 +102,7 @@ public class PaperPlayerConfigurationConnection extends PaperCommonConnection<Se
     }
 
     @Override
-    public void showDialog(final DialogLike dialog) {
+    public void showDialog(final @NonNull DialogLike dialog) {
         this.packetListener.send(new ClientboundShowDialogPacket(PaperDialog.bukkitToMinecraftHolder((Dialog) dialog)));
     }
 
@@ -111,7 +112,7 @@ public class PaperPlayerConfigurationConnection extends PaperCommonConnection<Se
     }
 
     @Override
-    public Pointers pointers() {
+    public @NonNull Pointers pointers() {
         if (this.adventurePointers == null) {
             this.adventurePointers = Pointers.builder()
                 .withDynamic(Identity.NAME, () -> this.packetListener.getOwner().name())
@@ -124,12 +125,12 @@ public class PaperPlayerConfigurationConnection extends PaperCommonConnection<Se
     }
 
     @Override
-    public Audience getAudience() {
+    public @NonNull Audience getAudience() {
         return this;
     }
 
     @Override
-    public PlayerProfile getProfile() {
+    public @NonNull PlayerProfile getProfile() {
         return CraftPlayerProfile.asBukkitCopy(this.packetListener.getOwner());
     }
 
@@ -151,12 +152,12 @@ public class PaperPlayerConfigurationConnection extends PaperCommonConnection<Se
     }
 
     @Override
-    public Set<String> channels() {
+    public @NonNull Set<String> channels() {
         return this.packetListener.pluginMessagerChannels;
     }
 
     @Override
-    public void sendPluginMessage(final Plugin source, final String channel, final byte[] message) {
+    public void sendPluginMessage(final @NonNull Plugin source, final @NonNull String channel, final byte @NonNull [] message) {
         StandardMessenger.validatePluginMessage(this.packetListener.cserver.getMessenger(), source, channel, message);
 
         if (this.channels().contains(channel)) {
@@ -168,7 +169,7 @@ public class PaperPlayerConfigurationConnection extends PaperCommonConnection<Se
     }
 
     @Override
-    public Set<String> getListeningPluginChannels() {
+    public @NonNull Set<String> getListeningPluginChannels() {
         return Set.copyOf(this.channels());
     }
 

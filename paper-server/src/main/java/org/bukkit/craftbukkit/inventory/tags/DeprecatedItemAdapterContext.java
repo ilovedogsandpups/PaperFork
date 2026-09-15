@@ -3,6 +3,7 @@ package org.bukkit.craftbukkit.inventory.tags;
 import org.bukkit.inventory.meta.tags.CustomItemTagContainer;
 import org.bukkit.inventory.meta.tags.ItemTagAdapterContext;
 import org.bukkit.persistence.PersistentDataAdapterContext;
+import org.jspecify.annotations.NonNull;
 
 public final class DeprecatedItemAdapterContext implements ItemTagAdapterContext {
 
@@ -18,7 +19,7 @@ public final class DeprecatedItemAdapterContext implements ItemTagAdapterContext
      * @return the fresh container instance
      */
     @Override
-    public CustomItemTagContainer newTagContainer() {
+    public @NonNull CustomItemTagContainer newTagContainer() {
         return new DeprecatedCustomTagContainer(this.context.newPersistentDataContainer());
     }
 }

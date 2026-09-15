@@ -16,6 +16,7 @@ import net.minecraft.world.level.storage.TagValueOutput;
 import org.bukkit.craftbukkit.inventory.CraftItemStack;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.spawner.Spawner;
+import org.jspecify.annotations.NonNull;
 import org.slf4j.Logger;
 
 /**
@@ -45,7 +46,7 @@ public interface PaperSharedSpawnerLogic extends Spawner {
         this.getSpawner().setNextSpawnData(this.getInternalWorld(), this.getInternalPosition(), spawnData);
     }
 
-    default void setSpawnedItem(final ItemStack itemStack) {
+    default void setSpawnedItem(final @NonNull ItemStack itemStack) {
         Preconditions.checkArgument(itemStack != null && !itemStack.getType().isAir(), "spawners cannot spawn air");
 
         final net.minecraft.world.item.ItemStack item = CraftItemStack.asNMSCopy(itemStack);

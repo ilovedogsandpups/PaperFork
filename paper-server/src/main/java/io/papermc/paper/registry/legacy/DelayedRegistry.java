@@ -9,7 +9,6 @@ import java.util.stream.Stream;
 import org.bukkit.Keyed;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
-import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 
 /**
@@ -70,7 +69,7 @@ public final class DelayedRegistry<T extends Keyed, R extends Registry<T>> imple
     }
 
     @Override
-    public @NonNull Tag<T> getTag(final TagKey<T> key) {
+    public Tag<T> getTag(final TagKey<T> key) {
         return this.delegate().getTag(key);
     }
 

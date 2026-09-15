@@ -4,6 +4,7 @@ import net.minecraft.world.level.block.entity.CopperGolemStatueBlockEntity;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.CopperGolemStatue;
+import org.jspecify.annotations.NonNull;
 
 public class CraftCopperGolemStatue extends CraftBlockEntityState<CopperGolemStatueBlockEntity> implements CopperGolemStatue {
     public CraftCopperGolemStatue(World world, CopperGolemStatueBlockEntity blockEntity) {
@@ -15,12 +16,12 @@ public class CraftCopperGolemStatue extends CraftBlockEntityState<CopperGolemSta
     }
 
     @Override
-    public CraftBlockEntityState<CopperGolemStatueBlockEntity> copy() {
+    public @NonNull CraftBlockEntityState<CopperGolemStatueBlockEntity> copy() {
         return new CraftCopperGolemStatue(this, null);
     }
 
     @Override
-    public CraftBlockEntityState<CopperGolemStatueBlockEntity> copy(Location location) {
+    public @NonNull CraftBlockEntityState<CopperGolemStatueBlockEntity> copy(@NonNull Location location) {
         return new CraftCopperGolemStatue(this, location);
     }
 }

@@ -11,6 +11,7 @@ import org.bukkit.DyeColor;
 import org.bukkit.craftbukkit.CraftRegistry;
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.entity.Cat;
+import org.jspecify.annotations.NonNull;
 
 public class CraftCat extends CraftTameableAnimal implements Cat {
 
@@ -24,31 +25,31 @@ public class CraftCat extends CraftTameableAnimal implements Cat {
     }
 
     @Override
-    public Type getCatType() {
+    public @NonNull Type getCatType() {
         return CraftType.minecraftHolderToBukkit(this.getHandle().getVariant());
     }
 
     @Override
-    public void setCatType(Type type) {
+    public void setCatType(@NonNull Type type) {
         Preconditions.checkArgument(type != null, "type cannot be null");
 
         this.getHandle().setVariant(CraftType.bukkitToMinecraftHolder(type));
     }
 
     @Override
-    public SoundVariant getSoundVariant() {
+    public @NonNull SoundVariant getSoundVariant() {
         return CraftSoundVariant.minecraftHolderToBukkit(this.getHandle().getSoundVariant());
     }
 
     @Override
-    public void setSoundVariant(final SoundVariant variant) {
+    public void setSoundVariant(final @NonNull SoundVariant variant) {
         Preconditions.checkArgument(variant != null, "variant cannot be null");
 
         this.getHandle().setSoundVariant(CraftSoundVariant.bukkitToMinecraftHolder(variant));
     }
 
     @Override
-    public DyeColor getCollarColor() {
+    public @NonNull DyeColor getCollarColor() {
         return DyeColor.getByWoolData((byte) this.getHandle().getCollarColor().getId());
     }
 

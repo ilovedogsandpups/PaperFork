@@ -14,6 +14,7 @@ import org.bukkit.block.Container;
 import org.bukkit.craftbukkit.inventory.CraftItemStack;
 import org.bukkit.craftbukkit.util.CraftChatMessage;
 import org.bukkit.inventory.ItemStack;
+import org.jspecify.annotations.NonNull;
 
 public abstract class CraftContainer<T extends BaseContainerBlockEntity> extends CraftBlockEntityState<T> implements Container {
 
@@ -31,7 +32,7 @@ public abstract class CraftContainer<T extends BaseContainerBlockEntity> extends
     }
 
     @Override
-    public String getLock() {
+    public @NonNull String getLock() {
         Component customName = this.getSnapshot().lockKey.predicate().components().exact().asPatch().get(DataComponentMap.EMPTY, DataComponents.CUSTOM_NAME);
         return (customName != null) ? CraftChatMessage.fromComponent(customName) : "";
     }
@@ -92,8 +93,8 @@ public abstract class CraftContainer<T extends BaseContainerBlockEntity> extends
     }
 
     @Override
-    public abstract CraftContainer<T> copy();
+    public abstract @NonNull CraftContainer<T> copy();
 
     @Override
-    public abstract CraftContainer<T> copy(Location location);
+    public abstract @NonNull CraftContainer<T> copy(@NonNull Location location);
 }

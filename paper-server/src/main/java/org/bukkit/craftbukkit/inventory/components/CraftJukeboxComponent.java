@@ -15,6 +15,7 @@ import org.bukkit.craftbukkit.CraftRegistry;
 import org.bukkit.craftbukkit.inventory.SerializableMeta;
 import org.bukkit.craftbukkit.util.CraftNamespacedKey;
 import org.bukkit.inventory.meta.components.JukeboxPlayableComponent;
+import org.jspecify.annotations.NonNull;
 
 @SerializableAs("JukeboxPlayable")
 public final class CraftJukeboxComponent implements JukeboxPlayableComponent {
@@ -38,7 +39,7 @@ public final class CraftJukeboxComponent implements JukeboxPlayableComponent {
     }
 
     @Override
-    public Map<String, Object> serialize() {
+    public @NonNull Map<String, Object> serialize() {
         Map<String, Object> result = new LinkedHashMap<>();
         result.put("song", this.getSongKey().toString());
         return result;
@@ -54,19 +55,19 @@ public final class CraftJukeboxComponent implements JukeboxPlayableComponent {
     }
 
     @Override
-    public NamespacedKey getSongKey() {
+    public @NonNull NamespacedKey getSongKey() {
         return CraftNamespacedKey.fromMinecraft(this.handle.song().unwrapKey().orElseThrow().identifier());
     }
 
     @Override
-    public void setSong(JukeboxSong song) {
+    public void setSong(@NonNull JukeboxSong song) {
         Preconditions.checkArgument(song != null, "song cannot be null");
 
         this.handle = new JukeboxPlayable(CraftJukeboxSong.bukkitToMinecraftHolder(song));
     }
 
     @Override
-    public void setSongKey(NamespacedKey song) {
+    public void setSongKey(@NonNull NamespacedKey song) {
         Preconditions.checkArgument(song != null, "song cannot be null");
 
         final net.minecraft.core.Registry<net.minecraft.world.item.JukeboxSong> registry = CraftRegistry.getMinecraftRegistry(Registries.JUKEBOX_SONG);

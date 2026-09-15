@@ -11,6 +11,7 @@ import org.bukkit.block.DoubleChest;
 import org.bukkit.inventory.DoubleChestInventory;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 
 public class CraftInventoryDoubleChest extends CraftInventory implements DoubleChestInventory {
@@ -41,12 +42,12 @@ public class CraftInventoryDoubleChest extends CraftInventory implements DoubleC
     }
 
     @Override
-    public Inventory getLeftSide() {
+    public @NonNull Inventory getLeftSide() {
         return this.left;
     }
 
     @Override
-    public Inventory getRightSide() {
+    public @NonNull Inventory getRightSide() {
         return this.right;
     }
 
@@ -95,12 +96,12 @@ public class CraftInventoryDoubleChest extends CraftInventory implements DoubleC
 
         @Nullable
         @Override
-        public AbstractContainerMenu createMenu(int containerId, net.minecraft.world.entity.player.Inventory inventory, Player player) {
+        public AbstractContainerMenu createMenu(int containerId, net.minecraft.world.entity.player.@NonNull Inventory inventory, @NonNull Player player) {
             return this.delegate.createMenu(containerId, inventory, player);
         }
 
         @Override
-        public Component getDisplayName() {
+        public @NonNull Component getDisplayName() {
             return this.delegate.getDisplayName();
         }
     }

@@ -39,6 +39,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.generator.LimitedRegion;
 import org.bukkit.util.BoundingBox;
+import org.jspecify.annotations.NonNull;
 import org.slf4j.Logger;
 
 public class CraftLimitedRegion extends CraftRegionAccessor implements LimitedRegion {
@@ -156,7 +157,7 @@ public class CraftLimitedRegion extends CraftRegionAccessor implements LimitedRe
     }
 
     @Override
-    public List<BlockState> getTileEntities() {
+    public @NonNull List<BlockState> getTileEntities() {
         List<BlockState> blockStates = new ArrayList<>();
 
         for (int x = -(this.buffer >> 4); x <= (this.buffer >> 4); x++) {
@@ -172,14 +173,14 @@ public class CraftLimitedRegion extends CraftRegionAccessor implements LimitedRe
     }
 
     @Override
-    public Biome getBiome(int x, int y, int z) {
+    public @NonNull Biome getBiome(int x, int y, int z) {
         Preconditions.checkArgument(this.isInRegion(x, y, z), "Coordinates %s, %s, %s are not in the region", x, y, z);
         return super.getBiome(x, y, z);
     }
 
     // Paper start
     @Override
-    public Biome getComputedBiome(int x, int y, int z) {
+    public @NonNull Biome getComputedBiome(int x, int y, int z) {
         Preconditions.checkArgument(this.isInRegion(x, y, z), "Coordinates %s, %s, %s are not in the region", x, y, z);
         return super.getComputedBiome(x, y, z);
     }
@@ -193,25 +194,25 @@ public class CraftLimitedRegion extends CraftRegionAccessor implements LimitedRe
     }
 
     @Override
-    public BlockState getBlockState(int x, int y, int z) {
+    public @NonNull BlockState getBlockState(int x, int y, int z) {
         Preconditions.checkArgument(this.isInRegion(x, y, z), "Coordinates %s, %s, %s are not in the region", x, y, z);
         return super.getBlockState(x, y, z);
     }
 
     @Override
-    public BlockData getBlockData(int x, int y, int z) {
+    public @NonNull BlockData getBlockData(int x, int y, int z) {
         Preconditions.checkArgument(this.isInRegion(x, y, z), "Coordinates %s, %s, %s are not in the region", x, y, z);
         return super.getBlockData(x, y, z);
     }
 
     @Override
-    public Material getType(int x, int y, int z) {
+    public @NonNull Material getType(int x, int y, int z) {
         Preconditions.checkArgument(this.isInRegion(x, y, z), "Coordinates %s, %s, %s are not in the region", x, y, z);
         return super.getType(x, y, z);
     }
 
     @Override
-    public void setBlockData(int x, int y, int z, BlockData blockData) {
+    public void setBlockData(int x, int y, int z, @NonNull BlockData blockData) {
         Preconditions.checkArgument(this.isInRegion(x, y, z), "Coordinates %s, %s, %s are not in the region", x, y, z);
         super.setBlockData(x, y, z, blockData);
     }
@@ -223,37 +224,37 @@ public class CraftLimitedRegion extends CraftRegionAccessor implements LimitedRe
     }
 
     @Override
-    public int getHighestBlockYAt(Location location) {
+    public int getHighestBlockYAt(@NonNull Location location) {
         Preconditions.checkArgument(this.isInRegion(location), "Coordinates %s, %s, %s are not in the region", location.getBlockX(), location.getBlockY(), location.getBlockZ());
         return super.getHighestBlockYAt(location);
     }
 
     @Override
-    public int getHighestBlockYAt(int x, int z, HeightMap heightMap) {
+    public int getHighestBlockYAt(int x, int z, @NonNull HeightMap heightMap) {
         Preconditions.checkArgument(this.isInRegion(x, this.region.getCenter().getBlockY(), z), "Coordinates %s, %s are not in the region", x, z);
         return super.getHighestBlockYAt(x, z, heightMap);
     }
 
     @Override
-    public int getHighestBlockYAt(Location location, HeightMap heightMap) {
+    public int getHighestBlockYAt(@NonNull Location location, @NonNull HeightMap heightMap) {
         Preconditions.checkArgument(this.isInRegion(location), "Coordinates %s, %s, %s are not in the region", location.getBlockX(), location.getBlockY(), location.getBlockZ());
         return super.getHighestBlockYAt(location, heightMap);
     }
 
     @Override
-    public boolean generateTree(Location location, Random random, TreeType treeType) {
+    public boolean generateTree(@NonNull Location location, @NonNull Random random, @NonNull TreeType treeType) {
         Preconditions.checkArgument(this.isInRegion(location), "Coordinates %s, %s, %s are not in the region", location.getBlockX(), location.getBlockY(), location.getBlockZ());
         return super.generateTree(location, random, treeType);
     }
 
     @Override
-    public boolean generateTree(Location location, Random random, TreeType treeType, Consumer<? super BlockState> consumer) {
+    public boolean generateTree(@NonNull Location location, @NonNull Random random, @NonNull TreeType treeType, Consumer<? super BlockState> consumer) {
         Preconditions.checkArgument(this.isInRegion(location), "Coordinates %s, %s, %s are not in the region", location.getBlockX(), location.getBlockY(), location.getBlockZ());
         return super.generateTree(location, random, treeType, consumer);
     }
 
     @Override
-    public boolean generateTree(Location location, Random random, TreeType treeType, Predicate<? super BlockState> statePredicate) {
+    public boolean generateTree(@NonNull Location location, @NonNull Random random, @NonNull TreeType treeType, Predicate<? super BlockState> statePredicate) {
         Preconditions.checkArgument(this.isInRegion(location), "Coordinates %s, %s, %s are not in the region", location.getBlockX(), location.getBlockY(), location.getBlockZ());
         return super.generateTree(location, random, treeType, statePredicate);
     }
@@ -283,7 +284,7 @@ public class CraftLimitedRegion extends CraftRegionAccessor implements LimitedRe
 
     // Paper start - Add more LimitedRegion API
     @Override
-    public void setBlockState(int x, int y, int z, BlockState state) { // todo deprecate, this doesn't make sense plugin should use the update method after fetching it from getBlockState
+    public void setBlockState(int x, int y, int z, @NonNull BlockState state) { // todo deprecate, this doesn't make sense plugin should use the update method after fetching it from getBlockState
         Preconditions.checkArgument(this.isInRegion(x, y, z), "Coordinates %s, %s, %s are not in the region", x, y, z);
         if (!(state instanceof CraftBlockEntityState<?> entityState)) {
             throw new IllegalArgumentException("state is not a valid block entity (TileState)");
@@ -325,7 +326,7 @@ public class CraftLimitedRegion extends CraftRegionAccessor implements LimitedRe
     }
 
     @Override
-    public World getWorld() {
+    public @NonNull World getWorld() {
         // reading/writing the returned Minecraft world causes a deadlock.
         // By implementing this, and covering it in warnings, we're assuming people won't be stupid, and
         // if they are stupid, they'll figure it out pretty fast.
@@ -344,7 +345,7 @@ public class CraftLimitedRegion extends CraftRegionAccessor implements LimitedRe
     // Paper end - Add more LimitedRegion API
     // Paper start - Fluid API
     @Override
-    public io.papermc.paper.block.fluid.FluidData getFluidData(int x, int y, int z) {
+    public io.papermc.paper.block.fluid.@NonNull FluidData getFluidData(int x, int y, int z) {
         Preconditions.checkArgument(this.isInRegion(x, y, z), "Coordinates %s, %s, %s are not in the region", x, y, z);
         return super.getFluidData(x, y, z);
     }

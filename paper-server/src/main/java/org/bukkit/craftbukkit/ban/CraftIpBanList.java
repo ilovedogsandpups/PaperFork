@@ -11,6 +11,7 @@ import java.util.Set;
 import net.minecraft.server.players.IpBanList;
 import net.minecraft.server.players.IpBanListEntry;
 import org.bukkit.BanEntry;
+import org.jspecify.annotations.NonNull;
 
 public class CraftIpBanList implements org.bukkit.ban.IpBanList {
     private final IpBanList list;
@@ -20,7 +21,7 @@ public class CraftIpBanList implements org.bukkit.ban.IpBanList {
     }
 
     @Override
-    public BanEntry<InetAddress> getBanEntry(String target) {
+    public BanEntry<InetAddress> getBanEntry(@NonNull String target) {
         Preconditions.checkArgument(target != null, "Target cannot be null");
 
         IpBanListEntry entry = this.list.get(target);
@@ -32,12 +33,12 @@ public class CraftIpBanList implements org.bukkit.ban.IpBanList {
     }
 
     @Override
-    public BanEntry<InetAddress> getBanEntry(InetAddress target) {
+    public BanEntry<InetAddress> getBanEntry(@NonNull InetAddress target) {
         return this.getBanEntry(this.getIpFromAddress(target));
     }
 
     @Override
-    public BanEntry<InetAddress> addBan(String target, String reason, Date expires, String source) {
+    public BanEntry<InetAddress> addBan(@NonNull String target, String reason, Date expires, String source) {
         Preconditions.checkArgument(target != null, "Ban target cannot be null");
 
         IpBanListEntry entry = new IpBanListEntry(target, new Date(),
@@ -50,24 +51,24 @@ public class CraftIpBanList implements org.bukkit.ban.IpBanList {
     }
 
     @Override
-    public BanEntry<InetAddress> addBan(InetAddress target, String reason, Date expires, String source) {
+    public BanEntry<InetAddress> addBan(@NonNull InetAddress target, String reason, Date expires, String source) {
         return this.addBan(this.getIpFromAddress(target), reason, expires, source);
     }
 
     @Override
-    public BanEntry<InetAddress> addBan(InetAddress target, String reason, Instant expires, String source) {
+    public BanEntry<InetAddress> addBan(@NonNull InetAddress target, String reason, Instant expires, String source) {
         Date date = expires != null ? Date.from(expires) : null;
         return this.addBan(target, reason, date, source);
     }
 
     @Override
-    public BanEntry<InetAddress> addBan(InetAddress target, String reason, Duration duration, String source) {
+    public BanEntry<InetAddress> addBan(@NonNull InetAddress target, String reason, Duration duration, String source) {
         Instant instant = duration != null ? Instant.now().plus(duration) : null;
         return this.addBan(target, reason, instant, source);
     }
 
     @Override
-    public Set<BanEntry> getBanEntries() {
+    public @NonNull Set<BanEntry> getBanEntries() {
         ImmutableSet.Builder<BanEntry> builder = ImmutableSet.builder();
         for (String target : this.list.getUserList()) {
             IpBanListEntry ipBanEntry = this.list.get(target);
@@ -79,7 +80,7 @@ public class CraftIpBanList implements org.bukkit.ban.IpBanList {
     }
 
     @Override
-    public Set<BanEntry<InetAddress>> getEntries() {
+    public @NonNull Set<BanEntry<InetAddress>> getEntries() {
         ImmutableSet.Builder<BanEntry<InetAddress>> builder = ImmutableSet.builder();
         for (String target : this.list.getUserList()) {
             IpBanListEntry ipBanEntry = this.list.get(target);
@@ -91,24 +92,24 @@ public class CraftIpBanList implements org.bukkit.ban.IpBanList {
     }
 
     @Override
-    public boolean isBanned(String target) {
+    public boolean isBanned(@NonNull String target) {
         Preconditions.checkArgument(target != null, "Target cannot be null");
         return this.list.isBanned(target);
     }
 
     @Override
-    public boolean isBanned(InetAddress target) {
+    public boolean isBanned(@NonNull InetAddress target) {
         return this.isBanned(this.getIpFromAddress(target));
     }
 
     @Override
-    public void pardon(String target) {
+    public void pardon(@NonNull String target) {
         Preconditions.checkArgument(target != null, "Target cannot be null");
         this.list.remove(target);
     }
 
     @Override
-    public void pardon(InetAddress target) {
+    public void pardon(@NonNull InetAddress target) {
         this.pardon(this.getIpFromAddress(target));
     }
 

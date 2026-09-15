@@ -3,6 +3,7 @@ package org.bukkit.craftbukkit.entity;
 import com.google.common.base.Preconditions;
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.entity.Panda;
+import org.jspecify.annotations.NonNull;
 
 public class CraftPanda extends CraftAnimals implements Panda {
 
@@ -16,22 +17,22 @@ public class CraftPanda extends CraftAnimals implements Panda {
     }
 
     @Override
-    public Gene getMainGene() {
+    public @NonNull Gene getMainGene() {
         return CraftPanda.fromNms(this.getHandle().getMainGene());
     }
 
     @Override
-    public void setMainGene(Gene gene) {
+    public void setMainGene(@NonNull Gene gene) {
         this.getHandle().setMainGene(CraftPanda.toNms(gene));
     }
 
     @Override
-    public Gene getHiddenGene() {
+    public @NonNull Gene getHiddenGene() {
         return CraftPanda.fromNms(this.getHandle().getHiddenGene());
     }
 
     @Override
-    public void setHiddenGene(Gene gene) {
+    public void setHiddenGene(@NonNull Gene gene) {
         this.getHandle().setHiddenGene(CraftPanda.toNms(gene));
     }
 
@@ -62,7 +63,7 @@ public class CraftPanda extends CraftAnimals implements Panda {
     }
 
     @Override
-    public Gene getCombinedGene() {
+    public @NonNull Gene getCombinedGene() {
         return CraftPanda.fromNms(this.getHandle().getVariant());
     }
     // Paper end - Panda API

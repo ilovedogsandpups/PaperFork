@@ -10,6 +10,7 @@ import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.craftbukkit.block.CraftBlock;
 import org.bukkit.craftbukkit.inventory.CraftItemStack;
 import org.bukkit.entity.ItemFrame;
+import org.jspecify.annotations.NonNull;
 
 public class CraftItemFrame extends CraftHanging implements ItemFrame {
 
@@ -23,7 +24,7 @@ public class CraftItemFrame extends CraftHanging implements ItemFrame {
     }
 
     @Override
-    public boolean setFacingDirection(BlockFace face, boolean force) {
+    public boolean setFacingDirection(@NonNull BlockFace face, boolean force) {
         HangingEntity hanging = this.getHandle();
         Direction oldDir = hanging.getDirection();
         Direction newDir = CraftBlock.blockFaceToNotch(face);
@@ -63,7 +64,7 @@ public class CraftItemFrame extends CraftHanging implements ItemFrame {
     }
 
     @Override
-    public org.bukkit.inventory.ItemStack getItem() {
+    public org.bukkit.inventory.@NonNull ItemStack getItem() {
         return CraftItemStack.asBukkitCopy(this.getHandle().getItem());
     }
 
@@ -79,7 +80,7 @@ public class CraftItemFrame extends CraftHanging implements ItemFrame {
     }
 
     @Override
-    public Rotation getRotation() {
+    public @NonNull Rotation getRotation() {
         return this.toBukkitRotation(this.getHandle().getRotation());
     }
 
@@ -108,7 +109,7 @@ public class CraftItemFrame extends CraftHanging implements ItemFrame {
     }
 
     @Override
-    public void setRotation(Rotation rotation) {
+    public void setRotation(@NonNull Rotation rotation) {
         Preconditions.checkArgument(rotation != null, "Rotation cannot be null");
         this.getHandle().setRotation(CraftItemFrame.toInteger(rotation));
     }

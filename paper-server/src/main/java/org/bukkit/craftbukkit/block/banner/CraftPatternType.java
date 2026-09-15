@@ -6,6 +6,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.entity.BannerPattern;
 import org.bukkit.block.banner.PatternType;
 import org.bukkit.craftbukkit.CraftRegistry;
+import org.jspecify.annotations.NonNull;
 
 public class CraftPatternType extends OldEnumHolderable<PatternType, BannerPattern> implements PatternType {
 
@@ -24,7 +25,7 @@ public class CraftPatternType extends OldEnumHolderable<PatternType, BannerPatte
     }
 
     @Override
-    public String getIdentifier() {
+    public @NonNull String getIdentifier() {
         return switch (this.name()) {
             case "BASE" -> "b";
             case "SQUARE_BOTTOM_LEFT" -> "bl";

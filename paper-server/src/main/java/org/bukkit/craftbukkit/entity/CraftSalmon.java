@@ -3,6 +3,7 @@ package org.bukkit.craftbukkit.entity;
 import com.google.common.base.Preconditions;
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.entity.Salmon;
+import org.jspecify.annotations.NonNull;
 
 public class CraftSalmon extends io.papermc.paper.entity.PaperSchoolableFish implements Salmon { // Paper - Schooling Fish API
 
@@ -16,7 +17,7 @@ public class CraftSalmon extends io.papermc.paper.entity.PaperSchoolableFish imp
     }
 
     @Override
-    public Variant getVariant() {
+    public @NonNull Variant getVariant() {
         return Variant.values()[this.getHandle().getVariant().ordinal()];
     }
 

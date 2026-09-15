@@ -7,6 +7,7 @@ import org.bukkit.craftbukkit.util.CraftVector;
 import org.bukkit.entity.Fireball;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 public class CraftFireball extends AbstractProjectile implements Fireball {
 
@@ -40,7 +41,7 @@ public class CraftFireball extends AbstractProjectile implements Fireball {
     }
 
     @Override
-    public Vector getDirection() {
+    public @NonNull Vector getDirection() {
         return this.getAcceleration();
     }
 
@@ -75,12 +76,12 @@ public class CraftFireball extends AbstractProjectile implements Fireball {
 
     // Paper start - Expose power on fireball projectiles
     @Override
-    public void setPower(final Vector power) {
+    public void setPower(final @NonNull Vector power) {
         this.setAcceleration(power);
     }
 
     @Override
-    public Vector getPower() {
+    public @NonNull Vector getPower() {
         return this.getAcceleration();
     }
     // Paper end - Expose power on fireball projectiles

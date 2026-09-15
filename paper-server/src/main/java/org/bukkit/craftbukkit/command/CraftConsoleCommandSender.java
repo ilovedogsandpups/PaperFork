@@ -7,6 +7,7 @@ import org.bukkit.conversations.Conversation;
 import org.bukkit.conversations.ConversationAbandonedEvent;
 import org.bukkit.conversations.ManuallyAbandonedConversationCanceller;
 import org.bukkit.craftbukkit.conversations.ConversationTracker;
+import org.jspecify.annotations.NonNull;
 
 /**
  * Represents CLI input from a console
@@ -20,17 +21,17 @@ public class CraftConsoleCommandSender extends ServerCommandSender implements Co
     }
 
     @Override
-    public void sendMessage(String message) {
+    public void sendMessage(@NonNull String message) {
         this.sendRawMessage(message);
     }
 
     @Override
-    public void sendRawMessage(String message) {
+    public void sendRawMessage(@NonNull String message) {
         System.out.println(ChatColor.stripColor(message));
     }
 
     @Override
-    public void sendRawMessage(UUID sender, String message) {
+    public void sendRawMessage(UUID sender, @NonNull String message) {
       this.sendRawMessage(message); // Console doesn't know of senders
     }
 
@@ -42,12 +43,12 @@ public class CraftConsoleCommandSender extends ServerCommandSender implements Co
     }
 
     @Override
-    public String getName() {
+    public @NonNull String getName() {
         return "CONSOLE";
     }
 
     @Override
-    public net.kyori.adventure.text.Component name() {
+    public net.kyori.adventure.text.@NonNull Component name() {
         return net.kyori.adventure.text.Component.text(this.getName());
     }
 
@@ -62,22 +63,22 @@ public class CraftConsoleCommandSender extends ServerCommandSender implements Co
     }
 
     @Override
-    public boolean beginConversation(Conversation conversation) {
+    public boolean beginConversation(@NonNull Conversation conversation) {
         return this.conversationTracker.beginConversation(conversation);
     }
 
     @Override
-    public void abandonConversation(Conversation conversation) {
+    public void abandonConversation(@NonNull Conversation conversation) {
         this.conversationTracker.abandonConversation(conversation, new ConversationAbandonedEvent(conversation, new ManuallyAbandonedConversationCanceller()));
     }
 
     @Override
-    public void abandonConversation(Conversation conversation, ConversationAbandonedEvent details) {
+    public void abandonConversation(@NonNull Conversation conversation, @NonNull ConversationAbandonedEvent details) {
         this.conversationTracker.abandonConversation(conversation, details);
     }
 
     @Override
-    public void acceptConversationInput(String input) {
+    public void acceptConversationInput(@NonNull String input) {
         this.conversationTracker.acceptConversationInput(input);
     }
 
@@ -87,17 +88,17 @@ public class CraftConsoleCommandSender extends ServerCommandSender implements Co
     }
 
     @Override
-    public void sendMessage(final net.kyori.adventure.text.Component message) {
+    public void sendMessage(final net.kyori.adventure.text.@NonNull Component message) {
         this.sendRawMessage(net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer.legacySection().serialize(message));
     }
 
     @Override
-    public boolean hasPermission(String name) {
+    public boolean hasPermission(@NonNull String name) {
         return io.papermc.paper.configuration.GlobalConfiguration.get().console.hasAllPermissions || super.hasPermission(name);
     }
 
     @Override
-    public boolean hasPermission(org.bukkit.permissions.Permission perm) {
+    public boolean hasPermission(org.bukkit.permissions.@NonNull Permission perm) {
         return io.papermc.paper.configuration.GlobalConfiguration.get().console.hasAllPermissions || super.hasPermission(perm);
     }
 }

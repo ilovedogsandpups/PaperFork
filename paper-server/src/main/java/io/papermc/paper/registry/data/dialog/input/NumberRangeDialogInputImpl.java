@@ -5,6 +5,7 @@ import net.kyori.adventure.text.Component;
 import net.minecraft.commands.functions.StringTemplate;
 import net.minecraft.server.dialog.body.PlainMessage;
 import org.jetbrains.annotations.Range;
+import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 
 import static io.papermc.paper.util.BoundChecker.requirePositive;
@@ -41,31 +42,31 @@ public record NumberRangeDialogInputImpl(
         }
 
         @Override
-        public BuilderImpl width(final @Range(from = 1, to = 1024) int width) {
+        public @NonNull BuilderImpl width(final @Range(from = 1, to = 1024) int width) {
             this.width = requireRange(width, "width", 1, 1024);
             return this;
         }
 
         @Override
-        public BuilderImpl labelFormat(final String labelFormat) {
+        public @NonNull BuilderImpl labelFormat(final @NonNull String labelFormat) {
             this.labelFormat = labelFormat;
             return this;
         }
 
         @Override
-        public BuilderImpl initial(final @Nullable Float initial) {
+        public @NonNull BuilderImpl initial(final @Nullable Float initial) {
             this.initial = initial == null ? null : requireRange(initial, "initial", this.start, this.end);
             return this;
         }
 
         @Override
-        public BuilderImpl step(final @Nullable Float step) {
+        public @NonNull BuilderImpl step(final @Nullable Float step) {
             this.step = step == null ? null : requirePositive(step, "step");
             return this;
         }
 
         @Override
-        public NumberRangeDialogInput build() {
+        public @NonNull NumberRangeDialogInput build() {
             return new NumberRangeDialogInputImpl(this.key, this.width, this.label, this.labelFormat, this.start, this.end, this.initial, this.step);
         }
     }

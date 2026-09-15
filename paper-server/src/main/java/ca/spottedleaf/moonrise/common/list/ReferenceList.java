@@ -1,6 +1,8 @@
 package ca.spottedleaf.moonrise.common.list;
 
 import it.unimi.dsi.fastutil.objects.Reference2IntOpenHashMap;
+import org.jspecify.annotations.NonNull;
+
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -107,7 +109,7 @@ public final class ReferenceList<E> implements Iterable<E> {
     }
 
     @Override
-    public Iterator<E> iterator() {
+    public @NonNull Iterator<E> iterator() {
         return new Iterator<>() {
             private E lastRet;
             private int current;

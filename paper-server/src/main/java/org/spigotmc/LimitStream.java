@@ -4,6 +4,7 @@ import java.io.FilterInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import net.minecraft.nbt.NbtAccounter;
+import org.jspecify.annotations.NonNull;
 
 public class LimitStream extends FilterInputStream {
 
@@ -27,7 +28,7 @@ public class LimitStream extends FilterInputStream {
     }
 
     @Override
-    public int read(byte[] b, int off, int len) throws IOException {
+    public int read(byte @NonNull [] b, int off, int len) throws IOException {
         this.limit.accountBytes(len);
         return super.read(b, off, len);
     }

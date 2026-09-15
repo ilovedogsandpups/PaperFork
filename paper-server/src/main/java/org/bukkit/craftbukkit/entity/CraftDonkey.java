@@ -3,6 +3,7 @@ package org.bukkit.craftbukkit.entity;
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.entity.Donkey;
 import org.bukkit.entity.Horse.Variant;
+import org.jspecify.annotations.NonNull;
 
 public class CraftDonkey extends CraftChestedHorse implements Donkey {
 
@@ -11,7 +12,7 @@ public class CraftDonkey extends CraftChestedHorse implements Donkey {
     }
 
     @Override
-    public Variant getVariant() {
+    public @NonNull Variant getVariant() {
         return Variant.DONKEY;
     }
 }

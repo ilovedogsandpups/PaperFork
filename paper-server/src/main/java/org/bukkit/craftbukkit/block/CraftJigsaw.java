@@ -4,6 +4,7 @@ import net.minecraft.world.level.block.entity.JigsawBlockEntity;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Jigsaw;
+import org.jspecify.annotations.NonNull;
 
 public class CraftJigsaw extends CraftBlockEntityState<JigsawBlockEntity> implements Jigsaw {
 
@@ -16,12 +17,12 @@ public class CraftJigsaw extends CraftBlockEntityState<JigsawBlockEntity> implem
     }
 
     @Override
-    public CraftJigsaw copy() {
+    public @NonNull CraftJigsaw copy() {
         return new CraftJigsaw(this, null);
     }
 
     @Override
-    public CraftJigsaw copy(Location location) {
+    public @NonNull CraftJigsaw copy(@NonNull Location location) {
         return new CraftJigsaw(this, location);
     }
 }

@@ -31,6 +31,7 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
+import org.jspecify.annotations.NonNull;
 
 public class CraftInventory implements Inventory {
     protected final Container inventory;
@@ -67,17 +68,17 @@ public class CraftInventory implements Inventory {
     }
 
     @Override
-    public ItemStack[] getStorageContents() {
+    public ItemStack @NonNull [] getStorageContents() {
         return this.getContents();
     }
 
     @Override
-    public void setStorageContents(ItemStack[] items) throws IllegalArgumentException {
+    public void setStorageContents(ItemStack @NonNull [] items) throws IllegalArgumentException {
         this.setContents(items);
     }
 
     @Override
-    public ItemStack[] getContents() {
+    public ItemStack @NonNull [] getContents() {
         List<net.minecraft.world.item.ItemStack> mcItems = this.getInventory().getContents();
 
         return this.asCraftMirror(mcItems);
@@ -102,7 +103,7 @@ public class CraftInventory implements Inventory {
     }
 
     @Override
-    public boolean contains(Material material) {
+    public boolean contains(@NonNull Material material) {
         Preconditions.checkArgument(material != null, "Material cannot be null");
         material = CraftLegacy.fromLegacy(material);
         for (ItemStack item : this.getStorageContents()) {
@@ -127,7 +128,7 @@ public class CraftInventory implements Inventory {
     }
 
     @Override
-    public boolean contains(Material material, int amount) {
+    public boolean contains(@NonNull Material material, int amount) {
         Preconditions.checkArgument(material != null, "Material cannot be null");
         material = CraftLegacy.fromLegacy(material);
         if (amount <= 0) {
@@ -176,7 +177,7 @@ public class CraftInventory implements Inventory {
     }
 
     @Override
-    public HashMap<Integer, ItemStack> all(Material material) {
+    public @NonNull HashMap<Integer, ItemStack> all(@NonNull Material material) {
         Preconditions.checkArgument(material != null, "Material cannot be null");
         material = CraftLegacy.fromLegacy(material);
         HashMap<Integer, ItemStack> slots = new HashMap<>();
@@ -192,7 +193,7 @@ public class CraftInventory implements Inventory {
     }
 
     @Override
-    public HashMap<Integer, ItemStack> all(ItemStack item) {
+    public @NonNull HashMap<Integer, ItemStack> all(ItemStack item) {
         HashMap<Integer, ItemStack> slots = new HashMap<>();
         if (item != null) {
             ItemStack[] inventory = this.getStorageContents();
@@ -206,7 +207,7 @@ public class CraftInventory implements Inventory {
     }
 
     @Override
-    public int first(Material material) {
+    public int first(@NonNull Material material) {
         Preconditions.checkArgument(material != null, "Material cannot be null");
         material = CraftLegacy.fromLegacy(material);
         ItemStack[] inventory = this.getStorageContents();
@@ -220,7 +221,7 @@ public class CraftInventory implements Inventory {
     }
 
     @Override
-    public int first(ItemStack item) {
+    public int first(@NonNull ItemStack item) {
         return this.first(item, true);
     }
 
@@ -277,7 +278,7 @@ public class CraftInventory implements Inventory {
     }
 
     @Override
-    public HashMap<Integer, ItemStack> addItem(ItemStack... items) {
+    public @NonNull HashMap<Integer, ItemStack> addItem(ItemStack... items) {
         Preconditions.checkArgument(items != null, "items cannot be null");
         HashMap<Integer, ItemStack> leftover = new HashMap<>();
 
@@ -345,13 +346,13 @@ public class CraftInventory implements Inventory {
     }
 
     @Override
-    public HashMap<Integer, ItemStack> removeItem(ItemStack... items) {
+    public @NonNull HashMap<Integer, ItemStack> removeItem(ItemStack... items) {
         // Paper start
         return removeItem(false, items);
     }
 
     @Override
-    public HashMap<Integer, ItemStack> removeItemAnySlot(ItemStack... items) {
+    public @NonNull HashMap<Integer, ItemStack> removeItemAnySlot(ItemStack... items) {
         return removeItem(true, items);
     }
 
@@ -408,7 +409,7 @@ public class CraftInventory implements Inventory {
     }
 
     @Override
-    public void remove(Material material) {
+    public void remove(@NonNull Material material) {
         Preconditions.checkArgument(material != null, "Material cannot be null");
         material = CraftLegacy.fromLegacy(material);
         ItemStack[] items = this.getStorageContents();
@@ -420,7 +421,7 @@ public class CraftInventory implements Inventory {
     }
 
     @Override
-    public void remove(ItemStack item) {
+    public void remove(@NonNull ItemStack item) {
         ItemStack[] items = this.getStorageContents();
         for (int i = 0; i < items.length; i++) {
             if (items[i] != null && items[i].equals(item)) {
@@ -450,12 +451,12 @@ public class CraftInventory implements Inventory {
     // Paper end
 
     @Override
-    public ListIterator<ItemStack> iterator() {
+    public @NonNull ListIterator<ItemStack> iterator() {
         return new InventoryIterator(this);
     }
 
     @Override
-    public ListIterator<ItemStack> iterator(int index) {
+    public @NonNull ListIterator<ItemStack> iterator(int index) {
         if (index < 0) {
             index += this.getSize() + 1; // ie, with -1, previous() will return the last element
         }
@@ -463,12 +464,12 @@ public class CraftInventory implements Inventory {
     }
 
     @Override
-    public List<HumanEntity> getViewers() {
+    public @NonNull List<HumanEntity> getViewers() {
         return this.inventory.getViewers();
     }
 
     @Override
-    public InventoryType getType() {
+    public @NonNull InventoryType getType() {
         // Thanks to Droppers extending Dispensers, Blast Furnaces & Smokers extending Furnace, order is important.
         if (this.inventory instanceof CraftingContainer) {
             if (this.inventory instanceof CrafterBlockEntity) {

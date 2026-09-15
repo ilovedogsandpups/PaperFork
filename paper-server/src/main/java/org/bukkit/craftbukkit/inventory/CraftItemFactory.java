@@ -36,6 +36,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemFactory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.jspecify.annotations.NonNull;
 
 public final class CraftItemFactory implements ItemFactory {
     static final Color DEFAULT_LEATHER_COLOR = Color.fromRGB(0xA06540);
@@ -78,7 +79,7 @@ public final class CraftItemFactory implements ItemFactory {
     }
 
     @Override
-    public ItemMeta getItemMeta(Material material) {
+    public ItemMeta getItemMeta(@NonNull Material material) {
         Preconditions.checkArgument(material != null, "Material cannot be null");
         return this.getItemMeta(material, null);
     }
@@ -132,25 +133,25 @@ public final class CraftItemFactory implements ItemFactory {
     }
 
     @Override
-    public ItemMeta asMetaFor(ItemMeta meta, ItemStack stack) {
+    public ItemMeta asMetaFor(@NonNull ItemMeta meta, ItemStack stack) {
         Preconditions.checkArgument(stack != null, "ItemStack stack cannot be null");
         return this.asMetaFor(meta, stack.getType());
     }
 
     @Override
-    public ItemMeta asMetaFor(ItemMeta meta, Material material) {
+    public ItemMeta asMetaFor(@NonNull ItemMeta meta, @NonNull Material material) {
         Preconditions.checkArgument(material != null, "Material cannot be null");
         Preconditions.checkArgument(meta instanceof CraftMetaItem, "ItemMeta of %s not created by %s", (meta != null ? meta.getClass().toString() : "null"), CraftItemFactory.class.getName());
         return this.getItemMeta(material, (CraftMetaItem) meta);
     }
 
     @Override
-    public Color getDefaultLeatherColor() {
+    public @NonNull Color getDefaultLeatherColor() {
         return CraftItemFactory.DEFAULT_LEATHER_COLOR;
     }
 
     @Override
-    public ItemStack createItemStack(String input) throws IllegalArgumentException {
+    public @NonNull ItemStack createItemStack(@NonNull String input) throws IllegalArgumentException {
         try {
             StringReader reader = new StringReader(input);
             net.minecraft.commands.arguments.item.ItemInput in = new ItemParser(CraftRegistry.getMinecraftRegistry()).parse(reader);
@@ -164,7 +165,7 @@ public final class CraftItemFactory implements ItemFactory {
     }
 
     @Override
-    public Material getSpawnEgg(EntityType type) {
+    public Material getSpawnEgg(@NonNull EntityType type) {
         if (type == EntityType.UNKNOWN) {
             return null;
         }
@@ -173,21 +174,21 @@ public final class CraftItemFactory implements ItemFactory {
     }
 
     @Override
-    public ItemStack enchantItem(Entity entity, ItemStack itemStack, int level, boolean allowTreasures) {
+    public @NonNull ItemStack enchantItem(@NonNull Entity entity, @NonNull ItemStack itemStack, int level, boolean allowTreasures) {
         Preconditions.checkArgument(entity != null, "The entity must not be null");
 
         return enchantItem(((CraftEntity) entity).getHandle().getRandom(), itemStack, level, allowTreasures);
     }
 
     @Override
-    public ItemStack enchantItem(final World world, final ItemStack itemStack, final int level, final boolean allowTreasures) {
+    public @NonNull ItemStack enchantItem(final @NonNull World world, final @NonNull ItemStack itemStack, final int level, final boolean allowTreasures) {
         Preconditions.checkArgument(world != null, "The world must not be null");
 
         return enchantItem(((CraftWorld) world).getHandle().getRandom(), itemStack, level, allowTreasures);
     }
 
     @Override
-    public ItemStack enchantItem(final ItemStack itemStack, final int level, final boolean allowTreasures) {
+    public @NonNull ItemStack enchantItem(final @NonNull ItemStack itemStack, final int level, final boolean allowTreasures) {
         return enchantItem(CraftItemFactory.randomSource, itemStack, level, allowTreasures);
     }
 
@@ -202,7 +203,7 @@ public final class CraftItemFactory implements ItemFactory {
     }
 
     @Override
-    public net.kyori.adventure.text.event.HoverEvent<net.kyori.adventure.text.event.HoverEvent.ShowItem> asHoverEvent(final ItemStack item, final java.util.function.UnaryOperator<net.kyori.adventure.text.event.HoverEvent.ShowItem> op) {
+    public net.kyori.adventure.text.event.@NonNull HoverEvent<net.kyori.adventure.text.event.HoverEvent.ShowItem> asHoverEvent(final ItemStack item, final java.util.function.UnaryOperator<net.kyori.adventure.text.event.HoverEvent.ShowItem> op) {
         Preconditions.checkArgument(item.getAmount() > 0 && item.getAmount() <= Item.ABSOLUTE_MAX_STACK_SIZE, "ItemStack amount must be between 1 and %s but was %s", Item.ABSOLUTE_MAX_STACK_SIZE, item.getAmount());
         return net.kyori.adventure.text.event.HoverEvent.showItem(op.apply(
             net.kyori.adventure.text.event.HoverEvent.ShowItem.showItem(
@@ -220,7 +221,7 @@ public final class CraftItemFactory implements ItemFactory {
     // Paper start - ensure server conversions API
     // TODO: DO WE NEED THIS?
     @Override
-    public ItemStack ensureServerConversions(ItemStack item) {
+    public @NonNull ItemStack ensureServerConversions(@NonNull ItemStack item) {
         return CraftItemStack.asCraftMirror(CraftItemStack.asNMSCopy(item));
     }
     // Paper end - ensure server conversions API
@@ -242,7 +243,7 @@ public final class CraftItemFactory implements ItemFactory {
 
     // Paper start - bungee hover events
     @Override
-    public net.md_5.bungee.api.chat.hover.content.Content hoverContentOf(ItemStack itemStack) {
+    public net.md_5.bungee.api.chat.hover.content.@NonNull Content hoverContentOf(@NonNull ItemStack itemStack) {
         throw new UnsupportedOperationException("BungeeCord Chat API does not support data components");
         /*
         net.md_5.bungee.api.chat.ItemTag itemTag = net.md_5.bungee.api.chat.ItemTag.ofNbt(CraftItemStack.asNMSCopy(itemStack).getOrCreateTag().toString());
@@ -254,17 +255,17 @@ public final class CraftItemFactory implements ItemFactory {
     }
 
     @Override
-    public net.md_5.bungee.api.chat.hover.content.Content hoverContentOf(org.bukkit.entity.Entity entity) {
+    public net.md_5.bungee.api.chat.hover.content.@NonNull Content hoverContentOf(org.bukkit.entity.@NonNull Entity entity) {
         return hoverContentOf(entity, org.apache.commons.lang3.StringUtils.isBlank(entity.getCustomName()) ? null : new net.md_5.bungee.api.chat.TextComponent(entity.getCustomName()));
     }
 
     @Override
-    public net.md_5.bungee.api.chat.hover.content.Content hoverContentOf(org.bukkit.entity.Entity entity, String customName) {
+    public net.md_5.bungee.api.chat.hover.content.@NonNull Content hoverContentOf(org.bukkit.entity.@NonNull Entity entity, String customName) {
         return hoverContentOf(entity, org.apache.commons.lang3.StringUtils.isBlank(customName) ? null : new net.md_5.bungee.api.chat.TextComponent(customName));
     }
 
     @Override
-    public net.md_5.bungee.api.chat.hover.content.Content hoverContentOf(org.bukkit.entity.Entity entity, net.md_5.bungee.api.chat.BaseComponent customName) {
+    public net.md_5.bungee.api.chat.hover.content.@NonNull Content hoverContentOf(org.bukkit.entity.Entity entity, net.md_5.bungee.api.chat.BaseComponent customName) {
         return new net.md_5.bungee.api.chat.hover.content.Entity(
             entity.getType().getKey().toString(),
             entity.getUniqueId().toString(),
@@ -272,7 +273,7 @@ public final class CraftItemFactory implements ItemFactory {
     }
 
     @Override
-    public net.md_5.bungee.api.chat.hover.content.Content hoverContentOf(org.bukkit.entity.Entity entity, net.md_5.bungee.api.chat.BaseComponent[] customName) {
+    public net.md_5.bungee.api.chat.hover.content.@NonNull Content hoverContentOf(org.bukkit.entity.Entity entity, net.md_5.bungee.api.chat.BaseComponent[] customName) {
         return new net.md_5.bungee.api.chat.hover.content.Entity(
             entity.getType().getKey().toString(),
             entity.getUniqueId().toString(),
@@ -295,7 +296,7 @@ public final class CraftItemFactory implements ItemFactory {
     // Paper end - old getSpawnEgg API
     // Paper start - enchantWithLevels API
     @Override
-    public ItemStack enchantWithLevels(ItemStack itemStack, int levels, boolean allowTreasure, java.util.Random random) {
+    public @NonNull ItemStack enchantWithLevels(@NonNull ItemStack itemStack, int levels, boolean allowTreasure, java.util.@NonNull Random random) {
         return enchantWithLevels(
             itemStack,
             levels,
@@ -311,7 +312,7 @@ public final class CraftItemFactory implements ItemFactory {
     }
 
     @Override
-    public ItemStack enchantWithLevels(ItemStack itemStack, int levels, io.papermc.paper.registry.set.RegistryKeySet<org.bukkit.enchantments.Enchantment> keySet, java.util.Random random) {
+    public @NonNull ItemStack enchantWithLevels(@NonNull ItemStack itemStack, int levels, io.papermc.paper.registry.set.@NonNull RegistryKeySet<org.bukkit.enchantments.Enchantment> keySet, java.util.@NonNull Random random) {
         return enchantWithLevels(
             itemStack,
             levels,

@@ -5,6 +5,7 @@ import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import net.minecraft.ChatFormatting;
 import net.minecraft.server.MinecraftServer;
 import org.apache.commons.lang3.StringUtils;
+import org.jspecify.annotations.NonNull;
 
 import java.net.InetSocketAddress;
 
@@ -23,7 +24,7 @@ public final class PaperLegacyStatusClient implements StatusClient {
     }
 
     @Override
-    public InetSocketAddress getAddress() {
+    public @NonNull InetSocketAddress getAddress() {
         return this.address;
     }
 

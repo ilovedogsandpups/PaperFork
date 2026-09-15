@@ -6,6 +6,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.lang.reflect.Type;
+
+import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 import org.spongepowered.configurate.objectmapping.meta.Constraint;
 import org.spongepowered.configurate.serialize.SerializationException;
@@ -31,7 +33,7 @@ public final class Constraints {
 
         final class Factory implements Constraint.Factory<Min, Number> {
             @Override
-            public Constraint<Number> make(Min data, Type type) {
+            public @NonNull Constraint<Number> make(@NonNull Min data, @NonNull Type type) {
                 return value -> {
                     if (value != null && value.intValue() < data.value()) {
                         throw new SerializationException(value + " is less than the min " + data.value());
@@ -49,7 +51,7 @@ public final class Constraints {
 
         final class Factory implements Constraint.Factory<Max, Number> {
             @Override
-            public Constraint<Number> make(Max data, Type type) {
+            public @NonNull Constraint<Number> make(@NonNull Max data, @NonNull Type type) {
                 return value -> {
                     if (value != null && value.intValue() > data.value()) {
                         throw new SerializationException(value + " is greater than the max " + data.value());

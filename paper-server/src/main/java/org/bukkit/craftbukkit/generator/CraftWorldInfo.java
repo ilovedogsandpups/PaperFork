@@ -10,6 +10,7 @@ import org.bukkit.World;
 import org.bukkit.craftbukkit.block.CraftBiome;
 import org.bukkit.generator.WorldInfo;
 import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 public class CraftWorldInfo implements WorldInfo {
 
@@ -48,17 +49,17 @@ public class CraftWorldInfo implements WorldInfo {
     }
 
     @Override
-    public String getName() {
+    public @NonNull String getName() {
         return this.name;
     }
 
     @Override
-    public UUID getUID() {
+    public @NonNull UUID getUID() {
         return this.uuid;
     }
 
     @Override
-    public World.Environment getEnvironment() {
+    public World.@NonNull Environment getEnvironment() {
         return this.environment;
     }
 
@@ -78,7 +79,7 @@ public class CraftWorldInfo implements WorldInfo {
     }
 
     @Override
-    public org.bukkit.generator.BiomeProvider vanillaBiomeProvider() {
+    public org.bukkit.generator.@NonNull BiomeProvider vanillaBiomeProvider() {
         final net.minecraft.world.level.levelgen.RandomState randomState;
         if (vanillaChunkGenerator instanceof net.minecraft.world.level.levelgen.NoiseBasedChunkGenerator noiseBasedChunkGenerator) {
             randomState = net.minecraft.world.level.levelgen.RandomState.create(noiseBasedChunkGenerator.generatorSettings().value(),
@@ -93,20 +94,20 @@ public class CraftWorldInfo implements WorldInfo {
             .toList();
         return new org.bukkit.generator.BiomeProvider() {
             @Override
-            public org.bukkit.block.Biome getBiome(final WorldInfo worldInfo, final int x, final int y, final int z) {
+            public org.bukkit.block.@NonNull Biome getBiome(final @NonNull WorldInfo worldInfo, final int x, final int y, final int z) {
                 return org.bukkit.craftbukkit.block.CraftBiome.minecraftHolderToBukkit(
                     CraftWorldInfo.this.vanillaChunkGenerator.getBiomeSource().getNoiseBiome(x >> 2, y >> 2, z >> 2, randomState.sampler()));
             }
 
             @Override
-            public java.util.List<org.bukkit.block.Biome> getBiomes(final org.bukkit.generator.WorldInfo worldInfo) {
+            public java.util.@NonNull List<org.bukkit.block.Biome> getBiomes(final org.bukkit.generator.@NonNull WorldInfo worldInfo) {
                 return possibleBiomes;
             }
         };
     }
 
     @Override
-    public java.util.Set<org.bukkit.FeatureFlag> getFeatureFlags() {
+    public java.util.@NonNull Set<org.bukkit.FeatureFlag> getFeatureFlags() {
         return io.papermc.paper.world.flag.PaperFeatureFlagProviderImpl.fromNms(this.enabledFeatures);
     }
 

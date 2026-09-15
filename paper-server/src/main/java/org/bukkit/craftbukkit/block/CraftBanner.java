@@ -13,6 +13,7 @@ import org.bukkit.World;
 import org.bukkit.block.Banner;
 import org.bukkit.block.banner.Pattern;
 import org.bukkit.craftbukkit.block.banner.CraftPatternType;
+import org.jspecify.annotations.NonNull;
 
 public class CraftBanner extends CraftBlockEntityState<BannerBlockEntity> implements Banner {
 
@@ -47,43 +48,43 @@ public class CraftBanner extends CraftBlockEntityState<BannerBlockEntity> implem
     }
 
     @Override
-    public DyeColor getBaseColor() {
+    public @NonNull DyeColor getBaseColor() {
         return this.base;
     }
 
     @Override
-    public void setBaseColor(DyeColor color) {
+    public void setBaseColor(@NonNull DyeColor color) {
         Preconditions.checkArgument(color != null, "color");
         this.base = color;
     }
 
     @Override
-    public List<Pattern> getPatterns() {
+    public @NonNull List<Pattern> getPatterns() {
         return new ArrayList<Pattern>(this.patterns);
     }
 
     @Override
-    public void setPatterns(List<Pattern> patterns) {
+    public void setPatterns(@NonNull List<Pattern> patterns) {
         this.patterns = new ArrayList<Pattern>(patterns);
     }
 
     @Override
-    public void addPattern(Pattern pattern) {
+    public void addPattern(@NonNull Pattern pattern) {
         this.patterns.add(pattern);
     }
 
     @Override
-    public Pattern getPattern(int i) {
+    public @NonNull Pattern getPattern(int i) {
         return this.patterns.get(i);
     }
 
     @Override
-    public Pattern removePattern(int i) {
+    public @NonNull Pattern removePattern(int i) {
         return this.patterns.remove(i);
     }
 
     @Override
-    public void setPattern(int i, Pattern pattern) {
+    public void setPattern(int i, @NonNull Pattern pattern) {
         this.patterns.set(i, pattern);
     }
 
@@ -107,12 +108,12 @@ public class CraftBanner extends CraftBlockEntityState<BannerBlockEntity> implem
     }
 
     @Override
-    public CraftBanner copy() {
+    public @NonNull CraftBanner copy() {
         return new CraftBanner(this, null);
     }
 
     @Override
-    public CraftBanner copy(Location location) {
+    public @NonNull CraftBanner copy(@NonNull Location location) {
         return new CraftBanner(this, location);
     }
 

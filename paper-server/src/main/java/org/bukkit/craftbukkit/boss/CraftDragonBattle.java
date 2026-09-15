@@ -21,6 +21,7 @@ import org.bukkit.craftbukkit.entity.CraftEnderCrystal;
 import org.bukkit.craftbukkit.util.CraftLocation;
 import org.bukkit.entity.EnderCrystal;
 import org.bukkit.entity.EnderDragon;
+import org.jspecify.annotations.NonNull;
 
 public class CraftDragonBattle implements DragonBattle {
 
@@ -37,7 +38,7 @@ public class CraftDragonBattle implements DragonBattle {
     }
 
     @Override
-    public BossBar getBossBar() {
+    public @NonNull BossBar getBossBar() {
         return new CraftBossBar(this.handle.dragonEvent);
     }
 
@@ -102,12 +103,12 @@ public class CraftDragonBattle implements DragonBattle {
     }
 
     @Override
-    public RespawnPhase getRespawnPhase() {
+    public @NonNull RespawnPhase getRespawnPhase() {
         return this.toBukkitRespawnPhase(this.handle.respawnStage);
     }
 
     @Override
-    public boolean setRespawnPhase(RespawnPhase phase) {
+    public boolean setRespawnPhase(@NonNull RespawnPhase phase) {
         Preconditions.checkArgument(phase != null && phase != RespawnPhase.NONE, "Invalid respawn phase provided: %s", phase);
 
         if (this.handle.respawnStage == null) {
@@ -152,12 +153,12 @@ public class CraftDragonBattle implements DragonBattle {
     }
 
     @Override
-    public void spawnNewGateway(final Position position) {
+    public void spawnNewGateway(final @NonNull Position position) {
         this.handle.spawnNewGateway(MCUtil.toBlockPos(position));
     }
 
     @Override
-    public List<EnderCrystal> getRespawnCrystals() {
+    public @NonNull List<EnderCrystal> getRespawnCrystals() {
         if (this.handle.respawnCrystals.isEmpty()) {
             return Collections.emptyList();
         }
@@ -173,7 +174,7 @@ public class CraftDragonBattle implements DragonBattle {
     }
 
     @Override
-    public List<EnderCrystal> getHealingCrystals() {
+    public @NonNull List<EnderCrystal> getHealingCrystals() {
         final List<EnderCrystal> enderCrystals = new ArrayList<>();
         for (final EndCrystal crystal : this.handle.getSpikeCrystals()) {
             if (!crystal.isRemoved() && crystal.isAlive() && crystal.valid) {

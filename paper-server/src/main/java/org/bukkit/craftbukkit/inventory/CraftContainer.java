@@ -29,6 +29,7 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.MenuType;
+import org.jspecify.annotations.NonNull;
 
 public class CraftContainer extends AbstractContainerMenu {
 
@@ -53,44 +54,44 @@ public class CraftContainer extends AbstractContainerMenu {
             private String title = this.originalTitle;
 
             @Override
-            public Inventory getTopInventory() {
+            public @NonNull Inventory getTopInventory() {
                 return inventory;
             }
 
             @Override
-            public Inventory getBottomInventory() {
+            public @NonNull Inventory getBottomInventory() {
                 return this.getPlayer().getInventory();
             }
 
             @Override
-            public HumanEntity getPlayer() {
+            public @NonNull HumanEntity getPlayer() {
                 return player.getBukkitEntity();
             }
 
             @Override
-            public InventoryType getType() {
+            public @NonNull InventoryType getType() {
                 return inventory.getType();
             }
 
             // Paper start
             @Override
-            public net.kyori.adventure.text.Component title() {
+            public net.kyori.adventure.text.@NonNull Component title() {
                 return inventory instanceof CraftInventoryCustom custom ? custom.title() : inventory.getType().defaultTitle(); // Paper
             }
             // Paper end
 
             @Override
-            public String getTitle() {
+            public @NonNull String getTitle() {
                 return this.title;
             }
 
             @Override
-            public String getOriginalTitle() {
+            public @NonNull String getOriginalTitle() {
                 return this.originalTitle;
             }
 
             @Override
-            public void setTitle(String title) {
+            public void setTitle(@NonNull String title) {
                 CraftInventoryView.sendInventoryTitleChange(this, title);
                 this.title = title;
             }
@@ -104,7 +105,7 @@ public class CraftContainer extends AbstractContainerMenu {
     }
 
     @Override
-    public InventoryView getBukkitView() {
+    public @NonNull InventoryView getBukkitView() {
         return this.view;
     }
 
@@ -323,17 +324,17 @@ public class CraftContainer extends AbstractContainerMenu {
     }
 
     @Override
-    public ItemStack quickMoveStack(Player player, int slot) {
+    public @NonNull ItemStack quickMoveStack(@NonNull Player player, int slot) {
         return (this.delegate != null) ? this.delegate.quickMoveStack(player, slot) : ItemStack.EMPTY;
     }
 
     @Override
-    public boolean stillValid(Player player) {
+    public boolean stillValid(@NonNull Player player) {
         return true;
     }
 
     @Override
-    public net.minecraft.world.inventory.MenuType<?> getType() {
+    public net.minecraft.world.inventory.@NonNull MenuType<?> getType() {
         return CraftContainer.getNotchInventoryType(this.view.getTopInventory());
     }
 }

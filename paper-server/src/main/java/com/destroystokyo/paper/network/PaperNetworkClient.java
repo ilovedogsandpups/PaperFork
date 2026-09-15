@@ -4,6 +4,7 @@ import java.net.InetSocketAddress;
 
 import javax.annotation.Nullable;
 import net.minecraft.network.Connection;
+import org.jspecify.annotations.NonNull;
 
 public class PaperNetworkClient implements NetworkClient {
 
@@ -14,7 +15,7 @@ public class PaperNetworkClient implements NetworkClient {
     }
 
     @Override
-    public InetSocketAddress getAddress() {
+    public @NonNull InetSocketAddress getAddress() {
         return (InetSocketAddress) this.connection.getRemoteAddress();
     }
 

@@ -7,6 +7,8 @@ import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.jspecify.annotations.NonNull;
+
 import java.text.DecimalFormat;
 
 import static net.kyori.adventure.text.Component.text;
@@ -33,7 +35,7 @@ public class TicksPerSecondCommand extends Command {
     // Paper end
 
     @Override
-    public boolean execute(CommandSender sender, String currentAlias, String[] args) {
+    public boolean execute(@NonNull CommandSender sender, @NonNull String currentAlias, String @NonNull [] args) {
         if (!this.testPermission(sender)) {
             return true;
         }

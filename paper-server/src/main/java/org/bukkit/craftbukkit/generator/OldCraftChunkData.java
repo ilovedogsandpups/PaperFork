@@ -17,6 +17,7 @@ import org.bukkit.craftbukkit.block.data.CraftBlockData;
 import org.bukkit.craftbukkit.util.CraftMagicNumbers;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.material.MaterialData;
+import org.jspecify.annotations.NonNull;
 
 /**
  * Data to be used for the block types and data in a newly generated chunk.
@@ -54,7 +55,7 @@ public final class OldCraftChunkData implements ChunkGenerator.ChunkData {
     }
 
     @Override
-    public Biome getBiome(int x, int y, int z) {
+    public @NonNull Biome getBiome(int x, int y, int z) {
         throw new UnsupportedOperationException("Unsupported, in older chunk generator api");
     }
 
@@ -64,12 +65,12 @@ public final class OldCraftChunkData implements ChunkGenerator.ChunkData {
     }
 
     @Override
-    public void setBlock(int x, int y, int z, MaterialData material) {
+    public void setBlock(int x, int y, int z, @NonNull MaterialData material) {
         this.setBlock(x, y, z, CraftMagicNumbers.getBlock(material));
     }
 
     @Override
-    public void setBlock(int x, int y, int z, BlockData blockData) {
+    public void setBlock(int x, int y, int z, @NonNull BlockData blockData) {
         this.setBlock(x, y, z, ((CraftBlockData) blockData).getState());
     }
 
@@ -79,27 +80,27 @@ public final class OldCraftChunkData implements ChunkGenerator.ChunkData {
     }
 
     @Override
-    public void setRegion(int xMin, int yMin, int zMin, int xMax, int yMax, int zMax, MaterialData material) {
+    public void setRegion(int xMin, int yMin, int zMin, int xMax, int yMax, int zMax, @NonNull MaterialData material) {
         this.setRegion(xMin, yMin, zMin, xMax, yMax, zMax, CraftMagicNumbers.getBlock(material));
     }
 
     @Override
-    public void setRegion(int xMin, int yMin, int zMin, int xMax, int yMax, int zMax, BlockData blockData) {
+    public void setRegion(int xMin, int yMin, int zMin, int xMax, int yMax, int zMax, @NonNull BlockData blockData) {
         this.setRegion(xMin, yMin, zMin, xMax, yMax, zMax, ((CraftBlockData) blockData).getState());
     }
 
     @Override
-    public Material getType(int x, int y, int z) {
+    public @NonNull Material getType(int x, int y, int z) {
         return CraftBlockType.minecraftToBukkit(this.getBlockState(x, y, z).getBlock());
     }
 
     @Override
-    public MaterialData getTypeAndData(int x, int y, int z) {
+    public @NonNull MaterialData getTypeAndData(int x, int y, int z) {
         return CraftMagicNumbers.getMaterial(this.getBlockState(x, y, z));
     }
 
     @Override
-    public BlockData getBlockData(int x, int y, int z) {
+    public @NonNull BlockData getBlockData(int x, int y, int z) {
         return this.getBlockState(x, y, z).asBlockData();
     }
 
@@ -202,7 +203,7 @@ public final class OldCraftChunkData implements ChunkGenerator.ChunkData {
     }
 
     @Override
-    public int getHeight(HeightMap heightMap, final int x, final int z) {
+    public int getHeight(@NonNull HeightMap heightMap, final int x, final int z) {
         throw new UnsupportedOperationException("Unsupported, in older chunk generator api");
     }
 }

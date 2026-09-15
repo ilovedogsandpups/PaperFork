@@ -9,6 +9,8 @@ import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.RenderType;
 import org.bukkit.scoreboard.Score;
+import org.jspecify.annotations.NonNull;
+
 import java.util.Objects;
 
 final class CraftObjective extends CraftScoreboardComponent implements Objective {
@@ -26,14 +28,14 @@ final class CraftObjective extends CraftScoreboardComponent implements Objective
     }
 
     @Override
-    public String getName() {
+    public @NonNull String getName() {
         this.checkState();
 
         return this.objective.getName();
     }
 
     @Override
-    public net.kyori.adventure.text.Component displayName() throws IllegalStateException {
+    public net.kyori.adventure.text.@NonNull Component displayName() throws IllegalStateException {
         this.checkState();
         return io.papermc.paper.adventure.PaperAdventure.asAdventure(this.objective.getDisplayName());
     }
@@ -48,14 +50,14 @@ final class CraftObjective extends CraftScoreboardComponent implements Objective
     }
 
     @Override
-    public String getDisplayName() {
+    public @NonNull String getDisplayName() {
         this.checkState();
 
         return CraftChatMessage.fromComponent(this.objective.getDisplayName());
     }
 
     @Override
-    public void setDisplayName(String displayName) {
+    public void setDisplayName(@NonNull String displayName) {
         Preconditions.checkArgument(displayName != null, "Display name cannot be null");
         this.checkState();
 
@@ -63,14 +65,14 @@ final class CraftObjective extends CraftScoreboardComponent implements Objective
     }
 
     @Override
-    public String getCriteria() {
+    public @NonNull String getCriteria() {
         this.checkState();
 
         return this.criteria.name;
     }
 
     @Override
-    public Criteria getTrackedCriteria() {
+    public @NonNull Criteria getTrackedCriteria() {
         this.checkState();
 
         return this.criteria;
@@ -116,7 +118,7 @@ final class CraftObjective extends CraftScoreboardComponent implements Objective
     }
 
     @Override
-    public void setRenderType(RenderType renderType) {
+    public void setRenderType(@NonNull RenderType renderType) {
         Preconditions.checkArgument(renderType != null, "RenderType cannot be null");
         this.checkState();
 
@@ -124,21 +126,21 @@ final class CraftObjective extends CraftScoreboardComponent implements Objective
     }
 
     @Override
-    public RenderType getRenderType() {
+    public @NonNull RenderType getRenderType() {
         this.checkState();
 
         return CraftScoreboardTranslations.toBukkitRender(this.objective.getRenderType());
     }
 
     @Override
-    public Score getScore(OfflinePlayer player) {
+    public @NonNull Score getScore(@NonNull OfflinePlayer player) {
         this.checkState();
 
         return new CraftScore(this, CraftScoreboard.getScoreHolder(player));
     }
 
     @Override
-    public Score getScore(String entry) {
+    public @NonNull Score getScore(String entry) {
         Preconditions.checkArgument(entry != null, "Entry cannot be null");
         Preconditions.checkArgument(entry.length() <= Short.MAX_VALUE, "Score '" + entry + "' is longer than the limit of 32767 characters");
         this.checkState();
@@ -147,7 +149,7 @@ final class CraftObjective extends CraftScoreboardComponent implements Objective
     }
 
     @Override
-    public Score getScoreFor(org.bukkit.entity.Entity entity) throws IllegalArgumentException, IllegalStateException {
+    public @NonNull Score getScoreFor(org.bukkit.entity.@NonNull Entity entity) throws IllegalArgumentException, IllegalStateException {
         Preconditions.checkArgument(entity != null, "Entity cannot be null");
         this.checkState();
 

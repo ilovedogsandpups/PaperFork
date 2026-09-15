@@ -15,6 +15,7 @@ import org.bukkit.craftbukkit.entity.CraftLivingEntity;
 import org.bukkit.craftbukkit.util.CraftBlockVector;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.util.BlockVector;
+import org.jspecify.annotations.NonNull;
 
 public class CraftStructureBlock extends CraftBlockEntityState<StructureBlockEntity> implements Structure {
 
@@ -29,18 +30,18 @@ public class CraftStructureBlock extends CraftBlockEntityState<StructureBlockEnt
     }
 
     @Override
-    public String getStructureName() {
+    public @NonNull String getStructureName() {
         return this.getSnapshot().getStructureName();
     }
 
     @Override
-    public void setStructureName(String name) {
+    public void setStructureName(@NonNull String name) {
         Preconditions.checkArgument(name != null, "Structure name cannot be null");
         this.getSnapshot().setStructureName(name);
     }
 
     @Override
-    public String getAuthor() {
+    public @NonNull String getAuthor() {
         return this.getSnapshot().author;
     }
 
@@ -52,13 +53,13 @@ public class CraftStructureBlock extends CraftBlockEntityState<StructureBlockEnt
     }
 
     @Override
-    public void setAuthor(LivingEntity entity) {
+    public void setAuthor(@NonNull LivingEntity entity) {
         Preconditions.checkArgument(entity != null, "Structure Block author entity cannot be null");
         this.getSnapshot().createdBy(((CraftLivingEntity) entity).getHandle());
     }
 
     @Override
-    public BlockVector getRelativePosition() {
+    public @NonNull BlockVector getRelativePosition() {
         return CraftBlockVector.toBukkit(this.getSnapshot().getStructurePos());
     }
 
@@ -71,7 +72,7 @@ public class CraftStructureBlock extends CraftBlockEntityState<StructureBlockEnt
     }
 
     @Override
-    public BlockVector getStructureSize() {
+    public @NonNull BlockVector getStructureSize() {
         return CraftBlockVector.toBukkit(this.getSnapshot().getStructureSize());
     }
 
@@ -90,7 +91,7 @@ public class CraftStructureBlock extends CraftBlockEntityState<StructureBlockEnt
     }
 
     @Override
-    public Mirror getMirror() {
+    public @NonNull Mirror getMirror() {
         return Mirror.valueOf(this.getSnapshot().getMirror().name());
     }
 
@@ -101,7 +102,7 @@ public class CraftStructureBlock extends CraftBlockEntityState<StructureBlockEnt
     }
 
     @Override
-    public StructureRotation getRotation() {
+    public @NonNull StructureRotation getRotation() {
         return StructureRotation.valueOf(this.getSnapshot().getRotation().name());
     }
 
@@ -112,7 +113,7 @@ public class CraftStructureBlock extends CraftBlockEntityState<StructureBlockEnt
     }
 
     @Override
-    public UsageMode getUsageMode() {
+    public @NonNull UsageMode getUsageMode() {
         return UsageMode.valueOf(this.getSnapshot().getMode().name());
     }
 
@@ -168,7 +169,7 @@ public class CraftStructureBlock extends CraftBlockEntityState<StructureBlockEnt
     }
 
     @Override
-    public void setMetadata(String metadata) {
+    public void setMetadata(@NonNull String metadata) {
         Preconditions.checkArgument(metadata != null, "Structure metadata cannot be null");
         if (this.getUsageMode() == UsageMode.DATA) {
             this.getSnapshot().setMetaData(metadata);
@@ -176,7 +177,7 @@ public class CraftStructureBlock extends CraftBlockEntityState<StructureBlockEnt
     }
 
     @Override
-    public String getMetadata() {
+    public @NonNull String getMetadata() {
         return this.getSnapshot().getMetaData();
     }
 
@@ -199,12 +200,12 @@ public class CraftStructureBlock extends CraftBlockEntityState<StructureBlockEnt
     }
 
     @Override
-    public CraftStructureBlock copy() {
+    public @NonNull CraftStructureBlock copy() {
         return new CraftStructureBlock(this, null);
     }
 
     @Override
-    public CraftStructureBlock copy(Location location) {
+    public @NonNull CraftStructureBlock copy(@NonNull Location location) {
         return new CraftStructureBlock(this, location);
     }
 

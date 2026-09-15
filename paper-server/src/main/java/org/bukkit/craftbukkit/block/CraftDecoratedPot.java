@@ -19,6 +19,7 @@ import org.bukkit.craftbukkit.inventory.CraftInventoryDecoratedPot;
 import org.bukkit.craftbukkit.inventory.CraftItemType;
 import org.bukkit.inventory.DecoratedPotInventory;
 import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 public class CraftDecoratedPot extends CraftBlockEntityState<DecoratedPotBlockEntity> implements DecoratedPot {
 
@@ -31,12 +32,12 @@ public class CraftDecoratedPot extends CraftBlockEntityState<DecoratedPotBlockEn
     }
 
     @Override
-    public DecoratedPotInventory getSnapshotInventory() {
+    public @NonNull DecoratedPotInventory getSnapshotInventory() {
         return new CraftInventoryDecoratedPot(this.getSnapshot());
     }
 
     @Override
-    public DecoratedPotInventory getInventory() {
+    public @NonNull DecoratedPotInventory getInventory() {
         if (!this.isPlaced()) {
             return this.getSnapshotInventory();
         }
@@ -89,7 +90,7 @@ public class CraftDecoratedPot extends CraftBlockEntityState<DecoratedPotBlockEn
     }
 
     @Override
-    public Material getSherd(Side face) {
+    public @NonNull Material getSherd(Side face) {
         Preconditions.checkArgument(face != null, "face must not be null");
 
         PotDecorations decorations = this.getSnapshot().getDecorations();
@@ -105,7 +106,7 @@ public class CraftDecoratedPot extends CraftBlockEntityState<DecoratedPotBlockEn
     }
 
     @Override
-    public Map<Side, Material> getSherds() {
+    public @NonNull Map<Side, Material> getSherds() {
         PotDecorations decorations = this.getSnapshot().getDecorations();
 
         Map<Side, Material> sherds = new EnumMap<>(Side.class);
@@ -117,17 +118,17 @@ public class CraftDecoratedPot extends CraftBlockEntityState<DecoratedPotBlockEn
     }
 
     @Override
-    public List<Material> getShards() {
+    public @NonNull List<Material> getShards() {
         return this.getSnapshot().getDecorations().ordered().stream().map(CraftItemType::minecraftToBukkit).collect(Collectors.toUnmodifiableList());
     }
 
     @Override
-    public CraftDecoratedPot copy() {
+    public @NonNull CraftDecoratedPot copy() {
         return new CraftDecoratedPot(this, null);
     }
 
     @Override
-    public CraftDecoratedPot copy(Location location) {
+    public @NonNull CraftDecoratedPot copy(@NonNull Location location) {
         return new CraftDecoratedPot(this, location);
     }
 

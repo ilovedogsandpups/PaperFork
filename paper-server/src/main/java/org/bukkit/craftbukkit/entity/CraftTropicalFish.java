@@ -3,6 +3,7 @@ package org.bukkit.craftbukkit.entity;
 import org.bukkit.DyeColor;
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.entity.TropicalFish;
+import org.jspecify.annotations.NonNull;
 
 public class CraftTropicalFish extends io.papermc.paper.entity.PaperSchoolableFish implements TropicalFish { // Paper - Schooling Fish API
 
@@ -16,32 +17,32 @@ public class CraftTropicalFish extends io.papermc.paper.entity.PaperSchoolableFi
     }
 
     @Override
-    public DyeColor getPatternColor() {
+    public @NonNull DyeColor getPatternColor() {
         return CraftTropicalFish.getPatternColor(this.getHandle().getPackedVariant());
     }
 
     @Override
-    public void setPatternColor(DyeColor color) {
+    public void setPatternColor(@NonNull DyeColor color) {
         this.getHandle().setPackedVariant(CraftTropicalFish.getData(color, this.getBodyColor(), this.getPattern()));
     }
 
     @Override
-    public DyeColor getBodyColor() {
+    public @NonNull DyeColor getBodyColor() {
         return CraftTropicalFish.getBodyColor(this.getHandle().getPackedVariant());
     }
 
     @Override
-    public void setBodyColor(DyeColor color) {
+    public void setBodyColor(@NonNull DyeColor color) {
         this.getHandle().setPackedVariant(CraftTropicalFish.getData(this.getPatternColor(), color, this.getPattern()));
     }
 
     @Override
-    public Pattern getPattern() {
+    public @NonNull Pattern getPattern() {
         return CraftTropicalFish.getPattern(this.getHandle().getPackedVariant());
     }
 
     @Override
-    public void setPattern(Pattern pattern) {
+    public void setPattern(@NonNull Pattern pattern) {
         this.getHandle().setPackedVariant(CraftTropicalFish.getData(this.getPatternColor(), this.getBodyColor(), pattern));
     }
 

@@ -19,6 +19,7 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.craftbukkit.util.CraftChatMessage;
 import org.bukkit.scoreboard.NameTagVisibility;
 import org.bukkit.scoreboard.Team;
+import org.jspecify.annotations.NonNull;
 
 final class CraftTeam extends CraftScoreboardComponent implements Team {
     private final PlayerTeam team;
@@ -29,14 +30,14 @@ final class CraftTeam extends CraftScoreboardComponent implements Team {
     }
 
     @Override
-    public String getName() {
+    public @NonNull String getName() {
         this.checkState();
 
         return this.team.getName();
     }
 
     @Override
-    public net.kyori.adventure.text.Component displayName() throws IllegalStateException {
+    public net.kyori.adventure.text.@NonNull Component displayName() throws IllegalStateException {
         this.checkState();
         return io.papermc.paper.adventure.PaperAdventure.asAdventure(this.team.getDisplayName());
     }
@@ -49,7 +50,7 @@ final class CraftTeam extends CraftScoreboardComponent implements Team {
     }
 
     @Override
-    public net.kyori.adventure.text.Component prefix() throws IllegalStateException {
+    public net.kyori.adventure.text.@NonNull Component prefix() throws IllegalStateException {
         this.checkState();
         return io.papermc.paper.adventure.PaperAdventure.asAdventure(this.team.getPlayerPrefix());
     }
@@ -62,7 +63,7 @@ final class CraftTeam extends CraftScoreboardComponent implements Team {
     }
 
     @Override
-    public net.kyori.adventure.text.Component suffix() throws IllegalStateException {
+    public net.kyori.adventure.text.@NonNull Component suffix() throws IllegalStateException {
         this.checkState();
         return io.papermc.paper.adventure.PaperAdventure.asAdventure(this.team.getPlayerSuffix());
     }
@@ -81,7 +82,7 @@ final class CraftTeam extends CraftScoreboardComponent implements Team {
     }
 
     @Override
-    public net.kyori.adventure.text.format.TextColor color() throws IllegalStateException {
+    public net.kyori.adventure.text.format.@NonNull TextColor color() throws IllegalStateException {
         this.checkState();
         return this.team.getColor().map(PaperAdventure::asAdventure).orElseThrow(() -> new IllegalStateException("Team does not have a color!"));
     }
@@ -93,14 +94,14 @@ final class CraftTeam extends CraftScoreboardComponent implements Team {
     }
 
     @Override
-    public String getDisplayName() {
+    public @NonNull String getDisplayName() {
         this.checkState();
 
         return CraftChatMessage.fromComponent(this.team.getDisplayName());
     }
 
     @Override
-    public void setDisplayName(String displayName) {
+    public void setDisplayName(@NonNull String displayName) {
         Preconditions.checkArgument(displayName != null, "Display name cannot be null");
         this.checkState();
 
@@ -108,14 +109,14 @@ final class CraftTeam extends CraftScoreboardComponent implements Team {
     }
 
     @Override
-    public String getPrefix() {
+    public @NonNull String getPrefix() {
         this.checkState();
 
         return CraftChatMessage.fromComponent(this.team.getPlayerPrefix());
     }
 
     @Override
-    public void setPrefix(String prefix) {
+    public void setPrefix(@NonNull String prefix) {
         Preconditions.checkArgument(prefix != null, "Prefix cannot be null");
         this.checkState();
 
@@ -123,14 +124,14 @@ final class CraftTeam extends CraftScoreboardComponent implements Team {
     }
 
     @Override
-    public String getSuffix() {
+    public @NonNull String getSuffix() {
         this.checkState();
 
         return CraftChatMessage.fromComponent(this.team.getPlayerSuffix());
     }
 
     @Override
-    public void setSuffix(String suffix) {
+    public void setSuffix(@NonNull String suffix) {
         Preconditions.checkArgument(suffix != null, "Suffix cannot be null");
         this.checkState();
 
@@ -138,7 +139,7 @@ final class CraftTeam extends CraftScoreboardComponent implements Team {
     }
 
     @Override
-    public ChatColor getColor() {
+    public @NonNull ChatColor getColor() {
         this.checkState();
 
         return this.team.getColor().map(t -> CraftChatMessage.toLegacyFormat(t.textColor())).map(CraftChatMessage::getColor).orElse(ChatColor.RESET);
@@ -189,21 +190,21 @@ final class CraftTeam extends CraftScoreboardComponent implements Team {
     }
 
     @Override
-    public NameTagVisibility getNameTagVisibility() throws IllegalArgumentException {
+    public @NonNull NameTagVisibility getNameTagVisibility() throws IllegalArgumentException {
         this.checkState();
 
         return CraftTeam.notchToBukkit(this.team.getNameTagVisibility());
     }
 
     @Override
-    public void setNameTagVisibility(NameTagVisibility visibility) throws IllegalArgumentException {
+    public void setNameTagVisibility(@NonNull NameTagVisibility visibility) throws IllegalArgumentException {
         this.checkState();
 
         this.team.setNameTagVisibility(CraftTeam.bukkitToNotch(visibility));
     }
 
     @Override
-    public Set<OfflinePlayer> getPlayers() {
+    public @NonNull Set<OfflinePlayer> getPlayers() {
         this.checkState();
 
         ImmutableSet.Builder<OfflinePlayer> players = ImmutableSet.builder();
@@ -214,7 +215,7 @@ final class CraftTeam extends CraftScoreboardComponent implements Team {
     }
 
     @Override
-    public Set<String> getEntries() {
+    public @NonNull Set<String> getEntries() {
         this.checkState();
 
         ImmutableSet.Builder<String> entries = ImmutableSet.builder();
@@ -239,7 +240,7 @@ final class CraftTeam extends CraftScoreboardComponent implements Team {
     }
 
     @Override
-    public void addEntry(String entry) {
+    public void addEntry(@NonNull String entry) {
         Preconditions.checkArgument(entry != null, "Entry cannot be null");
         this.checkState();
 
@@ -252,7 +253,7 @@ final class CraftTeam extends CraftScoreboardComponent implements Team {
     }
 
     @Override
-    public void addEntries(java.util.Collection<String> entries) throws IllegalStateException, IllegalArgumentException {
+    public void addEntries(java.util.@NonNull Collection<String> entries) throws IllegalStateException, IllegalArgumentException {
         Preconditions.checkArgument(entries != null, "Entries cannot be null");
         this.checkState();
 
@@ -267,7 +268,7 @@ final class CraftTeam extends CraftScoreboardComponent implements Team {
     }
 
     @Override
-    public boolean removeEntry(String entry) {
+    public boolean removeEntry(@NonNull String entry) {
         Preconditions.checkArgument(entry != null, "Entry cannot be null");
         this.checkState();
 
@@ -307,7 +308,7 @@ final class CraftTeam extends CraftScoreboardComponent implements Team {
     }
 
     @Override
-    public boolean hasEntry(String entry) throws IllegalArgumentException, IllegalStateException {
+    public boolean hasEntry(@NonNull String entry) throws IllegalArgumentException, IllegalStateException {
         Preconditions.checkArgument(entry != null, "Entry cannot be null");
         this.checkState();
 
@@ -321,7 +322,7 @@ final class CraftTeam extends CraftScoreboardComponent implements Team {
     }
 
     @Override
-    public OptionStatus getOption(Option option) {
+    public @NonNull OptionStatus getOption(Option option) {
         this.checkState();
 
         Enum<?> value = switch (option) {
@@ -333,7 +334,7 @@ final class CraftTeam extends CraftScoreboardComponent implements Team {
     }
 
     @Override
-    public void setOption(Option option, OptionStatus status) {
+    public void setOption(Option option, @NonNull OptionStatus status) {
         this.checkState();
 
         switch (option) {
@@ -345,25 +346,25 @@ final class CraftTeam extends CraftScoreboardComponent implements Team {
     }
 
     @Override
-    public void addEntity(org.bukkit.entity.Entity entity) throws IllegalStateException, IllegalArgumentException {
+    public void addEntity(org.bukkit.entity.@NonNull Entity entity) throws IllegalStateException, IllegalArgumentException {
         Preconditions.checkArgument(entity != null, "Entity cannot be null");
         this.addEntry(((org.bukkit.craftbukkit.entity.CraftEntity) entity).getHandle().getScoreboardName());
     }
 
     @Override
-    public boolean removeEntity(org.bukkit.entity.Entity entity) throws IllegalStateException, IllegalArgumentException {
+    public boolean removeEntity(org.bukkit.entity.@NonNull Entity entity) throws IllegalStateException, IllegalArgumentException {
         Preconditions.checkArgument(entity != null, "Entity cannot be null");
         return this.removeEntry(((org.bukkit.craftbukkit.entity.CraftEntity) entity).getHandle().getScoreboardName());
     }
 
     @Override
-    public boolean hasEntity(org.bukkit.entity.Entity entity) throws IllegalStateException, IllegalArgumentException {
+    public boolean hasEntity(org.bukkit.entity.@NonNull Entity entity) throws IllegalStateException, IllegalArgumentException {
         Preconditions.checkArgument(entity != null, "Entity cannot be null");
         return this.hasEntry(((org.bukkit.craftbukkit.entity.CraftEntity) entity).getHandle().getScoreboardName());
     }
 
     @Override
-    public Iterable<? extends Audience> audiences() {
+    public @NonNull Iterable<? extends Audience> audiences() {
         this.checkState();
         List<Audience> audiences = new ArrayList<>();
         for (String playerName : this.team.getPlayers()) {

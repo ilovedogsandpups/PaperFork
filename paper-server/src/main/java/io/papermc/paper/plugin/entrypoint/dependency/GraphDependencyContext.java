@@ -1,10 +1,10 @@
 package io.papermc.paper.plugin.entrypoint.dependency;
 
-import com.google.common.graph.Graph;
 import com.google.common.graph.Graphs;
 import com.google.common.graph.MutableGraph;
 import io.papermc.paper.plugin.configuration.PluginMeta;
 import io.papermc.paper.plugin.provider.entrypoint.DependencyContext;
+import org.jspecify.annotations.NonNull;
 
 import java.util.Set;
 
@@ -18,7 +18,7 @@ public class GraphDependencyContext implements DependencyContext {
     }
 
     @Override
-    public boolean isTransitiveDependency(PluginMeta plugin, PluginMeta depend) {
+    public boolean isTransitiveDependency(PluginMeta plugin, @NonNull PluginMeta depend) {
         String pluginIdentifier = plugin.getName();
 
         if (this.dependencyGraph.nodes().contains(pluginIdentifier)) {
@@ -37,7 +37,7 @@ public class GraphDependencyContext implements DependencyContext {
     }
 
     @Override
-    public boolean hasDependency(String pluginIdentifier) {
+    public boolean hasDependency(@NonNull String pluginIdentifier) {
         return this.dependencyGraph.nodes().contains(pluginIdentifier);
     }
 

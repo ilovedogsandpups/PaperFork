@@ -56,6 +56,7 @@ import org.bukkit.craftbukkit.util.CraftLocation;
 import org.bukkit.craftbukkit.util.CraftVoxelShape;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.Unmodifiable;
+import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 
 public class CraftBlockData implements BlockData {
@@ -68,7 +69,7 @@ public class CraftBlockData implements BlockData {
     }
 
     @Override
-    public Material getMaterial() {
+    public @NonNull Material getMaterial() {
         return this.state.getBukkitMaterial();
     }
 
@@ -77,7 +78,7 @@ public class CraftBlockData implements BlockData {
     }
 
     @Override
-    public BlockData merge(BlockData data) {
+    public @NonNull BlockData merge(@NonNull BlockData data) {
         CraftBlockData craft = (CraftBlockData) data;
         Preconditions.checkArgument(craft.parsedStates != null, "Block data not created via string parsing");
         Preconditions.checkArgument(this.state.getBlock() == craft.state.getBlock(), "States have different types (got %s, expected %s)", craft.state.getBlock(), this.state.getBlock());
@@ -152,7 +153,7 @@ public class CraftBlockData implements BlockData {
         return fromVanilla(this.state.getValue(property), bukkitClass);
     }
 
-    protected <M extends Enum<M> & StringRepresentable, A extends Enum<A>> @Unmodifiable Set<A> getValues(EnumProperty<M> property, Class<A> bukkitClass) {
+    protected <M extends Enum<M> & StringRepresentable, A extends Enum<A>> @Unmodifiable Set<A> getValues(EnumProperty<@NonNull M> property, Class<A> bukkitClass) {
         List<M> values = property.getPossibleValues();
         ImmutableSet.Builder<A> result = ImmutableSet.builderWithExpectedSize(values.size());
 
@@ -163,7 +164,7 @@ public class CraftBlockData implements BlockData {
         return result.build();
     }
 
-    protected <A extends Enum<A>, M extends Enum<M> & StringRepresentable> void set(EnumProperty<M> property, A bukkit) {
+    protected <A extends Enum<A>, M extends Enum<M> & StringRepresentable> void set(EnumProperty<@NonNull M> property, A bukkit) {
         this.parsedStates = null;
         this.state = this.state.setValue(property, toVanilla(bukkit, property.getValueClass()));
     }
@@ -180,17 +181,17 @@ public class CraftBlockData implements BlockData {
     }
 
     @Override
-    public String getAsString() {
+    public @NonNull String getAsString() {
         return this.toString(this.state.getValues(), this.state.isSingletonState());
     }
 
     @Override
-    public String getAsString(boolean hideUnspecified) {
+    public @NonNull String getAsString(boolean hideUnspecified) {
         return (hideUnspecified && this.parsedStates != null) ? this.toString(this.parsedStates.stream(), this.parsedStates.isEmpty()) : this.getAsString();
     }
 
     @Override
-    public BlockData clone() {
+    public @NonNull BlockData clone() {
         try {
             return (BlockData) super.clone();
         } catch (CloneNotSupportedException ex) {
@@ -507,7 +508,7 @@ public class CraftBlockData implements BlockData {
     }
 
     @Override
-    public SoundGroup getSoundGroup() {
+    public @NonNull SoundGroup getSoundGroup() {
         return CraftSoundGroup.getSoundGroup(this.state.getSoundType());
     }
 
@@ -527,7 +528,7 @@ public class CraftBlockData implements BlockData {
     }
 
     @Override
-    public boolean isPreferredTool(ItemStack tool) {
+    public boolean isPreferredTool(@NonNull ItemStack tool) {
         Preconditions.checkArgument(tool != null, "tool must not be null");
         return isPreferredTool(this.state, CraftItemStack.asNMSCopy(tool));
     }
@@ -537,12 +538,12 @@ public class CraftBlockData implements BlockData {
     }
 
     @Override
-    public PistonMoveReaction getPistonMoveReaction() {
+    public @NonNull PistonMoveReaction getPistonMoveReaction() {
         return PistonMoveReaction.getById(this.state.getPistonPushReaction().ordinal());
     }
 
     @Override
-    public boolean isSupported(org.bukkit.block.Block block) {
+    public boolean isSupported(org.bukkit.block.@NonNull Block block) {
         Preconditions.checkArgument(block != null, "block must not be null");
 
         CraftBlock craftBlock = (CraftBlock) block;
@@ -561,7 +562,7 @@ public class CraftBlockData implements BlockData {
     }
 
     @Override
-    public boolean isFaceSturdy(BlockFace face, BlockSupport support) {
+    public boolean isFaceSturdy(@NonNull BlockFace face, @NonNull BlockSupport support) {
         Preconditions.checkArgument(face != null, "face must not be null");
         Preconditions.checkArgument(support != null, "support must not be null");
 
@@ -569,7 +570,7 @@ public class CraftBlockData implements BlockData {
     }
 
     @Override
-    public org.bukkit.util.VoxelShape getCollisionShape(Location location) {
+    public org.bukkit.util.@NonNull VoxelShape getCollisionShape(Location location) {
         Preconditions.checkArgument(location != null, "location must not be null");
 
         CraftWorld world = (CraftWorld) location.getWorld();
@@ -581,12 +582,12 @@ public class CraftBlockData implements BlockData {
     }
 
     @Override
-    public Color getMapColor() {
+    public @NonNull Color getMapColor() {
         return Color.fromRGB(this.state.getMapColor(null, null).col);
     }
 
     @Override
-    public Material getPlacementMaterial() {
+    public @NonNull Material getPlacementMaterial() {
         return CraftItemType.minecraftToBukkit(this.state.getBlock().asItem());
     }
 
@@ -601,7 +602,7 @@ public class CraftBlockData implements BlockData {
     }
 
     @Override
-    public void copyTo(BlockData blockData) {
+    public void copyTo(@NonNull BlockData blockData) {
         CraftBlockData other = (CraftBlockData) blockData;
         BlockState otherState = other.state;
         for (Property<?> property : this.state.getBlock().getStateDefinition().getProperties()) {
@@ -614,12 +615,12 @@ public class CraftBlockData implements BlockData {
     }
 
     @Override
-    public org.bukkit.block.BlockState createBlockState() {
+    public org.bukkit.block.@NonNull BlockState createBlockState() {
         return CraftBlockStates.getBlockState(this.state, null);
     }
 
     @Override
-    public float getDestroySpeed(final ItemStack item, final boolean considerEnchants) {
+    public float getDestroySpeed(final @NonNull ItemStack item, final boolean considerEnchants) {
         net.minecraft.world.item.ItemStack itemStack = CraftItemStack.unwrap(item);
         float speed = itemStack.getDestroySpeed(this.state);
         if (speed > 1.0F && considerEnchants) {

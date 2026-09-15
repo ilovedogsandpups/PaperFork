@@ -3,6 +3,7 @@ package io.papermc.paper.plugin.provider.configuration.serializer;
 import io.papermc.paper.plugin.provider.configuration.type.PermissionConfiguration;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionDefault;
+import org.jspecify.annotations.NonNull;
 import org.spongepowered.configurate.ConfigurationNode;
 import org.spongepowered.configurate.serialize.SerializationException;
 import org.spongepowered.configurate.serialize.TypeSerializer;
@@ -22,7 +23,7 @@ public class PermissionConfigurationSerializer {
         }
 
         @Override
-        public PermissionConfiguration deserialize(Type type, ConfigurationNode node) throws SerializationException {
+        public PermissionConfiguration deserialize(@NonNull Type type, ConfigurationNode node) throws SerializationException {
             Map<?, ?> map = (Map<?, ?>) node.node("permissions").raw();
 
             PermissionDefault permissionDefault;
@@ -48,7 +49,7 @@ public class PermissionConfigurationSerializer {
         }
 
         @Override
-        public void serialize(Type type, @org.checkerframework.checker.nullness.qual.Nullable PermissionConfiguration obj, ConfigurationNode node) throws SerializationException {
+        public void serialize(@NonNull Type type, @org.checkerframework.checker.nullness.qual.Nullable PermissionConfiguration obj, @NonNull ConfigurationNode node) throws SerializationException {
 
         }
 

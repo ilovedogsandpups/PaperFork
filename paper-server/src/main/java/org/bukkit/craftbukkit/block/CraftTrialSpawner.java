@@ -15,6 +15,7 @@ import org.bukkit.block.TrialSpawner;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.spawner.TrialSpawnerConfiguration;
+import org.jspecify.annotations.NonNull;
 
 public class CraftTrialSpawner extends CraftBlockEntityState<TrialSpawnerBlockEntity> implements TrialSpawner {
 
@@ -74,7 +75,7 @@ public class CraftTrialSpawner extends CraftBlockEntityState<TrialSpawnerBlockEn
     }
 
     @Override
-    public Collection<Player> getTrackedPlayers() {
+    public @NonNull Collection<Player> getTrackedPlayers() {
         ImmutableSet.Builder<Player> players = ImmutableSet.builder();
 
         for (UUID uuid : this.getTrialData().detectedPlayers) {
@@ -108,7 +109,7 @@ public class CraftTrialSpawner extends CraftBlockEntityState<TrialSpawnerBlockEn
     }
 
     @Override
-    public Collection<Entity> getTrackedEntities() {
+    public @NonNull Collection<Entity> getTrackedEntities() {
         ImmutableSet.Builder<Entity> entities = ImmutableSet.builder();
 
         for (UUID uuid : this.getTrialData().currentMobs) {
@@ -163,12 +164,12 @@ public class CraftTrialSpawner extends CraftBlockEntityState<TrialSpawnerBlockEn
     }
 
     @Override
-    public TrialSpawnerConfiguration getNormalConfiguration() {
+    public @NonNull TrialSpawnerConfiguration getNormalConfiguration() {
         return this.normalConfig;
     }
 
     @Override
-    public TrialSpawnerConfiguration getOminousConfiguration() {
+    public @NonNull TrialSpawnerConfiguration getOminousConfiguration() {
         return this.ominousConfig;
     }
 
@@ -187,12 +188,12 @@ public class CraftTrialSpawner extends CraftBlockEntityState<TrialSpawnerBlockEn
     }
 
     @Override
-    public CraftTrialSpawner copy() {
+    public @NonNull CraftTrialSpawner copy() {
         return new CraftTrialSpawner(this, null);
     }
 
     @Override
-    public CraftTrialSpawner copy(Location location) {
+    public @NonNull CraftTrialSpawner copy(@NonNull Location location) {
         return new CraftTrialSpawner(this, location);
     }
 }

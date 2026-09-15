@@ -13,6 +13,7 @@ import org.bukkit.craftbukkit.CraftSound;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Mob;
 import org.bukkit.loot.LootTable;
+import org.jspecify.annotations.NonNull;
 
 public abstract class CraftMob extends CraftLivingEntity implements Mob, io.papermc.paper.entity.PaperLeashable { // Paper - Leashable API
 
@@ -40,16 +41,16 @@ public abstract class CraftMob extends CraftLivingEntity implements Mob, io.pape
     }
 
     @Override
-    public void setDespawnInPeacefulOverride(final TriState state) {
+    public void setDespawnInPeacefulOverride(final @NonNull TriState state) {
     }
 
     @Override
-    public TriState getDespawnInPeacefulOverride() {
+    public @NonNull TriState getDespawnInPeacefulOverride() {
         return TriState.NOT_SET;
     }
 
     @Override
-    public com.destroystokyo.paper.entity.Pathfinder getPathfinder() {
+    public com.destroystokyo.paper.entity.@NonNull Pathfinder getPathfinder() {
         return this.paperPathfinder;
     }
 
@@ -190,7 +191,7 @@ public abstract class CraftMob extends CraftLivingEntity implements Mob, io.pape
     }
 
     @Override
-    public org.bukkit.entity.Entity getLeashHolder() throws IllegalStateException {
+    public org.bukkit.entity.@NonNull Entity getLeashHolder() throws IllegalStateException {
         return io.papermc.paper.entity.PaperLeashable.super.getLeashHolder();
     }
 

@@ -7,6 +7,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
 import org.bukkit.Material;
 import org.bukkit.craftbukkit.block.CraftBlockType;
+import org.jspecify.annotations.NonNull;
 
 public class CraftBlockTag extends CraftTag<Block, Material> {
 
@@ -15,7 +16,7 @@ public class CraftBlockTag extends CraftTag<Block, Material> {
     }
 
     @Override
-    public boolean isTagged(Material item) {
+    public boolean isTagged(@NonNull Material item) {
         Block block = CraftBlockType.bukkitToMinecraft(item);
 
         // SPIGOT-6952: A Material is not necessary a block, in this case return false
@@ -27,7 +28,7 @@ public class CraftBlockTag extends CraftTag<Block, Material> {
     }
 
     @Override
-    public Set<Material> getValues() {
+    public @NonNull Set<Material> getValues() {
         return this.getHandle().stream().map((block) -> CraftBlockType.minecraftToBukkit(block.value())).collect(Collectors.toUnmodifiableSet());
     }
 }

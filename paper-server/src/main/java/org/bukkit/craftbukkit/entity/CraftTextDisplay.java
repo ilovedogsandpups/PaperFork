@@ -6,6 +6,7 @@ import org.bukkit.Color;
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.craftbukkit.util.CraftChatMessage;
 import org.bukkit.entity.TextDisplay;
+import org.jspecify.annotations.NonNull;
 
 public class CraftTextDisplay extends CraftDisplay implements TextDisplay {
 
@@ -29,7 +30,7 @@ public class CraftTextDisplay extends CraftDisplay implements TextDisplay {
     }
 
     @Override
-    public net.kyori.adventure.text.Component text() {
+    public net.kyori.adventure.text.@NonNull Component text() {
         return io.papermc.paper.adventure.PaperAdventure.asAdventure(this.getHandle().getText());
     }
 
@@ -105,7 +106,7 @@ public class CraftTextDisplay extends CraftDisplay implements TextDisplay {
     }
 
     @Override
-    public TextAlignment getAlignment() {
+    public @NonNull TextAlignment getAlignment() {
         Display.TextDisplay.Align nms = Display.TextDisplay.getAlign(this.getHandle().getFlags());
         return TextAlignment.valueOf(nms.name());
     }

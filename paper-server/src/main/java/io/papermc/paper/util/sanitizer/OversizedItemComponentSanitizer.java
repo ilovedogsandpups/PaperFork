@@ -53,12 +53,12 @@ public final class OversizedItemComponentSanitizer {
     };
     public static final StreamCodec<RegistryFriendlyByteBuf, BundleContents> BUNDLE_CONTENTS_STREAM = new StreamCodec<>() {
         @Override
-        public BundleContents decode(final RegistryFriendlyByteBuf buffer) {
+        public @org.jspecify.annotations.NonNull BundleContents decode(final @org.jspecify.annotations.NonNull RegistryFriendlyByteBuf buffer) {
             return BundleContents.STREAM_CODEC.decode(buffer);
         }
 
         @Override
-        public void encode(final RegistryFriendlyByteBuf buffer, final BundleContents value) {
+        public void encode(final @org.jspecify.annotations.NonNull RegistryFriendlyByteBuf buffer, final @org.jspecify.annotations.NonNull BundleContents value) {
             if (!ItemObfuscationSession.currentSession().obfuscationLevel().obfuscateOversized()) {
                 BundleContents.STREAM_CODEC.encode(buffer, value);
                 return;

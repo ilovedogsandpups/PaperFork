@@ -23,6 +23,7 @@ import org.bukkit.craftbukkit.configuration.ConfigSerializationUtil;
 import org.bukkit.craftbukkit.inventory.SerializableMeta;
 import org.bukkit.craftbukkit.tag.CraftBlockTag;
 import org.bukkit.inventory.meta.components.ToolComponent;
+import org.jspecify.annotations.NonNull;
 
 import static io.papermc.paper.util.BoundChecker.requireNonNegative;
 import static io.papermc.paper.util.BoundChecker.requirePositive;
@@ -61,7 +62,7 @@ public final class CraftToolComponent implements ToolComponent {
     }
 
     @Override
-    public Map<String, Object> serialize() {
+    public @NonNull Map<String, Object> serialize() {
         Map<String, Object> result = new LinkedHashMap<>();
         result.put("default-mining-speed", this.getDefaultMiningSpeed());
         result.put("damage-per-block", this.getDamagePerBlock());
@@ -94,7 +95,7 @@ public final class CraftToolComponent implements ToolComponent {
     }
 
     @Override
-    public List<ToolRule> getRules() {
+    public @NonNull List<ToolRule> getRules() {
         return this.handle.rules().stream().map(CraftToolRule::new).collect(Collectors.toList());
     }
 
@@ -105,7 +106,7 @@ public final class CraftToolComponent implements ToolComponent {
     }
 
     @Override
-    public ToolRule addRule(Material block, Float speed, Boolean correctForDrops) {
+    public @NonNull ToolRule addRule(Material block, Float speed, Boolean correctForDrops) {
         Preconditions.checkArgument(block != null, "block must not be null");
         Preconditions.checkArgument(block.isBlock(), "block must be a block type, given %s", block.getKey());
         if (speed != null) {
@@ -117,7 +118,7 @@ public final class CraftToolComponent implements ToolComponent {
     }
 
     @Override
-    public ToolRule addRule(Collection<Material> blocks, Float speed, Boolean correctForDrops) {
+    public @NonNull ToolRule addRule(@NonNull Collection<Material> blocks, Float speed, Boolean correctForDrops) {
         if (speed != null) {
             requirePositive(speed, "speed");
         }
@@ -132,7 +133,7 @@ public final class CraftToolComponent implements ToolComponent {
     }
 
     @Override
-    public ToolRule addRule(Tag<Material> tag, Float speed, Boolean correctForDrops) {
+    public @NonNull ToolRule addRule(@NonNull Tag<Material> tag, Float speed, Boolean correctForDrops) {
         Preconditions.checkArgument(tag instanceof CraftBlockTag, "tag must be a block tag");
         return this.addRule(((CraftBlockTag) tag).getHandle(), speed == null ? null : requirePositive(speed, "speed"), correctForDrops);
     }
@@ -149,7 +150,7 @@ public final class CraftToolComponent implements ToolComponent {
     }
 
     @Override
-    public boolean removeRule(ToolRule rule) {
+    public boolean removeRule(@NonNull ToolRule rule) {
         Preconditions.checkArgument(rule != null, "rule must not be null");
 
         List<Tool.Rule> rules = new ArrayList<>(this.handle.rules());
@@ -206,7 +207,7 @@ public final class CraftToolComponent implements ToolComponent {
         }
 
         @Override
-        public Map<String, Object> serialize() {
+        public @NonNull Map<String, Object> serialize() {
             Map<String, Object> result = new LinkedHashMap<>();
 
             ConfigSerializationUtil.setHolderSet(result, "blocks", this.handle.blocks());
@@ -229,7 +230,7 @@ public final class CraftToolComponent implements ToolComponent {
         }
 
         @Override
-        public Collection<Material> getBlocks() {
+        public @NonNull Collection<Material> getBlocks() {
             return this.handle.blocks().stream().map(Holder::value).map(CraftBlockType::minecraftToBukkit).collect(Collectors.toList());
         }
 
@@ -251,7 +252,7 @@ public final class CraftToolComponent implements ToolComponent {
         }
 
         @Override
-        public void setBlocks(Tag<Material> tag) {
+        public void setBlocks(@NonNull Tag<Material> tag) {
             Preconditions.checkArgument(tag instanceof CraftBlockTag, "tag must be a block tag");
             this.handle = new Tool.Rule(((CraftBlockTag) tag).getHandle(), this.handle.speed(), this.handle.correctForDrops());
         }

@@ -9,6 +9,7 @@ import net.minecraft.world.item.crafting.RecipeHolder;
 import org.bukkit.inventory.CraftingInventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
+import org.jspecify.annotations.NonNull;
 
 public class CraftInventoryCrafting extends CraftInventory implements CraftingInventory {
     private final Container resultInventory;
@@ -38,7 +39,7 @@ public class CraftInventoryCrafting extends CraftInventory implements CraftingIn
     }
 
     @Override
-    public ItemStack[] getContents() {
+    public ItemStack @NonNull [] getContents() {
         ItemStack[] items = new ItemStack[this.getSize()];
         List<net.minecraft.world.item.ItemStack> mcResultItems = this.getResultInventory().getContents();
 
@@ -82,7 +83,7 @@ public class CraftInventoryCrafting extends CraftInventory implements CraftingIn
     }
 
     @Override
-    public ItemStack[] getMatrix() {
+    public ItemStack @NonNull [] getMatrix() {
         List<net.minecraft.world.item.ItemStack> matrix = this.getMatrixInventory().getContents();
 
         return this.asCraftMirror(matrix);

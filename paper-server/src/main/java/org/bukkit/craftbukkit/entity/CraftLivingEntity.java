@@ -147,7 +147,7 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
     }
 
     @Override
-    public void heal(final double amount, final EntityRegainHealthEvent.RegainReason reason) {
+    public void heal(final double amount, final EntityRegainHealthEvent.@NonNull RegainReason reason) {
         this.getHandle().heal((float) amount, reason);
     }
 
@@ -220,12 +220,12 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
     }
 
     @Override
-    public List<Block> getLineOfSight(Set<Material> transparent, int maxDistance) {
+    public @NonNull List<Block> getLineOfSight(Set<Material> transparent, int maxDistance) {
         return this.getLineOfSight(transparent, maxDistance, 0);
     }
 
     @Override
-    public Block getTargetBlock(Set<Material> transparent, int maxDistance) {
+    public @NonNull Block getTargetBlock(Set<Material> transparent, int maxDistance) {
         List<Block> blocks = this.getLineOfSight(transparent, maxDistance, 1);
         return blocks.get(0);
     }
@@ -242,7 +242,7 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
     }
 
     @Override
-    public org.bukkit.block.BlockFace getTargetBlockFace(int maxDistance, org.bukkit.FluidCollisionMode fluidMode) {
+    public org.bukkit.block.BlockFace getTargetBlockFace(int maxDistance, org.bukkit.@NonNull FluidCollisionMode fluidMode) {
         RayTraceResult result = this.rayTraceBlocks(maxDistance, fluidMode);
         return result != null ? result.getHitBlockFace() : null;
     }
@@ -291,18 +291,18 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
     // Paper end
 
     @Override
-    public List<Block> getLastTwoTargetBlocks(Set<Material> transparent, int maxDistance) {
+    public @NonNull List<Block> getLastTwoTargetBlocks(Set<Material> transparent, int maxDistance) {
         return this.getLineOfSight(transparent, maxDistance, 2);
     }
 
     @Override
-    public Block getTargetBlockExact(int maxDistance, FluidCollisionMode fluidCollisionMode) {
+    public Block getTargetBlockExact(int maxDistance, @NonNull FluidCollisionMode fluidCollisionMode) {
         RayTraceResult hitResult = this.rayTraceBlocks(maxDistance, fluidCollisionMode);
         return (hitResult != null ? hitResult.getHitBlock() : null);
     }
 
     @Override
-    public RayTraceResult rayTraceBlocks(double maxDistance, FluidCollisionMode fluidCollisionMode) {
+    public RayTraceResult rayTraceBlocks(double maxDistance, @NonNull FluidCollisionMode fluidCollisionMode) {
         Preconditions.checkState(!this.getHandle().generation, "Cannot ray tray blocks during world generation");
 
         Location eyeLocation = this.getEyeLocation();
@@ -400,7 +400,7 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
     }
 
     @Override
-    public void kill(org.bukkit.damage.DamageSource damageSource) {
+    public void kill(org.bukkit.damage.@NonNull DamageSource damageSource) {
         Preconditions.checkState(!this.getHandle().generation, "Cannot kill entity during world generation");
         Preconditions.checkArgument(damageSource != null, "damageSource cannot be null");
 
@@ -426,7 +426,7 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
     }
 
     @Override
-    public void damage(double amount, org.bukkit.damage.DamageSource damageSource) {
+    public void damage(double amount, org.bukkit.damage.@NonNull DamageSource damageSource) {
         Preconditions.checkArgument(damageSource != null, "damageSource cannot be null");
 
         this.damage(amount, ((CraftDamageSource) damageSource).getHandle());
@@ -439,7 +439,7 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
     }
 
     @Override
-    public Location getEyeLocation() {
+    public @NonNull Location getEyeLocation() {
         Location loc = this.getLocation();
         loc.setY(loc.getY() + this.getEyeHeight());
         return loc;
@@ -504,7 +504,7 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
     }
 
     @Override
-    public boolean addPotionEffect(PotionEffect effect) {
+    public boolean addPotionEffect(@NonNull PotionEffect effect) {
         org.spigotmc.AsyncCatcher.catchOp("effect add"); // Paper
         return this.getHandle().addEffect(org.bukkit.craftbukkit.potion.CraftPotionUtil.fromBukkit(effect), EntityPotionEffectEvent.Cause.PLUGIN); // Paper - Don't ignore icon
     }
@@ -519,23 +519,23 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
     }
 
     @Override
-    public boolean hasPotionEffect(PotionEffectType type) {
+    public boolean hasPotionEffect(@NonNull PotionEffectType type) {
         return this.getHandle().hasEffect(CraftPotionEffectType.bukkitToMinecraftHolder(type));
     }
 
     @Override
-    public PotionEffect getPotionEffect(PotionEffectType type) {
+    public PotionEffect getPotionEffect(@NonNull PotionEffectType type) {
         MobEffectInstance handle = this.getHandle().getEffect(CraftPotionEffectType.bukkitToMinecraftHolder(type));
         return (handle == null) ? null : org.bukkit.craftbukkit.potion.CraftPotionUtil.toBukkit(handle); // Paper
     }
 
     @Override
-    public void removePotionEffect(PotionEffectType type) {
+    public void removePotionEffect(@NonNull PotionEffectType type) {
         this.getHandle().removeEffect(CraftPotionEffectType.bukkitToMinecraftHolder(type), EntityPotionEffectEvent.Cause.PLUGIN);
     }
 
     @Override
-    public Collection<PotionEffect> getActivePotionEffects() {
+    public @NonNull Collection<PotionEffect> getActivePotionEffects() {
         List<PotionEffect> effects = new ArrayList<>();
         for (MobEffectInstance handle : this.getHandle().getActiveEffects()) {
             effects.add(org.bukkit.craftbukkit.potion.CraftPotionUtil.toBukkit(handle)); // Paper
@@ -550,7 +550,7 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
 
     @Override
     @SuppressWarnings("unchecked")
-    public <T extends Projectile> T launchProjectile(Class<? extends T> projectile, Vector velocity, java.util.function.Consumer<? super T> function) {
+    public <T extends Projectile> @NonNull T launchProjectile(@NonNull Class<? extends T> projectile, Vector velocity, java.util.function.Consumer<? super T> function) {
         Preconditions.checkState(!this.getHandle().generation, "Cannot launch projectile during world generation");
 
         net.minecraft.world.level.Level world = ((CraftWorld) this.getWorld()).getHandle();
@@ -668,7 +668,7 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
     }
 
     @Override
-    public boolean hasLineOfSight(Entity other) {
+    public boolean hasLineOfSight(@NonNull Entity other) {
         Preconditions.checkState(!this.getHandle().generation, "Cannot check line of sight during world generation");
 
         return this.getHandle().hasLineOfSight(((CraftEntity) other).getHandle());
@@ -730,7 +730,7 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
     }
 
     @Override
-    public Entity getLeashHolder() throws IllegalStateException {
+    public @NonNull Entity getLeashHolder() throws IllegalStateException {
         throw new IllegalStateException("Entity not leashed"); // Paper - implement in CraftMob & PaperLeashable
     }
 
@@ -782,12 +782,12 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
     }
 
     @Override
-    public AttributeInstance getAttribute(Attribute attribute) {
+    public AttributeInstance getAttribute(@NonNull Attribute attribute) {
         return this.getHandle().craftAttributes.getAttribute(attribute);
     }
 
     @Override
-    public void registerAttribute(Attribute attribute) {
+    public void registerAttribute(@NonNull Attribute attribute) {
         this.getHandle().craftAttributes.registerAttribute(attribute);
     }
 
@@ -804,7 +804,7 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
     }
 
     @Override
-    public void attack(Entity target) {
+    public void attack(@NonNull Entity target) {
         Preconditions.checkArgument(target != null, "target == null");
         Preconditions.checkState(!this.getHandle().generation, "Cannot attack during world generation");
 
@@ -854,18 +854,18 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
     }
 
     @Override
-    public Set<UUID> getCollidableExemptions() {
+    public @NonNull Set<UUID> getCollidableExemptions() {
         return this.getHandle().collidableExemptions;
     }
 
     @Override
-    public <T> T getMemory(MemoryKey<T> memoryKey) {
+    public <T> T getMemory(@NonNull MemoryKey<T> memoryKey) {
         final Optional<?> memory = this.getHandle().getBrain().getMemoryInternal(CraftMemoryKey.bukkitToMinecraft(memoryKey));
         return memory != null ? (T) memory.map(CraftMemoryMapper::fromNms).orElse(null) : null;
     }
 
     @Override
-    public <T> void setMemory(MemoryKey<T> memoryKey, T t) {
+    public <T> void setMemory(@NonNull MemoryKey<T> memoryKey, T t) {
         this.getHandle().getBrain().setMemory(CraftMemoryKey.bukkitToMinecraft(memoryKey), CraftMemoryMapper.toNms(t));
     }
 
@@ -886,7 +886,7 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
     }
 
     @Override
-    public Sound getHurtSound(org.bukkit.damage.DamageSource damageSource) {
+    public Sound getHurtSound(org.bukkit.damage.@NonNull DamageSource damageSource) {
         Preconditions.checkArgument(damageSource != null, "damageSource cannot be null");
 
         SoundEvent sound = this.getHandle().getHurtSound(((CraftDamageSource) damageSource).getHandle());
@@ -900,27 +900,27 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
     }
 
     @Override
-    public Sound getFallDamageSound(int fallHeight) {
+    public @NonNull Sound getFallDamageSound(int fallHeight) {
         return CraftSound.minecraftToBukkit(this.getHandle().getFallDamageSound(fallHeight));
     }
 
     @Override
-    public Sound getFallDamageSoundSmall() {
+    public @NonNull Sound getFallDamageSoundSmall() {
         return CraftSound.minecraftToBukkit(this.getHandle().getFallSounds().small());
     }
 
     @Override
-    public Sound getFallDamageSoundBig() {
+    public @NonNull Sound getFallDamageSoundBig() {
         return CraftSound.minecraftToBukkit(this.getHandle().getFallSounds().big());
     }
 
     @Override
-    public Sound getDrinkingSound(ItemStack itemStack) {
+    public @NonNull Sound getDrinkingSound(@NonNull ItemStack itemStack) {
         return this.getEatingSound(itemStack);
     }
 
     @Override
-    public Sound getEatingSound(ItemStack itemStack) {
+    public @NonNull Sound getEatingSound(@NonNull ItemStack itemStack) {
         Preconditions.checkArgument(itemStack != null, "itemStack must not be null");
 
         net.minecraft.world.item.ItemStack nms = CraftItemStack.asNMSCopy(itemStack);
@@ -944,7 +944,7 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
     }
 
     @Override
-    public EntityCategory getCategory() {
+    public @NonNull EntityCategory getCategory() {
         throw new UnsupportedOperationException("Method no longer applicable. Use Tags instead.");
     }
 
@@ -964,7 +964,7 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
     }
 
     @Override
-    public void startUsingItem(org.bukkit.inventory.EquipmentSlot hand) {
+    public void startUsingItem(org.bukkit.inventory.@NonNull EquipmentSlot hand) {
         Preconditions.checkArgument(hand != null, "hand must not be null");
         this.getHandle().startUsingItem(CraftEquipmentSlot.getHand(hand));
     }
@@ -975,7 +975,7 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
     }
 
     @Override
-    public ItemStack getActiveItem() {
+    public @NonNull ItemStack getActiveItem() {
         return this.getHandle().getUseItem().asBukkitMirror();
     }
 
@@ -1007,7 +1007,7 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
     }
 
     @Override
-    public org.bukkit.inventory.EquipmentSlot getActiveItemHand() {
+    public org.bukkit.inventory.@NonNull EquipmentSlot getActiveItemHand() {
         return org.bukkit.craftbukkit.CraftEquipmentSlot.getHand(this.getHandle().getUsedItemHand());
     }
 
@@ -1026,7 +1026,7 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
     }
 
     @Override
-    public void playPickupItemAnimation(final org.bukkit.entity.Item item, final int quantity) {
+    public void playPickupItemAnimation(final org.bukkit.entity.@NonNull Item item, final int quantity) {
         this.getHandle().take(((CraftItem) item).getHandle(), quantity);
     }
 
@@ -1046,12 +1046,12 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
         this.getHandle().knockback(strength, directionX, directionZ, this.getHandle().damageSources().generic(), 0.0F); // todo - snapshot - api - expose damage source and/or damage
     }
 
-    public void broadcastSlotBreak(final org.bukkit.inventory.EquipmentSlot slot) {
+    public void broadcastSlotBreak(final org.bukkit.inventory.@NonNull EquipmentSlot slot) {
         this.getHandle().level().broadcastEntityEvent(this.getHandle(), net.minecraft.world.entity.LivingEntity.entityEventForEquipmentBreak(org.bukkit.craftbukkit.CraftEquipmentSlot.getNMS(slot)));
     }
 
     @Override
-    public void broadcastSlotBreak(final org.bukkit.inventory.EquipmentSlot slot, final Collection<org.bukkit.entity.Player> players) {
+    public void broadcastSlotBreak(final org.bukkit.inventory.@NonNull EquipmentSlot slot, final Collection<org.bukkit.entity.Player> players) {
         if (players.isEmpty()) {
             return;
         }
@@ -1063,7 +1063,7 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
     }
 
     @Override
-    public ItemStack damageItemStack(ItemStack stack, final int amount) {
+    public @NonNull ItemStack damageItemStack(@NonNull ItemStack stack, final int amount) {
         final net.minecraft.world.item.ItemStack nmsStack;
         if (stack instanceof final CraftItemStack craftItemStack) {
             if (craftItemStack.handle == null || craftItemStack.handle.isEmpty()) {
@@ -1079,7 +1079,7 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
     }
 
     @Override
-    public void damageItemStack(final org.bukkit.inventory.EquipmentSlot slot, final int amount) {
+    public void damageItemStack(final org.bukkit.inventory.@NonNull EquipmentSlot slot, final int amount) {
         final net.minecraft.world.entity.EquipmentSlot nmsSlot = org.bukkit.craftbukkit.CraftEquipmentSlot.getNMS(slot);
         this.damageItemStack0(this.getHandle().getItemBySlot(nmsSlot), amount, nmsSlot);
     }
@@ -1111,12 +1111,12 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
     }
 
     @Override
-    public boolean canUseEquipmentSlot(org.bukkit.inventory.EquipmentSlot slot) {
+    public boolean canUseEquipmentSlot(org.bukkit.inventory.@NonNull EquipmentSlot slot) {
         return this.getHandle().canUseSlot(org.bukkit.craftbukkit.CraftEquipmentSlot.getNMS(slot));
     }
 
     @Override
-    public CombatTracker getCombatTracker() {
+    public @NonNull CombatTracker getCombatTracker() {
         return this.getHandle().getCombatTracker().paperCombatTracker;
     }
 
@@ -1126,7 +1126,7 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
     }
 
     @Override
-    public Key getWaypointStyle() {
+    public @NonNull Key getWaypointStyle() {
         return PaperAdventure.asAdventure(getHandle().waypointIcon().style.identifier());
     }
 

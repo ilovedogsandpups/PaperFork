@@ -2,6 +2,8 @@ package org.bukkit.craftbukkit.entity;
 
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.entity.ExperienceOrb;
+import org.jspecify.annotations.NonNull;
+
 import java.util.UUID;
 
 public class CraftExperienceOrb extends CraftEntity implements ExperienceOrb {
@@ -46,7 +48,7 @@ public class CraftExperienceOrb extends CraftEntity implements ExperienceOrb {
     }
 
     @Override
-    public SpawnReason getSpawnReason() {
+    public @NonNull SpawnReason getSpawnReason() {
         return this.getHandle().spawnReason;
     }
 }

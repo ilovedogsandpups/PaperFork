@@ -13,12 +13,11 @@ import org.bukkit.entity.HumanEntity;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.MenuType;
 import org.bukkit.inventory.view.builder.InventoryViewBuilder;
-import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 @NullMarked
-public class CraftMenuType<V extends @NonNull InventoryView, B extends InventoryViewBuilder<V>> extends HolderableBase<net.minecraft.world.inventory.MenuType<?>> implements MenuType.Typed<V, B>, io.papermc.paper.world.flag.PaperFeatureDependent<net.minecraft.world.inventory.MenuType<?>> { // Paper - make FeatureDependant
+public class CraftMenuType<V extends InventoryView, B extends InventoryViewBuilder<V>> extends HolderableBase<net.minecraft.world.inventory.MenuType<?>> implements MenuType.Typed<V, B>, io.papermc.paper.world.flag.PaperFeatureDependent<net.minecraft.world.inventory.MenuType<?>> { // Paper - make FeatureDependant
 
     private final Supplier<CraftMenus.MenuTypeData<V, B>> typeData;
 

@@ -12,6 +12,7 @@ import org.bukkit.entity.HumanEntity;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
+import org.jspecify.annotations.NonNull;
 
 public class CraftInventoryPlayer extends CraftInventory implements org.bukkit.inventory.PlayerInventory, EntityEquipment {
     public CraftInventoryPlayer(net.minecraft.world.entity.player.Inventory inventory) {
@@ -24,12 +25,12 @@ public class CraftInventoryPlayer extends CraftInventory implements org.bukkit.i
     }
 
     @Override
-    public ItemStack[] getStorageContents() {
+    public ItemStack @NonNull [] getStorageContents() {
         return this.asCraftMirror(this.getInventory().getNonEquipmentItems());
     }
 
     @Override
-    public ItemStack getItemInMainHand() {
+    public @NonNull ItemStack getItemInMainHand() {
         return CraftItemStack.asCraftMirror(this.getInventory().getSelectedItem());
     }
 
@@ -44,7 +45,7 @@ public class CraftInventoryPlayer extends CraftInventory implements org.bukkit.i
     }
 
     @Override
-    public ItemStack getItemInOffHand() {
+    public @NonNull ItemStack getItemInOffHand() {
         return CraftItemStack.asCraftMirror(this.getInventory().equipment.get(net.minecraft.world.entity.EquipmentSlot.OFFHAND));
     }
 
@@ -59,7 +60,7 @@ public class CraftInventoryPlayer extends CraftInventory implements org.bukkit.i
     }
 
     @Override
-    public ItemStack getItemInHand() {
+    public @NonNull ItemStack getItemInHand() {
         return this.getItemInMainHand();
     }
 
@@ -140,12 +141,12 @@ public class CraftInventoryPlayer extends CraftInventory implements org.bukkit.i
     }
 
     @Override
-    public void setItem(EquipmentSlot slot, ItemStack item, boolean silent) {
+    public void setItem(@NonNull EquipmentSlot slot, ItemStack item, boolean silent) {
         this.setItem(slot, item); // Silence doesn't apply to players
     }
 
     @Override
-    public ItemStack getItem(EquipmentSlot slot) {
+    public @NonNull ItemStack getItem(EquipmentSlot slot) {
         Preconditions.checkArgument(slot != null, "slot must not be null");
 
         return switch (slot) {
@@ -167,22 +168,22 @@ public class CraftInventoryPlayer extends CraftInventory implements org.bukkit.i
     }
 
     @Override
-    public ItemStack getHelmet() {
+    public @NonNull ItemStack getHelmet() {
         return this.getItem(EquipmentSlot.HEAD);
     }
 
     @Override
-    public ItemStack getChestplate() {
+    public @NonNull ItemStack getChestplate() {
         return this.getItem(EquipmentSlot.CHEST);
     }
 
     @Override
-    public ItemStack getLeggings() {
+    public @NonNull ItemStack getLeggings() {
         return this.getItem(EquipmentSlot.LEGS);
     }
 
     @Override
-    public ItemStack getBoots() {
+    public @NonNull ItemStack getBoots() {
         return this.getItem(EquipmentSlot.FEET);
     }
 
@@ -227,7 +228,7 @@ public class CraftInventoryPlayer extends CraftInventory implements org.bukkit.i
     }
 
     @Override
-    public ItemStack[] getArmorContents() {
+    public ItemStack @NonNull [] getArmorContents() {
         return this.asCraftMirror(this.getInventory().getArmorContents());
     }
 
@@ -247,27 +248,27 @@ public class CraftInventoryPlayer extends CraftInventory implements org.bukkit.i
     }
 
     @Override
-    public void setStorageContents(ItemStack[] items) throws IllegalArgumentException {
+    public void setStorageContents(ItemStack @NonNull [] items) throws IllegalArgumentException {
         this.setSlots(items, 0, this.getInventory().getNonEquipmentItems().size());
     }
 
     @Override
-    public void setArmorContents(ItemStack[] items) {
+    public void setArmorContents(ItemStack @NonNull [] items) {
         this.setSlots(items, this.getInventory().getNonEquipmentItems().size(), this.getInventory().getArmorContents().size());
     }
 
     @Override
-    public ItemStack[] getExtraContents() {
+    public ItemStack @NonNull [] getExtraContents() {
         return this.asCraftMirror(this.getInventory().getExtraContent());
     }
 
     @Override
-    public void setExtraContents(ItemStack[] items) {
+    public void setExtraContents(ItemStack @NonNull [] items) {
         this.setSlots(items, this.getInventory().getNonEquipmentItems().size() + this.getInventory().getArmorContents().size(), 3);
     }
 
     @Override
-    public HumanEntity getHolder() {
+    public @NonNull HumanEntity getHolder() {
         return (HumanEntity) this.inventory.getOwner();
     }
 
@@ -342,12 +343,12 @@ public class CraftInventoryPlayer extends CraftInventory implements org.bukkit.i
     }
     // Paper start
     @Override
-    public float getDropChance(EquipmentSlot slot) {
+    public float getDropChance(@NonNull EquipmentSlot slot) {
         return 1;
     }
 
     @Override
-    public void setDropChance(EquipmentSlot slot, float chance) {
+    public void setDropChance(@NonNull EquipmentSlot slot, float chance) {
         throw new UnsupportedOperationException("Cannot set drop chance for PlayerInventory");
     }
     // Paper end

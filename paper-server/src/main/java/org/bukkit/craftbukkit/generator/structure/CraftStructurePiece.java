@@ -2,6 +2,7 @@ package org.bukkit.craftbukkit.generator.structure;
 
 import org.bukkit.generator.structure.StructurePiece;
 import org.bukkit.util.BoundingBox;
+import org.jspecify.annotations.NonNull;
 
 public class CraftStructurePiece implements StructurePiece {
 
@@ -12,7 +13,7 @@ public class CraftStructurePiece implements StructurePiece {
     }
 
     @Override
-    public BoundingBox getBoundingBox() {
+    public @NonNull BoundingBox getBoundingBox() {
         net.minecraft.world.level.levelgen.structure.BoundingBox box = this.handle.getBoundingBox();
         return new BoundingBox(box.minX(), box.minY(), box.minZ(), box.maxX(), box.maxY(), box.maxZ());
     }

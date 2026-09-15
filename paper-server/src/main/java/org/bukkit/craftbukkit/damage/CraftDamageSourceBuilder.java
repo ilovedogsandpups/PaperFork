@@ -6,6 +6,8 @@ import org.bukkit.Location;
 import org.bukkit.damage.DamageSource;
 import org.bukkit.damage.DamageType;
 import org.bukkit.entity.Entity;
+import org.jspecify.annotations.NonNull;
+
 import java.util.function.Consumer;
 
 public class CraftDamageSourceBuilder implements DamageSource.Builder {
@@ -23,35 +25,35 @@ public class CraftDamageSourceBuilder implements DamageSource.Builder {
     }
 
     @Override
-    public DamageSource.Builder withCausingEntity(Entity entity) {
+    public DamageSource.@NonNull Builder withCausingEntity(@NonNull Entity entity) {
         Preconditions.checkArgument(entity != null, "Entity cannot be null");
         this.causingEntity = entity;
         return this;
     }
 
     @Override
-    public DamageSource.Builder withDirectEntity(Entity entity) {
+    public DamageSource.@NonNull Builder withDirectEntity(@NonNull Entity entity) {
         Preconditions.checkArgument(entity != null, "Entity cannot be null");
         this.directEntity = entity;
         return this;
     }
 
     @Override
-    public DamageSource.Builder withDamageLocation(Location location) {
+    public DamageSource.@NonNull Builder withDamageLocation(Location location) {
         Preconditions.checkArgument(location != null, "Location cannot be null");
         this.damageLocation = location.clone();
         return this;
     }
 
     @Override
-    public DamageSource.Builder withDamageContext(Consumer<Pointers.Builder> consumer) {
+    public DamageSource.@NonNull Builder withDamageContext(Consumer<Pointers.Builder> consumer) {
         Preconditions.checkArgument(consumer != null, "Consumer cannot be null");
         consumer.accept(damageContext);
         return this;
     }
 
     @Override
-    public DamageSource build() {
+    public @NonNull DamageSource build() {
         if (this.causingEntity != null && this.directEntity == null) {
             throw new IllegalArgumentException("Direct entity must be set if causing entity is set");
         }

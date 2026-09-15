@@ -8,6 +8,7 @@ import org.bukkit.Location;
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
+import org.jspecify.annotations.NonNull;
 
 public class CraftWarden extends CraftMonster implements org.bukkit.entity.Warden {
 
@@ -26,7 +27,7 @@ public class CraftWarden extends CraftMonster implements org.bukkit.entity.Warde
     }
 
     @Override
-    public int getAnger(Entity entity) {
+    public int getAnger(@NonNull Entity entity) {
         Preconditions.checkArgument(entity != null, "Entity cannot be null");
 
         return this.getHandle().getAngerManagement().getActiveAnger(((CraftEntity) entity).getHandle());
@@ -38,14 +39,14 @@ public class CraftWarden extends CraftMonster implements org.bukkit.entity.Warde
     }
 
     @Override
-    public void increaseAnger(Entity entity, int increase) {
+    public void increaseAnger(@NonNull Entity entity, int increase) {
         Preconditions.checkArgument(entity != null, "Entity cannot be null");
 
         this.getHandle().getAngerManagement().increaseAnger(((CraftEntity) entity).getHandle(), increase);
     }
 
     @Override
-    public void setAnger(Entity entity, int anger) {
+    public void setAnger(@NonNull Entity entity, int anger) {
         Preconditions.checkArgument(entity != null, "Entity cannot be null");
 
         this.getHandle().clearAnger(((CraftEntity) entity).getHandle());
@@ -53,7 +54,7 @@ public class CraftWarden extends CraftMonster implements org.bukkit.entity.Warde
     }
 
     @Override
-    public void clearAnger(Entity entity) {
+    public void clearAnger(@NonNull Entity entity) {
         Preconditions.checkArgument(entity != null, "Entity cannot be null");
 
         this.getHandle().clearAnger(((CraftEntity) entity).getHandle());
@@ -72,7 +73,7 @@ public class CraftWarden extends CraftMonster implements org.bukkit.entity.Warde
     }
 
     @Override
-    public AngerLevel getAngerLevel() {
+    public @NonNull AngerLevel getAngerLevel() {
         return switch (this.getHandle().getAngerLevel()) {
             case CALM -> AngerLevel.CALM;
             case AGITATED -> AngerLevel.AGITATED;

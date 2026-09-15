@@ -7,6 +7,7 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemp
 import org.bukkit.block.BlockState;
 import org.bukkit.craftbukkit.block.CraftBlockStates;
 import org.bukkit.structure.Palette;
+import org.jspecify.annotations.NonNull;
 
 public class CraftPalette implements Palette {
 
@@ -19,7 +20,7 @@ public class CraftPalette implements Palette {
     }
 
     @Override
-    public List<BlockState> getBlocks() {
+    public @NonNull List<BlockState> getBlocks() {
         List<BlockState> blocks = new ArrayList<>(this.palette.blocks().size());
         for (StructureTemplate.StructureBlockInfo blockInfo : this.palette.blocks()) {
             blocks.add(CraftBlockStates.getBlockState(this.registry, blockInfo.pos(), blockInfo.state(), blockInfo.nbt()));

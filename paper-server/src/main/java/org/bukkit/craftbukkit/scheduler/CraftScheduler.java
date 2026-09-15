@@ -1,7 +1,7 @@
 package org.bukkit.craftbukkit.scheduler;
 
 import com.google.common.base.Preconditions;
-import com.google.common.util.concurrent.ThreadFactoryBuilder;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -10,7 +10,6 @@ import java.util.PriorityQueue;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
@@ -23,6 +22,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.scheduler.BukkitWorker;
+import org.jspecify.annotations.NonNull;
 
 /**
  * The fundamental concepts for this implementation:
@@ -133,84 +133,84 @@ public class CraftScheduler implements BukkitScheduler {
     // Paper end
 
     @Override
-    public int scheduleSyncDelayedTask(final Plugin plugin, final Runnable task) {
+    public int scheduleSyncDelayedTask(final @NonNull Plugin plugin, final @NonNull Runnable task) {
         return this.scheduleSyncDelayedTask(plugin, task, 0L);
     }
 
     @Override
-    public BukkitTask runTask(Plugin plugin, Runnable runnable) {
+    public @NonNull BukkitTask runTask(@NonNull Plugin plugin, @NonNull Runnable runnable) {
         return this.runTaskLater(plugin, runnable, 0L);
     }
 
     @Override
-    public void runTask(Plugin plugin, Consumer<? super BukkitTask> task) throws IllegalArgumentException {
+    public void runTask(@NonNull Plugin plugin, @NonNull Consumer<? super BukkitTask> task) throws IllegalArgumentException {
         this.runTaskLater(plugin, task, 0L);
     }
 
     @Deprecated
     @Override
-    public int scheduleAsyncDelayedTask(final Plugin plugin, final Runnable task) {
+    public int scheduleAsyncDelayedTask(final @NonNull Plugin plugin, final @NonNull Runnable task) {
         return this.scheduleAsyncDelayedTask(plugin, task, 0L);
     }
 
     @Override
-    public BukkitTask runTaskAsynchronously(Plugin plugin, Runnable runnable) {
+    public @NonNull BukkitTask runTaskAsynchronously(@NonNull Plugin plugin, @NonNull Runnable runnable) {
         return this.runTaskLaterAsynchronously(plugin, runnable, 0L);
     }
 
     @Override
-    public void runTaskAsynchronously(Plugin plugin, Consumer<? super BukkitTask> task) throws IllegalArgumentException {
+    public void runTaskAsynchronously(@NonNull Plugin plugin, @NonNull Consumer<? super BukkitTask> task) throws IllegalArgumentException {
         this.runTaskLaterAsynchronously(plugin, task, 0L);
     }
 
     @Override
-    public int scheduleSyncDelayedTask(final Plugin plugin, final Runnable task, final long delay) {
+    public int scheduleSyncDelayedTask(final @NonNull Plugin plugin, final @NonNull Runnable task, final long delay) {
         return this.scheduleSyncRepeatingTask(plugin, task, delay, CraftTask.NO_REPEATING);
     }
 
     @Override
-    public BukkitTask runTaskLater(Plugin plugin, Runnable runnable, long delay) {
+    public @NonNull BukkitTask runTaskLater(@NonNull Plugin plugin, @NonNull Runnable runnable, long delay) {
         return this.runTaskTimer(plugin, runnable, delay, CraftTask.NO_REPEATING);
     }
 
     @Override
-    public void runTaskLater(Plugin plugin, Consumer<? super BukkitTask> task, long delay) throws IllegalArgumentException {
+    public void runTaskLater(@NonNull Plugin plugin, @NonNull Consumer<? super BukkitTask> task, long delay) throws IllegalArgumentException {
         this.runTaskTimer(plugin, task, delay, CraftTask.NO_REPEATING);
     }
 
     @Deprecated
     @Override
-    public int scheduleAsyncDelayedTask(final Plugin plugin, final Runnable task, final long delay) {
+    public int scheduleAsyncDelayedTask(final @NonNull Plugin plugin, final @NonNull Runnable task, final long delay) {
         return this.scheduleAsyncRepeatingTask(plugin, task, delay, CraftTask.NO_REPEATING);
     }
 
     @Override
-    public BukkitTask runTaskLaterAsynchronously(Plugin plugin, Runnable runnable, long delay) {
+    public @NonNull BukkitTask runTaskLaterAsynchronously(@NonNull Plugin plugin, @NonNull Runnable runnable, long delay) {
         return this.runTaskTimerAsynchronously(plugin, runnable, delay, CraftTask.NO_REPEATING);
     }
 
     @Override
-    public void runTaskLaterAsynchronously(Plugin plugin, Consumer<? super BukkitTask> task, long delay) throws IllegalArgumentException {
+    public void runTaskLaterAsynchronously(@NonNull Plugin plugin, @NonNull Consumer<? super BukkitTask> task, long delay) throws IllegalArgumentException {
         this.runTaskTimerAsynchronously(plugin, task, delay, CraftTask.NO_REPEATING);
     }
 
     @Override
-    public void runTaskTimerAsynchronously(Plugin plugin, Consumer<? super BukkitTask> task, long delay, long period) throws IllegalArgumentException {
+    public void runTaskTimerAsynchronously(@NonNull Plugin plugin, @NonNull Consumer<? super BukkitTask> task, long delay, long period) throws IllegalArgumentException {
         this.runTaskTimerAsynchronously(plugin, (Object) task, delay, period); // Paper
     }
 
     @Override
-    public int scheduleSyncRepeatingTask(final Plugin plugin, final Runnable runnable, long delay, long period) {
+    public int scheduleSyncRepeatingTask(final @NonNull Plugin plugin, final @NonNull Runnable runnable, long delay, long period) {
         return this.runTaskTimer(plugin, runnable, delay, period).getTaskId();
     }
 
     @Override
-    public BukkitTask runTaskTimer(Plugin plugin, Runnable runnable, long delay, long period) {
+    public @NonNull BukkitTask runTaskTimer(@NonNull Plugin plugin, @NonNull Runnable runnable, long delay, long period) {
         return this.runTaskTimer(plugin, (Object) runnable, delay, period);
     }
 
     @Override
-    public void runTaskTimer(Plugin plugin, Consumer<? super BukkitTask> task, long delay, long period) throws IllegalArgumentException {
+    public void runTaskTimer(@NonNull Plugin plugin, @NonNull Consumer<? super BukkitTask> task, long delay, long period) throws IllegalArgumentException {
         this.runTaskTimer(plugin, (Object) task, delay, period);
     }
 
@@ -229,12 +229,12 @@ public class CraftScheduler implements BukkitScheduler {
 
     @Deprecated
     @Override
-    public int scheduleAsyncRepeatingTask(final Plugin plugin, final Runnable runnable, long delay, long period) {
+    public int scheduleAsyncRepeatingTask(final @NonNull Plugin plugin, final @NonNull Runnable runnable, long delay, long period) {
         return this.runTaskTimerAsynchronously(plugin, runnable, delay, period).getTaskId();
     }
 
     @Override
-    public BukkitTask runTaskTimerAsynchronously(Plugin plugin, Runnable runnable, long delay, long period) {
+    public @NonNull BukkitTask runTaskTimerAsynchronously(@NonNull Plugin plugin, @NonNull Runnable runnable, long delay, long period) {
         return this.runTaskTimerAsynchronously(plugin, (Object) runnable, delay, period);
     }
 
@@ -252,7 +252,7 @@ public class CraftScheduler implements BukkitScheduler {
     }
 
     @Override
-    public <T> Future<T> callSyncMethod(final Plugin plugin, final Callable<T> task) {
+    public <T> @NonNull Future<T> callSyncMethod(final @NonNull Plugin plugin, final @NonNull Callable<T> task) {
         CraftScheduler.validate(plugin, task);
         final CraftFuture<T> future = new CraftFuture<T>(task, plugin, this.nextId());
         this.handle(future, 0L);
@@ -309,7 +309,7 @@ public class CraftScheduler implements BukkitScheduler {
     }
 
     @Override
-    public void cancelTasks(final Plugin plugin) {
+    public void cancelTasks(final @NonNull Plugin plugin) {
         Preconditions.checkArgument(plugin != null, "Cannot cancel tasks of null plugin");
         // Paper start
         if (!this.isAsyncScheduler) {
@@ -395,7 +395,7 @@ public class CraftScheduler implements BukkitScheduler {
     }
 
     @Override
-    public List<BukkitWorker> getActiveWorkers() {
+    public @NonNull List<BukkitWorker> getActiveWorkers() {
         // Paper start
         if (!isAsyncScheduler) {
             //noinspection TailRecursion
@@ -418,7 +418,7 @@ public class CraftScheduler implements BukkitScheduler {
     }
 
     @Override
-    public List<BukkitTask> getPendingTasks() {
+    public @NonNull List<BukkitTask> getPendingTasks() {
         final ArrayList<CraftTask> truePending = new ArrayList<CraftTask>();
         for (CraftTask task = this.head.getNext(); task != null; task = task.getNext()) {
             if (task.getTaskId() != -1) {
@@ -582,61 +582,61 @@ public class CraftScheduler implements BukkitScheduler {
 
     @Deprecated
     @Override
-    public int scheduleSyncDelayedTask(Plugin plugin, BukkitRunnable task, long delay) {
+    public int scheduleSyncDelayedTask(@NonNull Plugin plugin, @NonNull BukkitRunnable task, long delay) {
         throw new UnsupportedOperationException("Use BukkitRunnable#runTaskLater(Plugin, long)");
     }
 
     @Deprecated
     @Override
-    public int scheduleSyncDelayedTask(Plugin plugin, BukkitRunnable task) {
+    public int scheduleSyncDelayedTask(@NonNull Plugin plugin, @NonNull BukkitRunnable task) {
         throw new UnsupportedOperationException("Use BukkitRunnable#runTask(Plugin)");
     }
 
     @Deprecated
     @Override
-    public int scheduleSyncRepeatingTask(Plugin plugin, BukkitRunnable task, long delay, long period) {
+    public int scheduleSyncRepeatingTask(@NonNull Plugin plugin, @NonNull BukkitRunnable task, long delay, long period) {
         throw new UnsupportedOperationException("Use BukkitRunnable#runTaskTimer(Plugin, long, long)");
     }
 
     @Deprecated
     @Override
-    public BukkitTask runTask(Plugin plugin, BukkitRunnable task) throws IllegalArgumentException {
+    public @NonNull BukkitTask runTask(@NonNull Plugin plugin, @NonNull BukkitRunnable task) throws IllegalArgumentException {
         throw new UnsupportedOperationException("Use BukkitRunnable#runTask(Plugin)");
     }
 
     @Deprecated
     @Override
-    public BukkitTask runTaskAsynchronously(Plugin plugin, BukkitRunnable task) throws IllegalArgumentException {
+    public @NonNull BukkitTask runTaskAsynchronously(@NonNull Plugin plugin, @NonNull BukkitRunnable task) throws IllegalArgumentException {
         throw new UnsupportedOperationException("Use BukkitRunnable#runTaskAsynchronously(Plugin)");
     }
 
     @Deprecated
     @Override
-    public BukkitTask runTaskLater(Plugin plugin, BukkitRunnable task, long delay) throws IllegalArgumentException {
+    public @NonNull BukkitTask runTaskLater(@NonNull Plugin plugin, @NonNull BukkitRunnable task, long delay) throws IllegalArgumentException {
         throw new UnsupportedOperationException("Use BukkitRunnable#runTaskLater(Plugin, long)");
     }
 
     @Deprecated
     @Override
-    public BukkitTask runTaskLaterAsynchronously(Plugin plugin, BukkitRunnable task, long delay) throws IllegalArgumentException {
+    public @NonNull BukkitTask runTaskLaterAsynchronously(@NonNull Plugin plugin, @NonNull BukkitRunnable task, long delay) throws IllegalArgumentException {
         throw new UnsupportedOperationException("Use BukkitRunnable#runTaskLaterAsynchronously(Plugin, long)");
     }
 
     @Deprecated
     @Override
-    public BukkitTask runTaskTimer(Plugin plugin, BukkitRunnable task, long delay, long period) throws IllegalArgumentException {
+    public @NonNull BukkitTask runTaskTimer(@NonNull Plugin plugin, @NonNull BukkitRunnable task, long delay, long period) throws IllegalArgumentException {
         throw new UnsupportedOperationException("Use BukkitRunnable#runTaskTimer(Plugin, long, long)");
     }
 
     @Deprecated
     @Override
-    public BukkitTask runTaskTimerAsynchronously(Plugin plugin, BukkitRunnable task, long delay, long period) throws IllegalArgumentException {
+    public @NonNull BukkitTask runTaskTimerAsynchronously(@NonNull Plugin plugin, @NonNull BukkitRunnable task, long delay, long period) throws IllegalArgumentException {
         throw new UnsupportedOperationException("Use BukkitRunnable#runTaskTimerAsynchronously(Plugin, long, long)");
     }
 
     // Paper start - add getMainThreadExecutor
     @Override
-    public Executor getMainThreadExecutor(Plugin plugin) {
+    public @NonNull Executor getMainThreadExecutor(@NonNull Plugin plugin) {
         Preconditions.checkArgument(plugin != null, "Plugin cannot be null");
         return command -> {
             Preconditions.checkArgument(command != null, "Command cannot be null");

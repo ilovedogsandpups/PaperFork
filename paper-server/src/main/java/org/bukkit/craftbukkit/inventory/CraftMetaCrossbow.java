@@ -13,6 +13,7 @@ import net.minecraft.world.item.component.ChargedProjectiles;
 import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.CrossbowMeta;
+import org.jspecify.annotations.NonNull;
 
 @DelegateDeserialization(SerializableMeta.class)
 public class CraftMetaCrossbow extends CraftMetaItem implements CrossbowMeta {
@@ -92,7 +93,7 @@ public class CraftMetaCrossbow extends CraftMetaItem implements CrossbowMeta {
     }
 
     @Override
-    public List<ItemStack> getChargedProjectiles() {
+    public @NonNull List<ItemStack> getChargedProjectiles() {
         return (this.chargedProjectiles == null) ? ImmutableList.of() : ImmutableList.copyOf(this.chargedProjectiles);
     }
 
@@ -150,7 +151,7 @@ public class CraftMetaCrossbow extends CraftMetaItem implements CrossbowMeta {
     }
 
     @Override
-    public CraftMetaCrossbow clone() {
+    public @NonNull CraftMetaCrossbow clone() {
         return (CraftMetaCrossbow) super.clone();
     }
 

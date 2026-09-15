@@ -20,7 +20,6 @@ import net.minecraft.world.level.block.entity.TrialSpawnerBlockEntity;
 import net.minecraft.world.level.block.entity.trialspawner.TrialSpawnerConfig;
 import net.minecraft.world.level.block.entity.trialspawner.TrialSpawnerStateData;
 import net.minecraft.world.level.storage.TagValueInput;
-import net.minecraft.world.level.storage.TagValueOutput;
 import org.bukkit.block.spawner.SpawnRule;
 import org.bukkit.block.spawner.SpawnerEntry;
 import org.bukkit.craftbukkit.CraftLootTable;
@@ -30,6 +29,7 @@ import org.bukkit.entity.EntitySnapshot;
 import org.bukkit.entity.EntityType;
 import org.bukkit.loot.LootTable;
 import org.bukkit.spawner.TrialSpawnerConfiguration;
+import org.jspecify.annotations.NonNull;
 import org.slf4j.Logger;
 
 public class CraftTrialSpawnerConfiguration implements TrialSpawnerConfiguration {
@@ -195,7 +195,7 @@ public class CraftTrialSpawnerConfiguration implements TrialSpawnerConfiguration
     }
 
     @Override
-    public void addPotentialSpawn(EntitySnapshot snapshot, int weight, SpawnRule spawnRule) {
+    public void addPotentialSpawn(@NonNull EntitySnapshot snapshot, int weight, SpawnRule spawnRule) {
         this.addPotentialSpawn(snapshot, weight, spawnRule, null);
     }
 
@@ -230,7 +230,7 @@ public class CraftTrialSpawnerConfiguration implements TrialSpawnerConfiguration
     }
 
     @Override
-    public List<SpawnerEntry> getPotentialSpawns() {
+    public @NonNull List<SpawnerEntry> getPotentialSpawns() {
         List<SpawnerEntry> entries = new ArrayList<>();
 
         for (Weighted<SpawnData> entry : this.spawnPotentialsDefinition.unwrap()) {
@@ -245,7 +245,7 @@ public class CraftTrialSpawnerConfiguration implements TrialSpawnerConfiguration
     }
 
     @Override
-    public Map<LootTable, Integer> getPossibleRewards() {
+    public @NonNull Map<LootTable, Integer> getPossibleRewards() {
         Map<LootTable, Integer> tables = new HashMap<>();
 
         for (Weighted<ResourceKey<net.minecraft.world.level.storage.loot.LootTable>> entry : this.lootTablesToEject.unwrap()) {
@@ -259,7 +259,7 @@ public class CraftTrialSpawnerConfiguration implements TrialSpawnerConfiguration
     }
 
     @Override
-    public void addPossibleReward(LootTable table, int weight) {
+    public void addPossibleReward(@NonNull LootTable table, int weight) {
         Preconditions.checkArgument(table != null, "Table cannot be null");
         Preconditions.checkArgument(weight >= 1, "Weight must be at least 1");
 
@@ -270,7 +270,7 @@ public class CraftTrialSpawnerConfiguration implements TrialSpawnerConfiguration
     }
 
     @Override
-    public void removePossibleReward(LootTable table) {
+    public void removePossibleReward(@NonNull LootTable table) {
         Preconditions.checkArgument(table != null, "Key cannot be null");
 
         ResourceKey<net.minecraft.world.level.storage.loot.LootTable> key = CraftLootTable.bukkitToMinecraft(table);
@@ -285,7 +285,7 @@ public class CraftTrialSpawnerConfiguration implements TrialSpawnerConfiguration
     }
 
     @Override
-    public void setPossibleRewards(Map<LootTable, Integer> rewards) {
+    public void setPossibleRewards(@NonNull Map<LootTable, Integer> rewards) {
         if (rewards == null || rewards.isEmpty()) {
             this.lootTablesToEject = WeightedList.of();
             return;

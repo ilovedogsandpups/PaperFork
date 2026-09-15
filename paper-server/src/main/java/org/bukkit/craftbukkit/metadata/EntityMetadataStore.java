@@ -3,6 +3,7 @@ package org.bukkit.craftbukkit.metadata;
 import org.bukkit.entity.Entity;
 import org.bukkit.metadata.MetadataStore;
 import org.bukkit.metadata.MetadataStoreBase;
+import org.jspecify.annotations.NonNull;
 
 /**
  * An EntityMetadataStore stores metadata values for all {@link Entity} classes and their descendants.
@@ -17,7 +18,7 @@ public class EntityMetadataStore extends MetadataStoreBase<Entity> implements Me
      * @see MetadataStoreBase#disambiguate(Object, String)
      */
     @Override
-    protected String disambiguate(Entity entity, String metadataKey) {
+    protected @NonNull String disambiguate(Entity entity, @NonNull String metadataKey) {
         return entity.getUniqueId().toString() + ":" + metadataKey;
     }
 }

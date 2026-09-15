@@ -3,6 +3,7 @@ package com.destroystokyo.paper.block;
 import net.minecraft.world.level.block.SoundType;
 import org.bukkit.Sound;
 import org.bukkit.craftbukkit.CraftSound;
+import org.jspecify.annotations.NonNull;
 
 @Deprecated(forRemoval = true)
 public class CraftBlockSoundGroup implements BlockSoundGroup {
@@ -13,27 +14,27 @@ public class CraftBlockSoundGroup implements BlockSoundGroup {
     }
 
     @Override
-    public Sound getBreakSound() {
+    public @NonNull Sound getBreakSound() {
         return CraftSound.minecraftToBukkit(soundEffectType.getBreakSound());
     }
 
     @Override
-    public Sound getStepSound() {
+    public @NonNull Sound getStepSound() {
         return CraftSound.minecraftToBukkit(soundEffectType.getStepSound());
     }
 
     @Override
-    public Sound getPlaceSound() {
+    public @NonNull Sound getPlaceSound() {
         return CraftSound.minecraftToBukkit(soundEffectType.getPlaceSound());
     }
 
     @Override
-    public Sound getHitSound() {
+    public @NonNull Sound getHitSound() {
         return CraftSound.minecraftToBukkit(soundEffectType.getHitSound());
     }
 
     @Override
-    public Sound getFallSound() {
+    public @NonNull Sound getFallSound() {
         return CraftSound.minecraftToBukkit(soundEffectType.getFallSound());
     }
 }

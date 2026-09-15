@@ -30,6 +30,7 @@ import org.bukkit.craftbukkit.util.CraftNamespacedKey;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.meta.components.EquippableComponent;
+import org.jspecify.annotations.NonNull;
 
 @SerializableAs("Equippable")
 public final class CraftEquippableComponent implements EquippableComponent {
@@ -91,7 +92,7 @@ public final class CraftEquippableComponent implements EquippableComponent {
     }
 
     @Override
-    public Map<String, Object> serialize() {
+    public @NonNull Map<String, Object> serialize() {
         Map<String, Object> result = new LinkedHashMap<>();
         result.put("slot", this.getSlot().name());
         result.put("equip-sound", Registry.SOUND_EVENT.getKeyOrThrow(this.getEquipSound()).toString());
@@ -126,17 +127,17 @@ public final class CraftEquippableComponent implements EquippableComponent {
     }
 
     @Override
-    public EquipmentSlot getSlot() {
+    public @NonNull EquipmentSlot getSlot() {
         return CraftEquipmentSlot.getSlot(this.handle.slot());
     }
 
     @Override
-    public void setSlot(EquipmentSlot slot) {
+    public void setSlot(@NonNull EquipmentSlot slot) {
         this.handle = new Equippable(CraftEquipmentSlot.getNMS(slot), this.handle.equipSound(), this.handle.assetId(), this.handle.cameraOverlay(), this.handle.allowedEntities(), this.handle.dispensable(), this.handle.swappable(), this.handle.damageOnHurt(), this.handle.equipOnInteract(), this.handle.canBeSheared(), this.handle.shearingSound());
     }
 
     @Override
-    public Sound getEquipSound() {
+    public @NonNull Sound getEquipSound() {
         return CraftSound.minecraftHolderToBukkit(this.handle.equipSound());
     }
 

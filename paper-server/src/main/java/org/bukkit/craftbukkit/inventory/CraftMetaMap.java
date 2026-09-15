@@ -14,6 +14,7 @@ import org.bukkit.Color;
 import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.inventory.meta.MapMeta;
 import org.bukkit.map.MapView;
+import org.jspecify.annotations.NonNull;
 
 @DelegateDeserialization(SerializableMeta.class)
 public class CraftMetaMap extends CraftMetaItem implements MapMeta {
@@ -230,7 +231,7 @@ public class CraftMetaMap extends CraftMetaItem implements MapMeta {
 
 
     @Override
-    public CraftMetaMap clone() {
+    public @NonNull CraftMetaMap clone() {
         return (CraftMetaMap) super.clone();
     }
 

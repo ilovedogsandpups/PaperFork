@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.bukkit.inventory.ItemCraftResult;
 import org.bukkit.inventory.ItemStack;
+import org.jspecify.annotations.NonNull;
 
 public final class CraftItemCraftResult implements ItemCraftResult {
 
@@ -22,17 +23,17 @@ public final class CraftItemCraftResult implements ItemCraftResult {
     }
 
     @Override
-    public ItemStack getResult() {
+    public @NonNull ItemStack getResult() {
         return this.result;
     }
 
     @Override
-    public ItemStack[] getResultingMatrix() {
+    public ItemStack @NonNull [] getResultingMatrix() {
         return this.resultMatrix;
     }
 
     @Override
-    public List<ItemStack> getOverflowItems() {
+    public @NonNull List<ItemStack> getOverflowItems() {
         return this.overflowItems;
     }
 

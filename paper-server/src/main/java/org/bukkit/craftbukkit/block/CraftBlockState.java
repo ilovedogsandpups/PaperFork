@@ -21,6 +21,7 @@ import org.bukkit.craftbukkit.util.CraftMagicNumbers;
 import org.bukkit.material.MaterialData;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
+import org.jspecify.annotations.NonNull;
 
 public class CraftBlockState implements BlockState {
 
@@ -99,7 +100,7 @@ public class CraftBlockState implements BlockState {
     }
 
     @Override
-    public World getWorld() {
+    public @NonNull World getWorld() {
         this.requirePlaced();
         return this.world;
     }
@@ -120,7 +121,7 @@ public class CraftBlockState implements BlockState {
     }
 
     @Override
-    public Chunk getChunk() {
+    public @NonNull Chunk getChunk() {
         this.requirePlaced();
         return this.world.getChunkAt(this.getX() >> 4, this.getZ() >> 4);
     }
@@ -138,19 +139,19 @@ public class CraftBlockState implements BlockState {
     }
 
     @Override
-    public BlockData getBlockData() {
+    public @NonNull BlockData getBlockData() {
         return this.block.asBlockData();
     }
 
     @Override
-    public void setBlockData(BlockData data) {
+    public void setBlockData(@NonNull BlockData data) {
         // todo this is weird for block entities since the old methods are still available but not the new might be better to have wither
         Preconditions.checkArgument(data != null, "BlockData cannot be null");
         this.block = ((CraftBlockData) data).getState();
     }
 
     @Override
-    public void setData(final MaterialData data) {
+    public void setData(final @NonNull MaterialData data) {
         Material mat = CraftMagicNumbers.getMaterial(this.block).getItemType();
 
         if (mat != null) {
@@ -160,7 +161,7 @@ public class CraftBlockState implements BlockState {
     }
 
     @Override
-    public MaterialData getData() {
+    public @NonNull MaterialData getData() {
         return CraftMagicNumbers.getMaterial(this.block);
     }
 
@@ -175,7 +176,7 @@ public class CraftBlockState implements BlockState {
     }
 
     @Override
-    public Material getType() {
+    public @NonNull Material getType() {
         return this.block.getBukkitMaterial();
     }
 
@@ -193,7 +194,7 @@ public class CraftBlockState implements BlockState {
     }
 
     @Override
-    public CraftBlock getBlock() {
+    public @NonNull CraftBlock getBlock() {
         this.requirePlaced();
         return CraftBlock.at(this.getWorldHandle(), this.position);
     }
@@ -253,7 +254,7 @@ public class CraftBlockState implements BlockState {
     }
 
     @Override
-    public Location getLocation() {
+    public @NonNull Location getLocation() {
         return CraftLocation.toBukkit(this.position, this.world);
     }
 
@@ -297,25 +298,25 @@ public class CraftBlockState implements BlockState {
     }
 
     @Override
-    public void setMetadata(String metadataKey, MetadataValue newMetadataValue) {
+    public void setMetadata(@NonNull String metadataKey, @NonNull MetadataValue newMetadataValue) {
         this.requirePlaced();
         this.world.getBlockMetadata().setMetadata(this.getBlock(), metadataKey, newMetadataValue);
     }
 
     @Override
-    public List<MetadataValue> getMetadata(String metadataKey) {
+    public @NonNull List<MetadataValue> getMetadata(@NonNull String metadataKey) {
         this.requirePlaced();
         return this.world.getBlockMetadata().getMetadata(this.getBlock(), metadataKey);
     }
 
     @Override
-    public boolean hasMetadata(String metadataKey) {
+    public boolean hasMetadata(@NonNull String metadataKey) {
         this.requirePlaced();
         return this.world.getBlockMetadata().hasMetadata(this.getBlock(), metadataKey);
     }
 
     @Override
-    public void removeMetadata(String metadataKey, Plugin owningPlugin) {
+    public void removeMetadata(@NonNull String metadataKey, @NonNull Plugin owningPlugin) {
         this.requirePlaced();
         this.world.getBlockMetadata().removeMetadata(this.getBlock(), metadataKey, owningPlugin);
     }
@@ -330,12 +331,12 @@ public class CraftBlockState implements BlockState {
     }
 
     @Override
-    public CraftBlockState copy() {
+    public @NonNull CraftBlockState copy() {
         return new CraftBlockState(this, null);
     }
 
     @Override
-    public BlockState copy(Location location) {
+    public @NonNull BlockState copy(@NonNull Location location) {
         return new CraftBlockState(this, location);
     }
 
@@ -345,7 +346,7 @@ public class CraftBlockState implements BlockState {
     }
 
     @Override
-    public java.util.Collection<org.bukkit.inventory.ItemStack> getDrops(org.bukkit.inventory.ItemStack tool, org.bukkit.entity.Entity entity) {
+    public java.util.@NonNull Collection<org.bukkit.inventory.ItemStack> getDrops(org.bukkit.inventory.ItemStack tool, org.bukkit.entity.Entity entity) {
         this.requirePlaced();
         net.minecraft.world.item.ItemStack item = org.bukkit.craftbukkit.inventory.CraftItemStack.asNMSCopy(tool);
 

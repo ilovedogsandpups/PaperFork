@@ -7,6 +7,7 @@ import org.bukkit.configuration.serialization.SerializableAs;
 import org.bukkit.craftbukkit.inventory.SerializableMeta;
 import org.bukkit.inventory.meta.components.FoodComponent;
 import org.checkerframework.checker.index.qual.NonNegative;
+import org.jspecify.annotations.NonNull;
 
 import static io.papermc.paper.util.BoundChecker.requireNonNegative;
 
@@ -32,7 +33,7 @@ public final class CraftFoodComponent implements FoodComponent {
     }
 
     @Override
-    public Map<String, Object> serialize() {
+    public @NonNull Map<String, Object> serialize() {
         Map<String, Object> result = new LinkedHashMap<>();
         result.put("nutrition", this.getNutrition());
         result.put("saturation", this.getSaturation());

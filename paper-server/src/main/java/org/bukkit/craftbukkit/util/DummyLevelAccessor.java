@@ -40,6 +40,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.ticks.BlackholeTickAccess;
 import net.minecraft.world.ticks.LevelTickAccess;
+import org.jspecify.annotations.NonNull;
 
 public class DummyLevelAccessor implements WorldGenLevel {
 
@@ -54,7 +55,7 @@ public class DummyLevelAccessor implements WorldGenLevel {
     }
 
     @Override
-    public ServerLevel getLevel() {
+    public @NonNull ServerLevel getLevel() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
@@ -64,27 +65,27 @@ public class DummyLevelAccessor implements WorldGenLevel {
     }
 
     @Override
-    public LevelTickAccess<Block> getBlockTicks() {
+    public @NonNull LevelTickAccess<Block> getBlockTicks() {
         return BlackholeTickAccess.emptyLevelList();
     }
 
     @Override
-    public void scheduleTick(BlockPos pos, Block type, int tickDelay) {
+    public void scheduleTick(@NonNull BlockPos pos, @NonNull Block type, int tickDelay) {
         // Used by ComposterBlock
     }
 
     @Override
-    public LevelTickAccess<Fluid> getFluidTicks() {
+    public @NonNull LevelTickAccess<Fluid> getFluidTicks() {
         return BlackholeTickAccess.emptyLevelList();
     }
 
     @Override
-    public LevelData getLevelData() {
+    public @NonNull LevelData getLevelData() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public DifficultyInstance getCurrentDifficultyAt(BlockPos pos) {
+    public @NonNull DifficultyInstance getCurrentDifficultyAt(@NonNull BlockPos pos) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
@@ -94,57 +95,57 @@ public class DummyLevelAccessor implements WorldGenLevel {
     }
 
     @Override
-    public ChunkSource getChunkSource() {
+    public @NonNull ChunkSource getChunkSource() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public RandomSource getRandom() {
+    public @NonNull RandomSource getRandom() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public void playSound(Entity except, BlockPos pos, SoundEvent sound, SoundSource source, float volume, float pitch) {
+    public void playSound(Entity except, @NonNull BlockPos pos, @NonNull SoundEvent sound, @NonNull SoundSource source, float volume, float pitch) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public void addParticle(ParticleOptions particle, double x, double y, double z, double xd, double yd, double zd) {
+    public void addParticle(@NonNull ParticleOptions particle, double x, double y, double z, double xd, double yd, double zd) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public void levelEvent(Entity source, int type, BlockPos pos, int data) {
+    public void levelEvent(Entity source, int type, @NonNull BlockPos pos, int data) {
         // Used by PowderSnowBlock.pickupBlock
     }
 
     @Override
-    public void gameEvent(Holder<GameEvent> gameEvent, Vec3 position, GameEvent.Context context) {
+    public void gameEvent(@NonNull Holder<GameEvent> gameEvent, @NonNull Vec3 position, GameEvent.@NonNull Context context) {
         // Used by ComposterBlock
     }
 
     @Override
-    public List<Entity> getEntities(Entity except, AABB bb, Predicate<? super Entity> selector) {
+    public @NonNull List<Entity> getEntities(Entity except, @NonNull AABB bb, @NonNull Predicate<? super Entity> selector) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public <T extends Entity> List<T> getEntities(EntityTypeTest<Entity, T> type, AABB bb, Predicate<? super T> selector) {
+    public <T extends Entity> @NonNull List<T> getEntities(@NonNull EntityTypeTest<Entity, T> type, @NonNull AABB bb, @NonNull Predicate<? super T> selector) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public List<? extends Player> players() {
+    public @NonNull List<? extends Player> players() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public ChunkAccess getChunk(int chunkX, int chunkZ, ChunkStatus targetStatus, boolean loadOrGenerate) {
+    public ChunkAccess getChunk(int chunkX, int chunkZ, @NonNull ChunkStatus targetStatus, boolean loadOrGenerate) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public int getHeight(Heightmap.Types type, int x, int z) {
+    public int getHeight(Heightmap.@NonNull Types type, int x, int z) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
@@ -154,12 +155,12 @@ public class DummyLevelAccessor implements WorldGenLevel {
     }
 
     @Override
-    public BiomeManager getBiomeManager() {
+    public @NonNull BiomeManager getBiomeManager() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public Holder<Biome> getUncachedNoiseBiome(int quartX, int quartY, int quartZ) {
+    public @NonNull Holder<Biome> getUncachedNoiseBiome(int quartX, int quartY, int quartZ) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
@@ -174,42 +175,42 @@ public class DummyLevelAccessor implements WorldGenLevel {
     }
 
     @Override
-    public DimensionType dimensionType() {
+    public @NonNull DimensionType dimensionType() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public RegistryAccess registryAccess() {
+    public @NonNull RegistryAccess registryAccess() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public FeatureFlagSet enabledFeatures() {
+    public @NonNull FeatureFlagSet enabledFeatures() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public EnvironmentAttributeReader environmentAttributes() {
+    public @NonNull EnvironmentAttributeReader environmentAttributes() {
         return EnvironmentAttributeReader.EMPTY;
     }
 
     @Override
-    public LevelLightEngine getLightEngine() {
+    public @NonNull LevelLightEngine getLightEngine() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public BlockEntity getBlockEntity(BlockPos pos) {
+    public BlockEntity getBlockEntity(@NonNull BlockPos pos) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public BlockState getBlockState(BlockPos pos) {
+    public @NonNull BlockState getBlockState(@NonNull BlockPos pos) {
         return Blocks.AIR.defaultBlockState(); // SPIGOT-6515
     }
 
     @Override
-    public FluidState getFluidState(BlockPos pos) {
+    public @NonNull FluidState getFluidState(@NonNull BlockPos pos) {
         return Fluids.EMPTY.defaultFluidState(); // SPIGOT-6634
     }
 
@@ -219,51 +220,51 @@ public class DummyLevelAccessor implements WorldGenLevel {
     }
 
     @Override
-    public BlockState getBlockStateIfLoaded(BlockPos pos) {
+    public BlockState getBlockStateIfLoaded(@NonNull BlockPos pos) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public FluidState getFluidIfLoaded(BlockPos pos) {
+    public FluidState getFluidIfLoaded(@NonNull BlockPos pos) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public WorldBorder getWorldBorder() {
+    public @NonNull WorldBorder getWorldBorder() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public boolean isStateAtPosition(BlockPos pos, Predicate<BlockState> predicate) {
+    public boolean isStateAtPosition(@NonNull BlockPos pos, @NonNull Predicate<BlockState> predicate) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public boolean isFluidAtPosition(BlockPos pos, Predicate<FluidState> predicate) {
+    public boolean isFluidAtPosition(@NonNull BlockPos pos, @NonNull Predicate<FluidState> predicate) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public boolean setBlock(BlockPos pos, BlockState blockState, @Block.UpdateFlags int updateFlags, int updateLimit) {
+    public boolean setBlock(@NonNull BlockPos pos, @NonNull BlockState blockState, @Block.UpdateFlags int updateFlags, int updateLimit) {
         return false;
     }
 
     @Override
-    public boolean removeBlock(BlockPos pos, boolean movedByPiston) {
+    public boolean removeBlock(@NonNull BlockPos pos, boolean movedByPiston) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public boolean destroyBlock(BlockPos pos, boolean dropResources, Entity breaker, int updateLimit) {
+    public boolean destroyBlock(@NonNull BlockPos pos, boolean dropResources, Entity breaker, int updateLimit) {
         return false; // SPIGOT-6515
     }
 
     @Override
-    public void scheduleTick(BlockPos pos, Fluid type, int tickDelay) {}
+    public void scheduleTick(@NonNull BlockPos pos, @NonNull Fluid type, int tickDelay) {}
 
     @Override
-    public void scheduleTick(BlockPos pos, Block type, int tickDelay, net.minecraft.world.ticks.TickPriority priority) {}
+    public void scheduleTick(@NonNull BlockPos pos, @NonNull Block type, int tickDelay, net.minecraft.world.ticks.@NonNull TickPriority priority) {}
 
     @Override
-    public void scheduleTick(BlockPos pos, Fluid type, int tickDelay, net.minecraft.world.ticks.TickPriority priority) {}
+    public void scheduleTick(@NonNull BlockPos pos, @NonNull Fluid type, int tickDelay, net.minecraft.world.ticks.@NonNull TickPriority priority) {}
 }

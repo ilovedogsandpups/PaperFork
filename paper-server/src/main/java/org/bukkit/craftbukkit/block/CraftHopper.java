@@ -6,6 +6,7 @@ import org.bukkit.World;
 import org.bukkit.block.Hopper;
 import org.bukkit.craftbukkit.inventory.CraftInventory;
 import org.bukkit.inventory.Inventory;
+import org.jspecify.annotations.NonNull;
 
 public class CraftHopper extends CraftLootable<HopperBlockEntity> implements Hopper {
 
@@ -18,12 +19,12 @@ public class CraftHopper extends CraftLootable<HopperBlockEntity> implements Hop
     }
 
     @Override
-    public Inventory getSnapshotInventory() {
+    public @NonNull Inventory getSnapshotInventory() {
         return new CraftInventory(this.getSnapshot());
     }
 
     @Override
-    public Inventory getInventory() {
+    public @NonNull Inventory getInventory() {
         if (!this.isPlaced()) {
             return this.getSnapshotInventory();
         }
@@ -32,12 +33,12 @@ public class CraftHopper extends CraftLootable<HopperBlockEntity> implements Hop
     }
 
     @Override
-    public CraftHopper copy() {
+    public @NonNull CraftHopper copy() {
         return new CraftHopper(this, null);
     }
 
     @Override
-    public CraftHopper copy(Location location) {
+    public @NonNull CraftHopper copy(@NonNull Location location) {
         return new CraftHopper(this, location);
     }
 

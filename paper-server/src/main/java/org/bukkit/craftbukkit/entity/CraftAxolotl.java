@@ -3,6 +3,7 @@ package org.bukkit.craftbukkit.entity;
 import com.google.common.base.Preconditions;
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.entity.Axolotl;
+import org.jspecify.annotations.NonNull;
 
 public class CraftAxolotl extends CraftAnimals implements Axolotl, io.papermc.paper.entity.PaperBucketable { // Paper - Bucketable API
 
@@ -26,7 +27,7 @@ public class CraftAxolotl extends CraftAnimals implements Axolotl, io.papermc.pa
     }
 
     @Override
-    public Variant getVariant() {
+    public @NonNull Variant getVariant() {
         return Variant.values()[this.getHandle().getVariant().ordinal()];
     }
 

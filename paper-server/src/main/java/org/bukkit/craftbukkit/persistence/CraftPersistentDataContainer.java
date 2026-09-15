@@ -16,6 +16,7 @@ import org.bukkit.persistence.PersistentDataAdapterContext;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 public class CraftPersistentDataContainer extends io.papermc.paper.persistence.PaperPersistentDataContainerView implements PersistentDataContainer { // Paper - split up view and mutable
 
@@ -31,7 +32,7 @@ public class CraftPersistentDataContainer extends io.papermc.paper.persistence.P
     }
 
     @Override
-    public Tag getTag(final String key) {
+    public Tag getTag(final @NonNull String key) {
         return this.customDataTags.get(key);
     }
 
@@ -71,9 +72,8 @@ public class CraftPersistentDataContainer extends io.papermc.paper.persistence.P
         return this.customDataTags.isEmpty();
     }
 
-    @NotNull
     @Override
-    public void copyTo(PersistentDataContainer other, boolean replace) {
+    public void copyTo(@NonNull PersistentDataContainer other, boolean replace) {
         Preconditions.checkArgument(other != null, "The target container cannot be null");
 
         CraftPersistentDataContainer target = (CraftPersistentDataContainer) other;
@@ -85,7 +85,7 @@ public class CraftPersistentDataContainer extends io.papermc.paper.persistence.P
     }
 
     @Override
-    public PersistentDataAdapterContext getAdapterContext() {
+    public @NonNull PersistentDataAdapterContext getAdapterContext() {
         return this.adapterContext;
     }
 
@@ -101,7 +101,7 @@ public class CraftPersistentDataContainer extends io.papermc.paper.persistence.P
         return Objects.equals(myRawMap, theirRawMap);
     }
 
-    public CompoundTag toTagCompound() {
+    public @NonNull CompoundTag toTagCompound() {
         CompoundTag tag = new CompoundTag();
         for (Entry<String, Tag> entry : this.customDataTags.entrySet()) {
             tag.put(entry.getKey(), entry.getValue());
@@ -147,7 +147,7 @@ public class CraftPersistentDataContainer extends io.papermc.paper.persistence.P
     }
 
     @Override
-    public void readFromBytes(final byte[] bytes, final boolean clear) throws java.io.IOException {
+    public void readFromBytes(final byte @NonNull [] bytes, final boolean clear) throws java.io.IOException {
         if (clear) {
             this.clear();
         }

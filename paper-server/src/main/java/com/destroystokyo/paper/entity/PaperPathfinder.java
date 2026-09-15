@@ -12,6 +12,7 @@ import org.bukkit.craftbukkit.entity.CraftEntity;
 import org.bukkit.craftbukkit.util.CraftLocation;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Mob;
+import org.jspecify.annotations.NonNull;
 
 public class PaperPathfinder implements com.destroystokyo.paper.entity.Pathfinder {
 
@@ -22,7 +23,7 @@ public class PaperPathfinder implements com.destroystokyo.paper.entity.Pathfinde
     }
 
     @Override
-    public Mob getEntity() {
+    public @NonNull Mob getEntity() {
         return (Mob) this.entity.getBukkitEntity();
     }
 
@@ -58,7 +59,7 @@ public class PaperPathfinder implements com.destroystokyo.paper.entity.Pathfinde
 
     @Nullable
     @Override
-    public PathResult findPath(final Entity target, final int reachRange) {
+    public PathResult findPath(final @NonNull Entity target, final int reachRange) {
         Preconditions.checkArgument(target != null, "Target can not be null");
         Preconditions.checkArgument(reachRange >= 0, "Reach range can not be negative");
         Path path = this.entity.getNavigation().createPath(((CraftEntity) target).getHandle(), reachRange);
@@ -123,7 +124,7 @@ public class PaperPathfinder implements com.destroystokyo.paper.entity.Pathfinde
         }
 
         @Override
-        public List<Location> getPoints() {
+        public @NonNull List<Location> getPoints() {
             List<Location> points = new ArrayList<>();
             for (Node point : this.path.nodes) {
                 points.add(CraftLocation.toBukkit(point, PaperPathfinder.this.entity.level()));

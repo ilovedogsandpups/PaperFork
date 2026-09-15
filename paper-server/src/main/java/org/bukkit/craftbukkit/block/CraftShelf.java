@@ -6,6 +6,7 @@ import org.bukkit.World;
 import org.bukkit.block.Shelf;
 import org.bukkit.craftbukkit.inventory.CraftInventoryShelf;
 import org.bukkit.inventory.ShelfInventory;
+import org.jspecify.annotations.NonNull;
 
 public class CraftShelf extends CraftBlockEntityState<ShelfBlockEntity> implements Shelf {
 
@@ -18,12 +19,12 @@ public class CraftShelf extends CraftBlockEntityState<ShelfBlockEntity> implemen
     }
 
     @Override
-    public ShelfInventory getSnapshotInventory() {
+    public @NonNull ShelfInventory getSnapshotInventory() {
         return new CraftInventoryShelf(this.getSnapshot());
     }
 
     @Override
-    public ShelfInventory getInventory() {
+    public @NonNull ShelfInventory getInventory() {
         if (!this.isPlaced()) {
             return this.getSnapshotInventory();
         }
@@ -32,12 +33,12 @@ public class CraftShelf extends CraftBlockEntityState<ShelfBlockEntity> implemen
     }
 
     @Override
-    public CraftBlockEntityState<ShelfBlockEntity> copy() {
+    public @NonNull CraftBlockEntityState<ShelfBlockEntity> copy() {
         return new CraftShelf(this, null);
     }
 
     @Override
-    public CraftBlockEntityState<ShelfBlockEntity> copy(final Location location) {
+    public @NonNull CraftBlockEntityState<ShelfBlockEntity> copy(final @NonNull Location location) {
         return new CraftShelf(this, location);
     }
 }

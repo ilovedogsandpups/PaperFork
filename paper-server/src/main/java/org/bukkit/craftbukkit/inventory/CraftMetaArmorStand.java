@@ -11,6 +11,7 @@ import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.item.component.TypedEntityData;
 import org.bukkit.Material;
 import org.bukkit.configuration.serialization.DelegateDeserialization;
+import org.jspecify.annotations.NonNull;
 
 @DelegateDeserialization(SerializableMeta.class)
 public class CraftMetaArmorStand extends CraftMetaItem implements com.destroystokyo.paper.inventory.meta.ArmorStandMeta {
@@ -163,7 +164,7 @@ public class CraftMetaArmorStand extends CraftMetaItem implements com.destroysto
     }
 
     @Override
-    public CraftMetaArmorStand clone() {
+    public @NonNull CraftMetaArmorStand clone() {
         CraftMetaArmorStand clone = (CraftMetaArmorStand) super.clone();
 
         if (this.entityTag != null) {

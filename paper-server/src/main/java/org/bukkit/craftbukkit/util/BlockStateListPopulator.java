@@ -25,6 +25,7 @@ import net.minecraft.world.level.storage.LevelData;
 import org.bukkit.block.BlockState;
 import org.bukkit.craftbukkit.block.CraftBlockState;
 import org.bukkit.craftbukkit.block.CraftBlockStates;
+import org.jspecify.annotations.NonNull;
 
 public class BlockStateListPopulator extends DummyLevelAccessor {
 
@@ -38,13 +39,13 @@ public class BlockStateListPopulator extends DummyLevelAccessor {
     }
 
     @Override
-    public net.minecraft.world.level.block.state.BlockState getBlockState(BlockPos pos) {
+    public net.minecraft.world.level.block.state.@NonNull BlockState getBlockState(BlockPos pos) {
         CapturedBlock block = this.blocks.get(pos);
         return block != null ? block.state() : this.level.getBlockState(pos);
     }
 
     @Override
-    public FluidState getFluidState(BlockPos pos) {
+    public @NonNull FluidState getFluidState(BlockPos pos) {
         CapturedBlock block = this.blocks.get(pos);
         return block != null ? block.state().getFluidState() : this.level.getFluidState(pos);
     }
@@ -91,7 +92,7 @@ public class BlockStateListPopulator extends DummyLevelAccessor {
     }
 
     @Override
-    public ServerLevel getMinecraftWorld() {
+    public @NonNull ServerLevel getMinecraftWorld() {
         return this.level.getMinecraftWorld();
     }
 
@@ -140,7 +141,7 @@ public class BlockStateListPopulator extends DummyLevelAccessor {
     // For tree generation
 
     @Override
-    public ServerLevel getLevel() {
+    public @NonNull ServerLevel getLevel() {
         return this.getMinecraftWorld();
     }
 
@@ -165,18 +166,18 @@ public class BlockStateListPopulator extends DummyLevelAccessor {
     }
 
     @Override
-    public DimensionType dimensionType() {
+    public @NonNull DimensionType dimensionType() {
         return this.level.dimensionType();
     }
 
     @Override
-    public RegistryAccess registryAccess() {
+    public @NonNull RegistryAccess registryAccess() {
         return this.level.registryAccess();
     }
 
     // Needed when a tree generates in water
     @Override
-    public LevelData getLevelData() {
+    public @NonNull LevelData getLevelData() {
         return this.level.getLevelData();
     }
 
@@ -187,18 +188,18 @@ public class BlockStateListPopulator extends DummyLevelAccessor {
 
     // SPIGOT-7966: Needed for some tree generations
     @Override
-    public RandomSource getRandom() {
+    public @NonNull RandomSource getRandom() {
         return this.level.getRandom();
     }
 
     @Override
-    public <T extends BlockEntity> Optional<T> getBlockEntity(BlockPos pos, BlockEntityType<T> type) {
+    public <T extends BlockEntity> @NonNull Optional<T> getBlockEntity(@NonNull BlockPos pos, @NonNull BlockEntityType<T> type) {
         BlockEntity blockEntity = this.getBlockEntity(pos);
         return blockEntity != null && blockEntity.getType() == type ? Optional.of((T) blockEntity) : Optional.empty();
     }
 
     @Override
-    public BlockPos getHeightmapPos(Heightmap.Types type, BlockPos pos) {
+    public @NonNull BlockPos getHeightmapPos(Heightmap.@NonNull Types type, @NonNull BlockPos pos) {
         return this.level.getHeightmapPos(type, pos);
     }
 
@@ -208,12 +209,12 @@ public class BlockStateListPopulator extends DummyLevelAccessor {
     }
 
     @Override
-    public int getRawBrightness(BlockPos pos, int darkening) {
+    public int getRawBrightness(@NonNull BlockPos pos, int darkening) {
         return this.level.getRawBrightness(pos, darkening);
     }
 
     @Override
-    public int getBrightness(LightLayer layer, BlockPos pos) {
+    public int getBrightness(@NonNull LightLayer layer, @NonNull BlockPos pos) {
         return this.level.getBrightness(layer, pos);
     }
 }

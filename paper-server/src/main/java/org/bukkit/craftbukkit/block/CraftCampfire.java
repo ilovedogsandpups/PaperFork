@@ -1,12 +1,12 @@
 package org.bukkit.craftbukkit.block;
 
-import com.google.common.base.Preconditions;
 import net.minecraft.world.level.block.entity.CampfireBlockEntity;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Campfire;
 import org.bukkit.craftbukkit.inventory.CraftItemStack;
 import org.bukkit.inventory.ItemStack;
+import org.jspecify.annotations.NonNull;
 
 import static io.papermc.paper.util.BoundChecker.requireRange;
 
@@ -57,12 +57,12 @@ public class CraftCampfire extends CraftBlockEntityState<CampfireBlockEntity> im
     }
 
     @Override
-    public CraftCampfire copy() {
+    public @NonNull CraftCampfire copy() {
         return new CraftCampfire(this, null);
     }
 
     @Override
-    public CraftCampfire copy(Location location) {
+    public @NonNull CraftCampfire copy(@NonNull Location location) {
         return new CraftCampfire(this, location);
     }
 

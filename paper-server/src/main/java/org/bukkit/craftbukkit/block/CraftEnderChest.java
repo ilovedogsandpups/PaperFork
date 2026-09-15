@@ -6,6 +6,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.EnderChest;
+import org.jspecify.annotations.NonNull;
 
 public class CraftEnderChest extends CraftBlockEntityState<EnderChestBlockEntity> implements EnderChest {
 
@@ -56,12 +57,12 @@ public class CraftEnderChest extends CraftBlockEntityState<EnderChestBlockEntity
     }
 
     @Override
-    public CraftEnderChest copy() {
+    public @NonNull CraftEnderChest copy() {
         return new CraftEnderChest(this, null);
     }
 
     @Override
-    public CraftEnderChest copy(Location location) {
+    public @NonNull CraftEnderChest copy(@NonNull Location location) {
         return new CraftEnderChest(this, location);
     }
 }

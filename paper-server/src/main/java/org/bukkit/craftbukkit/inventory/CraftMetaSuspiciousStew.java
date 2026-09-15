@@ -16,6 +16,7 @@ import org.bukkit.craftbukkit.potion.CraftPotionEffectType;
 import org.bukkit.inventory.meta.SuspiciousStewMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.jspecify.annotations.NonNull;
 
 @DelegateDeserialization(SerializableMeta.class)
 public class CraftMetaSuspiciousStew extends CraftMetaItem implements SuspiciousStewMeta {
@@ -91,7 +92,7 @@ public class CraftMetaSuspiciousStew extends CraftMetaItem implements Suspicious
     }
 
     @Override
-    public CraftMetaSuspiciousStew clone() {
+    public @NonNull CraftMetaSuspiciousStew clone() {
         CraftMetaSuspiciousStew clone = ((CraftMetaSuspiciousStew) super.clone());
         if (this.customEffects != null) {
             clone.customEffects = new ArrayList<>(this.customEffects);
@@ -105,7 +106,7 @@ public class CraftMetaSuspiciousStew extends CraftMetaItem implements Suspicious
     }
 
     @Override
-    public List<PotionEffect> getCustomEffects() {
+    public @NonNull List<PotionEffect> getCustomEffects() {
         if (this.hasCustomEffects()) {
             return this.customEffects.stream().map(suspiciousEffectEntry -> suspiciousEffectEntry.effect().createEffect(suspiciousEffectEntry.duration(), 0)).toList();
         }
@@ -119,7 +120,7 @@ public class CraftMetaSuspiciousStew extends CraftMetaItem implements Suspicious
     }
 
     @Override
-    public boolean addCustomEffect(final io.papermc.paper.potion.SuspiciousEffectEntry suspiciousEffectEntry, final boolean overwrite) {
+    public boolean addCustomEffect(final io.papermc.paper.potion.@NonNull SuspiciousEffectEntry suspiciousEffectEntry, final boolean overwrite) {
         Preconditions.checkArgument(suspiciousEffectEntry != null, "Suspicious effect entry cannot be null");
         if (this.hasCustomEffects()) {
             final List<io.papermc.paper.potion.SuspiciousEffectEntry> matchingEffects = this.customEffects.stream().filter(
@@ -156,7 +157,7 @@ public class CraftMetaSuspiciousStew extends CraftMetaItem implements Suspicious
     }
 
     @Override
-    public boolean removeCustomEffect(PotionEffectType type) {
+    public boolean removeCustomEffect(@NonNull PotionEffectType type) {
         Preconditions.checkArgument(type != null, "Potion effect type cannot be null");
 
         if (!this.hasCustomEffects()) {
@@ -179,7 +180,7 @@ public class CraftMetaSuspiciousStew extends CraftMetaItem implements Suspicious
     }
 
     @Override
-    public boolean hasCustomEffect(PotionEffectType type) {
+    public boolean hasCustomEffect(@NonNull PotionEffectType type) {
         Preconditions.checkArgument(type != null, "Potion effect type cannot be null");
         return this.indexOfEffect(type) != -1;
     }

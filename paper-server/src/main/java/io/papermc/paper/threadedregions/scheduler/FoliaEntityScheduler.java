@@ -6,6 +6,8 @@ import org.bukkit.craftbukkit.entity.CraftEntity;
 import org.bukkit.plugin.IllegalPluginAccessException;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
+
 import java.lang.invoke.VarHandle;
 import java.util.Objects;
 import java.util.function.Consumer;
@@ -37,7 +39,7 @@ public final class FoliaEntityScheduler implements EntityScheduler {
     }
 
     @Override
-    public boolean execute(final Plugin plugin, final Runnable run, final Runnable retired,
+    public boolean execute(final @NonNull Plugin plugin, final @NonNull Runnable run, final Runnable retired,
                            final long delay) {
         final Consumer<? extends Entity> runNMS = wrap(plugin, run);
         final Consumer<? extends Entity> runRetired = retired == null ? null : wrap(plugin, retired);
@@ -46,12 +48,12 @@ public final class FoliaEntityScheduler implements EntityScheduler {
     }
 
     @Override
-    public @Nullable ScheduledTask run(final Plugin plugin, final Consumer<ScheduledTask> task, final Runnable retired) {
+    public @Nullable ScheduledTask run(final @NonNull Plugin plugin, final @NonNull Consumer<ScheduledTask> task, final Runnable retired) {
         return this.runDelayed(plugin, task, retired, 1);
     }
 
     @Override
-    public @Nullable ScheduledTask runDelayed(final Plugin plugin, final Consumer<ScheduledTask> task, final Runnable retired,
+    public @Nullable ScheduledTask runDelayed(final @NonNull Plugin plugin, final @NonNull Consumer<ScheduledTask> task, final Runnable retired,
                                               final long delayTicks) {
         Objects.requireNonNull(plugin, "Plugin may not be null");
         Objects.requireNonNull(task, "Task may not be null");
@@ -78,7 +80,7 @@ public final class FoliaEntityScheduler implements EntityScheduler {
     }
 
     @Override
-    public @Nullable ScheduledTask runAtFixedRate(final Plugin plugin, final Consumer<ScheduledTask> task,
+    public @Nullable ScheduledTask runAtFixedRate(final @NonNull Plugin plugin, final @NonNull Consumer<ScheduledTask> task,
                                                   final Runnable retired, final long initialDelayTicks, final long periodTicks) {
         Objects.requireNonNull(plugin, "Plugin may not be null");
         Objects.requireNonNull(task, "Task may not be null");
@@ -195,7 +197,7 @@ public final class FoliaEntityScheduler implements EntityScheduler {
         }
 
         @Override
-        public Plugin getOwningPlugin() {
+        public @NonNull Plugin getOwningPlugin() {
             return this.plugin;
         }
 
@@ -205,7 +207,7 @@ public final class FoliaEntityScheduler implements EntityScheduler {
         }
 
         @Override
-        public CancelledState cancel() {
+        public @NonNull CancelledState cancel() {
             for (int curr = this.getStateVolatile();;) {
                 switch (curr) {
                     case STATE_IDLE: {
@@ -245,7 +247,7 @@ public final class FoliaEntityScheduler implements EntityScheduler {
         }
 
         @Override
-        public ExecutionState getExecutionState() {
+        public @NonNull ExecutionState getExecutionState() {
             final int state = this.getStateVolatile();
             switch (state) {
                 case STATE_IDLE:

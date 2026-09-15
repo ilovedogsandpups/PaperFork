@@ -12,6 +12,7 @@ import org.bukkit.craftbukkit.potion.CraftPotionUtil;
 import org.bukkit.entity.MushroomCow;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.jspecify.annotations.NonNull;
 
 public class CraftMushroomCow extends CraftAbstractCow implements MushroomCow, io.papermc.paper.entity.PaperShearable { // Paper
 
@@ -20,7 +21,7 @@ public class CraftMushroomCow extends CraftAbstractCow implements MushroomCow, i
     }
 
     @Override
-    public net.minecraft.world.entity.animal.cow.MushroomCow getHandle() {
+    public net.minecraft.world.entity.animal.cow.@NonNull MushroomCow getHandle() {
         return (net.minecraft.world.entity.animal.cow.MushroomCow) this.entity;
     }
 
@@ -31,7 +32,7 @@ public class CraftMushroomCow extends CraftAbstractCow implements MushroomCow, i
     }
 
     @Override
-    public List<PotionEffect> getEffectsForNextStew() {
+    public @NonNull List<PotionEffect> getEffectsForNextStew() {
         SuspiciousStewEffects stewEffects = this.getHandle().stewEffects;
         if (stewEffects != null) {
             return stewEffects.effects().stream().map(recordSuspiciousEffect -> CraftPotionUtil.toBukkit(recordSuspiciousEffect.createEffectInstance())).toList();
@@ -65,7 +66,7 @@ public class CraftMushroomCow extends CraftAbstractCow implements MushroomCow, i
     }
 
     @Override
-    public boolean removeEffectFromNextStew(PotionEffectType potionEffectType) {
+    public boolean removeEffectFromNextStew(@NonNull PotionEffectType potionEffectType) {
         Preconditions.checkArgument(potionEffectType != null, "potionEffectType cannot be null");
         if (!this.hasEffectForNextStew(potionEffectType)) {
             return false;
@@ -82,7 +83,7 @@ public class CraftMushroomCow extends CraftAbstractCow implements MushroomCow, i
     }
 
     @Override
-    public boolean hasEffectForNextStew(PotionEffectType potionEffectType) {
+    public boolean hasEffectForNextStew(@NonNull PotionEffectType potionEffectType) {
         Preconditions.checkArgument(potionEffectType != null, "potionEffectType cannot be null");
         SuspiciousStewEffects stewEffects = this.getHandle().stewEffects;
         if (stewEffects == null) {
@@ -98,7 +99,7 @@ public class CraftMushroomCow extends CraftAbstractCow implements MushroomCow, i
     }
 
     @Override
-    public Variant getVariant() {
+    public @NonNull Variant getVariant() {
         return Variant.values()[this.getHandle().getVariant().ordinal()];
     }
 
@@ -111,7 +112,7 @@ public class CraftMushroomCow extends CraftAbstractCow implements MushroomCow, i
 
     // Paper start
     @Override
-    public List<io.papermc.paper.potion.SuspiciousEffectEntry> getStewEffects() {
+    public @NonNull List<io.papermc.paper.potion.SuspiciousEffectEntry> getStewEffects() {
         if (this.getHandle().stewEffects == null) {
             return List.of();
         }

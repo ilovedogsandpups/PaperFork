@@ -11,6 +11,7 @@ import org.bukkit.Material;
 import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.inventory.meta.ColorableArmorMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
+import org.jspecify.annotations.NonNull;
 
 import static org.bukkit.craftbukkit.inventory.CraftItemFactory.DEFAULT_LEATHER_COLOR;
 
@@ -69,12 +70,12 @@ public class CraftMetaLeatherArmor extends CraftMetaItem implements LeatherArmor
     }
 
     @Override
-    public CraftMetaLeatherArmor clone() {
+    public @NonNull CraftMetaLeatherArmor clone() {
         return (CraftMetaLeatherArmor) super.clone();
     }
 
     @Override
-    public Color getColor() {
+    public @NonNull Color getColor() {
         return this.color == null ? DEFAULT_LEATHER_COLOR : Color.fromRGB(this.color & 0x00FFFFFF);
     }
 

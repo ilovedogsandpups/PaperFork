@@ -1,9 +1,7 @@
 package org.bukkit.craftbukkit.scoreboard;
 
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.function.Consumer;
 import net.minecraft.network.protocol.game.ClientboundSetObjectivePacket;
 import net.minecraft.network.protocol.game.ClientboundSetPlayerTeamPacket;
@@ -18,6 +16,7 @@ import net.minecraft.world.scores.criteria.ObjectiveCriteria;
 import org.bukkit.craftbukkit.entity.CraftPlayer;
 import org.bukkit.craftbukkit.util.WeakCollection;
 import org.bukkit.scoreboard.ScoreboardManager;
+import org.jspecify.annotations.NonNull;
 
 public final class CraftScoreboardManager implements ScoreboardManager {
     private final CraftScoreboard mainScoreboard;
@@ -32,12 +31,12 @@ public final class CraftScoreboardManager implements ScoreboardManager {
     }
 
     @Override
-    public CraftScoreboard getMainScoreboard() {
+    public @NonNull CraftScoreboard getMainScoreboard() {
         return this.mainScoreboard;
     }
 
     @Override
-    public CraftScoreboard getNewScoreboard() {
+    public @NonNull CraftScoreboard getNewScoreboard() {
         org.spigotmc.AsyncCatcher.catchOp("scoreboard creation"); // Spigot
         CraftScoreboard scoreboard = new CraftScoreboard(new ServerScoreboard(this.server));
         if (io.papermc.paper.configuration.GlobalConfiguration.get().scoreboards.trackPluginScoreboards) {

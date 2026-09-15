@@ -20,6 +20,7 @@ import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.craftbukkit.inventory.CraftMetaItem.ItemMetaKey.Specific;
 import org.bukkit.craftbukkit.inventory.CraftMetaItem.ItemMetaKey.Specific.To;
 import org.bukkit.inventory.meta.FireworkMeta;
+import org.jspecify.annotations.NonNull;
 
 @DelegateDeserialization(SerializableMeta.class)
 public class CraftMetaFirework extends CraftMetaItem implements FireworkMeta {
@@ -243,7 +244,7 @@ public class CraftMetaFirework extends CraftMetaItem implements FireworkMeta {
     }
 
     @Override
-    public CraftMetaFirework clone() {
+    public @NonNull CraftMetaFirework clone() {
         CraftMetaFirework meta = (CraftMetaFirework) super.clone();
 
         if (this.effects != null) {
@@ -254,7 +255,7 @@ public class CraftMetaFirework extends CraftMetaItem implements FireworkMeta {
     }
 
     @Override
-    public void addEffect(FireworkEffect effect) {
+    public void addEffect(@NonNull FireworkEffect effect) {
         Preconditions.checkArgument(effect != null, "FireworkEffect cannot be null");
         Preconditions.checkArgument(this.effects == null || this.effects.size() + 1 <= Fireworks.MAX_EXPLOSIONS, "cannot have more than %s firework effects", Fireworks.MAX_EXPLOSIONS); // Paper - limit firework effects
         if (this.effects == null) {
@@ -286,13 +287,13 @@ public class CraftMetaFirework extends CraftMetaItem implements FireworkMeta {
     }
 
     @Override
-    public void addEffects(Iterable<FireworkEffect> effects) {
+    public void addEffects(@NonNull Iterable<FireworkEffect> effects) {
         Preconditions.checkArgument(effects != null, "effects cannot be null");
         this.safelyAddEffects(effects, true); // Paper - limit firework effects
     }
 
     @Override
-    public List<FireworkEffect> getEffects() {
+    public @NonNull List<FireworkEffect> getEffects() {
         return this.effects == null ? ImmutableList.of() : ImmutableList.copyOf(this.effects);
     }
 

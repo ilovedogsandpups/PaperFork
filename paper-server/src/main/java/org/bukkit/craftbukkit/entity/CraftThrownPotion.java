@@ -12,6 +12,7 @@ import org.bukkit.craftbukkit.potion.CraftPotionUtil;
 import org.bukkit.entity.ThrownPotion;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionEffect;
+import org.jspecify.annotations.NonNull;
 
 public abstract class CraftThrownPotion extends CraftThrowableProjectile implements ThrownPotion {
 
@@ -25,7 +26,7 @@ public abstract class CraftThrownPotion extends CraftThrowableProjectile impleme
     }
 
     @Override
-    public Collection<PotionEffect> getEffects() {
+    public @NonNull Collection<PotionEffect> getEffects() {
         ImmutableList.Builder<PotionEffect> builder = ImmutableList.builder();
         for (MobEffectInstance effect : this.getHandle().getItem().getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY).getAllEffects()) {
             builder.add(CraftPotionUtil.toBukkit(effect));
@@ -34,7 +35,7 @@ public abstract class CraftThrownPotion extends CraftThrowableProjectile impleme
     }
 
     @Override
-    public void setPotionMeta(PotionMeta meta) {
+    public void setPotionMeta(@NonNull PotionMeta meta) {
         net.minecraft.world.item.ItemStack item = this.getHandle().getItem();
         CraftItemStack.applyMetaToItem(item, meta);
         this.getHandle().setItem(item); // Reset item

@@ -11,6 +11,7 @@ import org.bukkit.attribute.Attribute;
 import org.bukkit.craftbukkit.CraftRegistry;
 import org.bukkit.craftbukkit.legacy.FieldRename;
 import org.bukkit.craftbukkit.util.ApiVersion;
+import org.jspecify.annotations.NonNull;
 
 public class CraftAttribute extends OldEnumHolderable<Attribute, net.minecraft.world.entity.ai.attributes.Attribute> implements Attribute {
 
@@ -49,7 +50,7 @@ public class CraftAttribute extends OldEnumHolderable<Attribute, net.minecraft.w
     }
 
     @Override
-    public Sentiment getSentiment() {
+    public @NonNull Sentiment getSentiment() {
         return Sentiment.valueOf(this.getHandle().sentiment.name());
     }
 
@@ -59,12 +60,12 @@ public class CraftAttribute extends OldEnumHolderable<Attribute, net.minecraft.w
     }
 
     @Override
-    public String getTranslationKey() {
+    public @NonNull String getTranslationKey() {
         return this.getHandle().getDescriptionId();
     }
 
     @Override
-    public String translationKey() {
+    public @NonNull String translationKey() {
         return this.getHandle().getDescriptionId();
     }
 }

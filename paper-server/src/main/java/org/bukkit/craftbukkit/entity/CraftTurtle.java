@@ -3,6 +3,7 @@ package org.bukkit.craftbukkit.entity;
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.craftbukkit.util.CraftLocation;
 import org.bukkit.entity.Turtle;
+import org.jspecify.annotations.NonNull;
 
 public class CraftTurtle extends CraftAnimals implements Turtle {
 
@@ -26,12 +27,12 @@ public class CraftTurtle extends CraftAnimals implements Turtle {
     }
 
     @Override
-    public org.bukkit.Location getHome() {
+    public org.bukkit.@NonNull Location getHome() {
         return CraftLocation.toBukkit(this.getHandle().getHomePos(), this.getHandle().level());
     }
 
     @Override
-    public void setHome(org.bukkit.Location location) {
+    public void setHome(org.bukkit.@NonNull Location location) {
         this.getHandle().setHomePos(CraftLocation.toBlockPos(location));
     }
 

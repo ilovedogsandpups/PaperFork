@@ -8,6 +8,7 @@ import org.bukkit.Keyed;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Tag;
 import org.bukkit.craftbukkit.util.CraftNamespacedKey;
+import org.jspecify.annotations.NonNull;
 
 public abstract class CraftTag<N, B extends Keyed> implements Tag<B> {
 
@@ -27,7 +28,7 @@ public abstract class CraftTag<N, B extends Keyed> implements Tag<B> {
     }
 
     @Override
-    public NamespacedKey getKey() {
+    public @NonNull NamespacedKey getKey() {
         return CraftNamespacedKey.fromMinecraft(this.tag.location());
     }
 

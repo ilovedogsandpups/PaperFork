@@ -8,6 +8,7 @@ import io.papermc.paper.registry.set.RegistryValueSetBuilder;
 import io.papermc.paper.registry.set.RegistryValueSetBuilderImpl;
 import net.minecraft.server.dialog.CommonDialogData;
 import net.minecraft.server.dialog.Dialog;
+import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 
 import static io.papermc.paper.registry.data.util.Checks.asArgument;
@@ -34,12 +35,12 @@ public class PaperDialogRegistryEntry implements DialogRegistryEntry {
     }
 
     @Override
-    public DialogBase base() {
+    public @NonNull DialogBase base() {
         return asConfigured(this.dialogBase, "dialogBase");
     }
 
     @Override
-    public DialogType type() {
+    public @NonNull DialogType type() {
         return asConfigured(this.dialogType, "dialogType");
     }
 
@@ -50,24 +51,24 @@ public class PaperDialogRegistryEntry implements DialogRegistryEntry {
         }
 
         @Override
-        public RegistryValueSetBuilder<io.papermc.paper.dialog.Dialog, Builder> registryValueSet() {
+        public @NonNull RegistryValueSetBuilder<io.papermc.paper.dialog.Dialog, Builder> registryValueSet() {
             return new RegistryValueSetBuilderImpl<>(RegistryKey.DIALOG, this.conversions);
         }
 
         @Override
-        public Builder base(final DialogBase dialogBase) {
+        public @NonNull Builder base(final @NonNull DialogBase dialogBase) {
             this.dialogBase = asArgument(dialogBase, "dialogBase");
             return this;
         }
 
         @Override
-        public Builder type(final DialogType dialogType) {
+        public @NonNull Builder type(final @NonNull DialogType dialogType) {
             this.dialogType = asArgument(dialogType, "dialogType");
             return this;
         }
 
         @Override
-        public Dialog build() {
+        public @NonNull Dialog build() {
             return PaperDialogs.constructDialog(this.base(), this.type(), this.conversions);
         }
     }

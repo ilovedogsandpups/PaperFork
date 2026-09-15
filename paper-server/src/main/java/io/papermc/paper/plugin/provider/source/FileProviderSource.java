@@ -19,6 +19,8 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.jar.JarFile;
+
+import org.jspecify.annotations.NonNull;
 import org.slf4j.Logger;
 
 /**
@@ -154,12 +156,12 @@ public class FileProviderSource implements ProviderSource<Path, Path> {
         }
 
         @Override
-        public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
+        public @NonNull FileVisitResult preVisitDirectory(Path dir, @NonNull BasicFileAttributes attrs) throws IOException {
             return FileVisitResult.CONTINUE;
         }
 
         @Override
-        public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+        public @NonNull FileVisitResult visitFile(Path file, @NonNull BasicFileAttributes attrs) throws IOException {
             try {
                 String updatePluginName = FileProviderSource.this.getPluginName(file);
                 if (this.targetName.equals(updatePluginName)) {
@@ -175,12 +177,12 @@ public class FileProviderSource implements ProviderSource<Path, Path> {
         }
 
         @Override
-        public FileVisitResult visitFileFailed(Path file, IOException exc) throws IOException {
+        public @NonNull FileVisitResult visitFileFailed(Path file, @NonNull IOException exc) throws IOException {
             return FileVisitResult.CONTINUE;
         }
 
         @Override
-        public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
+        public @NonNull FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
             return FileVisitResult.CONTINUE;
         }
 

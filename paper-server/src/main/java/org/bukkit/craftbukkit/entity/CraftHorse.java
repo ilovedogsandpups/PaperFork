@@ -7,6 +7,7 @@ import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.craftbukkit.inventory.CraftInventoryHorse;
 import org.bukkit.entity.Horse;
 import org.bukkit.inventory.HorseInventory;
+import org.jspecify.annotations.NonNull;
 
 public class CraftHorse extends CraftAbstractHorse implements Horse {
 
@@ -20,12 +21,12 @@ public class CraftHorse extends CraftAbstractHorse implements Horse {
     }
 
     @Override
-    public Variant getVariant() {
+    public @NonNull Variant getVariant() {
         return Variant.HORSE;
     }
 
     @Override
-    public Color getColor() {
+    public @NonNull Color getColor() {
         return Color.values()[this.getHandle().getVariant().getId()];
     }
 
@@ -36,7 +37,7 @@ public class CraftHorse extends CraftAbstractHorse implements Horse {
     }
 
     @Override
-    public Style getStyle() {
+    public @NonNull Style getStyle() {
         return Style.values()[this.getHandle().getMarkings().getId()];
     }
 
@@ -57,7 +58,7 @@ public class CraftHorse extends CraftAbstractHorse implements Horse {
     }
 
     @Override
-    public HorseInventory getInventory() {
+    public @NonNull HorseInventory getInventory() {
         return new CraftInventoryHorse(this.getHandle().inventory,
             this.getHandle().createEquipmentSlotContainer(EquipmentSlot.BODY),
             this.getHandle().createEquipmentSlotContainer(EquipmentSlot.SADDLE)

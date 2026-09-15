@@ -14,6 +14,7 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.craftbukkit.util.CraftNamespacedKey;
 import org.bukkit.inventory.meta.KnowledgeBookMeta;
+import org.jspecify.annotations.NonNull;
 
 @DelegateDeserialization(SerializableMeta.class)
 public class CraftMetaKnowledgeBook extends CraftMetaItem implements KnowledgeBookMeta {
@@ -95,7 +96,7 @@ public class CraftMetaKnowledgeBook extends CraftMetaItem implements KnowledgeBo
     }
 
     @Override
-    public List<NamespacedKey> getRecipes() {
+    public @NonNull List<NamespacedKey> getRecipes() {
         return Collections.unmodifiableList(this.recipes);
     }
 
@@ -108,7 +109,7 @@ public class CraftMetaKnowledgeBook extends CraftMetaItem implements KnowledgeBo
     }
 
     @Override
-    public CraftMetaKnowledgeBook clone() {
+    public @NonNull CraftMetaKnowledgeBook clone() {
         CraftMetaKnowledgeBook meta = (CraftMetaKnowledgeBook) super.clone();
         meta.recipes = new ArrayList<>(this.recipes);
         return meta;

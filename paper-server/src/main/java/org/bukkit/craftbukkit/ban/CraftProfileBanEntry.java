@@ -6,6 +6,7 @@ import net.minecraft.server.players.NameAndId;
 import net.minecraft.server.players.UserBanList;
 import net.minecraft.server.players.UserBanListEntry;
 import org.bukkit.BanEntry;
+import org.jspecify.annotations.NonNull;
 
 public final class CraftProfileBanEntry implements BanEntry<com.destroystokyo.paper.profile.PlayerProfile> { // Paper
     private static final Date minorDate = Date.from(Instant.parse("1899-12-31T04:00:00Z"));
@@ -26,12 +27,12 @@ public final class CraftProfileBanEntry implements BanEntry<com.destroystokyo.pa
     }
 
     @Override
-    public String getTarget() {
+    public @NonNull String getTarget() {
         return this.profile.name();
     }
 
     @Override
-    public com.destroystokyo.paper.profile.PlayerProfile getBanTarget() { // Paper
+    public com.destroystokyo.paper.profile.@NonNull PlayerProfile getBanTarget() { // Paper
         return new com.destroystokyo.paper.profile.CraftPlayerProfile(this.profile); // Paper
     }
 
@@ -41,17 +42,17 @@ public final class CraftProfileBanEntry implements BanEntry<com.destroystokyo.pa
     }
 
     @Override
-    public void setCreated(Date created) {
+    public void setCreated(@NonNull Date created) {
         this.created = created;
     }
 
     @Override
-    public String getSource() {
+    public @NonNull String getSource() {
         return this.source;
     }
 
     @Override
-    public void setSource(String source) {
+    public void setSource(@NonNull String source) {
         this.source = source;
     }
 

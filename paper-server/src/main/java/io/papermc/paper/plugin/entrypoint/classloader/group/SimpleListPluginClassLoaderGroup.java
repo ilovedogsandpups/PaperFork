@@ -4,6 +4,7 @@ import io.papermc.paper.plugin.provider.classloader.ConfiguredPluginClassLoader;
 import io.papermc.paper.plugin.provider.classloader.PluginClassLoaderGroup;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
 
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -24,7 +25,7 @@ public abstract class SimpleListPluginClassLoaderGroup implements PluginClassLoa
     }
 
     @Override
-    public @Nullable Class<?> getClassByName(String name, boolean resolve, ConfiguredPluginClassLoader requester) {
+    public @Nullable Class<?> getClassByName(@NonNull String name, boolean resolve, @NonNull ConfiguredPluginClassLoader requester) {
         if (!DISABLE_CLASS_PRIORITIZATION) {
             try {
                 return this.lookupClass(name, false, requester); // First check the requester
@@ -47,12 +48,12 @@ public abstract class SimpleListPluginClassLoaderGroup implements PluginClassLoa
     }
 
     @Override
-    public void remove(ConfiguredPluginClassLoader configuredPluginClassLoader) {
+    public void remove(@NonNull ConfiguredPluginClassLoader configuredPluginClassLoader) {
         this.classloaders.remove(configuredPluginClassLoader);
     }
 
     @Override
-    public void add(ConfiguredPluginClassLoader configuredPluginClassLoader) {
+    public void add(@NonNull ConfiguredPluginClassLoader configuredPluginClassLoader) {
         this.classloaders.add(configuredPluginClassLoader);
     }
 

@@ -96,6 +96,7 @@ import org.bukkit.material.MaterialData;
 import org.bukkit.plugin.InvalidPluginException;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.potion.PotionType;
+import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 import org.slf4j.Logger;
 
@@ -517,7 +518,7 @@ public final class CraftMagicNumbers implements UnsafeValues {
     }
 
     @Override
-    public com.google.gson.JsonObject serializeItemAsJson(ItemStack itemStack) {
+    public com.google.gson.@NonNull JsonObject serializeItemAsJson(@NonNull ItemStack itemStack) {
         Preconditions.checkNotNull(itemStack, "Cannot serialize empty ItemStack");
         Preconditions.checkArgument(!itemStack.isEmpty(), "Cannot serialize empty ItemStack");
 
@@ -536,7 +537,7 @@ public final class CraftMagicNumbers implements UnsafeValues {
     }
 
     @Override
-    public ItemStack deserializeItemFromJson(com.google.gson.JsonObject data) throws IllegalArgumentException {
+    public @NonNull ItemStack deserializeItemFromJson(com.google.gson.@NonNull JsonObject data) throws IllegalArgumentException {
         Preconditions.checkNotNull(data, "null cannot be deserialized");
 
         final int dataVersion = data.get(SharedConstants.DATA_VERSION_TAG).getAsInt();
@@ -547,7 +548,7 @@ public final class CraftMagicNumbers implements UnsafeValues {
     }
 
     @Override
-    public byte[] serializeEntity(org.bukkit.entity.Entity entity, EntitySerializationFlag... serializationFlags) {
+    public byte @NonNull [] serializeEntity(org.bukkit.entity.@NonNull Entity entity, EntitySerializationFlag... serializationFlags) {
         Preconditions.checkNotNull(entity, "null cannot be serialized");
         Preconditions.checkArgument(entity instanceof CraftEntity, "Only CraftEntities can be serialized");
 
@@ -608,7 +609,7 @@ public final class CraftMagicNumbers implements UnsafeValues {
     }
 
     @Override
-    public org.bukkit.entity.Entity deserializeEntity(byte[] data, World world, boolean preserveUUID, boolean preservePassengers) {
+    public org.bukkit.entity.@NonNull Entity deserializeEntity(byte @NonNull [] data, @NonNull World world, boolean preserveUUID, boolean preservePassengers) {
         Preconditions.checkNotNull(data, "null cannot be deserialized");
         Preconditions.checkArgument(data.length > 0, "Cannot deserialize empty data");
 
@@ -658,7 +659,7 @@ public final class CraftMagicNumbers implements UnsafeValues {
     }
 
     @Override
-    public String getMainLevelName() {
+    public @NonNull String getMainLevelName() {
         return ((net.minecraft.server.dedicated.DedicatedServer) net.minecraft.server.MinecraftServer.getServer()).getProperties().levelName;
     }
 
@@ -669,7 +670,7 @@ public final class CraftMagicNumbers implements UnsafeValues {
     // Paper end
 
     @Override
-    public ItemStack deserializeItemHover(final HoverEvent.ShowItem itemHover) {
+    public @NonNull ItemStack deserializeItemHover(final HoverEvent.@NonNull ShowItem itemHover) {
         final RegistryOps<Object> ops = CraftRegistry.getMinecraftRegistry().createSerializationContext(JavaOps.INSTANCE);
         final Object encoded = AdventureCodecs.SHOW_ITEM_CODEC.codec()
             .encodeStart(ops, HoverEvent.showItem(itemHover)).getOrThrow(IllegalStateException::new);

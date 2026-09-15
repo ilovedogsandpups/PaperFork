@@ -4,6 +4,7 @@ import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.animal.armadillo.Armadillo.ArmadilloState;
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.entity.Armadillo;
+import org.jspecify.annotations.NonNull;
 
 public class CraftArmadillo extends CraftAnimals implements Armadillo {
 
@@ -17,7 +18,7 @@ public class CraftArmadillo extends CraftAnimals implements Armadillo {
     }
 
     @Override
-    public State getState() {
+    public @NonNull State getState() {
         return State.valueOf(this.getHandle().getState().name());
     }
 

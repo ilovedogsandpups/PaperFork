@@ -9,6 +9,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
+import org.jspecify.annotations.NonNull;
 
 public class CraftEntityEquipment implements EntityEquipment {
 
@@ -19,26 +20,26 @@ public class CraftEntityEquipment implements EntityEquipment {
     }
 
     @Override
-    public void setItem(EquipmentSlot slot, ItemStack item) {
+    public void setItem(@NonNull EquipmentSlot slot, ItemStack item) {
         this.setItem(slot, item, false);
     }
 
     @Override
-    public void setItem(EquipmentSlot slot, ItemStack item, boolean silent) {
+    public void setItem(@NonNull EquipmentSlot slot, ItemStack item, boolean silent) {
         Preconditions.checkArgument(slot != null, "slot must not be null");
         net.minecraft.world.entity.EquipmentSlot nmsSlot = CraftEquipmentSlot.getNMS(slot);
         this.setEquipment(nmsSlot, item, silent);
     }
 
     @Override
-    public ItemStack getItem(EquipmentSlot slot) {
+    public @NonNull ItemStack getItem(@NonNull EquipmentSlot slot) {
         Preconditions.checkArgument(slot != null, "slot must not be null");
         net.minecraft.world.entity.EquipmentSlot nmsSlot = CraftEquipmentSlot.getNMS(slot);
         return this.getEquipment(nmsSlot);
     }
 
     @Override
-    public ItemStack getItemInMainHand() {
+    public @NonNull ItemStack getItemInMainHand() {
         return this.getEquipment(net.minecraft.world.entity.EquipmentSlot.MAINHAND);
     }
 
@@ -53,7 +54,7 @@ public class CraftEntityEquipment implements EntityEquipment {
     }
 
     @Override
-    public ItemStack getItemInOffHand() {
+    public @NonNull ItemStack getItemInOffHand() {
         return this.getEquipment(net.minecraft.world.entity.EquipmentSlot.OFFHAND);
     }
 
@@ -68,7 +69,7 @@ public class CraftEntityEquipment implements EntityEquipment {
     }
 
     @Override
-    public ItemStack getItemInHand() {
+    public @NonNull ItemStack getItemInHand() {
         return this.getItemInMainHand();
     }
 
@@ -78,7 +79,7 @@ public class CraftEntityEquipment implements EntityEquipment {
     }
 
     @Override
-    public ItemStack getHelmet() {
+    public @NonNull ItemStack getHelmet() {
         return this.getEquipment(net.minecraft.world.entity.EquipmentSlot.HEAD);
     }
 
@@ -93,7 +94,7 @@ public class CraftEntityEquipment implements EntityEquipment {
     }
 
     @Override
-    public ItemStack getChestplate() {
+    public @NonNull ItemStack getChestplate() {
         return this.getEquipment(net.minecraft.world.entity.EquipmentSlot.CHEST);
     }
 
@@ -108,7 +109,7 @@ public class CraftEntityEquipment implements EntityEquipment {
     }
 
     @Override
-    public ItemStack getLeggings() {
+    public @NonNull ItemStack getLeggings() {
         return this.getEquipment(net.minecraft.world.entity.EquipmentSlot.LEGS);
     }
 
@@ -123,7 +124,7 @@ public class CraftEntityEquipment implements EntityEquipment {
     }
 
     @Override
-    public ItemStack getBoots() {
+    public @NonNull ItemStack getBoots() {
         return this.getEquipment(net.minecraft.world.entity.EquipmentSlot.FEET);
     }
 
@@ -138,7 +139,7 @@ public class CraftEntityEquipment implements EntityEquipment {
     }
 
     @Override
-    public ItemStack[] getArmorContents() {
+    public ItemStack @NonNull [] getArmorContents() {
         return new ItemStack[]{
             this.getEquipment(net.minecraft.world.entity.EquipmentSlot.FEET),
             this.getEquipment(net.minecraft.world.entity.EquipmentSlot.LEGS),
@@ -148,7 +149,7 @@ public class CraftEntityEquipment implements EntityEquipment {
     }
 
     @Override
-    public void setArmorContents(ItemStack[] items) {
+    public void setArmorContents(ItemStack @NonNull [] items) {
         this.setEquipment(net.minecraft.world.entity.EquipmentSlot.FEET, ArrayUtils.get(items, 0), false);
         this.setEquipment(net.minecraft.world.entity.EquipmentSlot.LEGS, ArrayUtils.get(items, 1), false);
         this.setEquipment(net.minecraft.world.entity.EquipmentSlot.CHEST, ArrayUtils.get(items, 2), false);
@@ -171,7 +172,7 @@ public class CraftEntityEquipment implements EntityEquipment {
     }
 
     @Override
-    public Entity getHolder() {
+    public @NonNull Entity getHolder() {
         return this.entity;
     }
 
@@ -246,12 +247,12 @@ public class CraftEntityEquipment implements EntityEquipment {
     }
     // Paper start
     @Override
-    public float getDropChance(EquipmentSlot slot) {
+    public float getDropChance(@NonNull EquipmentSlot slot) {
         return getDropChance(CraftEquipmentSlot.getNMS(slot));
     }
 
     @Override
-    public void setDropChance(EquipmentSlot slot, float chance) {
+    public void setDropChance(@NonNull EquipmentSlot slot, float chance) {
         setDropChance(CraftEquipmentSlot.getNMS(slot), chance);
     }
     // Paper end

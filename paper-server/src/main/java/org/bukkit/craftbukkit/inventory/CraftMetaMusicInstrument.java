@@ -9,6 +9,7 @@ import org.bukkit.MusicInstrument;
 import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.craftbukkit.CraftMusicInstrument;
 import org.bukkit.inventory.meta.MusicInstrumentMeta;
+import org.jspecify.annotations.NonNull;
 
 @DelegateDeserialization(SerializableMeta.class)
 public class CraftMetaMusicInstrument extends CraftMetaItem implements MusicInstrumentMeta {
@@ -88,7 +89,7 @@ public class CraftMetaMusicInstrument extends CraftMetaItem implements MusicInst
     }
 
     @Override
-    public CraftMetaMusicInstrument clone() {
+    public @NonNull CraftMetaMusicInstrument clone() {
         CraftMetaMusicInstrument meta = (CraftMetaMusicInstrument) super.clone();
         meta.instrument = this.instrument;
         return meta;

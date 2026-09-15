@@ -3,6 +3,7 @@ package com.destroystokyo.paper.entity.ai;
 import java.util.EnumSet;
 import net.minecraft.world.entity.ai.goal.Goal;
 import org.bukkit.entity.Mob;
+import org.jspecify.annotations.NonNull;
 
 /**
  * Wraps vanilla in api
@@ -50,12 +51,12 @@ public class PaperGoal<T extends Mob> implements com.destroystokyo.paper.entity.
     }
 
     @Override
-    public GoalKey<T> getKey() {
+    public @NonNull GoalKey<T> getKey() {
         return this.key;
     }
 
     @Override
-    public EnumSet<GoalType> getTypes() {
+    public @NonNull EnumSet<GoalType> getTypes() {
         return this.types;
     }
 

@@ -39,6 +39,7 @@ import org.bukkit.entity.Frog;
 import org.bukkit.entity.Villager;
 import org.bukkit.map.MapCursor;
 import org.bukkit.util.OldEnum;
+import org.jspecify.annotations.NonNull;
 
 @Deprecated
 @NotInBukkit
@@ -252,7 +253,7 @@ public class EnumEvil {
         }
 
         @Override
-        protected T doForward(String value) {
+        protected @NonNull T doForward(@NonNull String value) {
             if (this.registryData == null) {
                 this.registryData = EnumEvil.getRegistryData(this.clazz);
             }
@@ -261,7 +262,7 @@ public class EnumEvil {
         }
 
         @Override
-        protected String doBackward(T enumValue) {
+        protected @NonNull String doBackward(T enumValue) {
             return enumValue.name();
         }
 

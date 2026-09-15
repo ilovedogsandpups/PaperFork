@@ -11,6 +11,7 @@ import org.bukkit.craftbukkit.util.CraftLocation;
 import org.bukkit.damage.DamageSource;
 import org.bukkit.damage.DamageType;
 import org.bukkit.entity.Entity;
+import org.jspecify.annotations.NonNull;
 
 public class CraftDamageSource implements DamageSource {
 
@@ -31,7 +32,7 @@ public class CraftDamageSource implements DamageSource {
     }
 
     @Override
-    public DamageType getDamageType() {
+    public @NonNull DamageType getDamageType() {
         return this.damageType;
     }
 
@@ -71,7 +72,7 @@ public class CraftDamageSource implements DamageSource {
     }
 
     @Override
-    public Pointers getDamageContext() {
+    public @NonNull Pointers getDamageContext() {
         return this.getHandle().getDamageContext();
     }
 

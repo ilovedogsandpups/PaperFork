@@ -9,6 +9,7 @@ import org.bukkit.generator.structure.Structure;
 import org.bukkit.generator.structure.StructurePiece;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.util.BoundingBox;
+import org.jspecify.annotations.NonNull;
 
 public class CraftGeneratedStructure implements GeneratedStructure {
 
@@ -20,18 +21,18 @@ public class CraftGeneratedStructure implements GeneratedStructure {
     }
 
     @Override
-    public BoundingBox getBoundingBox() {
+    public @NonNull BoundingBox getBoundingBox() {
         net.minecraft.world.level.levelgen.structure.BoundingBox box = this.handle.getBoundingBox();
         return new BoundingBox(box.minX(), box.minY(), box.minZ(), box.maxX(), box.maxY(), box.maxZ());
     }
 
     @Override
-    public Structure getStructure() {
+    public @NonNull Structure getStructure() {
         return CraftStructure.minecraftToBukkit(this.handle.getStructure());
     }
 
     @Override
-    public Collection<StructurePiece> getPieces() {
+    public @NonNull Collection<StructurePiece> getPieces() {
         if (this.pieces == null) { // Cache the pieces on first request
             ImmutableList.Builder<StructurePiece> builder = ImmutableList.builderWithExpectedSize(this.handle.getPieces().size());
             for (net.minecraft.world.level.levelgen.structure.StructurePiece piece : this.handle.getPieces()) {
@@ -45,7 +46,7 @@ public class CraftGeneratedStructure implements GeneratedStructure {
     }
 
     @Override
-    public PersistentDataContainer getPersistentDataContainer() {
+    public @NonNull PersistentDataContainer getPersistentDataContainer() {
         return this.handle.persistentDataContainer;
     }
 }

@@ -7,6 +7,7 @@ import net.minecraft.server.dialog.body.PlainMessage;
 import net.minecraft.server.dialog.input.TextInput;
 import org.checkerframework.checker.index.qual.Positive;
 import org.jetbrains.annotations.Range;
+import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 
 import static io.papermc.paper.util.BoundChecker.requirePositive;
@@ -50,37 +51,37 @@ public record TextDialogInputImpl(
         }
 
         @Override
-        public TextDialogInput.Builder width(final @Range(from = 1, to = 1024) int width) {
+        public TextDialogInput.@NonNull Builder width(final @Range(from = 1, to = 1024) int width) {
             this.width = requireRange(width, "width", 1, 1024);
             return this;
         }
 
         @Override
-        public TextDialogInput.Builder labelVisible(final boolean labelVisible) {
+        public TextDialogInput.@NonNull Builder labelVisible(final boolean labelVisible) {
             this.labelVisible = labelVisible;
             return this;
         }
 
         @Override
-        public TextDialogInput.Builder initial(final String initial) {
+        public TextDialogInput.@NonNull Builder initial(final @NonNull String initial) {
             this.initial = initial;
             return this;
         }
 
         @Override
-        public TextDialogInput.Builder maxLength(final @Positive int maxLength) {
+        public TextDialogInput.@NonNull Builder maxLength(final @Positive int maxLength) {
             this.maxLength = requirePositive(maxLength, "maxLength");
             return this;
         }
 
         @Override
-        public TextDialogInput.Builder multiline(final TextDialogInput.@Nullable MultilineOptions multiline) {
+        public TextDialogInput.@NonNull Builder multiline(final TextDialogInput.@Nullable MultilineOptions multiline) {
             this.multiline = multiline;
             return this;
         }
 
         @Override
-        public TextDialogInput build() {
+        public @NonNull TextDialogInput build() {
             Preconditions.checkState(this.initial.length() <= this.maxLength, "The initial value must be less than or equal to the maximum length.");
             return new TextDialogInputImpl(this.key, this.width, this.label, this.labelVisible, this.initial, this.maxLength, this.multiline);
         }

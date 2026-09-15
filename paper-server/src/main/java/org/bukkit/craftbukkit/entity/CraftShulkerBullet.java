@@ -3,6 +3,7 @@ package org.bukkit.craftbukkit.entity;
 import com.google.common.base.Preconditions;
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.entity.ShulkerBullet;
+import org.jspecify.annotations.NonNull;
 
 public class CraftShulkerBullet extends AbstractProjectile implements ShulkerBullet {
 
@@ -28,7 +29,7 @@ public class CraftShulkerBullet extends AbstractProjectile implements ShulkerBul
     }
 
     @Override
-    public org.bukkit.util.Vector getTargetDelta() {
+    public org.bukkit.util.@NonNull Vector getTargetDelta() {
         net.minecraft.world.entity.projectile.ShulkerBullet bullet = this.getHandle();
         return new org.bukkit.util.Vector(bullet.targetDeltaX, bullet.targetDeltaY, bullet.targetDeltaZ);
     }

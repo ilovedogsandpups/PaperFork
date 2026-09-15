@@ -31,6 +31,7 @@ import org.bukkit.craftbukkit.block.CraftBlockEntityState;
 import org.bukkit.craftbukkit.block.CraftBlockStates;
 import org.bukkit.inventory.meta.BlockStateMeta;
 import org.bukkit.util.BlockVector;
+import org.jspecify.annotations.NonNull;
 
 @DelegateDeserialization(SerializableMeta.class)
 public class CraftMetaBlockState extends CraftMetaItem implements BlockStateMeta {
@@ -269,7 +270,7 @@ public class CraftMetaBlockState extends CraftMetaItem implements BlockStateMeta
     }
 
     @Override
-    public CraftMetaBlockState clone() {
+    public @NonNull CraftMetaBlockState clone() {
         CraftMetaBlockState meta = (CraftMetaBlockState) super.clone();
         // Paper start - no need for "clone" because they are essentially immutables
         meta.blockEntityTag = this.blockEntityTag;
@@ -293,7 +294,7 @@ public class CraftMetaBlockState extends CraftMetaItem implements BlockStateMeta
 
     @Override
     // Paper start - create blockstate on-demand
-    public CraftBlockEntityState<?> getBlockState() {
+    public @NonNull CraftBlockEntityState<?> getBlockState() {
         BlockPos pos = BlockPos.ZERO;
         final Material stateMaterial = this.materialForBlockEntityType();
         if (!this.blockEntityTag.isEmpty()) {

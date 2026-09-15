@@ -9,6 +9,7 @@ import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.craftbukkit.inventory.CraftItemStack;
 import org.bukkit.entity.Item;
 import org.bukkit.inventory.ItemStack;
+import org.jspecify.annotations.NonNull;
 
 public class CraftItem extends CraftEntity implements Item {
 
@@ -25,12 +26,12 @@ public class CraftItem extends CraftEntity implements Item {
     }
 
     @Override
-    public ItemStack getItemStack() {
+    public @NonNull ItemStack getItemStack() {
         return CraftItemStack.asCraftMirror(this.getHandle().getItem());
     }
 
     @Override
-    public void setItemStack(ItemStack stack) {
+    public void setItemStack(@NonNull ItemStack stack) {
         this.getHandle().setItem(CraftItemStack.asNMSCopy(stack));
     }
 
@@ -99,12 +100,12 @@ public class CraftItem extends CraftEntity implements Item {
      }
 
      @Override
-     public net.kyori.adventure.util.TriState getFrictionState() {
+     public net.kyori.adventure.util.@NonNull TriState getFrictionState() {
         return this.getHandle().frictionState;
      }
 
      @Override
-     public void setFrictionState(net.kyori.adventure.util.TriState state) {
+     public void setFrictionState(net.kyori.adventure.util.@NonNull TriState state) {
          Preconditions.checkArgument(state != null, "state may not be null");
          this.getHandle().frictionState = state;
      }

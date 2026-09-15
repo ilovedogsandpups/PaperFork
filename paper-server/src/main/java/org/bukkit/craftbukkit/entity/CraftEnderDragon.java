@@ -13,6 +13,7 @@ import org.bukkit.craftbukkit.boss.CraftDragonBattle;
 import org.bukkit.craftbukkit.util.CraftLocation;
 import org.bukkit.entity.ComplexEntityPart;
 import org.bukkit.entity.EnderDragon;
+import org.jspecify.annotations.NonNull;
 
 public class CraftEnderDragon extends CraftMob implements EnderDragon, CraftEnemy {
 
@@ -26,7 +27,7 @@ public class CraftEnderDragon extends CraftMob implements EnderDragon, CraftEnem
     }
 
     @Override
-    public Set<ComplexEntityPart> getParts() {
+    public @NonNull Set<ComplexEntityPart> getParts() {
         Builder<ComplexEntityPart> builder = ImmutableSet.builder();
 
         for (EnderDragonPart part : this.getHandle().getSubEntities()) {
@@ -37,12 +38,12 @@ public class CraftEnderDragon extends CraftMob implements EnderDragon, CraftEnem
     }
 
     @Override
-    public Phase getPhase() {
+    public @NonNull Phase getPhase() {
         return Phase.values()[this.getHandle().getEntityData().get(net.minecraft.world.entity.boss.enderdragon.EnderDragon.DATA_PHASE)];
     }
 
     @Override
-    public void setPhase(Phase phase) {
+    public void setPhase(@NonNull Phase phase) {
         this.getHandle().getPhaseManager().setPhase(CraftEnderDragon.getMinecraftPhase(phase));
     }
 
@@ -72,7 +73,7 @@ public class CraftEnderDragon extends CraftMob implements EnderDragon, CraftEnem
 
     // Paper start - Allow changing the EnderDragon podium
     @Override
-    public org.bukkit.Location getPodium() {
+    public org.bukkit.@NonNull Location getPodium() {
         return CraftLocation.toBukkit(this.getHandle().getPodium(), this.getWorld());
     }
 

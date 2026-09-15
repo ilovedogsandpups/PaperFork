@@ -5,6 +5,7 @@ import net.minecraft.server.level.ClientInformation;
 import net.minecraft.server.network.ServerGamePacketListenerImpl;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
+import org.jspecify.annotations.NonNull;
 
 public class PaperPlayerGameConnection extends PaperCommonConnection<ServerGamePacketListenerImpl> implements PlayerGameConnection {
 
@@ -26,17 +27,17 @@ public class PaperPlayerGameConnection extends PaperCommonConnection<ServerGameP
     }
 
     @Override
-    public Player getPlayer() {
+    public @NonNull Player getPlayer() {
         return this.packetListener.getCraftPlayer();
     }
 
     @Override
-    public void sendPluginMessage(final Plugin source, final String channel, final byte[] message) {
+    public void sendPluginMessage(final @NonNull Plugin source, final @NonNull String channel, final byte @NonNull [] message) {
         getPlayer().sendPluginMessage(source, channel, message);
     }
 
     @Override
-    public Set<String> getListeningPluginChannels() {
+    public @NonNull Set<String> getListeningPluginChannels() {
         return getPlayer().getListeningPluginChannels();
     }
 
