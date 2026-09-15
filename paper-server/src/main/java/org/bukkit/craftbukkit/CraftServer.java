@@ -153,7 +153,6 @@ import org.bukkit.craftbukkit.ban.CraftIpBanList;
 import org.bukkit.craftbukkit.ban.CraftProfileBanList;
 import org.bukkit.craftbukkit.block.data.CraftBlockData;
 import org.bukkit.craftbukkit.boss.CraftBossBar;
-import org.bukkit.craftbukkit.boss.CraftKeyedBossbar;
 import org.bukkit.craftbukkit.command.CraftCommandMap;
 import org.bukkit.craftbukkit.command.VanillaCommandWrapper;
 import org.bukkit.craftbukkit.entity.CraftEntityFactory;
@@ -245,7 +244,6 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginLoadOrder;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.ServicesManager;
-import org.bukkit.plugin.SimplePluginManager;
 import org.bukkit.plugin.SimpleServicesManager;
 import org.bukkit.plugin.messaging.Messenger;
 import org.bukkit.plugin.messaging.StandardMessenger;
@@ -271,7 +269,6 @@ public final class CraftServer implements Server {
     private final CraftCommandMap commandMap; // Paper - Move down
     private final SimpleHelpMap helpMap = new SimpleHelpMap(this);
     private final StandardMessenger messenger = new StandardMessenger();
-    private final SimplePluginManager pluginManager; // Paper - Move down
     public final io.papermc.paper.plugin.manager.PaperPluginManagerImpl paperPluginManager;
     private final StructureManager structureManager;
     final DedicatedServer console;
@@ -407,9 +404,7 @@ public final class CraftServer implements Server {
         Bukkit.setServer(this);
         // Paper start
         this.commandMap = new CraftCommandMap(this);
-        this.pluginManager = new SimplePluginManager(this, commandMap);
-        this.paperPluginManager = new io.papermc.paper.plugin.manager.PaperPluginManagerImpl(this, this.commandMap, pluginManager);
-        this.pluginManager.paperPluginManager = this.paperPluginManager;
+        this.paperPluginManager = new io.papermc.paper.plugin.manager.PaperPluginManagerImpl(this, this.commandMap, null);
          // Paper end
 
         CraftRegistry.setMinecraftRegistry(console.registryAccess());
@@ -583,7 +578,7 @@ public final class CraftServer implements Server {
             if (io.papermc.paper.configuration.GlobalConfiguration.get().misc.loadPermissionsYmlBeforePlugins) loadCustomPermissions(); // Paper
         }
 
-        Plugin[] plugins = this.pluginManager.getPlugins();
+        Plugin[] plugins = this.paperPluginManager.getPlugins();
 
         for (Plugin plugin : plugins) {
             if ((!plugin.isEnabled()) && (plugin.getDescription().getLoad() == type)) {
@@ -603,7 +598,7 @@ public final class CraftServer implements Server {
     }
 
     public void disablePlugins() {
-        this.pluginManager.disablePlugins();
+        this.paperPluginManager.disablePlugins();
     }
 
     public void syncCommands() {
@@ -629,8 +624,7 @@ public final class CraftServer implements Server {
                 }
             }
             this.paperPluginManager.addPermissions(permsToLoad); // Paper
-
-            this.pluginManager.enablePlugin(plugin);
+            this.paperPluginManager.enablePlugin(plugin);
         } catch (Throwable ex) {
             Logger.getLogger(CraftServer.class.getName()).log(Level.SEVERE, ex.getMessage() + " loading " + plugin.getDescription().getFullName() + " (Is it up to date?)", ex);
         }
@@ -885,7 +879,7 @@ public final class CraftServer implements Server {
 
     @Override
     public PluginManager getPluginManager() {
-        return this.pluginManager;
+        return this.paperPluginManager;
     }
 
     @Override
@@ -1002,9 +996,9 @@ public final class CraftServer implements Server {
             world.spigotConfig.init(); // Spigot
         }
 
-        Plugin[] pluginClone = pluginManager.getPlugins().clone(); // Paper
+        Plugin[] pluginClone = paperPluginManager.getPlugins().clone(); // Paper
         this.commandMap.clearCommands(); // Paper - Move command reloading up
-        this.pluginManager.clearPlugins();
+        this.paperPluginManager.clearPlugins();
         // Paper - move up
         // Paper start
         for (Plugin plugin : pluginClone) {
@@ -1150,7 +1144,7 @@ public final class CraftServer implements Server {
 
         for (Permission perm : permsList) {
             try {
-                this.pluginManager.addPermission(perm);
+                this.paperPluginManager.addPermission(perm);
             } catch (IllegalArgumentException ex) {
                 this.getLogger().log(Level.SEVERE, "Permission in " + file + " was already defined", ex);
             }
@@ -1755,7 +1749,7 @@ public final class CraftServer implements Server {
                 if (name != null && !name.isEmpty()) {
                     String[] split = name.split(":", 2);
                     String id = (split.length > 1) ? split[1] : null;
-                    Plugin plugin = this.pluginManager.getPlugin(split[0]);
+                    Plugin plugin = this.paperPluginManager.getPlugin(split[0]);
 
                     if (plugin == null) {
                         this.getLogger().severe("Could not set generator for default world '" + world + "': Plugin '" + split[0] + "' does not exist");
@@ -1791,7 +1785,7 @@ public final class CraftServer implements Server {
                 if (name != null && !name.isEmpty()) {
                     String[] split = name.split(":", 2);
                     String id = (split.length > 1) ? split[1] : null;
-                    Plugin plugin = this.pluginManager.getPlugin(split[0]);
+                    Plugin plugin = this.paperPluginManager.getPlugin(split[0]);
 
                     if (plugin == null) {
                         this.getLogger().severe("Could not set biome provider for default world '" + world + "': Plugin '" + split[0] + "' does not exist");
@@ -2841,12 +2835,12 @@ public final class CraftServer implements Server {
 
     @Override
     public void reloadPermissions() {
-        pluginManager.clearPermissions();
+        paperPluginManager.clearPermissions();
         if (io.papermc.paper.configuration.GlobalConfiguration.get().misc.loadPermissionsYmlBeforePlugins) loadCustomPermissions();
-        for (Plugin plugin : pluginManager.getPlugins()) {
+        for (Plugin plugin : paperPluginManager.getPlugins()) {
             for (Permission perm : plugin.getDescription().getPermissions()) {
                 try {
-                    pluginManager.addPermission(perm);
+                    paperPluginManager.addPermission(perm);
                 } catch (IllegalArgumentException ex) {
                     getLogger().log(Level.WARNING, "Plugin " + plugin.getDescription().getFullName() + " tried to register permission '" + perm.getName() + "' but it's already registered", ex);
                 }
