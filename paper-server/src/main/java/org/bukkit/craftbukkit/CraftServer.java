@@ -37,6 +37,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
@@ -254,6 +255,7 @@ import org.bukkit.structure.StructureManager;
 import org.bukkit.util.permissions.DefaultPermissions;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
 import org.yaml.snakeyaml.LoaderOptions;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.SafeConstructor;
@@ -308,29 +310,29 @@ public final class CraftServer implements Server {
     private final io.papermc.paper.threadedregions.scheduler.FoliaGlobalRegionScheduler globalRegionScheduler = new io.papermc.paper.threadedregions.scheduler.FoliaGlobalRegionScheduler();
 
     @Override
-    public final io.papermc.paper.threadedregions.scheduler.RegionScheduler getRegionScheduler() {
+    public final io.papermc.paper.threadedregions.scheduler.@NonNull RegionScheduler getRegionScheduler() {
         return this.regionizedScheduler;
     }
 
     @Override
-    public final io.papermc.paper.threadedregions.scheduler.AsyncScheduler getAsyncScheduler() {
+    public final io.papermc.paper.threadedregions.scheduler.@NonNull AsyncScheduler getAsyncScheduler() {
         return this.asyncScheduler;
     }
 
     @Override
-    public final io.papermc.paper.threadedregions.scheduler.FoliaGlobalRegionScheduler getGlobalRegionScheduler() {
+    public final io.papermc.paper.threadedregions.scheduler.@NonNull FoliaGlobalRegionScheduler getGlobalRegionScheduler() {
         return this.globalRegionScheduler;
     }
 
     @Override
-    public final boolean isOwnedByCurrentRegion(World world, io.papermc.paper.math.Position position) {
+    public final boolean isOwnedByCurrentRegion(@NonNull World world, io.papermc.paper.math.Position position) {
         return ca.spottedleaf.moonrise.common.util.TickThread.isTickThreadFor(
             ((CraftWorld) world).getHandle(), position.blockX() >> 4, position.blockZ() >> 4
         );
     }
 
     @Override
-    public final boolean isOwnedByCurrentRegion(World world, io.papermc.paper.math.Position position, int squareRadiusChunks) {
+    public final boolean isOwnedByCurrentRegion(@NonNull World world, io.papermc.paper.math.Position position, int squareRadiusChunks) {
         return ca.spottedleaf.moonrise.common.util.TickThread.isTickThreadFor(
             ((CraftWorld) world).getHandle(), position.blockX() >> 4, position.blockZ() >> 4, squareRadiusChunks
         );
@@ -353,28 +355,28 @@ public final class CraftServer implements Server {
     }
 
     @Override
-    public final boolean isOwnedByCurrentRegion(World world, int chunkX, int chunkZ) {
+    public final boolean isOwnedByCurrentRegion(@NonNull World world, int chunkX, int chunkZ) {
         return ca.spottedleaf.moonrise.common.util.TickThread.isTickThreadFor(
             ((CraftWorld) world).getHandle(), chunkX, chunkZ
         );
     }
 
     @Override
-    public final boolean isOwnedByCurrentRegion(World world, int chunkX, int chunkZ, int squareRadiusChunks) {
+    public final boolean isOwnedByCurrentRegion(@NonNull World world, int chunkX, int chunkZ, int squareRadiusChunks) {
         return ca.spottedleaf.moonrise.common.util.TickThread.isTickThreadFor(
             ((CraftWorld) world).getHandle(), chunkX, chunkZ, squareRadiusChunks
         );
     }
 
     @Override
-    public final boolean isOwnedByCurrentRegion(World world, int minChunkX, int minChunkZ, int maxChunkX, int maxChunkZ) {
+    public final boolean isOwnedByCurrentRegion(@NonNull World world, int minChunkX, int minChunkZ, int maxChunkX, int maxChunkZ) {
         return ca.spottedleaf.moonrise.common.util.TickThread.isTickThreadFor(
             ((CraftWorld) world).getHandle(), minChunkX, minChunkZ, maxChunkX, maxChunkZ
         );
     }
 
     @Override
-    public final boolean isOwnedByCurrentRegion(Entity entity) {
+    public final boolean isOwnedByCurrentRegion(@NonNull Entity entity) {
         return ca.spottedleaf.moonrise.common.util.TickThread.isTickThreadFor(((org.bukkit.craftbukkit.entity.CraftEntity) entity).getHandleRaw());
     }
 
@@ -415,7 +417,7 @@ public final class CraftServer implements Server {
 
         this.configuration = YamlConfiguration.loadConfiguration(this.getConfigFile());
         this.configuration.options().copyDefaults(true);
-        YamlConfiguration configurationDefaults = YamlConfiguration.loadConfiguration(new InputStreamReader(this.getClass().getClassLoader().getResourceAsStream("configurations/bukkit.yml"), StandardCharsets.UTF_8));
+        YamlConfiguration configurationDefaults = YamlConfiguration.loadConfiguration(new InputStreamReader(Objects.requireNonNull(this.getClass().getClassLoader().getResourceAsStream("configurations/bukkit.yml")), StandardCharsets.UTF_8));
         this.configuration.setDefaults(configurationDefaults);
         this.configuration.options().setHeader(configurationDefaults.options().getHeader());
         ConfigurationSection legacyAlias = null;
@@ -430,7 +432,7 @@ public final class CraftServer implements Server {
         this.commandsConfiguration = YamlConfiguration.loadConfiguration(this.getCommandsConfigFile());
         this.commandsConfiguration.options().copyDefaults(true);
         // Paper start - don't enforce icanhasbukkit default if alias block exists
-        final YamlConfiguration commandsDefaults = YamlConfiguration.loadConfiguration(new InputStreamReader(this.getClass().getClassLoader().getResourceAsStream("configurations/commands.yml"), StandardCharsets.UTF_8));
+        final YamlConfiguration commandsDefaults = YamlConfiguration.loadConfiguration(new InputStreamReader(Objects.requireNonNull(this.getClass().getClassLoader().getResourceAsStream("configurations/commands.yml")), StandardCharsets.UTF_8));
         if (this.commandsConfiguration.contains("aliases")) commandsDefaults.set("aliases", null);
         this.commandsConfiguration.setDefaults(commandsDefaults);
         // Paper end - don't enforce icanhasbukkit default if alias block exists
@@ -513,31 +515,7 @@ public final class CraftServer implements Server {
     }
 
     private void loadCompatibilities() {
-        if (true) return; // Paper - Big nope
-        ConfigurationSection compatibilities = this.configuration.getConfigurationSection("settings.compatibility");
-        if (compatibilities == null) {
-            this.activeCompatibilities = Collections.emptySet();
-            return;
-        }
-
-        this.activeCompatibilities = compatibilities
-                .getKeys(false)
-                .stream()
-                .filter(compatibilities::getBoolean)
-                .collect(Collectors.toSet());
-
-        if (!this.activeCompatibilities.isEmpty()) {
-            this.logger.info("Using following compatibilities: `" + Joiner.on("`, `").join(this.activeCompatibilities) + "`, this will affect performance and other plugins behavior.");
-            this.logger.info("Only use when necessary and prefer updating plugins if possible.");
-        }
-
-        if (this.activeCompatibilities.contains("enum-compatibility-mode")) {
-            this.getLogger().warning("Loading plugins in enum compatibility mode. This will affect plugin performance. Use only as a transition period or when absolutely necessary.");
-        } else if (System.getProperty("RemoveEnumBanner") == null) {
-            // TODO 2024-06-16: Remove in newer version
-            this.getLogger().info("*** This version of Spigot contains changes to some enums. If you notice that plugins no longer work after updating, please report this to the developers of those plugins first. ***");
-            this.getLogger().info("*** If you cannot update those plugins, you can try setting `settings.compatibility.enum-compatibility-mode` to `true` in `bukkit.yml`. ***");
-        }
+        return; // Paper - Big nope
     }
 
     public void loadPlugins() {
@@ -545,7 +523,7 @@ public final class CraftServer implements Server {
     }
 
     @Override
-    public File getPluginsFolder() {
+    public @NonNull File getPluginsFolder() {
         return this.console.getPluginsFolder();
     }
 
@@ -631,33 +609,33 @@ public final class CraftServer implements Server {
     }
 
     @Override
-    public String getName() {
+    public @NonNull String getName() {
         return this.serverName;
     }
 
     @Override
-    public String getVersion() {
+    public @NonNull String getVersion() {
         return this.serverVersion + " (MC: " + this.console.getServerVersion() + ")";
     }
 
     @Override
-    public String getBukkitVersion() {
+    public @NonNull String getBukkitVersion() {
         return this.bukkitVersion;
     }
 
     @Override
-    public String getMinecraftVersion() {
+    public @NonNull String getMinecraftVersion() {
         return this.console.getServerVersion();
     }
 
     @Override
-    public List<CraftPlayer> getOnlinePlayers() {
+    public @NonNull List<CraftPlayer> getOnlinePlayers() {
         return this.playerView;
     }
 
     @Override
     @Deprecated
-    public Player getPlayer(final String name) {
+    public Player getPlayer(final @NonNull String name) {
         Preconditions.checkArgument(name != null, "name cannot be null");
 
         Player found = this.getPlayerExact(name);
@@ -682,7 +660,7 @@ public final class CraftServer implements Server {
     }
 
     @Override
-    public Player getPlayerExact(String name) {
+    public Player getPlayerExact(@NonNull String name) {
         Preconditions.checkArgument(name != null, "name cannot be null");
 
         ServerPlayer player = this.playerList.getPlayerByName(name);
@@ -690,7 +668,7 @@ public final class CraftServer implements Server {
     }
 
     @Override
-    public Player getPlayer(UUID id) {
+    public Player getPlayer(@NonNull UUID id) {
         Preconditions.checkArgument(id != null, "UUID id cannot be null");
 
         ServerPlayer player = this.playerList.getPlayer(id);
@@ -703,7 +681,7 @@ public final class CraftServer implements Server {
 
     @Override
     @Deprecated
-    public List<Player> matchPlayer(String partialName) {
+    public @NonNull List<Player> matchPlayer(@NonNull String partialName) {
         Preconditions.checkArgument(partialName != null, "partialName cannot be null");
 
         List<Player> matchedPlayers = new ArrayList<>();
@@ -756,12 +734,12 @@ public final class CraftServer implements Server {
     }
 
     @Override
-    public String getIp() {
+    public @NonNull String getIp() {
         return this.getServer().getLocalIp();
     }
 
     @Override
-    public String getWorldType() {
+    public @NonNull String getWorldType() {
         return this.getProperties().properties.getProperty("level-type");
     }
 
@@ -799,17 +777,17 @@ public final class CraftServer implements Server {
     }
 
     @Override
-    public List<String> getInitialEnabledPacks() {
+    public @NonNull List<String> getInitialEnabledPacks() {
         return Collections.unmodifiableList(this.getProperties().initialDataPackConfiguration.getEnabled());
     }
 
     @Override
-    public List<String> getInitialDisabledPacks() {
+    public @NonNull List<String> getInitialDisabledPacks() {
         return Collections.unmodifiableList(this.getProperties().initialDataPackConfiguration.getDisabled());
     }
 
     @Override
-    public ServerTickManager getServerTickManager() {
+    public @NonNull ServerTickManager getServerTickManager() {
         return this.serverTickManager;
     }
 
@@ -819,17 +797,17 @@ public final class CraftServer implements Server {
     }
 
     @Override
-    public String getResourcePack() {
+    public @NonNull String getResourcePack() {
         return this.getServer().getServerResourcePack().map(MinecraftServer.ServerResourcePackInfo::url).orElse("");
     }
 
     @Override
-    public String getResourcePackHash() {
+    public @NonNull String getResourcePackHash() {
         return this.getServer().getServerResourcePack().map(MinecraftServer.ServerResourcePackInfo::hash).orElse("").toUpperCase(Locale.ROOT);
     }
 
     @Override
-    public String getResourcePackPrompt() {
+    public @NonNull String getResourcePackPrompt() {
         return this.getServer().getServerResourcePack().map(MinecraftServer.ServerResourcePackInfo::prompt).map(CraftChatMessage::fromComponent).orElse("");
     }
 
@@ -850,12 +828,12 @@ public final class CraftServer implements Server {
     // End Temporary calls
 
     @Override
-    public String getUpdateFolder() {
+    public @NonNull String getUpdateFolder() {
         return this.configuration.getString("settings.update-folder", "update");
     }
 
     @Override
-    public File getUpdateFolderFile() {
+    public @NonNull File getUpdateFolderFile() {
         return new File((File) this.console.options.valueOf("plugins"), this.configuration.getString("settings.update-folder", "update"));
     }
 
@@ -871,30 +849,30 @@ public final class CraftServer implements Server {
     }
 
     @Override
-    public int getTicksPerSpawns(SpawnCategory spawnCategory) {
+    public int getTicksPerSpawns(@NonNull SpawnCategory spawnCategory) {
         Preconditions.checkArgument(spawnCategory != null, "SpawnCategory cannot be null");
         Preconditions.checkArgument(CraftSpawnCategory.isValidForLimits(spawnCategory), "SpawnCategory.%s are not supported", spawnCategory);
         return this.configuration.getInt(CraftSpawnCategory.getConfigNameTicksPerSpawn(spawnCategory));
     }
 
     @Override
-    public PluginManager getPluginManager() {
+    public @NonNull PluginManager getPluginManager() {
         return this.paperPluginManager;
     }
 
     @Override
-    public CraftScheduler getScheduler() {
+    public @NonNull CraftScheduler getScheduler() {
         return this.scheduler;
     }
 
     @Override
-    public ServicesManager getServicesManager() {
+    public @NonNull ServicesManager getServicesManager() {
         return this.servicesManager;
     }
 
     @Override
-    public List<World> getWorlds() {
-        return new ArrayList<World>(this.worlds.values());
+    public @NonNull List<World> getWorlds() {
+        return new ArrayList<>(this.worlds.values());
     }
 
     @Override
@@ -907,7 +885,7 @@ public final class CraftServer implements Server {
     }
 
     @Override
-    public boolean dispatchCommand(CommandSender rawSender, String commandLine) {
+    public boolean dispatchCommand(@NonNull CommandSender rawSender, String commandLine) {
         Preconditions.checkArgument(rawSender != null, "sender cannot be null");
         Preconditions.checkArgument(commandLine != null, "commandLine cannot be null");
         org.spigotmc.AsyncCatcher.catchOp("Command Dispatched Async: " + commandLine); // Spigot // Paper - Include command in error message
@@ -1017,7 +995,7 @@ public final class CraftServer implements Server {
         int pollCount = 0;
 
         // Wait for at most 2.5 seconds for plugins to close their threads
-        while (pollCount < 50 && this.getScheduler().getActiveWorkers().size() > 0) {
+        while (pollCount < 50 && !this.getScheduler().getActiveWorkers().isEmpty()) {
             try {
                 Thread.sleep(50);
             } catch (InterruptedException e) {}
@@ -1055,7 +1033,7 @@ public final class CraftServer implements Server {
         int pollCount = 0;
 
         // Wait for at most 5 seconds for plugins to close their threads
-        while (pollCount < 10*5 && getScheduler().getActiveWorkers().size() > 0) {
+        while (pollCount < 10*5 && !getScheduler().getActiveWorkers().isEmpty()) {
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {}
@@ -1106,7 +1084,7 @@ public final class CraftServer implements Server {
     }
 
     private void loadCustomPermissions() {
-        File file = new File(this.configuration.getString("settings.permissions-file"));
+        File file = new File(Objects.requireNonNull(this.configuration.getString("settings.permissions-file")));
         if (!file.isFile()) {
             return;
         }
@@ -1124,7 +1102,7 @@ public final class CraftServer implements Server {
         try {
             perms = this.yaml.load(stream);
         } catch (MarkedYAMLException ex) {
-            this.getLogger().log(Level.WARNING, "Server permissions file " + file + " is not valid YAML: " + ex.toString());
+            this.getLogger().log(Level.WARNING, "Server permissions file " + file + " is not valid YAML: " + ex);
             return;
         } catch (Throwable ex) {
             this.getLogger().log(Level.WARNING, "Server permissions file " + file + " is not valid YAML.", ex);
@@ -1288,8 +1266,8 @@ public final class CraftServer implements Server {
             true,
             actualDimension,
             creator.environment(),
-            chunkGenerator,
-            biomeProvider,
+            Objects.requireNonNull(chunkGenerator),
+            Objects.requireNonNull(biomeProvider),
             savedDataStorage,
             loadedWorldData
         );
@@ -1309,12 +1287,12 @@ public final class CraftServer implements Server {
     }
 
     @Override
-    public boolean unloadWorld(String name, boolean save) {
+    public boolean unloadWorld(@NonNull String name, boolean save) {
         return this.unloadWorld(this.getWorld(name), save);
     }
 
     @Override
-    public boolean unloadWorld(World world, boolean save) {
+    public boolean unloadWorld(@NonNull World world, boolean save) {
         //Preconditions.checkState(!this.console.isIteratingOverLevels, "Cannot unload a world while worlds are being ticked"); // Paper - Cat - Temp disable. We'll see how this goes.
         if (world == null) {
             return false;
@@ -1356,12 +1334,12 @@ public final class CraftServer implements Server {
     }
 
     @Override
-    public World getRespawnWorld() {
+    public @NonNull World getRespawnWorld() {
         return this.console.findRespawnDimension().getWorld();
     }
 
     @Override
-    public void setRespawnWorld(final World world) {
+    public void setRespawnWorld(final @NonNull World world) {
         Preconditions.checkArgument(world != null, "world cannot be null");
 
         ((PrimaryLevelData) this.console.getWorldData()).respawnDimension = ((CraftWorld) world).getHandle().dimension();
@@ -1380,7 +1358,7 @@ public final class CraftServer implements Server {
     }
 
     @Override
-    public World getWorld(UUID uid) {
+    public World getWorld(@NonNull UUID uid) {
         for (World world : this.worlds.values()) {
             if (world.getUID().equals(uid)) {
                 return world;
@@ -1390,7 +1368,7 @@ public final class CraftServer implements Server {
     }
 
     @Override
-    public World getWorld(net.kyori.adventure.key.Key worldKey) {
+    public World getWorld(net.kyori.adventure.key.@NonNull Key worldKey) {
         ServerLevel level = console.getLevel(ResourceKey.create(net.minecraft.core.registries.Registries.DIMENSION, io.papermc.paper.adventure.PaperAdventure.asVanilla(worldKey)));
         if (level == null) return null;
         return level.getWorld();
@@ -1406,19 +1384,19 @@ public final class CraftServer implements Server {
     }
 
     @Override
-    public WorldBorder createWorldBorder() {
+    public @NonNull WorldBorder createWorldBorder() {
         net.minecraft.world.level.border.WorldBorder border = new net.minecraft.world.level.border.WorldBorder();
         border.setWarningTime(net.minecraft.world.level.border.WorldBorder.Settings.DEFAULT.warningTime()); // TODO remove once MC-304061 is truly fixed
         return new CraftWorldBorder(border);
     }
 
     @Override
-    public Logger getLogger() {
+    public @NonNull Logger getLogger() {
         return this.logger;
     }
 
     @Override
-    public PluginCommand getPluginCommand(String name) {
+    public PluginCommand getPluginCommand(@NonNull String name) {
         Command command = this.commandMap.getCommand(name);
 
         if (command instanceof PluginCommand) {
@@ -1440,35 +1418,30 @@ public final class CraftServer implements Server {
         if (recipe instanceof CraftRecipe) {
             toAdd = (CraftRecipe) recipe;
         } else {
-            if (recipe instanceof ShapedRecipe) {
-                toAdd = CraftShapedRecipe.fromBukkitRecipe((ShapedRecipe) recipe);
-            } else if (recipe instanceof ShapelessRecipe) {
-                toAdd = CraftShapelessRecipe.fromBukkitRecipe((ShapelessRecipe) recipe);
-            } else if (recipe instanceof FurnaceRecipe) {
-                toAdd = CraftFurnaceRecipe.fromBukkitRecipe((FurnaceRecipe) recipe);
-            } else if (recipe instanceof BlastingRecipe) {
-                toAdd = CraftBlastingRecipe.fromBukkitRecipe((BlastingRecipe) recipe);
-            } else if (recipe instanceof CampfireRecipe) {
-                toAdd = CraftCampfireRecipe.fromBukkitRecipe((CampfireRecipe) recipe);
-            } else if (recipe instanceof SmokingRecipe) {
-                toAdd = CraftSmokingRecipe.fromBukkitRecipe((SmokingRecipe) recipe);
-            } else if (recipe instanceof StonecuttingRecipe) {
-                toAdd = CraftStonecuttingRecipe.fromBukkitRecipe((StonecuttingRecipe) recipe);
-            } else if (recipe instanceof SmithingTransformRecipe) {
-                toAdd = CraftSmithingTransformRecipe.fromBukkitRecipe((SmithingTransformRecipe) recipe);
-            } else if (recipe instanceof SmithingTrimRecipe) {
-                toAdd = CraftSmithingTrimRecipe.fromBukkitRecipe((SmithingTrimRecipe) recipe);
-            } else if (recipe instanceof TransmuteRecipe) {
-                toAdd = CraftTransmuteRecipe.fromBukkitRecipe((TransmuteRecipe) recipe);
-            } else if (recipe instanceof ComplexRecipe) {
-                throw new UnsupportedOperationException("Cannot add custom complex recipe");
-            } else {
-                return false;
+            switch (recipe) {
+                case ShapedRecipe shapedRecipe -> toAdd = CraftShapedRecipe.fromBukkitRecipe(shapedRecipe);
+                case ShapelessRecipe shapelessRecipe -> toAdd = CraftShapelessRecipe.fromBukkitRecipe(shapelessRecipe);
+                case FurnaceRecipe furnaceRecipe -> toAdd = CraftFurnaceRecipe.fromBukkitRecipe(furnaceRecipe);
+                case BlastingRecipe blastingRecipe -> toAdd = CraftBlastingRecipe.fromBukkitRecipe(blastingRecipe);
+                case CampfireRecipe campfireRecipe -> toAdd = CraftCampfireRecipe.fromBukkitRecipe(campfireRecipe);
+                case SmokingRecipe smokingRecipe -> toAdd = CraftSmokingRecipe.fromBukkitRecipe(smokingRecipe);
+                case StonecuttingRecipe stonecuttingRecipe ->
+                    toAdd = CraftStonecuttingRecipe.fromBukkitRecipe(stonecuttingRecipe);
+                case SmithingTransformRecipe smithingTransformRecipe ->
+                    toAdd = CraftSmithingTransformRecipe.fromBukkitRecipe(smithingTransformRecipe);
+                case SmithingTrimRecipe smithingTrimRecipe ->
+                    toAdd = CraftSmithingTrimRecipe.fromBukkitRecipe(smithingTrimRecipe);
+                case TransmuteRecipe transmuteRecipe -> toAdd = CraftTransmuteRecipe.fromBukkitRecipe(transmuteRecipe);
+                case ComplexRecipe complexRecipe ->
+                    throw new UnsupportedOperationException("Cannot add custom complex recipe");
+                case null, default -> {
+                    return false;
+                }
             }
         }
         toAdd.addToRecipeManager();
         // Paper start - API for updating recipes on clients
-        if (true || resendRecipes) { // Always needs to be resent now... TODO
+        if (true) { // Always needs to be resent now... TODO
             this.playerList.reloadRecipes();
         }
         // Paper end - API for updating recipes on clients
@@ -1476,7 +1449,7 @@ public final class CraftServer implements Server {
     }
 
     @Override
-    public List<Recipe> getRecipesFor(ItemStack result) {
+    public @NonNull List<Recipe> getRecipesFor(@NonNull ItemStack result) {
         Preconditions.checkArgument(result != null, "ItemStack cannot be null");
 
         List<Recipe> results = new ArrayList<>();
@@ -1495,7 +1468,7 @@ public final class CraftServer implements Server {
     }
 
     @Override
-    public Recipe getRecipe(NamespacedKey recipeKey) {
+    public Recipe getRecipe(@NonNull NamespacedKey recipeKey) {
         Preconditions.checkArgument(recipeKey != null, "NamespacedKey recipeKey cannot be null");
 
         return this.getServer().getRecipeManager().byKey(CraftNamespacedKey.toResourceKey(Registries.RECIPE, recipeKey)).map(RecipeHolder::toBukkitRecipe).orElse(null);
@@ -1510,12 +1483,12 @@ public final class CraftServer implements Server {
             }
 
             @Override
-            public boolean stillValid(net.minecraft.world.entity.player.Player player) {
+            public boolean stillValid(net.minecraft.world.entity.player.@NonNull Player player) {
                 return false;
             }
 
             @Override
-            public net.minecraft.world.item.ItemStack quickMoveStack(net.minecraft.world.entity.player.Player player, int slot) {
+            public net.minecraft.world.item.@NonNull ItemStack quickMoveStack(net.minecraft.world.entity.player.@NonNull Player player, int slot) {
                 return net.minecraft.world.item.ItemStack.EMPTY;
             }
         };
@@ -1524,12 +1497,12 @@ public final class CraftServer implements Server {
     }
 
     @Override
-    public Recipe getCraftingRecipe(ItemStack[] craftingMatrix, World world) {
+    public Recipe getCraftingRecipe(ItemStack @NonNull [] craftingMatrix, @NonNull World world) {
         return this.getNMSRecipe(craftingMatrix, this.createCraftingContainer(), (CraftWorld) world).map(RecipeHolder::toBukkitRecipe).orElse(null);
     }
 
     @Override
-    public ItemCraftResult craftItemResult(ItemStack[] craftingMatrix, World world, Player player) {
+    public @NonNull ItemCraftResult craftItemResult(ItemStack @NonNull [] craftingMatrix, @NonNull World world, @NonNull Player player) {
         Preconditions.checkArgument(world != null, "world cannot be null");
         Preconditions.checkArgument(player != null, "player cannot be null");
 
@@ -1560,7 +1533,7 @@ public final class CraftServer implements Server {
     }
 
     @Override
-    public ItemCraftResult craftItemResult(ItemStack[] craftingMatrix, World world) {
+    public @NonNull ItemCraftResult craftItemResult(ItemStack @NonNull [] craftingMatrix, @NonNull World world) {
         Preconditions.checkArgument(world != null, "world must not be null");
 
         CraftWorld craftWorld = (CraftWorld) world;
@@ -1570,9 +1543,7 @@ public final class CraftServer implements Server {
         Optional<RecipeHolder<CraftingRecipe>> recipe = this.getNMSRecipe(craftingMatrix, craftingContainer, craftWorld);
 
         // Generate the resulting ItemStack from the Crafting Matrix
-        final ItemStack result = recipe.map(holder -> {
-            return CraftItemStack.asBukkitCopy(holder.value().assemble(craftingContainer.asCraftInput()));
-        }).orElseGet(ItemStack::empty);
+        final ItemStack result = recipe.map(holder -> CraftItemStack.asBukkitCopy(holder.value().assemble(craftingContainer.asCraftInput()))).orElseGet(ItemStack::empty);
 
         return this.createItemCraftResult(recipe, result, craftingContainer);
     }
@@ -1629,7 +1600,7 @@ public final class CraftServer implements Server {
     }
 
     @Override
-    public Iterator<Recipe> recipeIterator() {
+    public @NonNull Iterator<Recipe> recipeIterator() {
         return new RecipeIterator();
     }
 
@@ -1644,7 +1615,7 @@ public final class CraftServer implements Server {
     }
 
     @Override
-    public boolean removeRecipe(NamespacedKey recipeKey, boolean resendRecipes) {
+    public boolean removeRecipe(@NonNull NamespacedKey recipeKey, boolean resendRecipes) {
         Preconditions.checkArgument(recipeKey != null, "recipeKey == null");
 
         // Paper start - resend recipes on successful removal
@@ -1658,7 +1629,7 @@ public final class CraftServer implements Server {
     }
 
     @Override
-    public Map<String, String[]> getCommandAliases() {
+    public @NonNull Map<String, String[]> getCommandAliases() {
         ConfigurationSection section = this.commandsConfiguration.getConfigurationSection("aliases");
         Map<String, String[]> result = new LinkedHashMap<>();
 
@@ -1669,10 +1640,10 @@ public final class CraftServer implements Server {
                 if (section.isList(key)) {
                     commands = section.getStringList(key);
                 } else {
-                    commands = ImmutableList.of(section.getString(key));
+                    commands = ImmutableList.of(Objects.requireNonNull(section.getString(key)));
                 }
 
-                result.put(key, commands.toArray(new String[commands.size()]));
+                result.put(key, commands.toArray(new String[0]));
             }
         }
 
@@ -1811,7 +1782,6 @@ public final class CraftServer implements Server {
     @Override
     public CraftMapView getMap(int id) {
         final net.minecraft.world.level.Level overworld = this.console.overworld();
-        if (overworld == null) return null;
 
         final MapItemSavedData mapData = overworld.getMapData(new MapId(id));
         if (mapData == null) return null;
@@ -1820,18 +1790,18 @@ public final class CraftServer implements Server {
     }
 
     @Override
-    public CraftMapView createMap(World world) {
+    public @NonNull CraftMapView createMap(@NonNull World world) {
         Preconditions.checkArgument(world != null, "World cannot be null");
 
         ServerLevel level = ((CraftWorld) world).getHandle();
         // creates a new map at world spawn with the scale of 3, without tracking position and unlimited tracking
         BlockPos spawn = level.serverLevelData.getRespawnData().pos();
         MapId newId = MapItem.createNewSavedData(level, spawn.getX(), spawn.getZ(), 3, false, false, level.dimension());
-        return level.getMapData(newId).mapView;
+        return Objects.requireNonNull(level.getMapData(newId)).mapView;
     }
 
     @Override
-    public ItemStack createExplorerMap(World world, Location location, StructureType structureType, int radius, boolean findUnexplored) {
+    public @NonNull ItemStack createExplorerMap(World world, @NonNull Location location, StructureType structureType, int radius, boolean findUnexplored) {
         Preconditions.checkArgument(world != null, "World cannot be null");
         Preconditions.checkArgument(structureType != null, "StructureType cannot be null");
         Preconditions.checkArgument(structureType.getMapIcon() != null, "Cannot create explorer maps for StructureType %s", structureType.getName());
@@ -1854,7 +1824,7 @@ public final class CraftServer implements Server {
 
     // Paper start - copied from above (uses un-deprecated StructureType type)
     @Override
-    public ItemStack createExplorerMap(World world, Location location, org.bukkit.generator.structure.StructureType structureType, org.bukkit.map.MapCursor.Type mapIcon, int radius, boolean findUnexplored) {
+    public ItemStack createExplorerMap(World world, @NonNull Location location, org.bukkit.generator.structure.@NonNull StructureType structureType, org.bukkit.map.MapCursor.@NonNull Type mapIcon, int radius, boolean findUnexplored) {
         Preconditions.checkArgument(world != null, "World cannot be null");
         Preconditions.checkArgument(location != null, "Location cannot be null");
         Preconditions.checkArgument(structureType != null, "StructureType cannot be null");
@@ -1884,7 +1854,7 @@ public final class CraftServer implements Server {
     }
 
     @Override
-    public int broadcast(net.kyori.adventure.text.Component message, String permission) {
+    public int broadcast(net.kyori.adventure.text.@NonNull Component message, @NonNull String permission) {
         Set<CommandSender> recipients = new HashSet<>();
         for (Permissible permissible : this.getPluginManager().getPermissionSubscriptions(permission)) {
             if (permissible instanceof CommandSender && !(permissible instanceof org.bukkit.command.BlockCommandSender) && permissible.hasPermission(permission)) { // Paper - Don't broadcast messages to command blocks
@@ -1907,7 +1877,7 @@ public final class CraftServer implements Server {
     }
 
     @Override
-    public UUID getPlayerUniqueId(String name) {
+    public UUID getPlayerUniqueId(@NonNull String name) {
         Player player = Bukkit.getPlayerExact(name);
         if (player != null) {
             return player.getUniqueId();
@@ -1924,7 +1894,7 @@ public final class CraftServer implements Server {
     }
 
     @Override
-    public OfflinePlayer getOfflinePlayer(String name) {
+    public @NonNull OfflinePlayer getOfflinePlayer(String name) {
         Preconditions.checkArgument(name != null, "name cannot be null");
         Preconditions.checkArgument(!name.isBlank(), "name cannot be empty");
 
@@ -1972,7 +1942,7 @@ public final class CraftServer implements Server {
     }
 
     @Override
-    public OfflinePlayer getOfflinePlayer(UUID id) {
+    public @NonNull OfflinePlayer getOfflinePlayer(@NonNull UUID id) {
         Preconditions.checkArgument(id != null, "UUID id cannot be null");
 
         OfflinePlayer result = this.getPlayer(id);
@@ -1990,17 +1960,17 @@ public final class CraftServer implements Server {
     }
 
     @Override
-    public PlayerProfile createPlayerProfile(UUID uniqueId, String name) {
+    public @NonNull PlayerProfile createPlayerProfile(UUID uniqueId, String name) {
         return new CraftPlayerProfile(uniqueId, name);
     }
 
     @Override
-    public PlayerProfile createPlayerProfile(UUID uniqueId) {
+    public @NonNull PlayerProfile createPlayerProfile(@NonNull UUID uniqueId) {
         return new CraftPlayerProfile(uniqueId, null);
     }
 
     @Override
-    public PlayerProfile createPlayerProfile(String name) {
+    public @NonNull PlayerProfile createPlayerProfile(@NonNull String name) {
         return new CraftPlayerProfile(null, name);
     }
 
@@ -2011,40 +1981,40 @@ public final class CraftServer implements Server {
     }
 
     @Override
-    public Set<String> getIPBans() {
+    public @NonNull Set<String> getIPBans() {
         return this.playerList.getIpBans().getEntries().stream().map(IpBanListEntry::getUser).collect(Collectors.toSet());
     }
 
     @Override
-    public void banIP(String address) {
+    public void banIP(@NonNull String address) {
         Preconditions.checkArgument(address != null && !address.isBlank(), "Address cannot be null or blank.");
 
         this.getBanList(org.bukkit.BanList.Type.IP).addBan(address, null, null, null);
     }
 
     @Override
-    public void unbanIP(String address) {
+    public void unbanIP(@NonNull String address) {
         Preconditions.checkArgument(address != null && !address.isBlank(), "Address cannot be null or blank.");
 
         this.getBanList(org.bukkit.BanList.Type.IP).pardon(address);
     }
 
     @Override
-    public void banIP(InetAddress address) {
+    public void banIP(@NonNull InetAddress address) {
         Preconditions.checkArgument(address != null, "Address cannot be null.");
 
         ((CraftIpBanList) this.getBanList(BanList.Type.IP)).addBan(address, null, (Date) null, null);
     }
 
     @Override
-    public void unbanIP(InetAddress address) {
+    public void unbanIP(@NonNull InetAddress address) {
         Preconditions.checkArgument(address != null, "Address cannot be null.");
 
         ((CraftIpBanList) this.getBanList(BanList.Type.IP)).pardon(address);
     }
 
     @Override
-    public Set<OfflinePlayer> getBannedPlayers() {
+    public @NonNull Set<OfflinePlayer> getBannedPlayers() {
         Set<OfflinePlayer> result = new HashSet<>();
 
         for (UserBanListEntry entry : this.playerList.getBans().getEntries()) {
@@ -2055,7 +2025,7 @@ public final class CraftServer implements Server {
     }
 
     @Override
-    public <T extends BanList<?>> T getBanList(BanList.Type type) {
+    public <T extends BanList<?>> @NonNull T getBanList(BanList.Type type) {
         Preconditions.checkArgument(type != null, "BanList.Type cannot be null");
 
         return switch (type) {
@@ -2066,7 +2036,7 @@ public final class CraftServer implements Server {
 
     @SuppressWarnings("unchecked")
     @Override
-    public <B extends BanList<E>, E> B getBanList(final io.papermc.paper.ban.BanListType<B> type) {
+    public <B extends BanList<E>, E> @NonNull B getBanList(final io.papermc.paper.ban.@NonNull BanListType<B> type) {
         Preconditions.checkArgument(type != null, "BanList.BanType cannot be null");
        if (type == io.papermc.paper.ban.BanListType.IP) {
            return (B) new CraftIpBanList(this.playerList.getIpBans());
@@ -2093,7 +2063,7 @@ public final class CraftServer implements Server {
     }
 
     @Override
-    public Set<OfflinePlayer> getWhitelistedPlayers() {
+    public @NonNull Set<OfflinePlayer> getWhitelistedPlayers() {
         Set<OfflinePlayer> result = new LinkedHashSet<>();
 
         for (UserWhiteListEntry entry : this.playerList.getWhiteList().getEntries()) {
@@ -2104,7 +2074,7 @@ public final class CraftServer implements Server {
     }
 
     @Override
-    public Set<OfflinePlayer> getOperators() {
+    public @NonNull Set<OfflinePlayer> getOperators() {
         Set<OfflinePlayer> result = new HashSet<>();
 
         for (ServerOpListEntry entry : this.playerList.getOps().getEntries()) {
@@ -2120,16 +2090,16 @@ public final class CraftServer implements Server {
     }
 
     @Override
-    public GameMode getDefaultGameMode() {
-        return GameMode.getByValue(Optionull.mapOrDefault(
+    public @NonNull GameMode getDefaultGameMode() {
+        return Objects.requireNonNull(GameMode.getByValue(Optionull.mapOrDefault(
             this.console.getLevel(net.minecraft.world.level.Level.OVERWORLD),
             l -> l.serverLevelData.getGameType(),
             this.console.getProperties().gameMode.get()
-        ).getId());
+        ).getId()));
     }
 
     @Override
-    public void setDefaultGameMode(GameMode mode) {
+    public void setDefaultGameMode(@NonNull GameMode mode) {
         Preconditions.checkArgument(mode != null, "GameMode cannot be null");
 
         for (World world : this.getWorlds()) {
@@ -2143,12 +2113,12 @@ public final class CraftServer implements Server {
     }
 
     @Override
-    public ConsoleCommandSender getConsoleSender() {
+    public @NonNull ConsoleCommandSender getConsoleSender() {
         return this.console.console;
     }
 
     @Override
-    public CommandSender createCommandSender(final java.util.function.Consumer<? super net.kyori.adventure.text.Component> feedback) {
+    public @NonNull CommandSender createCommandSender(final java.util.function.@NonNull Consumer<? super net.kyori.adventure.text.Component> feedback) {
         return new io.papermc.paper.commands.FeedbackForwardingSender(feedback, this);
     }
 
@@ -2165,22 +2135,22 @@ public final class CraftServer implements Server {
     }
 
     @Override
-    public File getWorldContainer() {
+    public @NonNull File getWorldContainer() {
         return this.getServer().storageSource.getLevelDirectory().path().getParent().toFile();
     }
 
     @Override
-    public Path getLevelDirectory() {
+    public @NonNull Path getLevelDirectory() {
         return this.getServer().storageSource.getLevelDirectory().path();
     }
 
     @Override
-    public OfflinePlayer[] getOfflinePlayers() {
+    public OfflinePlayer @NonNull [] getOfflinePlayers() {
         PlayerDataStorage storage = this.console.getPlayerList().playerIo;
         String[] files = storage.getPlayerDir().list((dir, name) -> name.endsWith(".dat"));
         Set<OfflinePlayer> players = new HashSet<>();
 
-        for (String file : files) {
+        for (String file : Objects.requireNonNull(files)) {
             try {
                 players.add(this.getOfflinePlayer(UUID.fromString(file.substring(0, file.length() - 4))));
             } catch (IllegalArgumentException ex) {
@@ -2190,16 +2160,16 @@ public final class CraftServer implements Server {
 
         players.addAll(this.getOnlinePlayers());
 
-        return players.toArray(new OfflinePlayer[players.size()]);
+        return players.toArray(new OfflinePlayer[0]);
     }
 
     @Override
-    public Messenger getMessenger() {
+    public @NonNull Messenger getMessenger() {
         return this.messenger;
     }
 
     @Override
-    public void sendPluginMessage(Plugin source, String channel, byte[] message) {
+    public void sendPluginMessage(@NonNull Plugin source, @NonNull String channel, byte @NonNull [] message) {
         StandardMessenger.validatePluginMessage(this.getMessenger(), source, channel, message);
 
         for (Player player : this.getOnlinePlayers()) {
@@ -2208,7 +2178,7 @@ public final class CraftServer implements Server {
     }
 
     @Override
-    public Set<String> getListeningPluginChannels() {
+    public @NonNull Set<String> getListeningPluginChannels() {
         Set<String> result = new HashSet<>();
 
         for (Player player : this.getOnlinePlayers()) {
@@ -2219,20 +2189,20 @@ public final class CraftServer implements Server {
     }
 
     @Override
-    public Inventory createInventory(InventoryHolder owner, InventoryType type) {
+    public @NonNull Inventory createInventory(InventoryHolder owner, @NonNull InventoryType type) {
         Preconditions.checkArgument(type != null, "InventoryType cannot be null");
         Preconditions.checkArgument(type.isCreatable(), "InventoryType.%s cannot be used to create a inventory", type);
         return CraftInventoryCreator.INSTANCE.createInventory(owner, type);
     }
 
     @Override
-    public Inventory createInventory(InventoryHolder owner, InventoryType type, net.kyori.adventure.text.Component title) {
+    public @NonNull Inventory createInventory(InventoryHolder owner, @NonNull InventoryType type, net.kyori.adventure.text.@NonNull Component title) {
         Preconditions.checkArgument(type.isCreatable(), "Cannot open an inventory of type ", type);
         return CraftInventoryCreator.INSTANCE.createInventory(owner, type, title);
     }
 
     @Override
-    public Inventory createInventory(InventoryHolder owner, InventoryType type, String title) {
+    public @NonNull Inventory createInventory(InventoryHolder owner, @NonNull InventoryType type, @NonNull String title) {
         Preconditions.checkArgument(type != null, "InventoryType cannot be null");
         Preconditions.checkArgument(type.isCreatable(), "InventoryType.%s cannot be used to create a inventory", type);
         Preconditions.checkArgument(title != null, "title cannot be null");
@@ -2240,31 +2210,31 @@ public final class CraftServer implements Server {
     }
 
     @Override
-    public Inventory createInventory(InventoryHolder owner, int size) throws IllegalArgumentException {
+    public @NonNull Inventory createInventory(InventoryHolder owner, int size) throws IllegalArgumentException {
         Preconditions.checkArgument(9 <= size && size <= 54 && size % 9 == 0, "Size for custom inventory must be a multiple of 9 between 9 and 54 slots (got %s)", size);
         return CraftInventoryCreator.INSTANCE.createInventory(owner, size);
     }
 
     @Override
-    public Inventory createInventory(InventoryHolder owner, int size, net.kyori.adventure.text.Component title) throws IllegalArgumentException {
+    public @NonNull Inventory createInventory(InventoryHolder owner, int size, net.kyori.adventure.text.@NonNull Component title) throws IllegalArgumentException {
         Preconditions.checkArgument(9 <= size && size <= 54 && size % 9 == 0, "Size for custom inventory must be a multiple of 9 between 9 and 54 slots (got " + size + ")");
         return CraftInventoryCreator.INSTANCE.createInventory(owner, size, title);
     }
 
     @Override
-    public Inventory createInventory(InventoryHolder owner, int size, String title) throws IllegalArgumentException {
+    public @NonNull Inventory createInventory(InventoryHolder owner, int size, @NonNull String title) throws IllegalArgumentException {
         Preconditions.checkArgument(9 <= size && size <= 54 && size % 9 == 0, "Size for custom inventory must be a multiple of 9 between 9 and 54 slots (got %s)", size);
         return CraftInventoryCreator.INSTANCE.createInventory(owner, size, title);
     }
 
     @Override
-    public Merchant createMerchant(net.kyori.adventure.text.Component title) {
+    public @NonNull Merchant createMerchant(net.kyori.adventure.text.Component title) {
         return new org.bukkit.craftbukkit.inventory.CraftMerchantCustom(title == null ? InventoryType.MERCHANT.defaultTitle() : title);
     }
 
     @Override
     @Deprecated // Paper
-    public Merchant createMerchant(String title) {
+    public @NonNull Merchant createMerchant(String title) {
         return new CraftMerchantCustom(title == null ? InventoryType.MERCHANT.getDefaultTitle() : title);
     }
 
@@ -2279,17 +2249,17 @@ public final class CraftServer implements Server {
     }
 
     @Override
-    public HelpMap getHelpMap() {
+    public @NonNull HelpMap getHelpMap() {
         return this.helpMap;
     }
 
     @Override
-    public SimpleCommandMap getCommandMap() {
+    public @NonNull SimpleCommandMap getCommandMap() {
         return this.commandMap;
     }
 
     @Override
-    public int getSpawnLimit(SpawnCategory spawnCategory) {
+    public int getSpawnLimit(@NonNull SpawnCategory spawnCategory) {
         Preconditions.checkArgument(spawnCategory != null, "SpawnCategory cannot be null");
         Preconditions.checkArgument(CraftSpawnCategory.isValidForLimits(spawnCategory), "SpawnCategory." + spawnCategory + " does not have a spawn limit.");
         return this.getSpawnLimitUnsafe(spawnCategory);
@@ -2305,52 +2275,52 @@ public final class CraftServer implements Server {
     }
 
     @Override
-    public net.kyori.adventure.text.Component motd() {
+    public net.kyori.adventure.text.@NonNull Component motd() {
         return this.console.motd();
     }
 
     @Override
-    public void motd(final net.kyori.adventure.text.Component motd) {
+    public void motd(final net.kyori.adventure.text.@NonNull Component motd) {
         this.console.motd(motd);
     }
 
     @Override
-    public String getMotd() {
+    public @NonNull String getMotd() {
         return this.console.getMotd();
     }
 
     @Override
-    public void setMotd(String motd) {
+    public void setMotd(@NonNull String motd) {
         this.console.setMotd(motd);
     }
 
     @Override
-    public ServerLinks getServerLinks() {
+    public @NonNull ServerLinks getServerLinks() {
         return this.serverLinks;
     }
 
     @Override
-    public WarningState getWarningState() {
+    public @NonNull WarningState getWarningState() {
         return this.warningState;
     }
 
     @Override
-    public CraftItemFactory getItemFactory() {
+    public @NonNull CraftItemFactory getItemFactory() {
         return CraftItemFactory.instance();
     }
 
     @Override
-    public CraftEntityFactory getEntityFactory() {
+    public @NonNull CraftEntityFactory getEntityFactory() {
         return CraftEntityFactory.instance();
     }
 
     @Override
-    public CraftScoreboardManager getScoreboardManager() {
+    public @NonNull CraftScoreboardManager getScoreboardManager() {
         return this.scoreboardManager;
     }
 
     @Override
-    public Criteria getScoreboardCriteria(String name) {
+    public @NonNull Criteria getScoreboardCriteria(@NonNull String name) {
         return CraftCriteria.getFromBukkit(name);
     }
 
@@ -2368,7 +2338,7 @@ public final class CraftServer implements Server {
     }
 
     @Override
-    public CraftIconCache loadServerIcon(File file) throws Exception {
+    public @NonNull CraftIconCache loadServerIcon(@NonNull File file) throws Exception {
         Preconditions.checkArgument(file != null, "File cannot be null");
         Preconditions.checkArgument(file.isFile(), "File (%s) is not a valid file", file);
         return CraftServer.loadServerIcon0(file);
@@ -2379,7 +2349,7 @@ public final class CraftServer implements Server {
     }
 
     @Override
-    public CraftIconCache loadServerIcon(BufferedImage image) throws Exception {
+    public @NonNull CraftIconCache loadServerIcon(@NonNull BufferedImage image) throws Exception {
         Preconditions.checkArgument(image != null, "BufferedImage image cannot be null");
         return CraftServer.loadServerIcon0(image);
     }
@@ -2415,19 +2385,19 @@ public final class CraftServer implements Server {
     }
 
     @Override
-    public ChunkGenerator.ChunkData createChunkData(World world) {
+    public ChunkGenerator.@NonNull ChunkData createChunkData(@NonNull World world) {
         Preconditions.checkArgument(world != null, "World cannot be null");
         ServerLevel handle = ((CraftWorld) world).getHandle();
         return new OldCraftChunkData(world.getMinHeight(), world.getMaxHeight(), handle.palettedContainerFactory(), world);
     }
 
     @Override
-    public BossBar createBossBar(String title, BarColor color, BarStyle style, BarFlag... flags) {
+    public @NonNull BossBar createBossBar(String title, @NonNull BarColor color, @NonNull BarStyle style, BarFlag... flags) {
         return new CraftBossBar(title, color, style, flags);
     }
 
     @Override
-    public KeyedBossBar createBossBar(NamespacedKey key, String title, BarColor barColor, BarStyle barStyle, BarFlag... barFlags) {
+    public @NonNull KeyedBossBar createBossBar(@NonNull NamespacedKey key, String title, @NonNull BarColor barColor, @NonNull BarStyle barStyle, BarFlag... barFlags) {
         Preconditions.checkArgument(key != null, "NamespacedKey key cannot be null");
         Preconditions.checkArgument(barColor != null, "BarColor key cannot be null");
         Preconditions.checkArgument(barStyle != null, "BarStyle key cannot be null");
@@ -2447,14 +2417,14 @@ public final class CraftServer implements Server {
     }
 
     @Override
-    public Iterator<KeyedBossBar> getBossBars() {
+    public @NonNull Iterator<KeyedBossBar> getBossBars() {
         return Iterators.unmodifiableIterator(Iterators.transform(
             this.getServer().getCustomBossEvents().getEvents().iterator(), CustomBossEvent::getBukkitEntity)
         );
     }
 
     @Override
-    public KeyedBossBar getBossBar(NamespacedKey key) {
+    public KeyedBossBar getBossBar(@NonNull NamespacedKey key) {
         Preconditions.checkArgument(key != null, "key cannot be null");
         net.minecraft.server.bossevents.CustomBossEvent bossBattleCustom = this.getServer().getCustomBossEvents().get(CraftNamespacedKey.toMinecraft(key));
 
@@ -2462,7 +2432,7 @@ public final class CraftServer implements Server {
     }
 
     @Override
-    public boolean removeBossBar(NamespacedKey key) {
+    public boolean removeBossBar(@NonNull NamespacedKey key) {
         Preconditions.checkArgument(key != null, "key cannot be null");
         net.minecraft.server.bossevents.CustomBossEvents bossBattleCustomData = this.getServer().getCustomBossEvents();
         net.minecraft.server.bossevents.CustomBossEvent bossBattleCustom = bossBattleCustomData.get(CraftNamespacedKey.toMinecraft(key));
@@ -2476,7 +2446,7 @@ public final class CraftServer implements Server {
     }
 
     @Override
-    public Entity getEntity(UUID uuid) {
+    public Entity getEntity(@NonNull UUID uuid) {
         Preconditions.checkArgument(uuid != null, "uuid cannot be null");
 
         for (ServerLevel world : this.getServer().getAllLevels()) {
@@ -2490,7 +2460,7 @@ public final class CraftServer implements Server {
     }
 
     @Override
-    public org.bukkit.advancement.Advancement getAdvancement(NamespacedKey key) {
+    public org.bukkit.advancement.Advancement getAdvancement(@NonNull NamespacedKey key) {
         Preconditions.checkArgument(key != null, "key cannot be null");
 
         AdvancementHolder advancement = this.console.getAdvancements().get(CraftNamespacedKey.toMinecraft(key));
@@ -2498,21 +2468,21 @@ public final class CraftServer implements Server {
     }
 
     @Override
-    public Iterator<org.bukkit.advancement.Advancement> advancementIterator() {
+    public @NonNull Iterator<org.bukkit.advancement.Advancement> advancementIterator() {
         return Iterators.unmodifiableIterator(Iterators.transform(
             this.console.getAdvancements().getAllAdvancements().iterator(), AdvancementHolder::toBukkit)
         );
     }
 
     @Override
-    public BlockData createBlockData(org.bukkit.Material material) {
+    public @NonNull BlockData createBlockData(org.bukkit.@NonNull Material material) {
         Preconditions.checkArgument(material != null, "Material cannot be null");
 
         return this.createBlockData(material, (String) null);
     }
 
     @Override
-    public BlockData createBlockData(org.bukkit.Material material, Consumer<? super BlockData> consumer) {
+    public @NonNull BlockData createBlockData(org.bukkit.@NonNull Material material, Consumer<? super BlockData> consumer) {
         BlockData data = this.createBlockData(material);
 
         if (consumer != null) {
@@ -2523,14 +2493,14 @@ public final class CraftServer implements Server {
     }
 
     @Override
-    public BlockData createBlockData(String data) throws IllegalArgumentException {
+    public @NonNull BlockData createBlockData(@NonNull String data) throws IllegalArgumentException {
         Preconditions.checkArgument(data != null, "data cannot be null");
 
         return this.createBlockData(null, data);
     }
 
     @Override
-    public BlockData createBlockData(org.bukkit.Material material, String data) {
+    public @NonNull BlockData createBlockData(org.bukkit.Material material, String data) {
         Preconditions.checkArgument(material != null || data != null, "Must provide one of material or data");
         BlockType type = null;
         if (material != null) {
@@ -2543,7 +2513,7 @@ public final class CraftServer implements Server {
 
     @Override
     @SuppressWarnings("unchecked")
-    public <T extends Keyed> org.bukkit.Tag<T> getTag(String registry, NamespacedKey tag, Class<T> clazz) {
+    public <T extends Keyed> org.bukkit.Tag<T> getTag(String registry, @NonNull NamespacedKey tag, @NonNull Class<T> clazz) {
         Preconditions.checkArgument(registry != null, "registry cannot be null");
         Preconditions.checkArgument(tag != null, "NamespacedKey tag cannot be null");
         Preconditions.checkArgument(clazz != null, "Class clazz cannot be null");
@@ -2601,7 +2571,7 @@ public final class CraftServer implements Server {
 
     @Override
     @SuppressWarnings("unchecked")
-    public <T extends Keyed> Iterable<org.bukkit.Tag<T>> getTags(String registry, Class<T> clazz) {
+    public <T extends Keyed> @NonNull Iterable<org.bukkit.Tag<T>> getTags(String registry, @NonNull Class<T> clazz) {
         Preconditions.checkArgument(registry != null, "registry cannot be null");
         Preconditions.checkArgument(clazz != null, "Class clazz cannot be null");
         switch (registry) {
@@ -2640,7 +2610,7 @@ public final class CraftServer implements Server {
     }
 
     @Override
-    public LootTable getLootTable(NamespacedKey key) {
+    public LootTable getLootTable(@NonNull NamespacedKey key) {
         Preconditions.checkArgument(key != null, "NamespacedKey key cannot be null");
 
         ReloadableServerRegistries.Holder registry = this.getServer().reloadableRegistries();
@@ -2651,7 +2621,7 @@ public final class CraftServer implements Server {
     }
 
     @Override
-    public List<Entity> selectEntities(CommandSender sender, String selector) {
+    public @NonNull List<Entity> selectEntities(@NonNull CommandSender sender, @NonNull String selector) {
         Preconditions.checkArgument(selector != null, "selector cannot be null");
         Preconditions.checkArgument(sender != null, "CommandSender sender cannot be null");
 
@@ -2670,23 +2640,23 @@ public final class CraftServer implements Server {
     }
 
     @Override
-    public StructureManager getStructureManager() {
+    public @NonNull StructureManager getStructureManager() {
         return this.structureManager;
     }
 
     @Override
-    public <T extends Keyed> Registry<T> getRegistry(Class<T> aClass) {
+    public <T extends Keyed> Registry<T> getRegistry(@NonNull Class<T> aClass) {
         return io.papermc.paper.registry.RegistryAccess.registryAccess().getRegistry(aClass);
     }
 
     @Deprecated
     @Override
-    public UnsafeValues getUnsafe() {
+    public @NonNull UnsafeValues getUnsafe() {
         return CraftMagicNumbers.INSTANCE;
     }
 
     @Override
-    public long[] getTickTimes() {
+    public long @NonNull [] getTickTimes() {
         final TickData.MSPTData reportData = this.getServer().getMSPTData5s();
         return reportData == null ? new long[0] : reportData.rawData().clone();
     }
@@ -2701,22 +2671,22 @@ public final class CraftServer implements Server {
 
         @Deprecated
         @Override
-        public YamlConfiguration getConfig() {
+        public @NonNull YamlConfiguration getConfig() {
             return org.spigotmc.SpigotConfig.config;
         }
 
         @Override
-        public YamlConfiguration getBukkitConfig() {
+        public @NonNull YamlConfiguration getBukkitConfig() {
             return configuration;
         }
 
         @Override
-        public YamlConfiguration getSpigotConfig() {
+        public @NonNull YamlConfiguration getSpigotConfig() {
             return org.spigotmc.SpigotConfig.config;
         }
 
         @Override
-        public YamlConfiguration getPaperConfig() {
+        public @NonNull YamlConfiguration getPaperConfig() {
             return CraftServer.this.console.paperConfigurations.createLegacyObject(CraftServer.this.console);
         }
 
@@ -2726,7 +2696,7 @@ public final class CraftServer implements Server {
         }
 
         @Override
-        public void broadcast(BaseComponent component) {
+        public void broadcast(@NonNull BaseComponent component) {
             for (Player player : CraftServer.this.getOnlinePlayers()) {
                 player.spigot().sendMessage(component);
             }
@@ -2740,7 +2710,7 @@ public final class CraftServer implements Server {
         }
     };
 
-    public org.bukkit.Server.Spigot spigot() {
+    public org.bukkit.Server.@NonNull Spigot spigot() {
         return this.spigot;
     }
 
@@ -2750,7 +2720,7 @@ public final class CraftServer implements Server {
     }
 
     @Override
-    public double[] getTPS() {
+    public double @NonNull [] getTPS() {
         return this.getServer().getTPS();
     }
 
@@ -2764,13 +2734,13 @@ public final class CraftServer implements Server {
     }
 
     @Override
-    public void playSound(final net.kyori.adventure.sound.Sound sound, final double x, final double y, final double z) {
+    public void playSound(final net.kyori.adventure.sound.@NonNull Sound sound, final double x, final double y, final double z) {
         org.spigotmc.AsyncCatcher.catchOp("play sound");
         io.papermc.paper.adventure.PaperAdventure.asSoundPacket(sound, x, y, z, sound.seed().orElseGet(this.console.overworld().getRandom()::nextLong), this.playSound0(x, y, z, this.console.getAllLevels()));
     }
 
     @Override
-    public void playSound(final net.kyori.adventure.sound.Sound sound, final net.kyori.adventure.sound.Sound.Emitter emitter) {
+    public void playSound(final net.kyori.adventure.sound.Sound sound, final net.kyori.adventure.sound.Sound.@NonNull Emitter emitter) {
         if (sound.seed().isEmpty()) org.spigotmc.AsyncCatcher.catchOp("play sound; cannot generate seed with world random");
         final long seed = sound.seed().orElseGet(this.console.overworld().getRandom()::nextLong);
         if (emitter == net.kyori.adventure.sound.Sound.Emitter.self()) {
@@ -2826,7 +2796,7 @@ public final class CraftServer implements Server {
     private Iterable<? extends net.kyori.adventure.audience.Audience> adventure$audiences;
 
     @Override
-    public Iterable<? extends net.kyori.adventure.audience.Audience> audiences() {
+    public @NonNull Iterable<? extends net.kyori.adventure.audience.Audience> audiences() {
         if (this.adventure$audiences == null) {
             this.adventure$audiences = com.google.common.collect.Iterables.concat(java.util.Collections.singleton(this.getConsoleSender()), this.getOnlinePlayers());
         }
@@ -2876,27 +2846,27 @@ public final class CraftServer implements Server {
     }
 
     @Override
-    public String getPermissionMessage() {
+    public @NonNull String getPermissionMessage() {
         return net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer.legacyAmpersand().serialize(io.papermc.paper.configuration.GlobalConfiguration.get().messages.noPermission);
     }
 
     @Override
-    public net.kyori.adventure.text.Component permissionMessage() {
+    public net.kyori.adventure.text.@NonNull Component permissionMessage() {
         return io.papermc.paper.configuration.GlobalConfiguration.get().messages.noPermission;
     }
 
     @Override
-    public com.destroystokyo.paper.profile.PlayerProfile createProfile(@NotNull UUID uuid) {
+    public com.destroystokyo.paper.profile.@NonNull PlayerProfile createProfile(@NotNull UUID uuid) {
         return createProfile(uuid, null);
     }
 
     @Override
-    public com.destroystokyo.paper.profile.PlayerProfile createProfile(@NotNull String name) {
+    public com.destroystokyo.paper.profile.@NonNull PlayerProfile createProfile(@NotNull String name) {
         return createProfile(null, name);
     }
 
     @Override
-    public com.destroystokyo.paper.profile.PlayerProfile createProfile(@Nullable UUID uuid, @Nullable String name) {
+    public com.destroystokyo.paper.profile.@NonNull PlayerProfile createProfile(@Nullable UUID uuid, @Nullable String name) {
         Player player = uuid != null ? Bukkit.getPlayer(uuid) : (name != null ? Bukkit.getPlayerExact(name) : null);
         if (player != null) return new com.destroystokyo.paper.profile.CraftPlayerProfile((CraftPlayer) player);
 
@@ -2904,7 +2874,7 @@ public final class CraftServer implements Server {
     }
 
     @Override
-    public com.destroystokyo.paper.profile.PlayerProfile createProfileExact(@Nullable UUID uuid, @Nullable String name) {
+    public com.destroystokyo.paper.profile.@NonNull PlayerProfile createProfileExact(@Nullable UUID uuid, @Nullable String name) {
         Player player = uuid != null ? Bukkit.getPlayer(uuid) : (name != null ? Bukkit.getPlayerExact(name) : null);
         if (player == null) {
             return new com.destroystokyo.paper.profile.CraftPlayerProfile(uuid, name);
@@ -2932,17 +2902,17 @@ public final class CraftServer implements Server {
     private com.destroystokyo.paper.entity.ai.MobGoals mobGoals = new com.destroystokyo.paper.entity.ai.PaperMobGoals();
 
     @Override
-    public com.destroystokyo.paper.entity.ai.MobGoals getMobGoals() {
+    public com.destroystokyo.paper.entity.ai.@NonNull MobGoals getMobGoals() {
         return mobGoals;
     }
 
     @Override
-    public io.papermc.paper.datapack.PaperDatapackManager getDatapackManager() {
+    public io.papermc.paper.datapack.@NonNull PaperDatapackManager getDatapackManager() {
         return datapackManager;
     }
 
     @Override
-    public io.papermc.paper.potion.PaperPotionBrewer getPotionBrewer() {
+    public io.papermc.paper.potion.@NonNull PaperPotionBrewer getPotionBrewer() {
         return this.potionBrewer;
     }
 
