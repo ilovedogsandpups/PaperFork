@@ -1,7 +1,6 @@
 package org.bukkit.craftbukkit;
 
 import ca.spottedleaf.common.time.TickData;
-import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterators;
@@ -256,6 +255,7 @@ import org.bukkit.util.permissions.DefaultPermissions;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jspecify.annotations.NonNull;
+import org.spigotmc.AsyncGuard;
 import org.yaml.snakeyaml.LoaderOptions;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.SafeConstructor;
@@ -888,7 +888,7 @@ public final class CraftServer implements Server {
     public boolean dispatchCommand(@NonNull CommandSender rawSender, String commandLine) {
         Preconditions.checkArgument(rawSender != null, "sender cannot be null");
         Preconditions.checkArgument(commandLine != null, "commandLine cannot be null");
-        org.spigotmc.AsyncCatcher.catchOp("Command Dispatched Async: " + commandLine); // Spigot // Paper - Include command in error message
+        AsyncGuard.catchOperation("Command Dispatched Async: " + commandLine); // Spigot // Paper - Include command in error message
         CommandSourceStack sourceStack = VanillaCommandWrapper.getListener(rawSender);
 
         String command = StringUtils.normalizeSpace(commandLine.trim());
@@ -2726,7 +2726,7 @@ public final class CraftServer implements Server {
 
     @Override
     public void playSound(final net.kyori.adventure.sound.Sound sound) {
-        if (sound.seed().isEmpty()) org.spigotmc.AsyncCatcher.catchOp("play sound; cannot generate seed with world random");
+        if (sound.seed().isEmpty()) AsyncGuard.catchOperation("play sound; cannot generate seed with world random");
         final long seed = sound.seed().orElseGet(this.console.overworld().getRandom()::nextLong);
         for (ServerPlayer player : this.playerList.getPlayers()) {
             player.connection.send(io.papermc.paper.adventure.PaperAdventure.asSoundPacket(sound, player.getX(), player.getY(), player.getZ(), seed, null));
@@ -2735,20 +2735,20 @@ public final class CraftServer implements Server {
 
     @Override
     public void playSound(final net.kyori.adventure.sound.@NonNull Sound sound, final double x, final double y, final double z) {
-        org.spigotmc.AsyncCatcher.catchOp("play sound");
+        AsyncGuard.catchOperation("play sound");
         io.papermc.paper.adventure.PaperAdventure.asSoundPacket(sound, x, y, z, sound.seed().orElseGet(this.console.overworld().getRandom()::nextLong), this.playSound0(x, y, z, this.console.getAllLevels()));
     }
 
     @Override
     public void playSound(final net.kyori.adventure.sound.Sound sound, final net.kyori.adventure.sound.Sound.@NonNull Emitter emitter) {
-        if (sound.seed().isEmpty()) org.spigotmc.AsyncCatcher.catchOp("play sound; cannot generate seed with world random");
+        if (sound.seed().isEmpty()) AsyncGuard.catchOperation("play sound; cannot generate seed with world random");
         final long seed = sound.seed().orElseGet(this.console.overworld().getRandom()::nextLong);
         if (emitter == net.kyori.adventure.sound.Sound.Emitter.self()) {
             for (ServerPlayer player : this.playerList.getPlayers()) {
                 player.connection.send(io.papermc.paper.adventure.PaperAdventure.asSoundPacket(sound, player, seed, null));
             }
         } else if (emitter instanceof org.bukkit.craftbukkit.entity.CraftEntity craftEntity) {
-            org.spigotmc.AsyncCatcher.catchOp("play sound; cannot use entity emitter");
+            AsyncGuard.catchOperation("play sound; cannot use entity emitter");
             final net.minecraft.world.entity.Entity entity = craftEntity.getHandle();
             io.papermc.paper.adventure.PaperAdventure.asSoundPacket(sound, entity, seed, this.playSound0(entity.getX(), entity.getY(), entity.getZ(), List.of((ServerLevel) entity.level())));
         } else {

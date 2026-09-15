@@ -100,6 +100,7 @@ import org.bukkit.util.BlockIterator;
 import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
 import org.jspecify.annotations.NonNull;
+import org.spigotmc.AsyncGuard;
 
 public class CraftLivingEntity extends CraftEntity implements LivingEntity {
 
@@ -505,7 +506,7 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
 
     @Override
     public boolean addPotionEffect(@NonNull PotionEffect effect) {
-        org.spigotmc.AsyncCatcher.catchOp("effect add"); // Paper
+        AsyncGuard.catchOperation("effect add"); // Paper
         return this.getHandle().addEffect(org.bukkit.craftbukkit.potion.CraftPotionUtil.fromBukkit(effect), EntityPotionEffectEvent.Cause.PLUGIN); // Paper - Don't ignore icon
     }
 

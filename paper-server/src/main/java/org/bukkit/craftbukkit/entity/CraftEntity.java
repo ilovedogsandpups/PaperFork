@@ -86,6 +86,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jspecify.annotations.NonNull;
 import org.slf4j.Logger;
+import org.spigotmc.AsyncGuard;
 
 public abstract class CraftEntity implements org.bukkit.entity.Entity {
 
@@ -387,7 +388,7 @@ public abstract class CraftEntity implements org.bukkit.entity.Entity {
     @Override
     public @NonNull List<org.bukkit.entity.Entity> getNearbyEntities(double x, double y, double z) {
         Preconditions.checkState(!this.entity.generation, "Cannot get nearby entities during world generation");
-        org.spigotmc.AsyncCatcher.catchOp("getNearbyEntities"); // Spigot
+        AsyncGuard.catchOperation("getNearbyEntities"); // Spigot
 
         List<Entity> entities = this.getHandle().level().getEntities(this.entity, this.entity.getBoundingBox().inflate(x, y, z), Predicates.alwaysTrue());
         List<org.bukkit.entity.Entity> result = new java.util.ArrayList<>(entities.size());

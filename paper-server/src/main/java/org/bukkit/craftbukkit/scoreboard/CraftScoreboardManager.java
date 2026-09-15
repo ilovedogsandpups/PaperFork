@@ -17,6 +17,7 @@ import org.bukkit.craftbukkit.entity.CraftPlayer;
 import org.bukkit.craftbukkit.util.WeakCollection;
 import org.bukkit.scoreboard.ScoreboardManager;
 import org.jspecify.annotations.NonNull;
+import org.spigotmc.AsyncGuard;
 
 public final class CraftScoreboardManager implements ScoreboardManager {
     private final CraftScoreboard mainScoreboard;
@@ -37,7 +38,7 @@ public final class CraftScoreboardManager implements ScoreboardManager {
 
     @Override
     public @NonNull CraftScoreboard getNewScoreboard() {
-        org.spigotmc.AsyncCatcher.catchOp("scoreboard creation"); // Spigot
+        AsyncGuard.catchOperation("scoreboard creation"); // Spigot
         CraftScoreboard scoreboard = new CraftScoreboard(new ServerScoreboard(this.server));
         if (io.papermc.paper.configuration.GlobalConfiguration.get().scoreboards.trackPluginScoreboards) {
             scoreboard.registeredGlobally = true;
@@ -47,7 +48,7 @@ public final class CraftScoreboardManager implements ScoreboardManager {
     }
 
     public void registerScoreboardForVanilla(CraftScoreboard scoreboard) {
-        org.spigotmc.AsyncCatcher.catchOp("scoreboard registration");
+        AsyncGuard.catchOperation("scoreboard registration");
         this.scoreboards.add(scoreboard);
     }
 

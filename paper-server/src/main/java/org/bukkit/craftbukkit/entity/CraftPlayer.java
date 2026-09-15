@@ -221,6 +221,7 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scoreboard.Scoreboard;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
+import org.spigotmc.AsyncGuard;
 
 @DelegateDeserialization(CraftOfflinePlayer.class)
 public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessageBridgeImpl {
@@ -655,13 +656,13 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
 
     @Override
     public void kickPlayer(String message) {
-        org.spigotmc.AsyncCatcher.catchOp("player kick"); // Spigot
+        AsyncGuard.catchOperation("player kick"); // Spigot
         this.getHandle().connection.disconnect(CraftChatMessage.fromStringOrEmpty(message, true), org.bukkit.event.player.PlayerKickEvent.Cause.PLUGIN); // Paper - kick event cause
     }
 
     @Override
     public void kick(net.kyori.adventure.text.Component message, org.bukkit.event.player.PlayerKickEvent.@NonNull Cause cause) {
-        org.spigotmc.AsyncCatcher.catchOp("player kick");
+        AsyncGuard.catchOperation("player kick");
         final ServerGamePacketListenerImpl connection = this.getHandle().connection;
         if (connection != null) {
             connection.disconnect(message == null ? net.kyori.adventure.text.Component.empty() : message, cause);
@@ -3176,19 +3177,19 @@ public class CraftPlayer extends CraftHumanEntity implements Player, PluginMessa
     // Paper start - Add chunk view API
     @Override
     public @NonNull Set<java.lang.Long> getSentChunkKeys() {
-        org.spigotmc.AsyncCatcher.catchOp("accessing sent chunks");
+        AsyncGuard.catchOperation("accessing sent chunks");
         return FeatureHooks.getSentChunkKeys(this.getHandle());
     }
 
     @Override
     public @NonNull Set<org.bukkit.Chunk> getSentChunks() {
-        org.spigotmc.AsyncCatcher.catchOp("accessing sent chunks");
+        AsyncGuard.catchOperation("accessing sent chunks");
         return FeatureHooks.getSentChunks(this.getHandle());
     }
 
     @Override
     public boolean isChunkSent(final long chunkKey) {
-        org.spigotmc.AsyncCatcher.catchOp("accessing sent chunks");
+        AsyncGuard.catchOperation("accessing sent chunks");
         return FeatureHooks.isChunkSent(this.getHandle(), chunkKey);
     }
     // Paper end

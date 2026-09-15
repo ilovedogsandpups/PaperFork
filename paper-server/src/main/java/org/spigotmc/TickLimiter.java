@@ -1,5 +1,6 @@
 package org.spigotmc;
 
+@Deprecated(forRemoval = true)
 public class TickLimiter {
 
     private final int maxTime;

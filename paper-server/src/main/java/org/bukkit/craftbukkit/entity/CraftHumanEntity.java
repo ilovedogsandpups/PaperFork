@@ -75,6 +75,7 @@ import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jspecify.annotations.NonNull;
+import org.spigotmc.AsyncGuard;
 
 public class CraftHumanEntity extends CraftLivingEntity implements HumanEntity {
 
@@ -562,7 +563,7 @@ public class CraftHumanEntity extends CraftLivingEntity implements HumanEntity {
     }
 
     private InventoryView openInventory(Location location, boolean force, Material material) {
-        org.spigotmc.AsyncCatcher.catchOp("open" + material);
+        AsyncGuard.catchOperation("open" + material);
         if (location == null) {
             location = this.getLocation();
         }

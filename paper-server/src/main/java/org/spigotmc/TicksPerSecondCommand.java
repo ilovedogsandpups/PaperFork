@@ -16,9 +16,7 @@ import static net.kyori.adventure.text.Component.text;
 public class TicksPerSecondCommand extends Command {
 
     private boolean hasShownMemoryWarning; // Paper
-    private static final ThreadLocal<DecimalFormat> ONE_DECIMAL_PLACES = ThreadLocal.withInitial(() -> {
-        return new DecimalFormat("########0.0");
-    });
+    private static final ThreadLocal<DecimalFormat> ONE_DECIMAL_PLACES = ThreadLocal.withInitial(() -> new DecimalFormat("########0.0"));
 
     public TicksPerSecondCommand(String name) {
         super(name);

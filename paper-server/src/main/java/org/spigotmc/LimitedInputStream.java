@@ -6,11 +6,11 @@ import java.io.InputStream;
 import net.minecraft.nbt.NbtAccounter;
 import org.jspecify.annotations.NonNull;
 
-public class LimitStream extends FilterInputStream {
+public class LimitedInputStream extends FilterInputStream {
 
     private final NbtAccounter limit;
 
-    public LimitStream(InputStream is, NbtAccounter limit) {
+    public LimitedInputStream(InputStream is, NbtAccounter limit) {
         super(is);
         this.limit = limit;
     }

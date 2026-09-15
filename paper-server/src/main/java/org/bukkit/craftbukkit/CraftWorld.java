@@ -163,6 +163,7 @@ import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jspecify.annotations.NonNull;
+import org.spigotmc.AsyncGuard;
 
 public class CraftWorld extends CraftRegionAccessor implements World {
     private static final PointersSupplier<World> POINTERS_SUPPLIER = PointersSupplier.<World>builder()
@@ -450,7 +451,7 @@ public class CraftWorld extends CraftRegionAccessor implements World {
 
     @Override
     public boolean unloadChunkRequest(int x, int z) {
-        org.spigotmc.AsyncCatcher.catchOp("chunk unload"); // Spigot
+        AsyncGuard.catchOperation("chunk unload"); // Spigot
         if (this.isChunkLoaded(x, z)) {
             this.world.getChunkSource().removeTicketWithRadius(TicketType.PLUGIN, new ChunkPos(x, z), 1);
         }
@@ -459,7 +460,7 @@ public class CraftWorld extends CraftRegionAccessor implements World {
     }
 
     private boolean unloadChunk0(int x, int z, boolean save) {
-        org.spigotmc.AsyncCatcher.catchOp("chunk unload"); // Spigot
+        AsyncGuard.catchOperation("chunk unload"); // Spigot
         if (!this.isChunkLoaded(x, z)) {
             return true;
         }
@@ -526,7 +527,7 @@ public class CraftWorld extends CraftRegionAccessor implements World {
 
     @Override
     public boolean loadChunk(int x, int z, boolean generate) {
-        org.spigotmc.AsyncCatcher.catchOp("chunk load"); // Spigot
+        AsyncGuard.catchOperation("chunk load"); // Spigot
         warnUnsafeChunk("loading a faraway chunk", x, z); // Paper
         ChunkAccess chunk = this.world.getChunkSource().getChunk(x, z, generate || isChunkGenerated(x, z) ? ChunkStatus.FULL : ChunkStatus.EMPTY, true); // Paper
 
@@ -966,7 +967,7 @@ public class CraftWorld extends CraftRegionAccessor implements World {
 
     @Override
     public @NonNull Collection<Entity> getNearbyEntities(BoundingBox boundingBox, Predicate<? super Entity> filter) {
-        org.spigotmc.AsyncCatcher.catchOp("getNearbyEntities"); // Spigot
+        AsyncGuard.catchOperation("getNearbyEntities"); // Spigot
         Preconditions.checkArgument(boundingBox != null, "BoundingBox cannot be null");
 
         AABB bb = new AABB(boundingBox.getMinX(), boundingBox.getMinY(), boundingBox.getMinZ(), boundingBox.getMaxX(), boundingBox.getMaxY(), boundingBox.getMaxZ());
@@ -1134,7 +1135,7 @@ public class CraftWorld extends CraftRegionAccessor implements World {
 
     @Override
     public void save(boolean flush) {
-        org.spigotmc.AsyncCatcher.catchOp("world save"); // Spigot
+        AsyncGuard.catchOperation("world save"); // Spigot
         this.server.checkSaveState();
         boolean oldSave = this.world.noSave;
 
@@ -1556,7 +1557,7 @@ public class CraftWorld extends CraftRegionAccessor implements World {
 
     @Override
     public void playSound(@NonNull Location loc, @NonNull Sound sound, org.bukkit.@NonNull SoundCategory category, float volume, float pitch, long seed) {
-        org.spigotmc.AsyncCatcher.catchOp("play sound"); // Paper
+        AsyncGuard.catchOperation("play sound"); // Paper
         if (loc == null || sound == null || category == null) return;
 
         double x = loc.getX();
@@ -1568,7 +1569,7 @@ public class CraftWorld extends CraftRegionAccessor implements World {
 
     @Override
     public void playSound(@NonNull Location loc, @NonNull String sound, org.bukkit.@NonNull SoundCategory category, float volume, float pitch, long seed) {
-        org.spigotmc.AsyncCatcher.catchOp("play sound"); // Paper
+        AsyncGuard.catchOperation("play sound"); // Paper
         if (loc == null || sound == null || category == null) return;
 
         double x = loc.getX();
@@ -1591,7 +1592,7 @@ public class CraftWorld extends CraftRegionAccessor implements World {
 
     @Override
     public void playSound(@NonNull Entity entity, @NonNull Sound sound, org.bukkit.@NonNull SoundCategory category, float volume, float pitch, long seed) {
-        org.spigotmc.AsyncCatcher.catchOp("play sound"); // Paper
+        AsyncGuard.catchOperation("play sound"); // Paper
         if (!(entity instanceof CraftEntity craftEntity) || entity.getWorld() != this || sound == null || category == null) return;
 
         ClientboundSoundEntityPacket packet = new ClientboundSoundEntityPacket(CraftSound.bukkitToMinecraftHolder(sound), net.minecraft.sounds.SoundSource.valueOf(category.name()), craftEntity.getHandle(), volume, pitch, seed);
@@ -1603,7 +1604,7 @@ public class CraftWorld extends CraftRegionAccessor implements World {
     // Paper start - Adventure
     @Override
     public void playSound(final net.kyori.adventure.sound.Sound sound) {
-        org.spigotmc.AsyncCatcher.catchOp("play sound"); // Paper
+        AsyncGuard.catchOperation("play sound"); // Paper
         final long seed = sound.seed().orElseGet(this.world.getRandom()::nextLong);
         for (ServerPlayer player : this.getHandle().players()) {
             player.connection.send(io.papermc.paper.adventure.PaperAdventure.asSoundPacket(sound, player.getX(), player.getY(), player.getZ(), seed, null));
@@ -1612,7 +1613,7 @@ public class CraftWorld extends CraftRegionAccessor implements World {
 
     @Override
     public void playSound(@NonNull Entity entity, @NonNull String sound, org.bukkit.@NonNull SoundCategory category, float volume, float pitch, long seed) {
-        org.spigotmc.AsyncCatcher.catchOp("play sound"); // Paper
+        AsyncGuard.catchOperation("play sound"); // Paper
         if (!(entity instanceof CraftEntity craftEntity) || entity.getWorld() != this || sound == null || category == null) return;
 
         ClientboundSoundEntityPacket packet = new ClientboundSoundEntityPacket(Holder.direct(SoundEvent.createVariableRangeEvent(Identifier.parse(sound))), net.minecraft.sounds.SoundSource.valueOf(category.name()), craftEntity.getHandle(), volume, pitch, seed);
@@ -1624,13 +1625,13 @@ public class CraftWorld extends CraftRegionAccessor implements World {
 
     @Override
     public void playSound(final net.kyori.adventure.sound.@NonNull Sound sound, final double x, final double y, final double z) {
-        org.spigotmc.AsyncCatcher.catchOp("play sound"); // Paper
+        AsyncGuard.catchOperation("play sound"); // Paper
         io.papermc.paper.adventure.PaperAdventure.asSoundPacket(sound, x, y, z, sound.seed().orElseGet(this.world.getRandom()::nextLong), this.playSound0(x, y, z));
     }
 
     @Override
     public void playSound(final net.kyori.adventure.sound.Sound sound, final net.kyori.adventure.sound.Sound.@NonNull Emitter emitter) {
-        org.spigotmc.AsyncCatcher.catchOp("play sound"); // Paper
+        AsyncGuard.catchOperation("play sound"); // Paper
         final long seed = sound.seed().orElseGet(this.getHandle().getRandom()::nextLong);
         if (emitter == net.kyori.adventure.sound.Sound.Emitter.self()) {
             for (ServerPlayer player : this.getHandle().players()) {
