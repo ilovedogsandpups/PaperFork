@@ -7,6 +7,8 @@ import java.lang.constant.Constable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
+
+import org.bukkit.craftbukkit.craftUtils.util.ClassTraverser;
 import org.bukkit.support.environment.Normal;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;

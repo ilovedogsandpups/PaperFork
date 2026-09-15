@@ -34,7 +34,7 @@ import net.minecraft.server.dialog.input.TextInput;
 import net.minecraft.util.ExtraCodecs;
 import net.minecraft.util.Util;
 import net.minecraft.world.item.ItemStack;
-import org.bukkit.craftbukkit.inventory.CraftItemStack;
+import org.bukkit.craftbukkit.craftImpl.inventory.CraftItemStack;
 
 import static io.papermc.paper.util.PaperCodecs.registryFileDecoderFor;
 

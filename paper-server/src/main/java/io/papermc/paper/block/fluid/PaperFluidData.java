@@ -8,8 +8,8 @@ import org.bukkit.Fluid;
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.CraftFluid;
 import org.bukkit.craftbukkit.CraftWorld;
-import org.bukkit.craftbukkit.util.CraftLocation;
-import org.bukkit.craftbukkit.util.CraftVector;
+import org.bukkit.craftbukkit.craftUtils.util.CraftLocation;
+import org.bukkit.craftbukkit.craftUtils.util.CraftVector;
 import org.bukkit.util.Vector;
 
 public class PaperFluidData implements FluidData {

@@ -1,7 +1,7 @@
 package org.bukkit.damage;
 
 import static org.junit.jupiter.api.Assertions.*;
-import org.bukkit.craftbukkit.damage.CraftDamageType;
+import org.bukkit.craftbukkit.craftImpl.damage.CraftDamageType;
 import org.bukkit.support.environment.Normal;
 import org.junit.jupiter.api.Test;
 

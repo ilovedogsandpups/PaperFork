@@ -4,7 +4,7 @@ import com.mojang.brigadier.tree.CommandNode;
 import net.minecraft.commands.CommandSourceStack;
 import org.bukkit.command.Command;
 import org.bukkit.command.PluginIdentifiableCommand;
-import org.bukkit.craftbukkit.command.VanillaCommandWrapper;
+import org.bukkit.craftbukkit.craftImpl.command.VanillaCommandWrapper;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 

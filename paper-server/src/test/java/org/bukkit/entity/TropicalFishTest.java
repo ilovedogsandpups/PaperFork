@@ -3,7 +3,7 @@ package org.bukkit.entity;
 import static org.bukkit.support.MatcherAssert.*;
 import static org.hamcrest.Matchers.*;
 import org.bukkit.DyeColor;
-import org.bukkit.craftbukkit.entity.CraftTropicalFish;
+import org.bukkit.craftbukkit.craftMC.entity.CraftTropicalFish;
 import org.bukkit.entity.TropicalFish.Pattern;
 import org.bukkit.support.environment.Normal;
 import org.junit.jupiter.api.Test;

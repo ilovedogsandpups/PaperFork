@@ -11,6 +11,7 @@ import net.minecraft.world.item.Instrument;
 import org.bukkit.MusicInstrument;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Sound;
+import org.bukkit.craftbukkit.craftUtils.sounds.CraftSound;
 import org.jetbrains.annotations.NotNull;
 import org.jspecify.annotations.NonNull;
 

@@ -2,7 +2,7 @@ package io.papermc.paper.entity;
 
 import net.minecraft.world.entity.animal.fish.AbstractSchoolingFish;
 import org.bukkit.craftbukkit.CraftServer;
-import org.bukkit.craftbukkit.entity.CraftFish;
+import org.bukkit.craftbukkit.craftMC.entity.CraftFish;
 import org.jetbrains.annotations.NotNull;
 
 public class PaperSchoolableFish extends CraftFish implements SchoolableFish {

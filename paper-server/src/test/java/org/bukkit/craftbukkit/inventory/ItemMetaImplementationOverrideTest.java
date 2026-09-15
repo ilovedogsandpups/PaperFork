@@ -10,6 +10,8 @@ import java.util.stream.Stream;
 import org.bukkit.Material;
 import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.craftbukkit.Overridden;
+import org.bukkit.craftbukkit.craftImpl.inventory.CraftItemFactory;
+import org.bukkit.craftbukkit.craftImpl.inventory.CraftMetaItem;
 import org.bukkit.support.environment.AllFeatures;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;

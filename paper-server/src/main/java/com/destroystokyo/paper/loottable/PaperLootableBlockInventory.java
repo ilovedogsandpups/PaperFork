@@ -3,7 +3,7 @@ package com.destroystokyo.paper.loottable;
 import java.util.Objects;
 import net.minecraft.core.BlockPos;
 import org.bukkit.block.Block;
-import org.bukkit.craftbukkit.block.CraftBlock;
+import org.bukkit.craftbukkit.craftMC.block.CraftBlock;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.framework.qual.DefaultQualifier;
 

@@ -6,8 +6,8 @@ import net.minecraft.world.damagesource.DamageEffects;
 import net.minecraft.world.damagesource.DamageScaling;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.damagesource.DeathMessageType;
-import org.bukkit.craftbukkit.damage.CraftDamageEffect;
-import org.bukkit.craftbukkit.damage.CraftDamageType;
+import org.bukkit.craftbukkit.craftImpl.damage.CraftDamageEffect;
+import org.bukkit.craftbukkit.craftImpl.damage.CraftDamageType;
 import org.bukkit.damage.DamageEffect;
 import org.jspecify.annotations.Nullable;
 

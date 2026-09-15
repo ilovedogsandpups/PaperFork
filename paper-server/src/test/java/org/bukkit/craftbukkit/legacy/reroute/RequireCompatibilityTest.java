@@ -3,6 +3,8 @@ package org.bukkit.craftbukkit.legacy.reroute;
 import com.google.common.base.Predicates;
 import java.util.List;
 import java.util.Map;
+
+import org.bukkit.craftbukkit.craftUtils.legacy.reroute.RequireCompatibility;
 import org.bukkit.support.environment.Normal;
 import org.junit.jupiter.api.Test;
 

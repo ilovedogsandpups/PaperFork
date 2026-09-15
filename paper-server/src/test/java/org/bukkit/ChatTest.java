@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import org.bukkit.craftbukkit.util.CraftChatMessage;
+import org.bukkit.craftbukkit.craftUtils.util.CraftChatMessage;
 import org.bukkit.support.environment.VanillaFeature;
 import org.junit.jupiter.api.Test;
 

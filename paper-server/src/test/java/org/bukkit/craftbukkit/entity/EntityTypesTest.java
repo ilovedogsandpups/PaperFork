@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.jar.JarFile;
 import java.util.stream.Stream;
 import java.util.zip.ZipEntry;
+
+import org.bukkit.craftbukkit.craftMC.entity.CraftEntityTypes;
 import org.bukkit.entity.AbstractArrow;
 import org.bukkit.entity.AbstractCow;
 import org.bukkit.entity.AbstractCubeMob;

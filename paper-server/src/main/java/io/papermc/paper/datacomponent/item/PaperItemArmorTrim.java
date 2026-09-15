@@ -1,8 +1,8 @@
 package io.papermc.paper.datacomponent.item;
 
-import org.bukkit.craftbukkit.inventory.trim.CraftTrimMaterial;
-import org.bukkit.craftbukkit.inventory.trim.CraftTrimPattern;
-import org.bukkit.craftbukkit.util.Handleable;
+import org.bukkit.craftbukkit.craftImpl.inventory.trim.CraftTrimMaterial;
+import org.bukkit.craftbukkit.craftImpl.inventory.trim.CraftTrimPattern;
+import org.bukkit.craftbukkit.craftUtils.util.Handleable;
 import org.bukkit.inventory.meta.trim.ArmorTrim;
 
 public record PaperItemArmorTrim(

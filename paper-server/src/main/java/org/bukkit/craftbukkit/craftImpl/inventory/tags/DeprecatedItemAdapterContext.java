@@ -1,0 +1,25 @@
+package org.bukkit.craftbukkit.craftImpl.inventory.tags;
+
+import org.bukkit.inventory.meta.tags.CustomItemTagContainer;
+import org.bukkit.inventory.meta.tags.ItemTagAdapterContext;
+import org.bukkit.persistence.PersistentDataAdapterContext;
+import org.jspecify.annotations.NonNull;
+
+public final class DeprecatedItemAdapterContext implements ItemTagAdapterContext {
+
+    private final PersistentDataAdapterContext context;
+
+    public DeprecatedItemAdapterContext(PersistentDataAdapterContext context) {
+        this.context = context;
+    }
+
+    /**
+     * Creates a new and empty tag container instance.
+     *
+     * @return the fresh container instance
+     */
+    @Override
+    public @NonNull CustomItemTagContainer newTagContainer() {
+        return new DeprecatedCustomTagContainer(this.context.newPersistentDataContainer());
+    }
+}

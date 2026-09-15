@@ -1,0 +1,26 @@
+package org.bukkit.craftbukkit.craftMC.entity;
+
+import net.minecraft.world.entity.projectile.throwableitemprojectile.ThrownLingeringPotion;
+import org.bukkit.craftbukkit.CraftServer;
+import org.bukkit.craftbukkit.craftImpl.inventory.CraftItemStack;
+import org.bukkit.entity.LingeringPotion;
+import org.bukkit.inventory.ItemType;
+import org.bukkit.inventory.meta.PotionMeta;
+import org.jspecify.annotations.NonNull;
+
+public class CraftThrownLingeringPotion extends CraftThrownPotion implements LingeringPotion {
+
+    public CraftThrownLingeringPotion(final CraftServer server, final ThrownLingeringPotion entity) {
+        super(server, entity);
+    }
+
+    @Override
+    public ThrownLingeringPotion getHandle() {
+        return (ThrownLingeringPotion) this.entity;
+    }
+
+    @Override
+    public @NonNull PotionMeta getPotionMeta() {
+        return (PotionMeta) CraftItemStack.getItemMeta(this.getHandle().getItem(), ItemType.LINGERING_POTION);
+    }
+}

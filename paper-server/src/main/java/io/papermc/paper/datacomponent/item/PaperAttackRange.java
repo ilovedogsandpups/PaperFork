@@ -1,6 +1,6 @@
 package io.papermc.paper.datacomponent.item;
 
-import org.bukkit.craftbukkit.util.Handleable;
+import org.bukkit.craftbukkit.craftUtils.util.Handleable;
 
 import static io.papermc.paper.util.BoundChecker.requireRange;
 

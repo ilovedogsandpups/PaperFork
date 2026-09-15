@@ -2,7 +2,7 @@ package io.papermc.paper.datacomponent.item.consumable;
 
 import java.util.List;
 import net.minecraft.world.item.consume_effects.ApplyStatusEffectsConsumeEffect;
-import org.bukkit.craftbukkit.potion.CraftPotionUtil;
+import org.bukkit.craftbukkit.craftImpl.potion.CraftPotionUtil;
 import org.bukkit.potion.PotionEffect;
 
 import static io.papermc.paper.util.MCUtil.transformUnmodifiable;

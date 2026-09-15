@@ -5,8 +5,8 @@ import io.papermc.paper.util.MCUtil;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import java.util.Collection;
 import java.util.List;
-import org.bukkit.craftbukkit.potion.CraftPotionEffectType;
-import org.bukkit.craftbukkit.util.Handleable;
+import org.bukkit.craftbukkit.craftImpl.potion.CraftPotionEffectType;
+import org.bukkit.craftbukkit.craftUtils.util.Handleable;
 import org.jetbrains.annotations.Unmodifiable;
 
 import static io.papermc.paper.potion.SuspiciousEffectEntry.create;
@@ -32,7 +32,7 @@ public record PaperSuspiciousStewEffects(
         @Override
         public Builder add(final SuspiciousEffectEntry entry) {
             this.effects.add(new net.minecraft.world.item.component.SuspiciousStewEffects.Entry(
-                org.bukkit.craftbukkit.potion.CraftPotionEffectType.bukkitToMinecraftHolder(entry.effect()),
+                CraftPotionEffectType.bukkitToMinecraftHolder(entry.effect()),
                 entry.duration()
             ));
             return this;

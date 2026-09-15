@@ -1,7 +1,7 @@
 package io.papermc.paper.datacomponent.item;
 
-import org.bukkit.craftbukkit.inventory.CraftItemStack;
-import org.bukkit.craftbukkit.util.Handleable;
+import org.bukkit.craftbukkit.craftImpl.inventory.CraftItemStack;
+import org.bukkit.craftbukkit.craftUtils.util.Handleable;
 import org.bukkit.inventory.ItemStack;
 
 public record PaperSulfurCubeContent(

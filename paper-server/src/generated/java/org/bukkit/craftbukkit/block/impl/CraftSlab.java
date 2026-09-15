@@ -8,7 +8,7 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.SlabType;
 import org.bukkit.block.data.type.Slab;
-import org.bukkit.craftbukkit.block.data.CraftBlockData;
+import org.bukkit.craftbukkit.craftMC.block.data.CraftBlockData;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked

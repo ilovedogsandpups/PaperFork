@@ -1,0 +1,27 @@
+package org.bukkit.craftbukkit.craftImpl.tag;
+
+import java.util.Set;
+import java.util.stream.Collectors;
+import net.minecraft.core.Holder;
+import net.minecraft.core.Registry;
+import net.minecraft.tags.TagKey;
+import org.bukkit.craftbukkit.craftMC.entity.CraftEntityType;
+import org.bukkit.entity.EntityType;
+import org.jspecify.annotations.NonNull;
+
+public class CraftEntityTag extends CraftTag<net.minecraft.world.entity.EntityType<?>, EntityType> {
+
+    public CraftEntityTag(Registry<net.minecraft.world.entity.EntityType<?>> registry, TagKey<net.minecraft.world.entity.EntityType<?>> tag) {
+        super(registry, tag);
+    }
+
+    @Override
+    public boolean isTagged(@NonNull EntityType entity) {
+        return CraftEntityType.bukkitToMinecraft(entity).builtInRegistryHolder().is(this.tag);
+    }
+
+    @Override
+    public @NonNull Set<EntityType> getValues() {
+        return this.getHandle().stream().map(Holder::value).map(CraftEntityType::minecraftToBukkit).collect(Collectors.toUnmodifiableSet());
+    }
+}

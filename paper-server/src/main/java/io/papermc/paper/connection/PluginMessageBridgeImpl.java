@@ -3,7 +3,7 @@ package io.papermc.paper.connection;
 import com.google.common.base.Preconditions;
 import java.util.Set;
 import org.bukkit.Bukkit;
-import org.bukkit.craftbukkit.entity.CraftPlayer;
+import org.bukkit.craftbukkit.craftMC.entity.CraftPlayer;
 import org.bukkit.event.player.PlayerRegisterChannelEvent;
 import org.bukkit.event.player.PlayerUnregisterChannelEvent;
 import org.bukkit.plugin.messaging.StandardMessenger;

@@ -3,8 +3,8 @@ package io.papermc.paper.datacomponent.item;
 import com.google.common.base.Preconditions;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import java.util.List;
-import org.bukkit.craftbukkit.inventory.CraftItemStack;
-import org.bukkit.craftbukkit.util.Handleable;
+import org.bukkit.craftbukkit.craftImpl.inventory.CraftItemStack;
+import org.bukkit.craftbukkit.craftUtils.util.Handleable;
 import org.bukkit.inventory.ItemStack;
 
 public record PaperBundleContents(

@@ -24,7 +24,8 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.craftbukkit.CraftWorld;
-import org.bukkit.craftbukkit.entity.CraftPlayer;
+import org.bukkit.craftbukkit.craftMC.entity.CraftPlayer;
+import org.bukkit.craftbukkit.craftUtils.util.CraftSpawnCategory;
 import org.bukkit.entity.Player;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
@@ -172,7 +173,7 @@ public final class MobcapsCommand implements PaperSubcommand {
         sender.sendMessage(Component.join(JoinConfiguration.noSeparators(), Component.text("Mobcaps for player: "), Component.text(player.getName(), NamedTextColor.GREEN)));
         sender.sendMessage(createMobcapsComponent(
             category -> level.getChunkSource().chunkMap.getMobCountNear(serverPlayer, category),
-            category -> level.getWorld().getSpawnLimitUnsafe(org.bukkit.craftbukkit.util.CraftSpawnCategory.toBukkit(category))
+            category -> level.getWorld().getSpawnLimitUnsafe(CraftSpawnCategory.toBukkit(category))
         ));
     }
 

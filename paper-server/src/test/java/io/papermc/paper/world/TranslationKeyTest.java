@@ -5,6 +5,7 @@ import net.minecraft.world.level.GameType;
 import org.bukkit.Difficulty;
 import org.bukkit.FireworkEffect;
 import org.bukkit.GameMode;
+import org.bukkit.craftbukkit.craftImpl.inventory.CraftMetaFirework;
 import org.bukkit.support.environment.Normal;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -22,7 +23,7 @@ public class TranslationKeyTest {
     @Test
     public void testFireworkEffectType() {
         for (final FireworkEffect.Type type : FireworkEffect.Type.values()) {
-            final net.minecraft.world.item.component.FireworkExplosion.Shape nmsType = org.bukkit.craftbukkit.inventory.CraftMetaFirework.getShape(type);
+            final net.minecraft.world.item.component.FireworkExplosion.Shape nmsType = CraftMetaFirework.getShape(type);
             Assertions.assertTrue(nmsType.getName().getContents() instanceof TranslatableContents, "contents aren't translatable");
             Assertions.assertEquals(((TranslatableContents) nmsType.getName().getContents()).getKey(), type.translationKey(), "translation key mismatch for " + type);
         }

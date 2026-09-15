@@ -10,7 +10,7 @@ import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import org.bukkit.Instrument;
 import org.bukkit.Note;
 import org.bukkit.block.data.type.NoteBlock;
-import org.bukkit.craftbukkit.block.data.CraftBlockData;
+import org.bukkit.craftbukkit.craftMC.block.data.CraftBlockData;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked

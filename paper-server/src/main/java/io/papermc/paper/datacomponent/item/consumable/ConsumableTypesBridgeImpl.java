@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import net.kyori.adventure.key.Key;
 import net.minecraft.core.registries.Registries;
-import org.bukkit.craftbukkit.potion.CraftPotionUtil;
+import org.bukkit.craftbukkit.craftImpl.potion.CraftPotionUtil;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.jspecify.annotations.NullMarked;

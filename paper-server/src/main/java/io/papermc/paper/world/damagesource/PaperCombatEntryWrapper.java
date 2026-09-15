@@ -1,7 +1,7 @@
 package io.papermc.paper.world.damagesource;
 
 import net.minecraft.Optionull;
-import org.bukkit.craftbukkit.damage.CraftDamageSource;
+import org.bukkit.craftbukkit.craftImpl.damage.CraftDamageSource;
 import org.bukkit.damage.DamageSource;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;

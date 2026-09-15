@@ -1,12 +1,11 @@
 package io.papermc.paper.registry.entry;
 
 import com.mojang.datafixers.util.Either;
-import io.papermc.paper.util.MCUtil;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import net.minecraft.core.Holder;
 import org.bukkit.NamespacedKey;
-import org.bukkit.craftbukkit.util.CraftNamespacedKey;
+import org.bukkit.craftbukkit.craftUtils.util.CraftNamespacedKey;
 
 public final class RegistryTypeMapper<M, A> {
 

@@ -1,0 +1,69 @@
+package org.bukkit.craftbukkit.craftImpl.inventory.tags;
+
+import java.util.Objects;
+import org.bukkit.NamespacedKey;
+import org.bukkit.inventory.meta.tags.CustomItemTagContainer;
+import org.bukkit.inventory.meta.tags.ItemTagAdapterContext;
+import org.bukkit.inventory.meta.tags.ItemTagType;
+import org.bukkit.persistence.PersistentDataContainer;
+import org.jspecify.annotations.NonNull;
+
+/**
+ * The {@link DeprecatedCustomTagContainer} is a simply wrapper implementation
+ * that wraps the new api to still be usable with the old api parts.
+ */
+@SuppressWarnings("unchecked")
+public final class DeprecatedCustomTagContainer implements CustomItemTagContainer {
+
+    private final PersistentDataContainer wrapped;
+
+    public DeprecatedCustomTagContainer(PersistentDataContainer wrapped) {
+        this.wrapped = wrapped;
+    }
+
+    @Override
+    public <T, Z> void setCustomTag(@NonNull NamespacedKey key, ItemTagType<T, Z> type, @NonNull Z value) {
+        if (Objects.equals(CustomItemTagContainer.class, type.getPrimitiveType())) {
+            this.wrapped.set(key, new DeprecatedContainerTagType<>((ItemTagType<CustomItemTagContainer, Z>) type), value);
+        } else {
+            this.wrapped.set(key, new DeprecatedItemTagType<>(type), value);
+        }
+    }
+
+    @Override
+    public <T, Z> boolean hasCustomTag(@NonNull NamespacedKey key, ItemTagType<T, Z> type) {
+        if (Objects.equals(CustomItemTagContainer.class, type.getPrimitiveType())) {
+            return this.wrapped.has(key, new DeprecatedContainerTagType<>((ItemTagType<CustomItemTagContainer, Z>) type));
+        } else {
+            return this.wrapped.has(key, new DeprecatedItemTagType<>(type));
+        }
+    }
+
+    @Override
+    public <T, Z> Z getCustomTag(@NonNull NamespacedKey key, ItemTagType<T, Z> type) {
+        if (Objects.equals(CustomItemTagContainer.class, type.getPrimitiveType())) {
+            return this.wrapped.get(key, new DeprecatedContainerTagType<>((ItemTagType<CustomItemTagContainer, Z>) type));
+        } else {
+            return this.wrapped.get(key, new DeprecatedItemTagType<>(type));
+        }
+    }
+
+    @Override
+    public void removeCustomTag(@NonNull NamespacedKey key) {
+        this.wrapped.remove(key);
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return this.wrapped.isEmpty();
+    }
+
+    @Override
+    public @NonNull ItemTagAdapterContext getAdapterContext() {
+        return new DeprecatedItemAdapterContext(this.wrapped.getAdapterContext());
+    }
+
+    public PersistentDataContainer getWrapped() {
+        return this.wrapped;
+    }
+}

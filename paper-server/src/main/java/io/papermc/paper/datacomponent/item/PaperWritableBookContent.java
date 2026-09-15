@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 import net.kyori.adventure.inventory.Book;
 import net.kyori.adventure.text.Component;
 import net.minecraft.server.network.Filterable;
-import org.bukkit.craftbukkit.util.Handleable;
+import org.bukkit.craftbukkit.craftUtils.util.Handleable;
 import org.jetbrains.annotations.Unmodifiable;
 
 public record PaperWritableBookContent(

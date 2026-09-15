@@ -29,7 +29,8 @@ import org.bukkit.World;
 import org.bukkit.ban.ProfileBanList;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.configuration.serialization.SerializableAs;
-import org.bukkit.craftbukkit.util.CraftLocation;
+import org.bukkit.craftbukkit.craftImpl.persistence.CraftPersistentDataTypeRegistry;
+import org.bukkit.craftbukkit.craftUtils.util.CraftLocation;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.jspecify.annotations.NonNull;
@@ -300,7 +301,7 @@ public class CraftOfflinePlayer implements OfflinePlayer, ConfigurationSerializa
         return result;
     }
 
-    private static final org.bukkit.craftbukkit.persistence.CraftPersistentDataTypeRegistry DATA_TYPE_REGISTRY = new org.bukkit.craftbukkit.persistence.CraftPersistentDataTypeRegistry();
+    private static final CraftPersistentDataTypeRegistry DATA_TYPE_REGISTRY = new CraftPersistentDataTypeRegistry();
     private io.papermc.paper.persistence.@org.checkerframework.checker.nullness.qual.MonotonicNonNull PersistentDataContainerView persistentDataContainerView;
 
     @Override

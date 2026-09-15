@@ -6,8 +6,8 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.util.datafix.DataFixTypes;
 import net.minecraft.world.level.saveddata.SavedData;
 import net.minecraft.world.level.saveddata.SavedDataType;
-import org.bukkit.craftbukkit.persistence.CraftPersistentDataContainer;
-import org.bukkit.craftbukkit.persistence.CraftPersistentDataTypeRegistry;
+import org.bukkit.craftbukkit.craftImpl.persistence.CraftPersistentDataContainer;
+import org.bukkit.craftbukkit.craftImpl.persistence.CraftPersistentDataTypeRegistry;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked

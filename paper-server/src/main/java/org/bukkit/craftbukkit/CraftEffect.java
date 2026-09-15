@@ -11,7 +11,10 @@ import org.bukkit.Effect;
 import org.bukkit.JukeboxSong;
 import org.bukkit.Material;
 import org.bukkit.block.BlockFace;
-import org.bukkit.craftbukkit.block.CraftBlockType;
+import org.bukkit.craftbukkit.craftMC.block.CraftBlock;
+import org.bukkit.craftbukkit.craftMC.block.CraftBlockType;
+import org.bukkit.craftbukkit.craftMC.block.data.CraftBlockData;
+import org.bukkit.craftbukkit.craftUtils.sounds.CraftJukeboxSong;
 import org.bukkit.inventory.ItemType;
 
 public class CraftEffect {
@@ -48,7 +51,7 @@ public class CraftEffect {
             case WHITE_SMOKE_SHOOT:
                 final BlockFace face = (BlockFace) data;
                 Preconditions.checkArgument(face.isCartesian(), face + " isn't cartesian");
-                dataValue = org.bukkit.craftbukkit.block.CraftBlock.blockFaceToNotch(face).get3DDataValue();
+                dataValue = CraftBlock.blockFaceToNotch(face).get3DDataValue();
                 break;
             case SMOKE_SHOOT:
                 switch ((BlockFace) data) {
@@ -89,7 +92,7 @@ public class CraftEffect {
                 // use the blockdata otherwise
             case DESTROY_BLOCK:
             case BRUSH_BLOCK_COMPLETE:
-                dataValue = Block.getId(((org.bukkit.craftbukkit.block.data.CraftBlockData) data).getState());
+                dataValue = Block.getId(((CraftBlockData) data).getState());
                 break;
             case EXTINGUISH:
             case COMPOSTER_FILL_ATTEMPT:

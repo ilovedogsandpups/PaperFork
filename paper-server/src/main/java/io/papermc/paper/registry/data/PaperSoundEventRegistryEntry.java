@@ -8,6 +8,7 @@ import net.kyori.adventure.key.Key;
 import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import org.bukkit.Sound;
+import org.bukkit.craftbukkit.craftUtils.sounds.CraftSound;
 import org.jspecify.annotations.Nullable;
 
 import static io.papermc.paper.registry.data.util.Checks.asArgument;
@@ -15,7 +16,7 @@ import static io.papermc.paper.registry.data.util.Checks.asConfigured;
 
 /**
  * Not actually used for modifying {@link net.minecraft.core.registries.Registries#SOUND_EVENT}
- * but for creating direct holders for other registries and direct {@link org.bukkit.craftbukkit.CraftSound}s.
+ * but for creating direct holders for other registries and direct {@link CraftSound}s.
  */
 public class PaperSoundEventRegistryEntry implements SoundEventRegistryEntry {
 

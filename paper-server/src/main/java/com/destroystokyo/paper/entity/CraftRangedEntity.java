@@ -2,7 +2,7 @@ package com.destroystokyo.paper.entity;
 
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.monster.RangedAttackMob;
-import org.bukkit.craftbukkit.entity.CraftLivingEntity;
+import org.bukkit.craftbukkit.craftMC.entity.CraftLivingEntity;
 import org.bukkit.entity.LivingEntity;
 import org.jspecify.annotations.NonNull;
 

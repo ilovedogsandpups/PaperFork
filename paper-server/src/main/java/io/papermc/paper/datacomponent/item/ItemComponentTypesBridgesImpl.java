@@ -12,7 +12,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.component.OminousBottleAmplifier;
 import org.bukkit.JukeboxSong;
 import org.bukkit.block.BlockType;
-import org.bukkit.craftbukkit.inventory.CraftItemStack;
+import org.bukkit.craftbukkit.craftImpl.inventory.CraftItemStack;
 import org.bukkit.damage.DamageType;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;

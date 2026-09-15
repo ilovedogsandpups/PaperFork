@@ -5,6 +5,7 @@ import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
 import java.lang.reflect.Method;
 import org.bukkit.Material;
+import org.bukkit.craftbukkit.craftImpl.inventory.CraftItemFactory;
 import org.bukkit.support.environment.AllFeatures;
 import org.junit.jupiter.api.Test;
 

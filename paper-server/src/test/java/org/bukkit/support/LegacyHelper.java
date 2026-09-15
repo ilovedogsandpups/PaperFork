@@ -3,7 +3,7 @@ package org.bukkit.support;
 import com.google.common.collect.ImmutableList;
 import java.util.List;
 import org.bukkit.Material;
-import org.bukkit.craftbukkit.util.CraftMagicNumbers;
+import org.bukkit.craftbukkit.craftUtils.util.CraftMagicNumbers;
 
 public final class LegacyHelper {
 

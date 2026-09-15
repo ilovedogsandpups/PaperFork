@@ -1,0 +1,26 @@
+package org.bukkit.craftbukkit.craftMC.entity;
+
+import net.minecraft.world.entity.projectile.throwableitemprojectile.ThrownSplashPotion;
+import org.bukkit.craftbukkit.CraftServer;
+import org.bukkit.craftbukkit.craftImpl.inventory.CraftItemStack;
+import org.bukkit.entity.SplashPotion;
+import org.bukkit.inventory.ItemType;
+import org.bukkit.inventory.meta.PotionMeta;
+import org.jspecify.annotations.NonNull;
+
+public class CraftThrownSplashPotion extends CraftThrownPotion implements SplashPotion {
+
+    public CraftThrownSplashPotion(final CraftServer server, final ThrownSplashPotion entity) {
+        super(server, entity);
+    }
+
+    @Override
+    public ThrownSplashPotion getHandle() {
+        return (ThrownSplashPotion) this.entity;
+    }
+
+    @Override
+    public @NonNull PotionMeta getPotionMeta() {
+        return (PotionMeta) CraftItemStack.getItemMeta(this.getHandle().getItem(), ItemType.SPLASH_POTION);
+    }
+}

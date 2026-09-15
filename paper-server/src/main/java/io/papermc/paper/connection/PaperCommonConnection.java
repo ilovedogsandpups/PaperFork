@@ -17,7 +17,7 @@ import net.minecraft.server.network.ServerCommonPacketListenerImpl;
 import org.bukkit.NamespacedKey;
 import org.bukkit.ServerLinks;
 import org.bukkit.craftbukkit.CraftServerLinks;
-import org.bukkit.craftbukkit.util.CraftNamespacedKey;
+import org.bukkit.craftbukkit.craftUtils.util.CraftNamespacedKey;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 

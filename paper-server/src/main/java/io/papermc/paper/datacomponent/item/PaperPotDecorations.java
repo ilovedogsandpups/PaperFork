@@ -1,8 +1,8 @@
 package io.papermc.paper.datacomponent.item;
 
 import java.util.Optional;
-import org.bukkit.craftbukkit.inventory.CraftItemType;
-import org.bukkit.craftbukkit.util.Handleable;
+import org.bukkit.craftbukkit.craftImpl.inventory.CraftItemType;
+import org.bukkit.craftbukkit.craftUtils.util.Handleable;
 import org.bukkit.inventory.ItemType;
 import org.jspecify.annotations.Nullable;
 

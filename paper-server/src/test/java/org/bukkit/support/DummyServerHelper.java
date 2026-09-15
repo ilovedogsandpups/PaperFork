@@ -12,16 +12,16 @@ import net.minecraft.world.level.block.Block;
 import org.bukkit.Material;
 import org.bukkit.Server;
 import org.bukkit.craftbukkit.CraftLootTable;
-import org.bukkit.craftbukkit.block.data.CraftBlockData;
-import org.bukkit.craftbukkit.inventory.CraftItemFactory;
-import org.bukkit.craftbukkit.tag.CraftBlockTag;
-import org.bukkit.craftbukkit.tag.CraftEntityTag;
-import org.bukkit.craftbukkit.tag.CraftFluidTag;
-import org.bukkit.craftbukkit.tag.CraftGameEventTag;
-import org.bukkit.craftbukkit.tag.CraftItemTag;
-import org.bukkit.craftbukkit.util.CraftMagicNumbers;
-import org.bukkit.craftbukkit.util.CraftNamespacedKey;
-import org.bukkit.craftbukkit.util.Versioning;
+import org.bukkit.craftbukkit.craftMC.block.data.CraftBlockData;
+import org.bukkit.craftbukkit.craftImpl.inventory.CraftItemFactory;
+import org.bukkit.craftbukkit.craftImpl.tag.CraftBlockTag;
+import org.bukkit.craftbukkit.craftImpl.tag.CraftEntityTag;
+import org.bukkit.craftbukkit.craftImpl.tag.CraftFluidTag;
+import org.bukkit.craftbukkit.craftImpl.tag.CraftGameEventTag;
+import org.bukkit.craftbukkit.craftImpl.tag.CraftItemTag;
+import org.bukkit.craftbukkit.craftUtils.util.CraftMagicNumbers;
+import org.bukkit.craftbukkit.craftUtils.util.CraftNamespacedKey;
+import org.bukkit.craftbukkit.craftUtils.util.Versioning;
 
 public final class DummyServerHelper {
 

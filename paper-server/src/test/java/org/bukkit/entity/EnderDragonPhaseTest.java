@@ -3,7 +3,7 @@ package org.bukkit.entity;
 import static org.junit.jupiter.api.Assertions.*;
 
 import net.minecraft.world.entity.boss.enderdragon.phases.EnderDragonPhase;
-import org.bukkit.craftbukkit.entity.CraftEnderDragon;
+import org.bukkit.craftbukkit.craftMC.entity.CraftEnderDragon;
 import org.bukkit.support.environment.Normal;
 import org.junit.jupiter.api.Test;
 

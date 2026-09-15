@@ -3,7 +3,7 @@ package org.bukkit.craftbukkit;
 import com.google.common.base.Preconditions;
 import net.minecraft.server.ServerTickRateManager;
 import org.bukkit.ServerTickManager;
-import org.bukkit.craftbukkit.entity.CraftEntity;
+import org.bukkit.craftbukkit.craftMC.entity.CraftEntity;
 import org.bukkit.entity.Entity;
 import org.jspecify.annotations.NonNull;
 

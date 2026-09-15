@@ -4,8 +4,8 @@ import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
-import org.bukkit.craftbukkit.map.CraftMapCursor;
-import org.bukkit.craftbukkit.util.Handleable;
+import org.bukkit.craftbukkit.craftImpl.map.CraftMapCursor;
+import org.bukkit.craftbukkit.craftUtils.util.Handleable;
 import org.bukkit.map.MapCursor;
 import org.jspecify.annotations.Nullable;
 

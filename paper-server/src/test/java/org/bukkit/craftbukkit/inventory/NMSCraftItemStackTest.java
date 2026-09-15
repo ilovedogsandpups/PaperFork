@@ -2,7 +2,8 @@ package org.bukkit.craftbukkit.inventory;
 
 import static org.bukkit.support.MatcherAssert.*;
 import static org.hamcrest.Matchers.*;
-import org.bukkit.craftbukkit.enchantments.CraftEnchantment;
+import org.bukkit.craftbukkit.craftImpl.enchantments.CraftEnchantment;
+import org.bukkit.craftbukkit.craftImpl.inventory.CraftItemStack;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.support.environment.VanillaFeature;

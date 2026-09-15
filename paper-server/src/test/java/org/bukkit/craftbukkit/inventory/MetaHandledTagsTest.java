@@ -4,6 +4,7 @@ import io.github.classgraph.ClassGraph;
 import io.github.classgraph.ClassInfo;
 import io.github.classgraph.ClassInfoList;
 import io.github.classgraph.ScanResult;
+import org.bukkit.craftbukkit.craftImpl.inventory.CraftMetaItem;
 import org.bukkit.support.environment.AllFeatures;
 import org.junit.jupiter.api.Test;
 

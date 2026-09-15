@@ -15,9 +15,9 @@ import org.bukkit.Material;
 import org.bukkit.Statistic;
 import org.bukkit.Statistic.Type;
 import org.bukkit.block.BlockType;
-import org.bukkit.craftbukkit.block.CraftBlockType;
-import org.bukkit.craftbukkit.entity.CraftEntityType;
-import org.bukkit.craftbukkit.inventory.CraftItemType;
+import org.bukkit.craftbukkit.craftMC.block.CraftBlockType;
+import org.bukkit.craftbukkit.craftMC.entity.CraftEntityType;
+import org.bukkit.craftbukkit.craftImpl.inventory.CraftItemType;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemType;
 

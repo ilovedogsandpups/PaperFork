@@ -12,7 +12,7 @@ import java.util.Optional;
 import net.kyori.adventure.util.TriState;
 import net.minecraft.core.registries.Registries;
 import org.bukkit.block.BlockType;
-import org.bukkit.craftbukkit.util.Handleable;
+import org.bukkit.craftbukkit.craftUtils.util.Handleable;
 import org.checkerframework.checker.index.qual.NonNegative;
 import org.jetbrains.annotations.Unmodifiable;
 import org.jspecify.annotations.Nullable;

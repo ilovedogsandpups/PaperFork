@@ -5,7 +5,7 @@ import net.minecraft.world.level.block.JukeboxBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import org.bukkit.block.data.type.Jukebox;
-import org.bukkit.craftbukkit.block.data.CraftBlockData;
+import org.bukkit.craftbukkit.craftMC.block.data.CraftBlockData;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked

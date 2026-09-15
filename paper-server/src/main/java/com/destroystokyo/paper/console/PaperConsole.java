@@ -6,7 +6,7 @@ import io.papermc.paper.console.BrigadierConsoleParser;
 import io.papermc.paper.util.PaperCacheDir;
 import net.minecraft.server.dedicated.DedicatedServer;
 import net.minecrell.terminalconsole.SimpleTerminalConsole;
-import org.bukkit.craftbukkit.command.ConsoleCommandCompleter;
+import org.bukkit.craftbukkit.craftImpl.command.ConsoleCommandCompleter;
 import org.jline.reader.LineReader;
 import org.jline.reader.LineReaderBuilder;
 

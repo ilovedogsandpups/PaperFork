@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.awt.Color;
 import java.util.concurrent.ExecutionException;
 import java.util.logging.Logger;
-import org.bukkit.craftbukkit.map.CraftMapColorCache;
+import org.bukkit.craftbukkit.craftImpl.map.CraftMapColorCache;
 import org.bukkit.support.environment.Slow;
 import org.junit.jupiter.api.Test;
 

@@ -1,0 +1,30 @@
+package org.bukkit.craftbukkit.craftMC.entity;
+
+import com.google.common.base.Preconditions;
+import org.bukkit.craftbukkit.CraftServer;
+import org.bukkit.entity.Salmon;
+import org.jspecify.annotations.NonNull;
+
+public class CraftSalmon extends io.papermc.paper.entity.PaperSchoolableFish implements Salmon { // Paper - Schooling Fish API
+
+    public CraftSalmon(CraftServer server, net.minecraft.world.entity.animal.fish.Salmon entity) {
+        super(server, entity);
+    }
+
+    @Override
+    public net.minecraft.world.entity.animal.fish.Salmon getHandle() {
+        return (net.minecraft.world.entity.animal.fish.Salmon) this.entity;
+    }
+
+    @Override
+    public @NonNull Variant getVariant() {
+        return Variant.values()[this.getHandle().getVariant().ordinal()];
+    }
+
+    @Override
+    public void setVariant(Variant variant) {
+        Preconditions.checkArgument(variant != null, "variant cannot be null");
+
+        this.getHandle().setVariant(net.minecraft.world.entity.animal.fish.Salmon.Variant.values()[variant.ordinal()]);
+    }
+}

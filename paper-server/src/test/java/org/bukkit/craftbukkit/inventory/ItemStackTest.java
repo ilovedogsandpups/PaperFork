@@ -18,6 +18,8 @@ import java.util.stream.Stream;
 import org.bukkit.Material;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.craftbukkit.craftImpl.inventory.CraftItemFactory;
+import org.bukkit.craftbukkit.craftImpl.inventory.CraftItemStack;
 import org.bukkit.inventory.ItemFactory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;

@@ -4,7 +4,7 @@ import io.papermc.paper.adventure.PaperAdventure;
 import java.util.Optional;
 import net.kyori.adventure.key.Key;
 import net.minecraft.resources.Identifier;
-import org.bukkit.craftbukkit.util.Handleable;
+import org.bukkit.craftbukkit.craftUtils.util.Handleable;
 import org.jspecify.annotations.Nullable;
 
 public record PaperUseCooldown(

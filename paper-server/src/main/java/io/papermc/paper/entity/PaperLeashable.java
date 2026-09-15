@@ -2,7 +2,7 @@ package io.papermc.paper.entity;
 
 import com.google.common.base.Preconditions;
 import net.minecraft.world.entity.Leashable;
-import org.bukkit.craftbukkit.entity.CraftEntity;
+import org.bukkit.craftbukkit.craftMC.entity.CraftEntity;
 import org.bukkit.entity.Entity;
 import org.jspecify.annotations.NonNull;
 

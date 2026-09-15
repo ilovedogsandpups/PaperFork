@@ -13,7 +13,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ClientInformation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.players.PlayerList;
-import org.bukkit.craftbukkit.entity.CraftPlayer;
+import org.bukkit.craftbukkit.craftMC.entity.CraftPlayer;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.plugin.RegisteredListener;
 import org.jspecify.annotations.NullMarked;
@@ -34,13 +34,13 @@ public class HorriblePlayerLoginEventHack {
             return false;
         }
         LOGGER.warn("""
-                
+
                 ============================================================
                 WARNING: {} Attempted to use PlayerGameConnection#reenterConfiguration()
-                
+
                 This method currently requires that all plugins installed on the server
                 are not listening to the PlayerLoginEvent.
-                
+
                 Please look in your logs for the Plugins listening to this event.
                 ============================================================""", StackWalkerUtil.getFirstPluginCaller().getName());
         return true;
@@ -60,14 +60,14 @@ public class HorriblePlayerLoginEventHack {
                 LOGGER.info("You have plugins listening to the PlayerLoginEvent, this will cause re-configuration APIs to be unavailable: {}", plugins);
             } else {
                 LOGGER.warn("""
-                    
+
                     ============================================================
                     WARNING: Legacy PlayerLoginEvent usage detected!
-                    
+
                     This event forces an alternative player loading path that is
                     deprecated and will be removed in a future release.
                     For more information, see: https://go.papermc.io/announcement/1.21.7
-                    
+
                     Please notify the following plugin developers: {}
                     ============================================================""", plugins);
             }

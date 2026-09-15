@@ -103,25 +103,31 @@ import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.boss.DragonBattle;
-import org.bukkit.craftbukkit.block.CraftBiome;
-import org.bukkit.craftbukkit.block.CraftBlock;
-import org.bukkit.craftbukkit.block.CraftBlockState;
-import org.bukkit.craftbukkit.block.CraftBlockType;
-import org.bukkit.craftbukkit.block.data.CraftBlockData;
-import org.bukkit.craftbukkit.boss.CraftDragonBattle;
-import org.bukkit.craftbukkit.entity.CraftEntity;
-import org.bukkit.craftbukkit.entity.CraftPlayer;
-import org.bukkit.craftbukkit.event.CraftEventFactory;
-import org.bukkit.craftbukkit.generator.structure.CraftGeneratedStructure;
-import org.bukkit.craftbukkit.generator.structure.CraftStructure;
-import org.bukkit.craftbukkit.inventory.CraftItemStack;
-import org.bukkit.craftbukkit.metadata.BlockMetadataStore;
-import org.bukkit.craftbukkit.util.CraftBiomeSearchResult;
-import org.bukkit.craftbukkit.util.CraftDifficulty;
-import org.bukkit.craftbukkit.util.CraftLocation;
-import org.bukkit.craftbukkit.util.CraftRayTraceResult;
-import org.bukkit.craftbukkit.util.CraftSpawnCategory;
-import org.bukkit.craftbukkit.util.CraftStructureSearchResult;
+import org.bukkit.craftbukkit.craftImpl.generator.CustomChunkGenerator;
+import org.bukkit.craftbukkit.craftImpl.generator.CustomWorldChunkManager;
+import org.bukkit.craftbukkit.craftMC.block.CraftBiome;
+import org.bukkit.craftbukkit.craftMC.block.CraftBlock;
+import org.bukkit.craftbukkit.craftMC.block.CraftBlockState;
+import org.bukkit.craftbukkit.craftMC.block.CraftBlockType;
+import org.bukkit.craftbukkit.craftMC.block.data.CraftBlockData;
+import org.bukkit.craftbukkit.craftMC.boss.CraftDragonBattle;
+import org.bukkit.craftbukkit.craftMC.entity.CraftEntity;
+import org.bukkit.craftbukkit.craftMC.entity.CraftPlayer;
+import org.bukkit.craftbukkit.craftImpl.event.CraftEventFactory;
+import org.bukkit.craftbukkit.craftImpl.generator.structure.CraftGeneratedStructure;
+import org.bukkit.craftbukkit.craftImpl.generator.structure.CraftStructure;
+import org.bukkit.craftbukkit.craftImpl.inventory.CraftItemStack;
+import org.bukkit.craftbukkit.craftUtils.chunks.CraftChunk;
+import org.bukkit.craftbukkit.craftUtils.sounds.CraftSound;
+import org.bukkit.craftbukkit.craftUtils.util.CraftNamespacedKey;
+import org.bukkit.craftbukkit.craftUtils.util.CraftVector;
+import org.bukkit.craftbukkit.craftImpl.metadata.BlockMetadataStore;
+import org.bukkit.craftbukkit.craftUtils.util.CraftBiomeSearchResult;
+import org.bukkit.craftbukkit.craftUtils.util.CraftDifficulty;
+import org.bukkit.craftbukkit.craftUtils.util.CraftLocation;
+import org.bukkit.craftbukkit.craftUtils.util.CraftRayTraceResult;
+import org.bukkit.craftbukkit.craftUtils.util.CraftSpawnCategory;
+import org.bukkit.craftbukkit.craftUtils.util.CraftStructureSearchResult;
 import org.bukkit.entity.AbstractArrow;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
@@ -258,12 +264,12 @@ public class CraftWorld extends CraftRegionAccessor implements World {
 
         final net.minecraft.world.level.chunk.ChunkGenerator gen = serverCache.getGenerator();
         net.minecraft.world.level.biome.BiomeSource biomeSource;
-        if (gen instanceof org.bukkit.craftbukkit.generator.CustomChunkGenerator custom) {
+        if (gen instanceof CustomChunkGenerator custom) {
             biomeSource = custom.getDelegate().getBiomeSource();
         } else {
             biomeSource = gen.getBiomeSource();
         }
-        if (biomeSource instanceof org.bukkit.craftbukkit.generator.CustomWorldChunkManager customBiomeSource) {
+        if (biomeSource instanceof CustomWorldChunkManager customBiomeSource) {
             biomeSource = customBiomeSource.vanillaBiomeSource;
         }
         final net.minecraft.world.level.biome.BiomeSource finalBiomeSource = biomeSource;
@@ -742,7 +748,7 @@ public class CraftWorld extends CraftRegionAccessor implements World {
     public boolean generateTree(@NonNull Location loc, @NonNull TreeType type, @NonNull BlockChangeDelegate delegate) {
         this.world.captureTreeGeneration = true;
         this.world.captureBlockStates = true;
-        List<org.bukkit.craftbukkit.block.CraftBlockState> capturedBlockStates;
+        List<CraftBlockState> capturedBlockStates;
         boolean grownTree;
         try {
             grownTree = this.generateTree(loc, type);
@@ -1865,7 +1871,7 @@ public class CraftWorld extends CraftRegionAccessor implements World {
 
     @Override
     public void sendGameEvent(Entity sourceEntity, org.bukkit.GameEvent gameEvent, @NonNull Vector position) {
-        getHandle().gameEvent(sourceEntity != null ? ((CraftEntity) sourceEntity).getHandle(): null, net.minecraft.core.registries.BuiltInRegistries.GAME_EVENT.get(org.bukkit.craftbukkit.util.CraftNamespacedKey.toMinecraft(gameEvent.getKey())).orElseThrow(), org.bukkit.craftbukkit.util.CraftVector.toBlockPos(position));
+        getHandle().gameEvent(sourceEntity != null ? ((CraftEntity) sourceEntity).getHandle(): null, net.minecraft.core.registries.BuiltInRegistries.GAME_EVENT.get(CraftNamespacedKey.toMinecraft(gameEvent.getKey())).orElseThrow(), CraftVector.toBlockPos(position));
     }
     // Paper end
 

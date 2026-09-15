@@ -28,7 +28,7 @@ import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
-import org.bukkit.craftbukkit.util.CraftMagicNumbers;
+import org.bukkit.craftbukkit.craftUtils.util.CraftMagicNumbers;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jspecify.annotations.NullMarked;
@@ -43,7 +43,7 @@ public class PaperPluginsCommand {
         .append(asPlainComponents("""
                                       Server plugins can add new behavior to your server!
                                       You can find new plugins on Paper's plugin repository, Hangar.
-                                      
+
                                       https://hangar.papermc.io/
                                       """));
 
@@ -51,7 +51,7 @@ public class PaperPluginsCommand {
         .append(asPlainComponents("""
                                       A legacy plugin is a plugin that was made on
                                       very old unsupported versions of the game.
-                                      
+
                                       It is encouraged that you replace this plugin,
                                       as they might not work in the future and may cause
                                       performance issues.

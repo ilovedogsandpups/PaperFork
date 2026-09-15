@@ -1,6 +1,6 @@
 package io.papermc.paper.datacomponent.item;
 
-import org.bukkit.craftbukkit.util.Handleable;
+import org.bukkit.craftbukkit.craftUtils.util.Handleable;
 import org.checkerframework.checker.index.qual.NonNegative;
 
 import static io.papermc.paper.util.BoundChecker.requireNonNegative;

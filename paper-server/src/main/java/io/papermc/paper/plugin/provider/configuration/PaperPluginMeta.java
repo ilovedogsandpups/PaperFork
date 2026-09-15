@@ -13,7 +13,7 @@ import io.papermc.paper.plugin.provider.configuration.type.PermissionConfigurati
 import io.papermc.paper.plugin.provider.configuration.type.PluginDependencyLifeCycle;
 import java.lang.reflect.Type;
 import java.util.function.Predicate;
-import org.bukkit.craftbukkit.util.ApiVersion;
+import org.bukkit.craftbukkit.craftUtils.util.ApiVersion;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionDefault;
 import org.bukkit.plugin.PluginLoadOrder;

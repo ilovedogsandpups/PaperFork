@@ -32,16 +32,17 @@ import org.bukkit.TreeType;
 import org.bukkit.block.Biome;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.data.BlockData;
-import org.bukkit.craftbukkit.block.CraftBiome;
-import org.bukkit.craftbukkit.block.CraftBlock;
-import org.bukkit.craftbukkit.block.CraftBlockType;
-import org.bukkit.craftbukkit.block.data.CraftBlockData;
-import org.bukkit.craftbukkit.entity.CraftEntity;
-import org.bukkit.craftbukkit.entity.CraftEntityType;
-import org.bukkit.craftbukkit.entity.CraftEntityTypes;
-import org.bukkit.craftbukkit.util.BlockStateListPopulator;
-import org.bukkit.craftbukkit.util.CraftLocation;
-import org.bukkit.craftbukkit.util.RandomSourceWrapper;
+import org.bukkit.craftbukkit.craftMC.block.CraftBiome;
+import org.bukkit.craftbukkit.craftMC.block.CraftBlock;
+import org.bukkit.craftbukkit.craftMC.block.CraftBlockType;
+import org.bukkit.craftbukkit.craftMC.block.data.CraftBlockData;
+import org.bukkit.craftbukkit.craftMC.entity.CraftEntity;
+import org.bukkit.craftbukkit.craftMC.entity.CraftEntityType;
+import org.bukkit.craftbukkit.craftMC.entity.CraftEntityTypes;
+import org.bukkit.craftbukkit.craftUtils.util.BlockStateListPopulator;
+import org.bukkit.craftbukkit.craftUtils.util.CraftLocation;
+import org.bukkit.craftbukkit.craftUtils.util.CraftNamespacedKey;
+import org.bukkit.craftbukkit.craftUtils.util.RandomSourceWrapper;
 import org.bukkit.entity.AbstractArrow;
 import org.bukkit.entity.AbstractCow;
 import org.bukkit.entity.AbstractCubeMob;
@@ -477,7 +478,7 @@ public abstract class CraftRegionAccessor implements RegionAccessor {
 
     @Override
     public org.bukkit.@NonNull NamespacedKey getKey() {
-        return org.bukkit.craftbukkit.util.CraftNamespacedKey.fromMinecraft(this.getHandle().getLevel().dimension().identifier());
+        return CraftNamespacedKey.fromMinecraft(this.getHandle().getLevel().dimension().identifier());
     }
 
     public boolean lineOfSightExists(Location from, Location to) {

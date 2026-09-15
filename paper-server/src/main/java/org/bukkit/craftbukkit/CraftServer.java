@@ -149,62 +149,63 @@ import org.bukkit.command.SimpleCommandMap;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
-import org.bukkit.craftbukkit.ban.CraftIpBanList;
-import org.bukkit.craftbukkit.ban.CraftProfileBanList;
-import org.bukkit.craftbukkit.block.data.CraftBlockData;
-import org.bukkit.craftbukkit.boss.CraftBossBar;
-import org.bukkit.craftbukkit.command.CraftCommandMap;
-import org.bukkit.craftbukkit.command.VanillaCommandWrapper;
-import org.bukkit.craftbukkit.entity.CraftEntityFactory;
-import org.bukkit.craftbukkit.entity.CraftPlayer;
-import org.bukkit.craftbukkit.event.CraftEventFactory;
-import org.bukkit.craftbukkit.generator.CraftWorldInfo;
-import org.bukkit.craftbukkit.generator.OldCraftChunkData;
-import org.bukkit.craftbukkit.help.SimpleHelpMap;
-import org.bukkit.craftbukkit.inventory.CraftBlastingRecipe;
-import org.bukkit.craftbukkit.inventory.CraftCampfireRecipe;
-import org.bukkit.craftbukkit.inventory.CraftFurnaceRecipe;
-import org.bukkit.craftbukkit.inventory.CraftItemCraftResult;
-import org.bukkit.craftbukkit.inventory.CraftItemFactory;
-import org.bukkit.craftbukkit.inventory.CraftItemStack;
-import org.bukkit.craftbukkit.inventory.CraftMerchantCustom;
-import org.bukkit.craftbukkit.inventory.CraftRecipe;
-import org.bukkit.craftbukkit.inventory.CraftShapedRecipe;
-import org.bukkit.craftbukkit.inventory.CraftShapelessRecipe;
-import org.bukkit.craftbukkit.inventory.CraftSmithingTransformRecipe;
-import org.bukkit.craftbukkit.inventory.CraftSmithingTrimRecipe;
-import org.bukkit.craftbukkit.inventory.CraftSmokingRecipe;
-import org.bukkit.craftbukkit.inventory.CraftStonecuttingRecipe;
-import org.bukkit.craftbukkit.inventory.CraftTransmuteRecipe;
-import org.bukkit.craftbukkit.inventory.RecipeIterator;
-import org.bukkit.craftbukkit.inventory.util.CraftInventoryCreator;
-import org.bukkit.craftbukkit.map.CraftMapColorCache;
-import org.bukkit.craftbukkit.map.CraftMapCursor;
-import org.bukkit.craftbukkit.map.CraftMapView;
-import org.bukkit.craftbukkit.metadata.EntityMetadataStore;
-import org.bukkit.craftbukkit.metadata.PlayerMetadataStore;
-import org.bukkit.craftbukkit.metadata.WorldMetadataStore;
-import org.bukkit.craftbukkit.packs.CraftResourcePack;
-import org.bukkit.craftbukkit.profile.CraftPlayerProfile;
-import org.bukkit.craftbukkit.scheduler.CraftScheduler;
-import org.bukkit.craftbukkit.scoreboard.CraftCriteria;
-import org.bukkit.craftbukkit.scoreboard.CraftScoreboardManager;
-import org.bukkit.craftbukkit.structure.CraftStructureManager;
-import org.bukkit.craftbukkit.tag.CraftBlockTag;
-import org.bukkit.craftbukkit.tag.CraftDamageTag;
-import org.bukkit.craftbukkit.tag.CraftEntityTag;
-import org.bukkit.craftbukkit.tag.CraftFluidTag;
-import org.bukkit.craftbukkit.tag.CraftGameEventTag;
-import org.bukkit.craftbukkit.tag.CraftItemTag;
-import org.bukkit.craftbukkit.util.ApiVersion;
-import org.bukkit.craftbukkit.util.CraftChatMessage;
-import org.bukkit.craftbukkit.util.CraftIconCache;
-import org.bukkit.craftbukkit.util.CraftLocation;
-import org.bukkit.craftbukkit.util.CraftMagicNumbers;
-import org.bukkit.craftbukkit.util.CraftNamespacedKey;
-import org.bukkit.craftbukkit.util.CraftSpawnCategory;
-import org.bukkit.craftbukkit.util.Versioning;
-import org.bukkit.craftbukkit.util.permissions.CraftDefaultPermissions;
+import org.bukkit.craftbukkit.craftImpl.ban.CraftIpBanList;
+import org.bukkit.craftbukkit.craftImpl.ban.CraftProfileBanList;
+import org.bukkit.craftbukkit.craftMC.block.data.CraftBlockData;
+import org.bukkit.craftbukkit.craftMC.boss.CraftBossBar;
+import org.bukkit.craftbukkit.craftImpl.command.CraftCommandMap;
+import org.bukkit.craftbukkit.craftImpl.command.VanillaCommandWrapper;
+import org.bukkit.craftbukkit.craftMC.entity.CraftEntity;
+import org.bukkit.craftbukkit.craftMC.entity.CraftEntityFactory;
+import org.bukkit.craftbukkit.craftMC.entity.CraftPlayer;
+import org.bukkit.craftbukkit.craftImpl.event.CraftEventFactory;
+import org.bukkit.craftbukkit.craftImpl.generator.CraftWorldInfo;
+import org.bukkit.craftbukkit.craftImpl.generator.OldCraftChunkData;
+import org.bukkit.craftbukkit.craftImpl.help.SimpleHelpMap;
+import org.bukkit.craftbukkit.craftImpl.inventory.CraftBlastingRecipe;
+import org.bukkit.craftbukkit.craftImpl.inventory.CraftCampfireRecipe;
+import org.bukkit.craftbukkit.craftImpl.inventory.CraftFurnaceRecipe;
+import org.bukkit.craftbukkit.craftImpl.inventory.CraftItemCraftResult;
+import org.bukkit.craftbukkit.craftImpl.inventory.CraftItemFactory;
+import org.bukkit.craftbukkit.craftImpl.inventory.CraftItemStack;
+import org.bukkit.craftbukkit.craftImpl.inventory.CraftMerchantCustom;
+import org.bukkit.craftbukkit.craftImpl.inventory.CraftRecipe;
+import org.bukkit.craftbukkit.craftImpl.inventory.CraftShapedRecipe;
+import org.bukkit.craftbukkit.craftImpl.inventory.CraftShapelessRecipe;
+import org.bukkit.craftbukkit.craftImpl.inventory.CraftSmithingTransformRecipe;
+import org.bukkit.craftbukkit.craftImpl.inventory.CraftSmithingTrimRecipe;
+import org.bukkit.craftbukkit.craftImpl.inventory.CraftSmokingRecipe;
+import org.bukkit.craftbukkit.craftImpl.inventory.CraftStonecuttingRecipe;
+import org.bukkit.craftbukkit.craftImpl.inventory.CraftTransmuteRecipe;
+import org.bukkit.craftbukkit.craftImpl.inventory.RecipeIterator;
+import org.bukkit.craftbukkit.craftImpl.inventory.util.CraftInventoryCreator;
+import org.bukkit.craftbukkit.craftImpl.map.CraftMapColorCache;
+import org.bukkit.craftbukkit.craftImpl.map.CraftMapCursor;
+import org.bukkit.craftbukkit.craftImpl.map.CraftMapView;
+import org.bukkit.craftbukkit.craftImpl.metadata.EntityMetadataStore;
+import org.bukkit.craftbukkit.craftImpl.metadata.PlayerMetadataStore;
+import org.bukkit.craftbukkit.craftImpl.metadata.WorldMetadataStore;
+import org.bukkit.craftbukkit.craftImpl.packs.CraftResourcePack;
+import org.bukkit.craftbukkit.craftImpl.profile.CraftPlayerProfile;
+import org.bukkit.craftbukkit.craftUtils.scheduler.CraftScheduler;
+import org.bukkit.craftbukkit.craftImpl.scoreboard.CraftCriteria;
+import org.bukkit.craftbukkit.craftImpl.scoreboard.CraftScoreboardManager;
+import org.bukkit.craftbukkit.craftImpl.structure.CraftStructureManager;
+import org.bukkit.craftbukkit.craftImpl.tag.CraftBlockTag;
+import org.bukkit.craftbukkit.craftImpl.tag.CraftDamageTag;
+import org.bukkit.craftbukkit.craftImpl.tag.CraftEntityTag;
+import org.bukkit.craftbukkit.craftImpl.tag.CraftFluidTag;
+import org.bukkit.craftbukkit.craftImpl.tag.CraftGameEventTag;
+import org.bukkit.craftbukkit.craftImpl.tag.CraftItemTag;
+import org.bukkit.craftbukkit.craftUtils.util.ApiVersion;
+import org.bukkit.craftbukkit.craftUtils.util.CraftChatMessage;
+import org.bukkit.craftbukkit.craftUtils.util.CraftIconCache;
+import org.bukkit.craftbukkit.craftUtils.util.CraftLocation;
+import org.bukkit.craftbukkit.craftUtils.util.CraftMagicNumbers;
+import org.bukkit.craftbukkit.craftUtils.util.CraftNamespacedKey;
+import org.bukkit.craftbukkit.craftUtils.util.CraftSpawnCategory;
+import org.bukkit.craftbukkit.craftUtils.util.Versioning;
+import org.bukkit.craftbukkit.craftUtils.util.permissions.CraftDefaultPermissions;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.SpawnCategory;
@@ -377,7 +378,7 @@ public final class CraftServer implements Server {
 
     @Override
     public final boolean isOwnedByCurrentRegion(@NonNull Entity entity) {
-        return ca.spottedleaf.moonrise.common.util.TickThread.isTickThreadFor(((org.bukkit.craftbukkit.entity.CraftEntity) entity).getHandleRaw());
+        return ca.spottedleaf.moonrise.common.util.TickThread.isTickThreadFor(((CraftEntity) entity).getHandleRaw());
     }
 
     @Override
@@ -2229,7 +2230,7 @@ public final class CraftServer implements Server {
 
     @Override
     public @NonNull Merchant createMerchant(net.kyori.adventure.text.Component title) {
-        return new org.bukkit.craftbukkit.inventory.CraftMerchantCustom(title == null ? InventoryType.MERCHANT.defaultTitle() : title);
+        return new CraftMerchantCustom(title == null ? InventoryType.MERCHANT.defaultTitle() : title);
     }
 
     @Override
@@ -2747,7 +2748,7 @@ public final class CraftServer implements Server {
             for (ServerPlayer player : this.playerList.getPlayers()) {
                 player.connection.send(io.papermc.paper.adventure.PaperAdventure.asSoundPacket(sound, player, seed, null));
             }
-        } else if (emitter instanceof org.bukkit.craftbukkit.entity.CraftEntity craftEntity) {
+        } else if (emitter instanceof CraftEntity craftEntity) {
             AsyncGuard.catchOperation("play sound; cannot use entity emitter");
             final net.minecraft.world.entity.Entity entity = craftEntity.getHandle();
             io.papermc.paper.adventure.PaperAdventure.asSoundPacket(sound, entity, seed, this.playSound0(entity.getX(), entity.getY(), entity.getZ(), List.of((ServerLevel) entity.level())));

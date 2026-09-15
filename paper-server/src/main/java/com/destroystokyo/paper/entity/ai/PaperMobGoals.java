@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Set;
 import net.minecraft.world.entity.ai.goal.GoalSelector;
 import net.minecraft.world.entity.ai.goal.WrappedGoal;
-import org.bukkit.craftbukkit.entity.CraftMob;
+import org.bukkit.craftbukkit.craftMC.entity.CraftMob;
 import org.bukkit.entity.Mob;
 import org.jspecify.annotations.NullMarked;
 

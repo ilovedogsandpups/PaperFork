@@ -5,7 +5,8 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import org.bukkit.Material;
-import org.bukkit.craftbukkit.util.CraftMagicNumbers;
+import org.bukkit.craftbukkit.craftUtils.util.CraftLegacy;
+import org.bukkit.craftbukkit.craftUtils.util.CraftMagicNumbers;
 import org.bukkit.material.MaterialData;
 import org.bukkit.support.environment.Legacy;
 import org.junit.jupiter.api.Test;
@@ -175,46 +176,46 @@ public class LegacyTest {
     public void toLegacyMaterial() {
         for (Material material : Material.values()) {
             if (!this.INVALIDATED_MATERIALS.contains(material) && !material.isLegacy()) {
-                MaterialData converted = CraftLegacy.toLegacyData(material);
+                MaterialData converted = org.bukkit.craftbukkit.craftUtils.legacy.CraftLegacy.toLegacyData(material);
 
                 assertNotEquals(Material.LEGACY_AIR, converted.getItemType(), "Could not toLegacy " + material);
 
                 if (!this.INVALIDATED_MATERIALS.contains(converted.getItemType())) {
-                    assertNotEquals(Material.AIR, CraftLegacy.fromLegacy(converted), "Could not fromLegacy(toLegacy) " + converted + "(" + material + ")");
+                    assertNotEquals(Material.AIR, org.bukkit.craftbukkit.craftUtils.legacy.CraftLegacy.fromLegacy(converted), "Could not fromLegacy(toLegacy) " + converted + "(" + material + ")");
                 }
                 if (!this.INVERSION_FAILS.contains(material)) {
-                    assertEquals(material, CraftLegacy.fromLegacy(converted), "Could not fromLegacy(toLegacy) " + converted + "(" + material + ")");
+                    assertEquals(material, org.bukkit.craftbukkit.craftUtils.legacy.CraftLegacy.fromLegacy(converted), "Could not fromLegacy(toLegacy) " + converted + "(" + material + ")");
                 }
             }
         }
 
-        assertEquals(Material.LEGACY_AIR, CraftLegacy.toLegacy(Material.AIR), "Could not toLegacy Air");
+        assertEquals(Material.LEGACY_AIR, org.bukkit.craftbukkit.craftUtils.legacy.CraftLegacy.toLegacy(Material.AIR), "Could not toLegacy Air");
     }
 
     @Test
     public void fromLegacyMaterial() {
         for (Material material : Material.values()) {
             if (!this.INVALIDATED_MATERIALS.contains(material) && material.isLegacy()) {
-                Material converted = CraftLegacy.fromLegacy(material);
+                Material converted = org.bukkit.craftbukkit.craftUtils.legacy.CraftLegacy.fromLegacy(material);
                 assertNotEquals(Material.AIR, converted, "Could not fromLegacy " + material);
 
-                assertNotEquals(Material.AIR, CraftLegacy.toLegacy(converted), "Could not toLegacy(fromLegacy) " + converted + "(" + material + ")");
+                assertNotEquals(Material.AIR, org.bukkit.craftbukkit.craftUtils.legacy.CraftLegacy.toLegacy(converted), "Could not toLegacy(fromLegacy) " + converted + "(" + material + ")");
                 if (!this.INVERSION_FAILS.contains(material)) {
-                    assertEquals(material, CraftLegacy.toLegacy(converted), "Could not toLegacy(fromLegacy) " + converted + "(" + material + ")");
+                    assertEquals(material, org.bukkit.craftbukkit.craftUtils.legacy.CraftLegacy.toLegacy(converted), "Could not toLegacy(fromLegacy) " + converted + "(" + material + ")");
                 }
             }
         }
 
-        assertEquals(Material.AIR, CraftLegacy.fromLegacy(Material.LEGACY_AIR), "Could not fromLegacy Air");
+        assertEquals(Material.AIR, org.bukkit.craftbukkit.craftUtils.legacy.CraftLegacy.fromLegacy(Material.LEGACY_AIR), "Could not fromLegacy Air");
     }
 
     @Test
     public void testRestricted() {
-        for (Material material : CraftLegacy.values()) {
+        for (Material material : org.bukkit.craftbukkit.craftUtils.legacy.CraftLegacy.values()) {
             assertTrue(material.isLegacy(), "Must iterate only legacy materials");
         }
 
-        for (Material material : org.bukkit.craftbukkit.util.CraftLegacy.modern_values()) {
+        for (Material material : CraftLegacy.modern_values()) {
             assertFalse(material.isLegacy(), "Must iterate only modern materials");
         }
     }

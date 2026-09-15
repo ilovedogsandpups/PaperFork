@@ -1,0 +1,18 @@
+package org.bukkit.craftbukkit.craftImpl.command;
+
+import java.util.Map;
+import org.bukkit.Server;
+import org.bukkit.command.Command;
+import org.bukkit.command.SimpleCommandMap;
+import org.jspecify.annotations.NonNull;
+
+public class CraftCommandMap extends SimpleCommandMap {
+
+    public CraftCommandMap(Server server) {
+        super(server, io.papermc.paper.command.brigadier.bukkit.BukkitBrigForwardingMap.INSTANCE);
+    }
+
+    public @NonNull Map<String, Command> getKnownCommands() {
+        return this.knownCommands;
+    }
+}

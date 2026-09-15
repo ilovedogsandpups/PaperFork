@@ -4,7 +4,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import org.bukkit.attribute.Attributable;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
-import org.bukkit.craftbukkit.attribute.CraftAttribute;
+import org.bukkit.craftbukkit.craftImpl.attribute.CraftAttribute;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

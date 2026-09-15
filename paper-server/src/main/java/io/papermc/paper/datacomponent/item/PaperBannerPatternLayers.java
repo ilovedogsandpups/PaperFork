@@ -9,8 +9,8 @@ import org.bukkit.DyeColor;
 import org.bukkit.block.banner.Pattern;
 import org.bukkit.block.banner.PatternType;
 import org.bukkit.craftbukkit.CraftRegistry;
-import org.bukkit.craftbukkit.block.banner.CraftPatternType;
-import org.bukkit.craftbukkit.util.Handleable;
+import org.bukkit.craftbukkit.craftMC.block.banner.CraftPatternType;
+import org.bukkit.craftbukkit.craftUtils.util.Handleable;
 import org.jetbrains.annotations.Unmodifiable;
 
 public record PaperBannerPatternLayers(

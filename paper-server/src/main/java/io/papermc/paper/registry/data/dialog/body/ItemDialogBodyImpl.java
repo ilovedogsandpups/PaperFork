@@ -1,6 +1,6 @@
 package io.papermc.paper.registry.data.dialog.body;
 
-import org.bukkit.craftbukkit.inventory.CraftItemStack;
+import org.bukkit.craftbukkit.craftImpl.inventory.CraftItemStack;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.Range;
 import org.jspecify.annotations.NonNull;

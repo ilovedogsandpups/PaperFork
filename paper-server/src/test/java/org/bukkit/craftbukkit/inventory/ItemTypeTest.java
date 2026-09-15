@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import org.bukkit.Material;
+import org.bukkit.craftbukkit.craftImpl.inventory.CraftMetaItem;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ItemType;
 import org.bukkit.inventory.meta.ArmorMeta;

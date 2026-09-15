@@ -7,6 +7,9 @@ import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import org.bukkit.Material;
+import org.bukkit.craftbukkit.craftMC.block.CraftBlockEntityState;
+import org.bukkit.craftbukkit.craftMC.block.CraftBlockStates;
+import org.bukkit.craftbukkit.craftMC.block.CraftBlockType;
 import org.bukkit.support.environment.AllFeatures;
 import org.junit.jupiter.api.Test;
 

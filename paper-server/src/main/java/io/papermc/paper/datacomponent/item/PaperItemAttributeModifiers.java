@@ -9,10 +9,10 @@ import java.util.List;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.craftbukkit.CraftEquipmentSlot;
-import org.bukkit.craftbukkit.attribute.CraftAttribute;
-import org.bukkit.craftbukkit.attribute.CraftAttributeInstance;
-import org.bukkit.craftbukkit.util.CraftNamespacedKey;
-import org.bukkit.craftbukkit.util.Handleable;
+import org.bukkit.craftbukkit.craftImpl.attribute.CraftAttribute;
+import org.bukkit.craftbukkit.craftImpl.attribute.CraftAttributeInstance;
+import org.bukkit.craftbukkit.craftUtils.util.CraftNamespacedKey;
+import org.bukkit.craftbukkit.craftUtils.util.Handleable;
 import org.bukkit.inventory.EquipmentSlotGroup;
 import org.jetbrains.annotations.Unmodifiable;
 

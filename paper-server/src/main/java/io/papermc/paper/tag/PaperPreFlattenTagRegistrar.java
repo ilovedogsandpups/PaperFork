@@ -17,7 +17,7 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagLoader;
-import org.bukkit.craftbukkit.util.CraftNamespacedKey;
+import org.bukkit.craftbukkit.craftUtils.util.CraftNamespacedKey;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.checkerframework.framework.qual.DefaultQualifier;

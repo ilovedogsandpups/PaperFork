@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import net.minecraft.world.level.chunk.PalettedContainerFactory;
 import org.bukkit.Material;
 import org.bukkit.block.data.BlockData;
+import org.bukkit.craftbukkit.craftImpl.generator.OldCraftChunkData;
 import org.bukkit.support.RegistryHelper;
 import org.bukkit.support.environment.Legacy;
 import org.junit.jupiter.api.Test;

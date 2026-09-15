@@ -3,10 +3,9 @@ package io.papermc.paper.attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
-import org.bukkit.craftbukkit.attribute.CraftAttributeInstance;
+import org.bukkit.craftbukkit.craftImpl.attribute.CraftAttributeInstance;
 
 import java.util.UUID;
-import java.util.Collection;
 
 public class UnmodifiableAttributeInstance extends CraftAttributeInstance {
 

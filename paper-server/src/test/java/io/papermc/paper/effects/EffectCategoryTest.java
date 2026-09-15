@@ -2,7 +2,7 @@ package io.papermc.paper.effects;
 
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.minecraft.world.effect.MobEffectCategory;
-import org.bukkit.craftbukkit.potion.CraftPotionEffectType;
+import org.bukkit.craftbukkit.craftImpl.potion.CraftPotionEffectType;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.support.environment.Normal;
 import org.junit.jupiter.api.Test;

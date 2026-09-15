@@ -1,8 +1,8 @@
 package io.papermc.paper.entity;
 
 import org.bukkit.Sound;
-import org.bukkit.craftbukkit.CraftSound;
-import org.bukkit.craftbukkit.inventory.CraftItemStack;
+import org.bukkit.craftbukkit.craftUtils.sounds.CraftSound;
+import org.bukkit.craftbukkit.craftImpl.inventory.CraftItemStack;
 import org.bukkit.inventory.ItemStack;
 import org.jspecify.annotations.NonNull;
 
