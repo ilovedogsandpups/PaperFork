@@ -5,6 +5,7 @@ import net.minecraft.server.ServerTickRateManager;
 import org.bukkit.ServerTickManager;
 import org.bukkit.craftbukkit.entity.CraftEntity;
 import org.bukkit.entity.Entity;
+import org.jspecify.annotations.NonNull;
 
 final class CraftServerTickManager implements ServerTickManager {
 
@@ -81,8 +82,7 @@ final class CraftServerTickManager implements ServerTickManager {
     }
 
     @Override
-    public boolean isFrozen(final Entity entity) {
-        Preconditions.checkArgument(entity != null, "The given entity must not be null");
+    public boolean isFrozen(final @NonNull Entity entity) {
         return this.manager.isEntityFrozen(((CraftEntity) entity).getHandle());
     }
 
