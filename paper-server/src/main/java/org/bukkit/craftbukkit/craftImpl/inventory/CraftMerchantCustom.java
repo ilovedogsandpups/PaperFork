@@ -10,7 +10,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.trading.Merchant;
 import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraft.world.item.trading.MerchantOffers;
-import org.bukkit.craftbukkit.craftUtils.util.CraftChatMessage;
+import org.bukkit.craftbukkit.craftOthers.util.CraftChatMessage;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 

@@ -1,7 +1,7 @@
 package org.bukkit.craftbukkit.craftMC.entity;
 
 import org.bukkit.craftbukkit.CraftServer;
-import org.bukkit.craftbukkit.craftUtils.util.CraftLocation;
+import org.bukkit.craftbukkit.craftOthers.util.CraftLocation;
 import org.bukkit.entity.WanderingTrader;
 
 public class CraftWanderingTrader extends CraftAbstractVillager implements WanderingTrader {

@@ -7,7 +7,7 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.component.InstrumentComponent;
 import org.bukkit.MusicInstrument;
 import org.bukkit.configuration.serialization.DelegateDeserialization;
-import org.bukkit.craftbukkit.CraftMusicInstrument;
+import org.bukkit.craftbukkit.craftImpl.CraftMusicInstrument;
 import org.bukkit.inventory.meta.MusicInstrumentMeta;
 import org.jspecify.annotations.NonNull;
 

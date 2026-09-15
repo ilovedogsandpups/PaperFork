@@ -11,7 +11,7 @@ import java.util.Set;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import org.bukkit.NamespacedKey;
-import org.bukkit.craftbukkit.craftUtils.util.CraftNBTTagConfigSerializer;
+import org.bukkit.craftbukkit.craftOthers.util.CraftNBTTagConfigSerializer;
 import org.bukkit.persistence.PersistentDataAdapterContext;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;

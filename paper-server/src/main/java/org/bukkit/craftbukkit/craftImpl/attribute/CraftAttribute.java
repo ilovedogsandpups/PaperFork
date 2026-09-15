@@ -9,8 +9,8 @@ import net.minecraft.core.registries.Registries;
 import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.craftbukkit.CraftRegistry;
-import org.bukkit.craftbukkit.craftUtils.legacy.FieldRename;
-import org.bukkit.craftbukkit.craftUtils.util.ApiVersion;
+import org.bukkit.craftbukkit.craftOthers.legacy.FieldRename;
+import org.bukkit.craftbukkit.craftOthers.util.ApiVersion;
 import org.jspecify.annotations.NonNull;
 
 public class CraftAttribute extends OldEnumHolderable<Attribute, net.minecraft.world.entity.ai.attributes.Attribute> implements Attribute {

@@ -3,7 +3,7 @@ package io.papermc.paper.datacomponent.item;
 import io.papermc.paper.registry.RegistryKey;
 import io.papermc.paper.registry.set.PaperRegistrySets;
 import io.papermc.paper.registry.set.RegistryKeySet;
-import org.bukkit.craftbukkit.craftUtils.util.Handleable;
+import org.bukkit.craftbukkit.craftOthers.util.Handleable;
 import org.bukkit.inventory.ItemType;
 
 public record PaperRepairable(

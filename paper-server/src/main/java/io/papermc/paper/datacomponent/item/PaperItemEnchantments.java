@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 import net.minecraft.core.Holder;
 import org.bukkit.craftbukkit.craftImpl.enchantments.CraftEnchantment;
-import org.bukkit.craftbukkit.craftUtils.util.Handleable;
+import org.bukkit.craftbukkit.craftOthers.util.Handleable;
 import org.bukkit.enchantments.Enchantment;
 
 import static io.papermc.paper.util.BoundChecker.requireRange;

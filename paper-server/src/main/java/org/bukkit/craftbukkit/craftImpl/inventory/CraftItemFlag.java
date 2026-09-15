@@ -1,8 +1,8 @@
 package org.bukkit.craftbukkit.craftImpl.inventory;
 
 import com.google.common.base.Preconditions;
-import org.bukkit.craftbukkit.craftUtils.legacy.FieldRename;
-import org.bukkit.craftbukkit.craftUtils.util.ApiVersion;
+import org.bukkit.craftbukkit.craftOthers.legacy.FieldRename;
+import org.bukkit.craftbukkit.craftOthers.util.ApiVersion;
 import org.bukkit.inventory.ItemFlag;
 
 public class CraftItemFlag {

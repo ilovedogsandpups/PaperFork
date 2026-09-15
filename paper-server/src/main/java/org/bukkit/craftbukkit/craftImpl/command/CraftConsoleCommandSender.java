@@ -6,7 +6,7 @@ import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.conversations.Conversation;
 import org.bukkit.conversations.ConversationAbandonedEvent;
 import org.bukkit.conversations.ManuallyAbandonedConversationCanceller;
-import org.bukkit.craftbukkit.craftUtils.conversations.ConversationTracker;
+import org.bukkit.craftbukkit.craftOthers.conversations.ConversationTracker;
 import org.jspecify.annotations.NonNull;
 
 /**

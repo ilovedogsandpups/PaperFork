@@ -19,7 +19,7 @@ import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.craftbukkit.CraftRegistry;
-import org.bukkit.craftbukkit.CraftWorld;
+import org.bukkit.craftbukkit.craftImpl.worlds.CraftWorld;
 
 public final class CraftBlockStates {
 

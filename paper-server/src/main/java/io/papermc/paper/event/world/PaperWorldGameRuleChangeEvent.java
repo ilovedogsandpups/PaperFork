@@ -3,7 +3,7 @@ package io.papermc.paper.event.world;
 import org.bukkit.GameRule;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
-import org.bukkit.craftbukkit.CraftGameRule;
+import org.bukkit.craftbukkit.craftImpl.CraftGameRule;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 

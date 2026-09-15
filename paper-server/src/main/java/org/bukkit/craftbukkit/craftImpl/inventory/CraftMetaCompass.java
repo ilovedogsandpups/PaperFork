@@ -18,8 +18,8 @@ import net.minecraft.world.item.component.LodestoneTracker;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.configuration.serialization.DelegateDeserialization;
-import org.bukkit.craftbukkit.CraftWorld;
-import org.bukkit.craftbukkit.craftUtils.util.CraftLocation;
+import org.bukkit.craftbukkit.craftImpl.worlds.CraftWorld;
+import org.bukkit.craftbukkit.craftOthers.util.CraftLocation;
 import org.bukkit.inventory.meta.CompassMeta;
 import org.jspecify.annotations.NonNull;
 

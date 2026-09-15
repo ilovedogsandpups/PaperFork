@@ -12,7 +12,7 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Container;
 import org.bukkit.craftbukkit.craftImpl.inventory.CraftItemStack;
-import org.bukkit.craftbukkit.craftUtils.util.CraftChatMessage;
+import org.bukkit.craftbukkit.craftOthers.util.CraftChatMessage;
 import org.bukkit.inventory.ItemStack;
 import org.jspecify.annotations.NonNull;
 

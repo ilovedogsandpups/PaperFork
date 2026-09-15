@@ -16,7 +16,7 @@ import java.util.Base64;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
-import org.bukkit.craftbukkit.craftUtils.configuration.ConfigSerializationUtil;
+import org.bukkit.craftbukkit.craftOthers.configuration.ConfigSerializationUtil;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 

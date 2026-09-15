@@ -7,7 +7,7 @@ import net.minecraft.world.item.Items;
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.craftbukkit.craftImpl.inventory.CraftItemStack;
-import org.bukkit.craftbukkit.craftUtils.util.CraftLocation;
+import org.bukkit.craftbukkit.craftOthers.util.CraftLocation;
 import org.bukkit.entity.EnderSignal;
 import org.bukkit.inventory.ItemStack;
 import org.jspecify.annotations.NonNull;

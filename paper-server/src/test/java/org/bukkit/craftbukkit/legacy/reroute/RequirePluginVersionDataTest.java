@@ -3,9 +3,9 @@ package org.bukkit.craftbukkit.legacy.reroute;
 import static org.junit.jupiter.api.Assertions.*;
 import java.lang.annotation.Annotation;
 
-import org.bukkit.craftbukkit.craftUtils.legacy.reroute.RequirePluginVersion;
-import org.bukkit.craftbukkit.craftUtils.legacy.reroute.RequirePluginVersionData;
-import org.bukkit.craftbukkit.craftUtils.util.ApiVersion;
+import org.bukkit.craftbukkit.craftOthers.legacy.reroute.RequirePluginVersion;
+import org.bukkit.craftbukkit.craftOthers.legacy.reroute.RequirePluginVersionData;
+import org.bukkit.craftbukkit.craftOthers.util.ApiVersion;
 import org.bukkit.support.environment.Normal;
 import org.junit.jupiter.api.Test;
 

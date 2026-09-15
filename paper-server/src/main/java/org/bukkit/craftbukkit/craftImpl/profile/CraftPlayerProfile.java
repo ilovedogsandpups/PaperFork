@@ -24,7 +24,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.serialization.SerializableAs;
 import org.bukkit.craftbukkit.CraftServer;
-import org.bukkit.craftbukkit.craftUtils.configuration.ConfigSerializationUtil;
+import org.bukkit.craftbukkit.craftOthers.configuration.ConfigSerializationUtil;
 import org.bukkit.profile.PlayerProfile;
 import org.bukkit.profile.PlayerTextures;
 import org.jetbrains.annotations.ApiStatus;

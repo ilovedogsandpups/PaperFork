@@ -52,7 +52,7 @@ import org.bukkit.craftbukkit.craftImpl.enchantments.CraftEnchantment;
 import org.bukkit.craftbukkit.craftMC.entity.CraftLivingEntity;
 import org.bukkit.craftbukkit.craftImpl.persistence.CraftPersistentDataContainer;
 import org.bukkit.craftbukkit.craftImpl.persistence.CraftPersistentDataTypeRegistry;
-import org.bukkit.craftbukkit.craftUtils.util.CraftMagicNumbers;
+import org.bukkit.craftbukkit.craftOthers.util.CraftMagicNumbers;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;

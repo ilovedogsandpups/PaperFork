@@ -20,7 +20,7 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.TileState;
 import org.bukkit.craftbukkit.CraftRegistry;
-import org.bukkit.craftbukkit.craftUtils.util.CraftLocation;
+import org.bukkit.craftbukkit.craftOthers.util.CraftLocation;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

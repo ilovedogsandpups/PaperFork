@@ -19,7 +19,7 @@ import net.minecraft.util.valueproviders.ConstantFloat;
 import net.minecraft.world.entity.SulfurCubeArchetype;
 import net.minecraft.world.item.Item;
 import org.bukkit.craftbukkit.craftImpl.attribute.CraftAttributeInstance;
-import org.bukkit.craftbukkit.craftUtils.util.RandomSourceWrapper;
+import org.bukkit.craftbukkit.craftOthers.util.RandomSourceWrapper;
 import org.bukkit.entity.SulfurCube;
 import org.bukkit.inventory.ItemType;
 import org.jspecify.annotations.Nullable;

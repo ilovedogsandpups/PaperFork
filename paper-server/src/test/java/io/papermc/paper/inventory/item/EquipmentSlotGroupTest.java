@@ -5,7 +5,7 @@ import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
 import net.minecraft.world.entity.EquipmentSlot;
-import org.bukkit.craftbukkit.CraftEquipmentSlot;
+import org.bukkit.craftbukkit.craftImpl.CraftEquipmentSlot;
 import org.bukkit.inventory.EquipmentSlotGroup;
 import org.bukkit.support.environment.Normal;
 import org.junit.jupiter.params.ParameterizedTest;

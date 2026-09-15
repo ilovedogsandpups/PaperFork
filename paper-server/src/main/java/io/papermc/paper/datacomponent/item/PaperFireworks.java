@@ -7,7 +7,7 @@ import java.util.List;
 import net.minecraft.world.item.component.FireworkExplosion;
 import org.bukkit.FireworkEffect;
 import org.bukkit.craftbukkit.craftImpl.inventory.CraftMetaFirework;
-import org.bukkit.craftbukkit.craftUtils.util.Handleable;
+import org.bukkit.craftbukkit.craftOthers.util.Handleable;
 import org.jetbrains.annotations.Unmodifiable;
 
 public record PaperFireworks(

@@ -4,7 +4,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import org.bukkit.Registry;
 import org.bukkit.craftbukkit.CraftRegistry;
-import org.bukkit.craftbukkit.craftUtils.util.CraftNamespacedKey;
+import org.bukkit.craftbukkit.craftOthers.util.CraftNamespacedKey;
 import org.bukkit.entity.memory.MemoryKey;
 
 public final class CraftMemoryKey {

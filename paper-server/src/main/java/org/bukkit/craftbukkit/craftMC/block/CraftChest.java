@@ -12,7 +12,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Chest;
-import org.bukkit.craftbukkit.CraftWorld;
+import org.bukkit.craftbukkit.craftImpl.worlds.CraftWorld;
 import org.bukkit.craftbukkit.craftImpl.inventory.CraftInventory;
 import org.bukkit.craftbukkit.craftImpl.inventory.CraftInventoryDoubleChest;
 import org.bukkit.inventory.Inventory;

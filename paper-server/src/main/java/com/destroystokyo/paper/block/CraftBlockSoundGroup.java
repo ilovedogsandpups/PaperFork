@@ -2,7 +2,7 @@ package com.destroystokyo.paper.block;
 
 import net.minecraft.world.level.block.SoundType;
 import org.bukkit.Sound;
-import org.bukkit.craftbukkit.craftUtils.sounds.CraftSound;
+import org.bukkit.craftbukkit.craftImpl.sounds.CraftSound;
 import org.jspecify.annotations.NonNull;
 
 @Deprecated(forRemoval = true)

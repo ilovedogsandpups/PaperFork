@@ -1,9 +1,7 @@
 package org.bukkit;
 
 import static org.junit.jupiter.api.Assertions.*;
-import java.util.Map;
-import net.minecraft.world.flag.FeatureFlags;
-import org.bukkit.craftbukkit.CraftWorld;
+
 import org.bukkit.support.environment.Normal;
 import org.junit.jupiter.api.Test;
 

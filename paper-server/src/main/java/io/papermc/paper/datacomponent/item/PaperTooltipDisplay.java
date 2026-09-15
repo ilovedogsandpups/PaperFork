@@ -6,7 +6,7 @@ import it.unimi.dsi.fastutil.objects.ReferenceLinkedOpenHashSet;
 import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
-import org.bukkit.craftbukkit.craftUtils.util.Handleable;
+import org.bukkit.craftbukkit.craftOthers.util.Handleable;
 
 public record PaperTooltipDisplay(
     net.minecraft.world.item.component.TooltipDisplay impl

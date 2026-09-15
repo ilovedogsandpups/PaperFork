@@ -4,7 +4,7 @@ import com.google.common.base.Preconditions;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import java.util.List;
 import org.bukkit.craftbukkit.craftImpl.inventory.CraftItemStack;
-import org.bukkit.craftbukkit.craftUtils.util.Handleable;
+import org.bukkit.craftbukkit.craftOthers.util.Handleable;
 import org.bukkit.inventory.ItemStack;
 
 public record PaperBundleContents(

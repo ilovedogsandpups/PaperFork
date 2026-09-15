@@ -3,7 +3,7 @@ package io.papermc.paper.entity.poi;
 import net.minecraft.world.entity.ai.village.poi.PoiRecord;
 import org.bukkit.Location;
 import org.bukkit.World;
-import org.bukkit.craftbukkit.craftUtils.util.CraftLocation;
+import org.bukkit.craftbukkit.craftOthers.util.CraftLocation;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked

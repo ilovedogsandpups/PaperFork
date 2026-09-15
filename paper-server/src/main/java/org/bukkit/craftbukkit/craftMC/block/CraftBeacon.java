@@ -17,7 +17,7 @@ import org.bukkit.World;
 import org.bukkit.block.Beacon;
 import org.bukkit.craftbukkit.craftImpl.inventory.CraftItemStack;
 import org.bukkit.craftbukkit.craftImpl.potion.CraftPotionEffectType;
-import org.bukkit.craftbukkit.craftUtils.util.CraftChatMessage;
+import org.bukkit.craftbukkit.craftOthers.util.CraftChatMessage;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;

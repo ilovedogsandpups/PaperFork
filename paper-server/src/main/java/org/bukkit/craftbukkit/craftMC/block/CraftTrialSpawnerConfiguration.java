@@ -22,7 +22,7 @@ import net.minecraft.world.level.block.entity.trialspawner.TrialSpawnerStateData
 import net.minecraft.world.level.storage.TagValueInput;
 import org.bukkit.block.spawner.SpawnRule;
 import org.bukkit.block.spawner.SpawnerEntry;
-import org.bukkit.craftbukkit.CraftLootTable;
+import org.bukkit.craftbukkit.craftImpl.CraftLootTable;
 import org.bukkit.craftbukkit.craftMC.entity.CraftEntitySnapshot;
 import org.bukkit.craftbukkit.craftMC.entity.CraftEntityType;
 import org.bukkit.entity.EntitySnapshot;

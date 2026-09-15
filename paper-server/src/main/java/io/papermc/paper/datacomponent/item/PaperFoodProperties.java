@@ -1,7 +1,7 @@
 package io.papermc.paper.datacomponent.item;
 
 import com.google.common.base.Preconditions;
-import org.bukkit.craftbukkit.craftUtils.util.Handleable;
+import org.bukkit.craftbukkit.craftOthers.util.Handleable;
 
 public record PaperFoodProperties(
     net.minecraft.world.food.FoodProperties impl

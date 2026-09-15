@@ -5,7 +5,7 @@ import io.papermc.paper.datacomponent.item.consumable.PaperConsumableEffect;
 import io.papermc.paper.util.MCUtil;
 import java.util.ArrayList;
 import java.util.List;
-import org.bukkit.craftbukkit.craftUtils.util.Handleable;
+import org.bukkit.craftbukkit.craftOthers.util.Handleable;
 import org.jetbrains.annotations.Unmodifiable;
 
 public record PaperDeathProtection(

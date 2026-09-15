@@ -12,7 +12,7 @@ import net.minecraft.world.level.storage.TagValueOutput;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.craftbukkit.CraftRegistry;
-import org.bukkit.craftbukkit.CraftWorld;
+import org.bukkit.craftbukkit.craftImpl.worlds.CraftWorld;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntitySnapshot;
 import org.bukkit.entity.EntityType;

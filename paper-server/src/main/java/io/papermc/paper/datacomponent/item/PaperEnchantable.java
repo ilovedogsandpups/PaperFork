@@ -1,6 +1,6 @@
 package io.papermc.paper.datacomponent.item;
 
-import org.bukkit.craftbukkit.craftUtils.util.Handleable;
+import org.bukkit.craftbukkit.craftOthers.util.Handleable;
 
 public record PaperEnchantable(
     net.minecraft.world.item.enchantment.Enchantable impl

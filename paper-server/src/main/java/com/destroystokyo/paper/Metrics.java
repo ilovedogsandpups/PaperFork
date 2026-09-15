@@ -3,7 +3,7 @@ package com.destroystokyo.paper;
 import net.minecraft.server.MinecraftServer;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.craftbukkit.craftUtils.util.CraftMagicNumbers;
+import org.bukkit.craftbukkit.craftOthers.util.CraftMagicNumbers;
 import org.bukkit.plugin.Plugin;
 
 import org.json.simple.JSONArray;

@@ -33,7 +33,7 @@ import org.bukkit.World;
 import org.bukkit.block.Biome;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.data.BlockData;
-import org.bukkit.craftbukkit.CraftRegionAccessor;
+import org.bukkit.craftbukkit.craftImpl.worlds.CraftRegionAccessor;
 import org.bukkit.craftbukkit.craftMC.block.CraftBlockEntityState;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.entity.CreatureSpawnEvent;

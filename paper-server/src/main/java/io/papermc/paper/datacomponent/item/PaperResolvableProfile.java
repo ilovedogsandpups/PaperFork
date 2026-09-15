@@ -25,7 +25,7 @@ import net.minecraft.util.ExtraCodecs;
 import net.minecraft.util.StringUtil;
 import net.minecraft.world.entity.player.PlayerModelType;
 import net.minecraft.world.entity.player.PlayerSkin;
-import org.bukkit.craftbukkit.craftUtils.util.Handleable;
+import org.bukkit.craftbukkit.craftOthers.util.Handleable;
 import org.bukkit.profile.PlayerTextures;
 import org.jetbrains.annotations.Unmodifiable;
 import org.jspecify.annotations.Nullable;

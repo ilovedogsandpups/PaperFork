@@ -5,7 +5,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.SmeltingRecipe;
 import org.bukkit.NamespacedKey;
-import org.bukkit.craftbukkit.craftUtils.util.CraftNamespacedKey;
+import org.bukkit.craftbukkit.craftOthers.util.CraftNamespacedKey;
 import org.bukkit.inventory.FurnaceRecipe;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.RecipeChoice;

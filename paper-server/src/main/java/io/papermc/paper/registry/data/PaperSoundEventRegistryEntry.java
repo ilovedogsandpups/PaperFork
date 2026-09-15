@@ -8,7 +8,7 @@ import net.kyori.adventure.key.Key;
 import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import org.bukkit.Sound;
-import org.bukkit.craftbukkit.craftUtils.sounds.CraftSound;
+import org.bukkit.craftbukkit.craftImpl.sounds.CraftSound;
 import org.jspecify.annotations.Nullable;
 
 import static io.papermc.paper.registry.data.util.Checks.asArgument;

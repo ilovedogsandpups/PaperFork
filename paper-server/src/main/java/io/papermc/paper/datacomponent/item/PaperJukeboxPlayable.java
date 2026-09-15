@@ -1,8 +1,8 @@
 package io.papermc.paper.datacomponent.item;
 
 import org.bukkit.JukeboxSong;
-import org.bukkit.craftbukkit.craftUtils.sounds.CraftJukeboxSong;
-import org.bukkit.craftbukkit.craftUtils.util.Handleable;
+import org.bukkit.craftbukkit.craftImpl.sounds.CraftJukeboxSong;
+import org.bukkit.craftbukkit.craftOthers.util.Handleable;
 
 public record PaperJukeboxPlayable(
     net.minecraft.world.item.JukeboxPlayable impl

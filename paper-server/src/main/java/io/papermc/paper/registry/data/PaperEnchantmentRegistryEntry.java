@@ -19,7 +19,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.enchantment.Enchantment;
-import org.bukkit.craftbukkit.CraftEquipmentSlot;
+import org.bukkit.craftbukkit.craftImpl.CraftEquipmentSlot;
 import org.bukkit.inventory.ItemType;
 import org.checkerframework.checker.index.qual.NonNegative;
 import org.jetbrains.annotations.Range;

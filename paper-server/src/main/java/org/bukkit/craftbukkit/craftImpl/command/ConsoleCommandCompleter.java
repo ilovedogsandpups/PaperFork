@@ -6,7 +6,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
 import net.minecraft.server.dedicated.DedicatedServer;
 import org.bukkit.craftbukkit.CraftServer;
-import org.bukkit.craftbukkit.craftUtils.util.Waitable;
+import org.bukkit.craftbukkit.craftOthers.util.Waitable;
 
 import org.jline.reader.Candidate;
 import org.jline.reader.Completer;

@@ -14,7 +14,7 @@ import net.minecraft.world.scores.ScoreAccess;
 import net.minecraft.world.scores.ScoreHolder;
 import net.minecraft.world.scores.criteria.ObjectiveCriteria;
 import org.bukkit.craftbukkit.craftMC.entity.CraftPlayer;
-import org.bukkit.craftbukkit.craftUtils.util.WeakCollection;
+import org.bukkit.craftbukkit.craftOthers.util.WeakCollection;
 import org.bukkit.scoreboard.ScoreboardManager;
 import org.jspecify.annotations.NonNull;
 import org.spigotmc.AsyncGuard;

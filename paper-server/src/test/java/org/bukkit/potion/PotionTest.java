@@ -1,7 +1,7 @@
 package org.bukkit.potion;
 
 import net.minecraft.core.registries.BuiltInRegistries;
-import org.bukkit.craftbukkit.craftUtils.legacy.FieldRename;
+import org.bukkit.craftbukkit.craftOthers.legacy.FieldRename;
 import org.bukkit.craftbukkit.craftImpl.potion.CraftPotionEffectType;
 import org.bukkit.support.environment.AllFeatures;
 import org.junit.jupiter.api.Test;

@@ -6,7 +6,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.tags.TagKey;
 import org.bukkit.Fluid;
-import org.bukkit.craftbukkit.CraftFluid;
+import org.bukkit.craftbukkit.craftImpl.CraftFluid;
 import org.jspecify.annotations.NonNull;
 
 public class CraftFluidTag extends CraftTag<net.minecraft.world.level.material.Fluid, Fluid> {

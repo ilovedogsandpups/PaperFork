@@ -2,7 +2,7 @@ package org.bukkit.craftbukkit.craftMC.entity;
 
 import com.google.common.base.Preconditions;
 import net.minecraft.core.Rotations;
-import org.bukkit.craftbukkit.CraftEquipmentSlot;
+import org.bukkit.craftbukkit.craftImpl.CraftEquipmentSlot;
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.inventory.EquipmentSlot;
@@ -267,7 +267,7 @@ public class CraftArmorStand extends CraftLivingEntity implements ArmorStand {
         int disabled = 0;
         for (org.bukkit.inventory.EquipmentSlot slot : slots) {
             if (slot == org.bukkit.inventory.EquipmentSlot.OFF_HAND) continue;
-            net.minecraft.world.entity.EquipmentSlot nmsSlot = org.bukkit.craftbukkit.CraftEquipmentSlot.getNMS(slot);
+            net.minecraft.world.entity.EquipmentSlot nmsSlot = CraftEquipmentSlot.getNMS(slot);
             disabled += (1 << nmsSlot.getFilterBit(0)) + (1 << nmsSlot.getFilterBit(8)) + (1 << nmsSlot.getFilterBit(16));
         }
         this.getHandle().disabledSlots = disabled;
@@ -289,7 +289,7 @@ public class CraftArmorStand extends CraftLivingEntity implements ArmorStand {
 
     @Override
     public boolean isSlotDisabled(org.bukkit.inventory.@NonNull EquipmentSlot slot) {
-        return this.getHandle().isDisabled(org.bukkit.craftbukkit.CraftEquipmentSlot.getNMS(slot));
+        return this.getHandle().isDisabled(CraftEquipmentSlot.getNMS(slot));
     }
 
     @Override

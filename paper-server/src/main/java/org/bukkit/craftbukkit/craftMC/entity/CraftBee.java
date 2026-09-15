@@ -4,7 +4,7 @@ import com.google.common.base.Preconditions;
 import net.minecraft.core.BlockPos;
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.CraftServer;
-import org.bukkit.craftbukkit.craftUtils.util.CraftLocation;
+import org.bukkit.craftbukkit.craftOthers.util.CraftLocation;
 import org.bukkit.entity.Bee;
 import org.jspecify.annotations.NonNull;
 

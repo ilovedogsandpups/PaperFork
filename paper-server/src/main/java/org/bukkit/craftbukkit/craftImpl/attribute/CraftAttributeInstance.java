@@ -7,7 +7,8 @@ import java.util.List;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.attribute.AttributeModifier;
-import org.bukkit.craftbukkit.craftUtils.util.CraftNamespacedKey;
+import org.bukkit.craftbukkit.craftImpl.CraftEquipmentSlot;
+import org.bukkit.craftbukkit.craftOthers.util.CraftNamespacedKey;
 import org.jspecify.annotations.NonNull;
 
 public class CraftAttributeInstance implements AttributeInstance {
@@ -107,6 +108,6 @@ public class CraftAttributeInstance implements AttributeInstance {
     }
 
     public static AttributeModifier convert(net.minecraft.world.entity.ai.attributes.AttributeModifier nms, net.minecraft.world.entity.EquipmentSlotGroup slot) { // Paper
-        return new AttributeModifier(CraftNamespacedKey.fromMinecraft(nms.id()), nms.amount(), AttributeModifier.Operation.values()[nms.operation().ordinal()], org.bukkit.craftbukkit.CraftEquipmentSlot.getSlotGroup(slot)); // Paper
+        return new AttributeModifier(CraftNamespacedKey.fromMinecraft(nms.id()), nms.amount(), AttributeModifier.Operation.values()[nms.operation().ordinal()], CraftEquipmentSlot.getSlotGroup(slot)); // Paper
     }
 }

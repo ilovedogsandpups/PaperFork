@@ -6,7 +6,7 @@ import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import java.util.Collection;
 import java.util.List;
 import org.bukkit.craftbukkit.craftImpl.potion.CraftPotionEffectType;
-import org.bukkit.craftbukkit.craftUtils.util.Handleable;
+import org.bukkit.craftbukkit.craftOthers.util.Handleable;
 import org.jetbrains.annotations.Unmodifiable;
 
 import static io.papermc.paper.potion.SuspiciousEffectEntry.create;

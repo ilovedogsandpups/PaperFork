@@ -1,7 +1,7 @@
 package io.papermc.paper.datacomponent.item;
 
 import net.minecraft.world.item.SwingAnimationType;
-import org.bukkit.craftbukkit.craftUtils.util.Handleable;
+import org.bukkit.craftbukkit.craftOthers.util.Handleable;
 import org.checkerframework.checker.index.qual.Positive;
 
 import static io.papermc.paper.util.BoundChecker.requirePositive;

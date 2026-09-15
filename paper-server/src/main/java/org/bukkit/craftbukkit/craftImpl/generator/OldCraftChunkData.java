@@ -14,7 +14,8 @@ import org.bukkit.block.Biome;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.craftbukkit.craftMC.block.CraftBlockType;
 import org.bukkit.craftbukkit.craftMC.block.data.CraftBlockData;
-import org.bukkit.craftbukkit.craftUtils.util.CraftMagicNumbers;
+import org.bukkit.craftbukkit.craftOthers.util.CraftMagicNumbers;
+import org.bukkit.craftbukkit.craftImpl.worlds.CraftWorld;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.material.MaterialData;
 import org.jspecify.annotations.NonNull;
@@ -185,7 +186,7 @@ public final class OldCraftChunkData implements ChunkGenerator.ChunkData {
         int offset = (y - this.minHeight) >> 4;
         LevelChunkSection section = this.sections[offset];
         if (create && section == null) {
-            this.sections[offset] = section = FeatureHooks.createSection(this.palettedContainerFactory, this.world instanceof org.bukkit.craftbukkit.CraftWorld ? ((org.bukkit.craftbukkit.CraftWorld) this.world).getHandle() : null, null, offset + (this.minHeight >> 4)); // Paper - Anti-Xray - Add parameters
+            this.sections[offset] = section = FeatureHooks.createSection(this.palettedContainerFactory, this.world instanceof CraftWorld ? ((CraftWorld) this.world).getHandle() : null, null, offset + (this.minHeight >> 4)); // Paper - Anti-Xray - Add parameters
         }
         return section;
     }

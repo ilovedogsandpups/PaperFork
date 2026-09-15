@@ -5,8 +5,8 @@ import net.kyori.adventure.key.Key;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.storage.loot.LootTable;
-import org.bukkit.craftbukkit.craftUtils.util.CraftNamespacedKey;
-import org.bukkit.craftbukkit.craftUtils.util.Handleable;
+import org.bukkit.craftbukkit.craftOthers.util.CraftNamespacedKey;
+import org.bukkit.craftbukkit.craftOthers.util.Handleable;
 
 public record PaperSeededContainerLoot(
     net.minecraft.world.item.component.SeededContainerLoot impl

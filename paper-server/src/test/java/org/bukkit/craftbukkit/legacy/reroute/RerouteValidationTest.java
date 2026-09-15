@@ -9,9 +9,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Stream;
 
-import org.bukkit.craftbukkit.craftUtils.legacy.reroute.Reroute;
-import org.bukkit.craftbukkit.craftUtils.legacy.reroute.RerouteMethodData;
-import org.bukkit.craftbukkit.craftUtils.util.Commodore;
+import org.bukkit.craftbukkit.craftOthers.legacy.reroute.Reroute;
+import org.bukkit.craftbukkit.craftOthers.legacy.reroute.RerouteMethodData;
+import org.bukkit.craftbukkit.craftOthers.util.Commodore;
 import org.bukkit.support.environment.Normal;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;

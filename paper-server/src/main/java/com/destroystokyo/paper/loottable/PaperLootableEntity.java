@@ -1,7 +1,7 @@
 package com.destroystokyo.paper.loottable;
 
 import net.minecraft.world.entity.vehicle.ContainerEntity;
-import org.bukkit.craftbukkit.CraftLootTable;
+import org.bukkit.craftbukkit.craftImpl.CraftLootTable;
 import org.bukkit.loot.LootTable;
 import org.bukkit.loot.Lootable;
 import org.checkerframework.checker.nullness.qual.Nullable;

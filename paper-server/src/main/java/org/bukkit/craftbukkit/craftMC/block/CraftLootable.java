@@ -4,6 +4,7 @@ import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import org.bukkit.Location;
 import org.bukkit.Nameable;
 import org.bukkit.World;
+import org.bukkit.craftbukkit.craftImpl.worlds.CraftWorld;
 import org.bukkit.loot.Lootable;
 import org.jspecify.annotations.NonNull;
 
@@ -29,7 +30,7 @@ public abstract class CraftLootable<T extends RandomizableContainerBlockEntity> 
     // Paper start - move to PaperLootableBlockInventory
     @Override
     public net.minecraft.world.level.@NonNull Level getNMSWorld() {
-        return ((org.bukkit.craftbukkit.CraftWorld) this.getWorld()).getHandle();
+        return ((CraftWorld) this.getWorld()).getHandle();
     }
 
     @Override

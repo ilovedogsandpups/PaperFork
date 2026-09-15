@@ -18,7 +18,7 @@ import org.bukkit.craftbukkit.craftImpl.inventory.CraftInventoryCustom;
 import org.bukkit.craftbukkit.craftImpl.inventory.CraftInventory;
 import org.bukkit.craftbukkit.craftImpl.inventory.CraftInventoryBrewer;
 import org.bukkit.craftbukkit.craftImpl.inventory.CraftInventoryFurnace;
-import org.bukkit.craftbukkit.craftUtils.util.CraftChatMessage;
+import org.bukkit.craftbukkit.craftOthers.util.CraftChatMessage;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;

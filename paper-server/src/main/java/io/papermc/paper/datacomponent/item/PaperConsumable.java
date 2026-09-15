@@ -11,7 +11,7 @@ import net.kyori.adventure.key.Key;
 import net.minecraft.core.Holder;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import org.bukkit.craftbukkit.craftUtils.util.Handleable;
+import org.bukkit.craftbukkit.craftOthers.util.Handleable;
 import org.checkerframework.checker.index.qual.NonNegative;
 import org.jetbrains.annotations.Unmodifiable;
 

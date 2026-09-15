@@ -8,7 +8,7 @@ import org.bukkit.Material;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.craftbukkit.craftMC.block.data.CraftBlockData;
-import org.bukkit.craftbukkit.craftUtils.util.CraftMagicNumbers;
+import org.bukkit.craftbukkit.craftOthers.util.CraftMagicNumbers;
 import org.bukkit.entity.Minecart;
 import org.bukkit.material.MaterialData;
 import org.bukkit.util.Vector;

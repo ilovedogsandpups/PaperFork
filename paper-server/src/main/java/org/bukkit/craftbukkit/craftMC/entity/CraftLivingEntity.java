@@ -52,10 +52,10 @@ import org.bukkit.Sound;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.block.Block;
-import org.bukkit.craftbukkit.CraftEquipmentSlot;
+import org.bukkit.craftbukkit.craftImpl.CraftEquipmentSlot;
 import org.bukkit.craftbukkit.CraftServer;
-import org.bukkit.craftbukkit.craftUtils.sounds.CraftSound;
-import org.bukkit.craftbukkit.CraftWorld;
+import org.bukkit.craftbukkit.craftImpl.sounds.CraftSound;
+import org.bukkit.craftbukkit.craftImpl.worlds.CraftWorld;
 import org.bukkit.craftbukkit.craftImpl.damage.CraftDamageSource;
 import org.bukkit.craftbukkit.craftImpl.potion.CraftPotionUtil;
 import org.bukkit.craftbukkit.craftMC.entity.memory.CraftMemoryKey;
@@ -63,7 +63,7 @@ import org.bukkit.craftbukkit.craftMC.entity.memory.CraftMemoryMapper;
 import org.bukkit.craftbukkit.craftImpl.inventory.CraftEntityEquipment;
 import org.bukkit.craftbukkit.craftImpl.inventory.CraftItemStack;
 import org.bukkit.craftbukkit.craftImpl.potion.CraftPotionEffectType;
-import org.bukkit.craftbukkit.craftUtils.util.CraftVector;
+import org.bukkit.craftbukkit.craftOthers.util.CraftVector;
 import org.bukkit.entity.AbstractArrow;
 import org.bukkit.entity.AbstractWindCharge;
 import org.bukkit.entity.Arrow;
@@ -1011,7 +1011,7 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
 
     @Override
     public org.bukkit.inventory.@NonNull EquipmentSlot getActiveItemHand() {
-        return org.bukkit.craftbukkit.CraftEquipmentSlot.getHand(this.getHandle().getUsedItemHand());
+        return CraftEquipmentSlot.getHand(this.getHandle().getUsedItemHand());
     }
 
     @Override
@@ -1050,7 +1050,7 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
     }
 
     public void broadcastSlotBreak(final org.bukkit.inventory.@NonNull EquipmentSlot slot) {
-        this.getHandle().level().broadcastEntityEvent(this.getHandle(), net.minecraft.world.entity.LivingEntity.entityEventForEquipmentBreak(org.bukkit.craftbukkit.CraftEquipmentSlot.getNMS(slot)));
+        this.getHandle().level().broadcastEntityEvent(this.getHandle(), net.minecraft.world.entity.LivingEntity.entityEventForEquipmentBreak(CraftEquipmentSlot.getNMS(slot)));
     }
 
     @Override
@@ -1060,7 +1060,7 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
         }
         final net.minecraft.network.protocol.game.ClientboundEntityEventPacket packet = new net.minecraft.network.protocol.game.ClientboundEntityEventPacket(
             this.getHandle(),
-            net.minecraft.world.entity.LivingEntity.entityEventForEquipmentBreak(org.bukkit.craftbukkit.CraftEquipmentSlot.getNMS(slot))
+            net.minecraft.world.entity.LivingEntity.entityEventForEquipmentBreak(CraftEquipmentSlot.getNMS(slot))
         );
         players.forEach(player -> ((CraftPlayer) player).getHandle().connection.send(packet));
     }
@@ -1083,7 +1083,7 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
 
     @Override
     public void damageItemStack(final org.bukkit.inventory.@NonNull EquipmentSlot slot, final int amount) {
-        final net.minecraft.world.entity.EquipmentSlot nmsSlot = org.bukkit.craftbukkit.CraftEquipmentSlot.getNMS(slot);
+        final net.minecraft.world.entity.EquipmentSlot nmsSlot = CraftEquipmentSlot.getNMS(slot);
         this.damageItemStack0(this.getHandle().getItemBySlot(nmsSlot), amount, nmsSlot);
     }
 
@@ -1115,7 +1115,7 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
 
     @Override
     public boolean canUseEquipmentSlot(org.bukkit.inventory.@NonNull EquipmentSlot slot) {
-        return this.getHandle().canUseSlot(org.bukkit.craftbukkit.CraftEquipmentSlot.getNMS(slot));
+        return this.getHandle().canUseSlot(CraftEquipmentSlot.getNMS(slot));
     }
 
     @Override

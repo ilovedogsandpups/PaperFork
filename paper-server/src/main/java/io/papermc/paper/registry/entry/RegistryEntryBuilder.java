@@ -10,7 +10,7 @@ import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import org.bukkit.Keyed;
 import org.bukkit.NamespacedKey;
-import org.bukkit.craftbukkit.craftUtils.util.ApiVersion;
+import org.bukkit.craftbukkit.craftOthers.util.ApiVersion;
 
 import static io.papermc.paper.registry.entry.RegistryEntryMeta.RegistryModificationApiSupport.ADDABLE;
 import static io.papermc.paper.registry.entry.RegistryEntryMeta.RegistryModificationApiSupport.MODIFIABLE;

@@ -6,7 +6,7 @@ import net.minecraft.advancements.AdvancementHolder;
 import org.bukkit.NamespacedKey;
 import org.bukkit.advancement.AdvancementDisplay;
 import org.bukkit.advancement.AdvancementRequirements;
-import org.bukkit.craftbukkit.craftUtils.util.CraftNamespacedKey;
+import org.bukkit.craftbukkit.craftOthers.util.CraftNamespacedKey;
 import org.jspecify.annotations.NonNull;
 
 public class CraftAdvancement implements org.bukkit.advancement.Advancement {

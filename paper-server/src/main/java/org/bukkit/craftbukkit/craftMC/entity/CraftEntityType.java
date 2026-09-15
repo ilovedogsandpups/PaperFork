@@ -8,9 +8,9 @@ import net.minecraft.core.registries.Registries;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
 import org.bukkit.craftbukkit.CraftRegistry;
-import org.bukkit.craftbukkit.craftUtils.legacy.FieldRename;
-import org.bukkit.craftbukkit.craftUtils.util.ApiVersion;
-import org.bukkit.craftbukkit.craftUtils.util.CraftNamespacedKey;
+import org.bukkit.craftbukkit.craftOthers.legacy.FieldRename;
+import org.bukkit.craftbukkit.craftOthers.util.ApiVersion;
+import org.bukkit.craftbukkit.craftOthers.util.CraftNamespacedKey;
 import org.bukkit.entity.EntityType;
 
 public class CraftEntityType {

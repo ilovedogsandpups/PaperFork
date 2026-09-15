@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import org.bukkit.craftbukkit.craftUtils.legacy.reroute.*;
+import org.bukkit.craftbukkit.craftOthers.legacy.reroute.*;
 import org.objectweb.asm.Type;
 
 public abstract class AbstractRerouteTest {

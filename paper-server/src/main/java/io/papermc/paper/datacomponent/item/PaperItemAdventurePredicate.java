@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 import net.minecraft.advancements.predicates.DataComponentMatchers;
 import net.minecraft.core.registries.Registries;
-import org.bukkit.craftbukkit.craftUtils.util.Handleable;
+import org.bukkit.craftbukkit.craftOthers.util.Handleable;
 
 public record PaperItemAdventurePredicate(
     net.minecraft.world.item.AdventureModePredicate impl

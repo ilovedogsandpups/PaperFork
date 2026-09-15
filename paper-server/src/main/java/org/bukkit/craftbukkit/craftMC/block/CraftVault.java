@@ -8,7 +8,7 @@ import net.minecraft.world.level.block.entity.vault.VaultConfig;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Vault;
-import org.bukkit.craftbukkit.CraftLootTable;
+import org.bukkit.craftbukkit.craftImpl.CraftLootTable;
 import org.bukkit.craftbukkit.craftImpl.inventory.CraftItemStack;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.loot.LootTable;

@@ -92,15 +92,15 @@ import org.bukkit.block.BlockState;
 import org.bukkit.block.Sign;
 import org.bukkit.block.sign.Side;
 import org.bukkit.command.CommandSender;
-import org.bukkit.craftbukkit.craftUtils.chunks.CraftChunk;
-import org.bukkit.craftbukkit.CraftEquipmentSlot;
-import org.bukkit.craftbukkit.CraftExplosionResult;
-import org.bukkit.craftbukkit.CraftGameRule;
-import org.bukkit.craftbukkit.CraftLootTable;
-import org.bukkit.craftbukkit.CraftRaid;
+import org.bukkit.craftbukkit.craftImpl.worlds.chunks.CraftChunk;
+import org.bukkit.craftbukkit.craftImpl.CraftEquipmentSlot;
+import org.bukkit.craftbukkit.craftImpl.CraftExplosionResult;
+import org.bukkit.craftbukkit.craftImpl.CraftGameRule;
+import org.bukkit.craftbukkit.craftImpl.CraftLootTable;
+import org.bukkit.craftbukkit.craftImpl.CraftRaid;
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.craftbukkit.CraftStatistic;
-import org.bukkit.craftbukkit.CraftWorld;
+import org.bukkit.craftbukkit.craftImpl.worlds.CraftWorld;
 import org.bukkit.craftbukkit.craftMC.block.CraftBlock;
 import org.bukkit.craftbukkit.craftMC.block.CraftBlockState;
 import org.bukkit.craftbukkit.craftMC.block.CraftBlockStates;
@@ -114,9 +114,9 @@ import org.bukkit.craftbukkit.craftImpl.inventory.CraftInventoryCrafting;
 import org.bukkit.craftbukkit.craftImpl.inventory.CraftItemStack;
 import org.bukkit.craftbukkit.craftImpl.inventory.CraftItemType;
 import org.bukkit.craftbukkit.craftImpl.potion.CraftPotionUtil;
-import org.bukkit.craftbukkit.craftUtils.sounds.CraftSound;
-import org.bukkit.craftbukkit.craftUtils.util.CraftNamespacedKey;
-import org.bukkit.craftbukkit.craftUtils.util.CraftVector;
+import org.bukkit.craftbukkit.craftImpl.sounds.CraftSound;
+import org.bukkit.craftbukkit.craftOthers.util.CraftNamespacedKey;
+import org.bukkit.craftbukkit.craftOthers.util.CraftVector;
 import org.bukkit.entity.AbstractHorse;
 import org.bukkit.entity.Animals;
 import org.bukkit.entity.AreaEffectCloud;
@@ -2393,7 +2393,7 @@ public class CraftEventFactory {
             (org.bukkit.entity.Player) player.getBukkitEntity(),
             (LivingEntity) target.getBukkitEntity(),
             itemUsed.asBukkitCopy(),
-            org.bukkit.craftbukkit.CraftEquipmentSlot.getHand(hand),
+            CraftEquipmentSlot.getHand(hand),
             ageLocked
         );
 

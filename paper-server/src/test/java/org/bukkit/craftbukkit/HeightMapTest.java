@@ -2,6 +2,7 @@ package org.bukkit.craftbukkit;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.bukkit.HeightMap;
+import org.bukkit.craftbukkit.craftImpl.CraftHeightMap;
 import org.bukkit.support.environment.Normal;
 import org.junit.jupiter.api.Test;
 

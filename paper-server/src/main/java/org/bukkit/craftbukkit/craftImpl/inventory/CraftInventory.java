@@ -25,7 +25,7 @@ import net.minecraft.world.level.block.entity.ShulkerBoxBlockEntity;
 import net.minecraft.world.level.block.entity.SmokerBlockEntity;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.craftbukkit.craftUtils.util.CraftLegacy;
+import org.bukkit.craftbukkit.craftOthers.util.CraftLegacy;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;

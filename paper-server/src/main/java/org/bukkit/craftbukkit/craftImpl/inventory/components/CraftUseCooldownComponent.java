@@ -8,7 +8,7 @@ import net.minecraft.world.item.component.UseCooldown;
 import org.bukkit.NamespacedKey;
 import org.bukkit.configuration.serialization.SerializableAs;
 import org.bukkit.craftbukkit.craftImpl.inventory.SerializableMeta;
-import org.bukkit.craftbukkit.craftUtils.util.CraftNamespacedKey;
+import org.bukkit.craftbukkit.craftOthers.util.CraftNamespacedKey;
 import org.bukkit.inventory.meta.components.UseCooldownComponent;
 import org.jspecify.annotations.NonNull;
 

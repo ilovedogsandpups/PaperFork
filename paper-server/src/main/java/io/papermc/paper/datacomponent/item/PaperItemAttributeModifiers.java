@@ -8,11 +8,11 @@ import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import java.util.List;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
-import org.bukkit.craftbukkit.CraftEquipmentSlot;
+import org.bukkit.craftbukkit.craftImpl.CraftEquipmentSlot;
 import org.bukkit.craftbukkit.craftImpl.attribute.CraftAttribute;
 import org.bukkit.craftbukkit.craftImpl.attribute.CraftAttributeInstance;
-import org.bukkit.craftbukkit.craftUtils.util.CraftNamespacedKey;
-import org.bukkit.craftbukkit.craftUtils.util.Handleable;
+import org.bukkit.craftbukkit.craftOthers.util.CraftNamespacedKey;
+import org.bukkit.craftbukkit.craftOthers.util.Handleable;
 import org.bukkit.inventory.EquipmentSlotGroup;
 import org.jetbrains.annotations.Unmodifiable;
 

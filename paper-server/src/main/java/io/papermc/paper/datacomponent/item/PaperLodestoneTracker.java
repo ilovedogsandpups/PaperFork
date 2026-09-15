@@ -2,8 +2,8 @@ package io.papermc.paper.datacomponent.item;
 
 import java.util.Optional;
 import org.bukkit.Location;
-import org.bukkit.craftbukkit.craftUtils.util.CraftLocation;
-import org.bukkit.craftbukkit.craftUtils.util.Handleable;
+import org.bukkit.craftbukkit.craftOthers.util.CraftLocation;
+import org.bukkit.craftbukkit.craftOthers.util.Handleable;
 import org.jspecify.annotations.Nullable;
 
 public record PaperLodestoneTracker(

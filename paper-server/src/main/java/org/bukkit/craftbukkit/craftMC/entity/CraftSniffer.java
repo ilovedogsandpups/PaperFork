@@ -7,7 +7,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.CraftServer;
-import org.bukkit.craftbukkit.craftUtils.util.CraftLocation;
+import org.bukkit.craftbukkit.craftOthers.util.CraftLocation;
+import org.bukkit.craftbukkit.craftImpl.worlds.CraftWorld;
 import org.bukkit.entity.Sniffer;
 import org.jspecify.annotations.NonNull;
 
@@ -32,7 +33,7 @@ public class CraftSniffer extends CraftAnimals implements Sniffer {
         Preconditions.checkArgument(location != null, "location cannot be null");
 
         BlockPos pos = CraftLocation.toBlockPos(location);
-        net.minecraft.world.level.Level level = location.getWorld() != null ? ((org.bukkit.craftbukkit.CraftWorld) location.getWorld()).getHandle() : this.getHandle().level();
+        net.minecraft.world.level.Level level = location.getWorld() != null ? ((CraftWorld) location.getWorld()).getHandle() : this.getHandle().level();
         net.minecraft.core.GlobalPos globalPos = net.minecraft.core.GlobalPos.of(level.dimension(), pos);
         this.getHandle().getBrain().setMemory(MemoryModuleType.SNIFFER_EXPLORED_POSITIONS, this.getHandle().getExploredPositions().filter(blockPositionExplored -> !blockPositionExplored.equals(globalPos)).collect(Collectors.toList()));
     }

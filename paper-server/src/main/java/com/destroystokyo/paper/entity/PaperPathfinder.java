@@ -9,7 +9,7 @@ import net.minecraft.world.level.pathfinder.Node;
 import net.minecraft.world.level.pathfinder.Path;
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.craftMC.entity.CraftEntity;
-import org.bukkit.craftbukkit.craftUtils.util.CraftLocation;
+import org.bukkit.craftbukkit.craftOthers.util.CraftLocation;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Mob;
 import org.jspecify.annotations.NonNull;

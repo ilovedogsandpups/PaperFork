@@ -9,7 +9,7 @@ import org.bukkit.block.BlockType;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.craftbukkit.craftMC.block.CraftBlockType;
 import org.bukkit.craftbukkit.craftMC.block.data.CraftBlockData;
-import org.bukkit.craftbukkit.craftUtils.util.Handleable;
+import org.bukkit.craftbukkit.craftOthers.util.Handleable;
 
 public record PaperBlockItemDataProperties(
     BlockItemStateProperties impl

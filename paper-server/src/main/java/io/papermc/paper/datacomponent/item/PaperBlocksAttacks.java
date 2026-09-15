@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 import net.kyori.adventure.key.Key;
 import net.minecraft.core.registries.Registries;
-import org.bukkit.craftbukkit.craftUtils.util.Handleable;
+import org.bukkit.craftbukkit.craftOthers.util.Handleable;
 import org.bukkit.damage.DamageType;
 import org.checkerframework.checker.index.qual.NonNegative;
 import org.jspecify.annotations.Nullable;

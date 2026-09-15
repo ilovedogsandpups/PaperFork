@@ -3,7 +3,7 @@ package org.bukkit.craftbukkit.craftImpl.advancement;
 import net.minecraft.advancements.DisplayInfo;
 import org.bukkit.advancement.AdvancementDisplayType;
 import org.bukkit.craftbukkit.craftImpl.inventory.CraftItemStack;
-import org.bukkit.craftbukkit.craftUtils.util.CraftChatMessage;
+import org.bukkit.craftbukkit.craftOthers.util.CraftChatMessage;
 import org.bukkit.inventory.ItemStack;
 import org.jspecify.annotations.NonNull;
 

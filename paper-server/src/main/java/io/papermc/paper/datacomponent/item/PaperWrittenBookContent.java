@@ -15,7 +15,7 @@ import net.kyori.adventure.text.ComponentLike;
 import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
 import net.minecraft.server.network.Filterable;
 import net.minecraft.util.GsonHelper;
-import org.bukkit.craftbukkit.craftUtils.util.Handleable;
+import org.bukkit.craftbukkit.craftOthers.util.Handleable;
 import org.jetbrains.annotations.Unmodifiable;
 
 import static io.papermc.paper.adventure.PaperAdventure.asAdventure;

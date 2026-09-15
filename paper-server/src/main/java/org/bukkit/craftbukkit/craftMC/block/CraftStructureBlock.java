@@ -12,7 +12,7 @@ import org.bukkit.block.structure.Mirror;
 import org.bukkit.block.structure.StructureRotation;
 import org.bukkit.block.structure.UsageMode;
 import org.bukkit.craftbukkit.craftMC.entity.CraftLivingEntity;
-import org.bukkit.craftbukkit.craftUtils.util.CraftBlockVector;
+import org.bukkit.craftbukkit.craftOthers.util.CraftBlockVector;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.util.BlockVector;
 import org.jspecify.annotations.NonNull;

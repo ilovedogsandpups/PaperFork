@@ -10,7 +10,7 @@ import java.net.URI;
 import java.net.URL;
 import java.util.Locale;
 import java.util.Objects;
-import org.bukkit.craftbukkit.craftUtils.util.JsonHelper;
+import org.bukkit.craftbukkit.craftOthers.util.JsonHelper;
 import org.bukkit.profile.PlayerTextures;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;

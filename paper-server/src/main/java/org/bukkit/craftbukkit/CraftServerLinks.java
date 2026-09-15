@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import net.minecraft.server.dedicated.DedicatedServer;
 import org.bukkit.ServerLinks;
-import org.bukkit.craftbukkit.craftUtils.util.CraftChatMessage;
+import org.bukkit.craftbukkit.craftOthers.util.CraftChatMessage;
 import org.jspecify.annotations.NonNull;
 
 public class CraftServerLinks implements ServerLinks {

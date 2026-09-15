@@ -15,6 +15,7 @@ import org.bukkit.Material;
 import org.bukkit.Tag;
 import org.bukkit.World;
 import org.bukkit.block.DecoratedPot;
+import org.bukkit.craftbukkit.craftImpl.CraftLootTable;
 import org.bukkit.craftbukkit.craftImpl.inventory.CraftInventoryDecoratedPot;
 import org.bukkit.craftbukkit.craftImpl.inventory.CraftItemType;
 import org.bukkit.inventory.DecoratedPotInventory;
@@ -53,12 +54,12 @@ public class CraftDecoratedPot extends CraftBlockEntityState<DecoratedPotBlockEn
 
     @Override
     public void setLootTable(org.bukkit.loot.LootTable table, long seed) {
-        this.getSnapshot().setLootTable(org.bukkit.craftbukkit.CraftLootTable.bukkitToMinecraft(table), seed);
+        this.getSnapshot().setLootTable(CraftLootTable.bukkitToMinecraft(table), seed);
     }
 
     @Override
     public org.bukkit.loot.LootTable getLootTable() {
-        return org.bukkit.craftbukkit.CraftLootTable.minecraftToBukkit(this.getSnapshot().getLootTable());
+        return CraftLootTable.minecraftToBukkit(this.getSnapshot().getLootTable());
     }
 
     @Override

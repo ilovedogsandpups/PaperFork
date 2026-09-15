@@ -3,7 +3,7 @@ package org.bukkit.craftbukkit.util;
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.stream.Stream;
 import net.minecraft.SharedConstants;
-import org.bukkit.craftbukkit.craftUtils.util.ApiVersion;
+import org.bukkit.craftbukkit.craftOthers.util.ApiVersion;
 import org.bukkit.support.environment.VanillaFeature;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

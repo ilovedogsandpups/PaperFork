@@ -16,7 +16,7 @@ import net.minecraft.core.HolderSet;
 import org.bukkit.Keyed;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
-import org.bukkit.craftbukkit.craftUtils.util.CraftNamespacedKey;
+import org.bukkit.craftbukkit.craftOthers.util.CraftNamespacedKey;
 import org.jetbrains.annotations.Unmodifiable;
 
 public record NamedRegistryKeySetImpl<T extends Keyed, M>( // TODO remove Keyed

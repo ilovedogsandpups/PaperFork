@@ -2,7 +2,7 @@ package org.bukkit.craftbukkit.craftImpl.damage;
 
 import net.minecraft.world.damagesource.DamageEffects;
 import org.bukkit.Sound;
-import org.bukkit.craftbukkit.craftUtils.sounds.CraftSound;
+import org.bukkit.craftbukkit.craftImpl.sounds.CraftSound;
 import org.bukkit.damage.DamageEffect;
 import org.jspecify.annotations.NonNull;
 

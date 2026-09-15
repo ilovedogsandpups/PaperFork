@@ -3,7 +3,7 @@ package org.bukkit.craftbukkit.craftMC.entity.memory;
 import java.util.UUID;
 import net.minecraft.core.GlobalPos;
 import org.bukkit.Location;
-import org.bukkit.craftbukkit.craftUtils.util.CraftLocation;
+import org.bukkit.craftbukkit.craftOthers.util.CraftLocation;
 
 public final class CraftMemoryMapper {
 

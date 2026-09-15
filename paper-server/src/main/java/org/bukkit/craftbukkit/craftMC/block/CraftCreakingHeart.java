@@ -7,7 +7,7 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.CreakingHeart;
 import org.bukkit.craftbukkit.craftMC.entity.CraftCreaking;
-import org.bukkit.craftbukkit.craftUtils.util.CraftLocation;
+import org.bukkit.craftbukkit.craftOthers.util.CraftLocation;
 import org.bukkit.entity.Creaking;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;

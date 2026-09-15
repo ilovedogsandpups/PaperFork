@@ -3,7 +3,7 @@ package org.bukkit.craftbukkit.craftMC.entity;
 import com.google.common.base.Preconditions;
 import net.minecraft.world.entity.projectile.hurtingprojectile.AbstractHurtingProjectile;
 import org.bukkit.craftbukkit.CraftServer;
-import org.bukkit.craftbukkit.craftUtils.util.CraftVector;
+import org.bukkit.craftbukkit.craftOthers.util.CraftVector;
 import org.bukkit.entity.Fireball;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;

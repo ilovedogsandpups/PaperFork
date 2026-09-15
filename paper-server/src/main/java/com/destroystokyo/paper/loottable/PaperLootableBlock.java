@@ -1,7 +1,7 @@
 package com.destroystokyo.paper.loottable;
 
 import net.minecraft.world.RandomizableContainer;
-import org.bukkit.craftbukkit.CraftLootTable;
+import org.bukkit.craftbukkit.craftImpl.CraftLootTable;
 import org.bukkit.loot.LootTable;
 import org.checkerframework.checker.nullness.qual.Nullable;
 

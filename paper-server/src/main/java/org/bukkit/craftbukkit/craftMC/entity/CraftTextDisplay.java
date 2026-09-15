@@ -4,7 +4,7 @@ import com.google.common.base.Preconditions;
 import net.minecraft.world.entity.Display;
 import org.bukkit.Color;
 import org.bukkit.craftbukkit.CraftServer;
-import org.bukkit.craftbukkit.craftUtils.util.CraftChatMessage;
+import org.bukkit.craftbukkit.craftOthers.util.CraftChatMessage;
 import org.bukkit.entity.TextDisplay;
 import org.jspecify.annotations.NonNull;
 

@@ -2,7 +2,7 @@ package org.bukkit.craftbukkit.legacy;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.bukkit.Material;
-import org.bukkit.craftbukkit.craftUtils.legacy.CraftEvil;
+import org.bukkit.craftbukkit.craftOthers.legacy.CraftEvil;
 import org.bukkit.support.environment.Legacy;
 import org.junit.jupiter.api.Test;
 

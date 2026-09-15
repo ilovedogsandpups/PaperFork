@@ -25,7 +25,7 @@ import org.bukkit.block.data.Directional;
 import org.bukkit.block.data.Rotatable;
 import org.bukkit.craftbukkit.craftMC.entity.CraftPlayer;
 import org.bukkit.craftbukkit.craftImpl.profile.CraftPlayerProfile;
-import org.bukkit.craftbukkit.craftUtils.util.CraftNamespacedKey;
+import org.bukkit.craftbukkit.craftOthers.util.CraftNamespacedKey;
 import org.bukkit.profile.PlayerProfile;
 import org.jetbrains.annotations.Nullable;
 import org.jspecify.annotations.NonNull;

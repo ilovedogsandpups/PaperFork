@@ -2,7 +2,7 @@ package org.bukkit.craftbukkit.craftImpl.packs;
 
 import java.util.UUID;
 import net.minecraft.server.MinecraftServer;
-import org.bukkit.craftbukkit.craftUtils.util.CraftChatMessage;
+import org.bukkit.craftbukkit.craftOthers.util.CraftChatMessage;
 import org.bukkit.packs.ResourcePack;
 import org.jspecify.annotations.NonNull;
 

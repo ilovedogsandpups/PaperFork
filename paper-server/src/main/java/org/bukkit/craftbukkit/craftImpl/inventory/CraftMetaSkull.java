@@ -20,7 +20,7 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.craftbukkit.craftMC.entity.CraftPlayer;
 import org.bukkit.craftbukkit.craftImpl.profile.CraftPlayerProfile;
-import org.bukkit.craftbukkit.craftUtils.util.CraftNamespacedKey;
+import org.bukkit.craftbukkit.craftOthers.util.CraftNamespacedKey;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.profile.PlayerProfile;
 import org.jetbrains.annotations.Nullable;

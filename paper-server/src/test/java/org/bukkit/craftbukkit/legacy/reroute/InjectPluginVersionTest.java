@@ -5,9 +5,9 @@ import com.google.common.base.Predicates;
 import java.util.List;
 import java.util.Map;
 
-import org.bukkit.craftbukkit.craftUtils.legacy.reroute.InjectPluginVersion;
-import org.bukkit.craftbukkit.craftUtils.legacy.reroute.RerouteBuilder;
-import org.bukkit.craftbukkit.craftUtils.util.ApiVersion;
+import org.bukkit.craftbukkit.craftOthers.legacy.reroute.InjectPluginVersion;
+import org.bukkit.craftbukkit.craftOthers.legacy.reroute.RerouteBuilder;
+import org.bukkit.craftbukkit.craftOthers.util.ApiVersion;
 import org.bukkit.support.environment.Normal;
 import org.junit.jupiter.api.Test;
 

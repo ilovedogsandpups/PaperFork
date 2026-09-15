@@ -12,7 +12,7 @@ import org.bukkit.block.Block;
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.craftbukkit.craftMC.block.CraftBlock;
 import org.bukkit.craftbukkit.craftImpl.inventory.CraftItemStack;
-import org.bukkit.craftbukkit.craftUtils.sounds.CraftSound;
+import org.bukkit.craftbukkit.craftImpl.sounds.CraftSound;
 import org.bukkit.entity.AbstractArrow;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;

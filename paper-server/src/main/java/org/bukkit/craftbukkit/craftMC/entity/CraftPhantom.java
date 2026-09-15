@@ -3,7 +3,7 @@ package org.bukkit.craftbukkit.craftMC.entity;
 import net.minecraft.Optionull;
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.CraftServer;
-import org.bukkit.craftbukkit.craftUtils.util.CraftLocation;
+import org.bukkit.craftbukkit.craftOthers.util.CraftLocation;
 import org.bukkit.entity.Phantom;
 import java.util.UUID;
 

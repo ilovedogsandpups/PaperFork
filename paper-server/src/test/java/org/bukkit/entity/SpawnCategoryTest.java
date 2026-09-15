@@ -1,6 +1,6 @@
 package org.bukkit.entity;
 
-import org.bukkit.craftbukkit.craftUtils.util.CraftSpawnCategory;
+import org.bukkit.craftbukkit.craftOthers.util.CraftSpawnCategory;
 import org.bukkit.support.environment.Normal;
 import org.junit.jupiter.api.Test;
 

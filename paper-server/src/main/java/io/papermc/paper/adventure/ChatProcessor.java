@@ -32,10 +32,10 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import org.bukkit.command.ConsoleCommandSender;
-import org.bukkit.craftbukkit.CraftWorld;
+import org.bukkit.craftbukkit.craftImpl.worlds.CraftWorld;
 import org.bukkit.craftbukkit.craftMC.entity.CraftPlayer;
-import org.bukkit.craftbukkit.craftUtils.util.LazyPlayerSet;
-import org.bukkit.craftbukkit.craftUtils.util.Waitable;
+import org.bukkit.craftbukkit.craftOthers.util.LazyPlayerSet;
+import org.bukkit.craftbukkit.craftOthers.util.Waitable;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
@@ -331,7 +331,7 @@ public final class ChatProcessor {
     }
 
     static String legacyDisplayName(final CraftPlayer player) {
-        if (((org.bukkit.craftbukkit.CraftWorld) player.getWorld()).getHandle().paperConfig().scoreboards.useVanillaWorldScoreboardNameColoring) {
+        if (((CraftWorld) player.getWorld()).getHandle().paperConfig().scoreboards.useVanillaWorldScoreboardNameColoring) {
             return legacySection().serialize(player.teamDisplayName()) + ChatFormatting.RESET;
         }
         return player.getDisplayName();

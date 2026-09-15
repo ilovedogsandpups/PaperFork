@@ -5,7 +5,7 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 import net.minecraft.core.Holder;
 import org.bukkit.NamespacedKey;
-import org.bukkit.craftbukkit.craftUtils.util.CraftNamespacedKey;
+import org.bukkit.craftbukkit.craftOthers.util.CraftNamespacedKey;
 
 public final class RegistryTypeMapper<M, A> {
 

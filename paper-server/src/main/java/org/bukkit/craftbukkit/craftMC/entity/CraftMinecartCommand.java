@@ -6,7 +6,7 @@ import net.minecraft.world.entity.vehicle.minecart.MinecartCommandBlock;
 import org.bukkit.Bukkit;
 import org.bukkit.Server;
 import org.bukkit.craftbukkit.CraftServer;
-import org.bukkit.craftbukkit.craftUtils.util.CraftChatMessage;
+import org.bukkit.craftbukkit.craftOthers.util.CraftChatMessage;
 import org.bukkit.entity.minecart.CommandMinecart;
 import org.bukkit.permissions.PermissibleBase;
 import org.bukkit.permissions.Permission;

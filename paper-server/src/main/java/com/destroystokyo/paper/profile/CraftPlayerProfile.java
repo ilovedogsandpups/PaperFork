@@ -17,7 +17,7 @@ import net.minecraft.util.StringUtil;
 import net.minecraft.world.item.component.ResolvableProfile;
 import org.apache.commons.lang3.StringUtils;
 import org.bukkit.configuration.serialization.SerializableAs;
-import org.bukkit.craftbukkit.craftUtils.configuration.ConfigSerializationUtil;
+import org.bukkit.craftbukkit.craftOthers.configuration.ConfigSerializationUtil;
 import org.bukkit.craftbukkit.craftMC.entity.CraftPlayer;
 import org.bukkit.craftbukkit.craftImpl.profile.CraftPlayerTextures;
 import org.bukkit.craftbukkit.craftImpl.profile.CraftProfileProperty;

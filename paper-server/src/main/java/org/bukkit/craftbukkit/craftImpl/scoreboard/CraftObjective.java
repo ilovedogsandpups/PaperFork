@@ -4,7 +4,7 @@ import com.google.common.base.Preconditions;
 import net.minecraft.world.scores.Scoreboard;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.craftbukkit.craftMC.entity.CraftEntity;
-import org.bukkit.craftbukkit.craftUtils.util.CraftChatMessage;
+import org.bukkit.craftbukkit.craftOthers.util.CraftChatMessage;
 import org.bukkit.scoreboard.Criteria;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;

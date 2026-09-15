@@ -11,7 +11,7 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Beehive;
 import org.bukkit.craftbukkit.craftMC.entity.CraftBee;
-import org.bukkit.craftbukkit.craftUtils.util.CraftLocation;
+import org.bukkit.craftbukkit.craftOthers.util.CraftLocation;
 import org.bukkit.entity.Bee;
 import org.jspecify.annotations.NonNull;
 

@@ -4,7 +4,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.world.entity.decoration.painting.PaintingVariant;
 import org.bukkit.Art;
 import org.bukkit.block.BlockFace;
-import org.bukkit.craftbukkit.CraftArt;
+import org.bukkit.craftbukkit.craftImpl.CraftArt;
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.entity.Painting;
 import org.jspecify.annotations.NonNull;

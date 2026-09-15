@@ -13,7 +13,7 @@ import net.minecraft.network.protocol.status.ClientboundStatusResponsePacket;
 import net.minecraft.network.protocol.status.ServerStatus;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.players.NameAndId;
-import org.bukkit.craftbukkit.craftUtils.util.CraftIconCache;
+import org.bukkit.craftbukkit.craftOthers.util.CraftIconCache;
 import org.jetbrains.annotations.NotNull;
 
 public final class StandardPaperServerListPingEventImpl extends PaperServerListPingEventImpl {

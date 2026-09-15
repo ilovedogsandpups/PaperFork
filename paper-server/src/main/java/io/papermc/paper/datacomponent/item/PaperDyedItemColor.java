@@ -1,7 +1,7 @@
 package io.papermc.paper.datacomponent.item;
 
 import org.bukkit.Color;
-import org.bukkit.craftbukkit.craftUtils.util.Handleable;
+import org.bukkit.craftbukkit.craftOthers.util.Handleable;
 
 public record PaperDyedItemColor(
     net.minecraft.world.item.component.DyedItemColor impl

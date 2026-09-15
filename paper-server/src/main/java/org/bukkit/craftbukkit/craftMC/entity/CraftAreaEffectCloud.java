@@ -13,7 +13,7 @@ import net.minecraft.world.entity.EntityReference;
 import net.minecraft.world.item.alchemy.PotionContents;
 import org.bukkit.Color;
 import org.bukkit.Particle;
-import org.bukkit.craftbukkit.CraftParticle;
+import org.bukkit.craftbukkit.craftImpl.CraftParticle;
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.craftbukkit.craftImpl.potion.CraftPotionEffectType;
 import org.bukkit.craftbukkit.craftImpl.potion.CraftPotionType;

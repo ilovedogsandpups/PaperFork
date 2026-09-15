@@ -19,7 +19,7 @@ import org.bukkit.Material;
 import org.bukkit.Tag;
 import org.bukkit.configuration.serialization.SerializableAs;
 import org.bukkit.craftbukkit.craftMC.block.CraftBlockType;
-import org.bukkit.craftbukkit.craftUtils.configuration.ConfigSerializationUtil;
+import org.bukkit.craftbukkit.craftOthers.configuration.ConfigSerializationUtil;
 import org.bukkit.craftbukkit.craftImpl.inventory.SerializableMeta;
 import org.bukkit.craftbukkit.craftImpl.tag.CraftBlockTag;
 import org.bukkit.inventory.meta.components.ToolComponent;

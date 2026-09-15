@@ -15,7 +15,7 @@ import net.minecraft.server.Bootstrap;
 import net.minecraft.world.flag.FeatureFlags;
 import org.bukkit.Bukkit;
 import org.bukkit.craftbukkit.craftImpl.command.VanillaCommandWrapper;
-import org.bukkit.craftbukkit.craftUtils.util.permissions.CraftDefaultPermissions;
+import org.bukkit.craftbukkit.craftOthers.util.permissions.CraftDefaultPermissions;
 import org.bukkit.permissions.Permission;
 import org.bukkit.support.RegistryHelper;
 import org.bukkit.support.environment.VanillaFeature;

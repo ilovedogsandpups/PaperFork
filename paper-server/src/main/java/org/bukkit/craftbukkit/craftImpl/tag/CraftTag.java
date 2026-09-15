@@ -7,7 +7,7 @@ import net.minecraft.tags.TagKey;
 import org.bukkit.Keyed;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Tag;
-import org.bukkit.craftbukkit.craftUtils.util.CraftNamespacedKey;
+import org.bukkit.craftbukkit.craftOthers.util.CraftNamespacedKey;
 import org.jspecify.annotations.NonNull;
 
 public abstract class CraftTag<N, B extends Keyed> implements Tag<B> {

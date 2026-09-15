@@ -14,7 +14,7 @@ import org.bukkit.block.sign.SignSide;
 import org.bukkit.craftbukkit.craftMC.block.sign.CraftSignSide;
 import org.bukkit.craftbukkit.craftMC.entity.CraftPlayer;
 import org.bukkit.craftbukkit.craftImpl.event.CraftEventFactory;
-import org.bukkit.craftbukkit.craftUtils.util.CraftChatMessage;
+import org.bukkit.craftbukkit.craftOthers.util.CraftChatMessage;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerSignOpenEvent;
 import org.checkerframework.checker.nullness.qual.MonotonicNonNull;

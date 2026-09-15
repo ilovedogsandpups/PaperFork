@@ -10,10 +10,10 @@ import net.minecraft.world.item.JukeboxPlayable;
 import org.bukkit.JukeboxSong;
 import org.bukkit.NamespacedKey;
 import org.bukkit.configuration.serialization.SerializableAs;
-import org.bukkit.craftbukkit.craftUtils.sounds.CraftJukeboxSong;
+import org.bukkit.craftbukkit.craftImpl.sounds.CraftJukeboxSong;
 import org.bukkit.craftbukkit.CraftRegistry;
 import org.bukkit.craftbukkit.craftImpl.inventory.SerializableMeta;
-import org.bukkit.craftbukkit.craftUtils.util.CraftNamespacedKey;
+import org.bukkit.craftbukkit.craftOthers.util.CraftNamespacedKey;
 import org.bukkit.inventory.meta.components.JukeboxPlayableComponent;
 import org.jspecify.annotations.NonNull;
 

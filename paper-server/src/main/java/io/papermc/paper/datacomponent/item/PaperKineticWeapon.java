@@ -5,7 +5,7 @@ import java.util.Optional;
 import net.kyori.adventure.key.Key;
 import net.minecraft.core.Holder;
 import net.minecraft.sounds.SoundEvent;
-import org.bukkit.craftbukkit.craftUtils.util.Handleable;
+import org.bukkit.craftbukkit.craftOthers.util.Handleable;
 import org.checkerframework.checker.index.qual.NonNegative;
 import org.jspecify.annotations.Nullable;
 

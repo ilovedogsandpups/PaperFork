@@ -2,7 +2,7 @@ package org.bukkit.craftbukkit.craftMC.entity;
 
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.animal.nautilus.AbstractNautilus;
-import org.bukkit.craftbukkit.CraftInventoryArmoredSaddledMount;
+import org.bukkit.craftbukkit.craftImpl.CraftInventoryArmoredSaddledMount;
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.inventory.ArmoredSaddledMountInventory;
 import org.jspecify.annotations.NullMarked;

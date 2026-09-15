@@ -11,7 +11,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import org.bukkit.Color;
 import org.bukkit.craftbukkit.craftImpl.potion.CraftPotionType;
 import org.bukkit.craftbukkit.craftImpl.potion.CraftPotionUtil;
-import org.bukkit.craftbukkit.craftUtils.util.Handleable;
+import org.bukkit.craftbukkit.craftOthers.util.Handleable;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionType;
 import org.jetbrains.annotations.Unmodifiable;

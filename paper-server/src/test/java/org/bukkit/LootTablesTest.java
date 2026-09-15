@@ -2,7 +2,7 @@ package org.bukkit;
 
 import static org.junit.jupiter.api.Assertions.*;
 import net.minecraft.resources.ResourceKey;
-import org.bukkit.craftbukkit.CraftLootTable;
+import org.bukkit.craftbukkit.craftImpl.CraftLootTable;
 import org.bukkit.loot.LootTable;
 import org.bukkit.loot.LootTables;
 import org.bukkit.support.environment.AllFeatures;
