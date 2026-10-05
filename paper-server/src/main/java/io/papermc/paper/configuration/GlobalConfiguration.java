@@ -35,6 +35,12 @@ public class GlobalConfiguration extends ConfigurationPart {
         return instance;
     }
 
+    public MaxConfig maxConfig;
+
+    public class MaxConfig extends ConfigurationPart {
+        public boolean disableDefaultPaperCommand = true;
+    }
+
     public ChunkLoadingBasic chunkLoadingBasic;
 
     public class ChunkLoadingBasic extends ConfigurationPart {

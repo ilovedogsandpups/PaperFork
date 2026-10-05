@@ -3,6 +3,7 @@ package io.papermc.paper.command;
 import com.mojang.brigadier.tree.LiteralCommandNode;
 import io.papermc.paper.command.brigadier.CommandRegistrationFlag;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
+import io.papermc.paper.configuration.GlobalConfiguration;
 import net.minecraft.server.MinecraftServer;
 import org.bukkit.command.Command;
 
@@ -22,6 +23,7 @@ public final class PaperCommands {
     private static final Map<String, Command> COMMANDS = new HashMap<>();
 
     public static void registerCommands(final MinecraftServer server) {
+        if (GlobalConfiguration.get().maxConfig.disableDefaultPaperCommand) return;
         COMMANDS.put("paper", new PaperCommand("paper"));
 
         COMMANDS.forEach((s, command) -> {
@@ -32,6 +34,7 @@ public final class PaperCommands {
     public static void registerCommands() {
         // Paper commands go here
         registerInternalCommand(PaperMSPTCommand.create(), "paper", PaperMSPTCommand.DESCRIPTION, List.of(), Set.of());
+        if (GlobalConfiguration.get().maxConfig.disableDefaultPaperCommand) return;
         registerInternalCommand(PaperVersionCommand.create(), "bukkit", PaperVersionCommand.DESCRIPTION, List.of("ver", "about"), Set.of());
         registerInternalCommand(PaperPluginsCommand.create(), "bukkit", PaperPluginsCommand.DESCRIPTION, List.of("pl"), Set.of());
     }
